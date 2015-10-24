@@ -1,7 +1,10 @@
-\documentclass{scrreprt}
+\documentclass{article}
 \usepackage{listings}
 \usepackage{underscore}
 \usepackage[bookmarks=true]{hyperref}
+\author{Roberto Clapis, Erica Stella}
+\date{\today}
+\title{Requirements Analysis \\ and \\ Specification Document}
 \hypersetup{
     bookmarks=false,    % show bookmarks bar?
     pdftitle={Software Requirement Specification},    % title
@@ -15,36 +18,25 @@
     urlcolor=purple,        % color of external links
     linktoc=page            % only page is linked
 }%
-\def\myversion{1.0 }
-\title{%
-\flushright
-\rule{16cm}{5pt}\vspace1cm
-\Huge{SOFTWARE REQUIREMENTS\\ SPECIFICATION}\\
-\vspace{2cm}
-for\\
-\vspace{2cm}
-Materials Ordering System\\
-\vspace{2cm}
-\LARGE{Release 1.0\\}
-\vspace{2cm}
-\LARGE{Version \myversion approved\\}
-\vspace{2cm}
-Prepared by Roberto Clapis and Erica Stella\\
-\vfill
-\rule{16cm}{5pt}
-}
-\date{}
-\usepackage{hyperref}
 \begin{document}
 \maketitle
-\tableofcontents
-\chapter*{Revision History}
-\chapter{Introduction}
-\section{Purpose}
-\section{Project Scope and Product Features}
-\section{References}
-\chapter{Overall Description}
-\section{Product Perspective}
-\section{User Classes and Characteristics}
-% add other chapters and sections to suit
+\section{Introduction}
+\subsection{Description of the given problem}
+\subsection{Goals}
+\subsection{Domain Properties}
+\subsection{Glossary}
+\subsection{Assumptions}
+\subsection{Proposed Sustem}
+\subsection{Identifying Stakeholders}
+\subsection{Other considerations about the system}
+\section{Actors}
+\section{Requirements}
+\subsection{Functional Requirements}
+\subsection{Non Functional Requirements}
+\subsubsection{UI}
+\subsubsection{Documentation}
+\subsubsection{Architectural considerations}
+\section{Specification}
+\section{Scenarios}
+%\section{UML Models}
 \end{document}
