@@ -8,8 +8,8 @@
 \title{Politecnico di Milano
 	\\A.A. 2015\@-\@2016
 	\\Software Engineering 2: ``TAXInseconds''
-\\\textbf{R}equirements \textbf{A}nalysis and \textbf{S}pecifications \textbf{D}ocument}
-\hypersetup{pdftitle={Software Requirement Specification},    % title
+	\\\textbf{R}equirements \textbf{A}nalysis \\and\\ \textbf{S}pecifications \textbf{D}ocument}
+	\hypersetup{pdftitle={Software Requirement Specification},    % title
 	pdfauthor={Roberto Clapis, Erica Stella},                     % author
 	pdfsubject={TeX and LaTeX},                        % subject of the document
 	pdfkeywords={TeX, LaTeX, taxi, RASD, SoftwareEngineering2}, % list of keywords
@@ -133,20 +133,98 @@ There are no existing systems to integrate it with.
 \section{Specific requirements}
 \subsection{Functional Requirements}
 %TODO Bob
+On the user side:\@
 \begin{itemize}
-	\item  
+	\item For the non logged in user (on both the WEB and Mobile interface):
+		\begin{itemize}
+			\item Provide informations about taxies queues and availability 
+			\item Allow registration in order to become a regeistered user
+			\item Allow a registered user to login
+			\item Allow a registered user to enter a ``reset password'' procedure
+		\end{itemize}
+	\item For the logged in user (on both the WEB and Mobile interface):
+		\begin{itemize}
+			\item Provide informations about taxies queues and availability 
+			\item Place a call for a taxi at the current position 
+			\item Make a reservation for later
+			\item Allow the user to logout
+		\end{itemize}
+	\item Through the API:\@
+		\begin{itemize}
+			\item Get the queue status for a given position
+			\item Get the ETA for a taxi for a given position
+			\item Establish a Secure Channel %TODO add this to keywords
+			\item Obtain a login-token using valid credentials through a previously established Secure Channel
+			\item Using a valid login-token:\@
+				\begin{itemize}
+					\item Place a call for a given position
+					\item Place a reservation for a given position
+					\item Require the sytem to send a push message for updates about the status of a previous request
+					\item Logout (this will close the secure channel and invalidate the login token) %TODO add ``login token'' to keywords
+				\end{itemize}
+		\end{itemize}
+\end{itemize}
+On the taxist side (there will be no Web interface in this case):\@
+\begin{itemize}
+	\item For the non logged in driver:
+		\begin{itemize}
+			\item Allow a registered driver to login
+			\item Allow a registered driver to enter a ``reset password'' procedure
+		\end{itemize}
+	\item For the logged in driver:
+		\begin{itemize}
+			\item If credentials have been invalidated a ``reset password'' procedure will begin
+			\item Toggle the availability of the driver
+			\item Notify for new calls
+			\item Allow to accept or refuse a call
+			\item Handle disconnection 
+			\item Handle timeout (if reaching the client takes too much time)
+			\item Log out
+		\end{itemize}
+	\item Through the API:\@
+		\begin{itemize}
+			\item Establish a Secure Channel %TODO add this to keywords
+			\item Obtain a login-token using valid credentials through a previously established Secure Channel
+			\item Using a valid login-token:\@
+				\begin{itemize}
+					\item Toggle the driver state
+					\item Send a notification when a call is made for the driver
+					\item Accept the answer to the call, whether the answer is Acceptance or Refusal
+					\item Handle disconnection
+					\item Handle timeout (if no taxi reach the client in time)%TODO e come fa a saperlo?
+					\item Log out (invalidation of the token)
+				\end{itemize}
+			\item 
+		\end{itemize}
+\end{itemize}
+On the admin side:\@
+\begin{itemize}
+	\item For the non logged in admin:
+		\begin{itemize}
+			\item Log in
+		\end{itemize}
+	\item For the logged in admin:
+		\begin{itemize}
+			\item Add a new taxi driver
+			\item Remove a taxi driver
+			\item Invalidate a taxi driver's credentials 
+			\item Set the area of the map handled by the system
+			\item Change credentials for the admin
+			\item Log out
+		\end{itemize}
 \end{itemize}
 \subsection{Non functional requirements}
 %TODO Bob
 \begin{itemize}
-	\item  
+	\item There will be a UI for mobile and one for the Web platform
+	\item 
 \end{itemize}
 \end{document}
 
 
 
 \comment{%TEMPLATE FOR BULLETS
-\begin{itemize}
-	\item  
-\end{itemize}
+	\begin{itemize}
+		\item  
+	\end{itemize}
 }
