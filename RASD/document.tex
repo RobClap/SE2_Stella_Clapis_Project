@@ -1,4 +1,6 @@
 \documentclass{article}
+\usepackage{graphicx}
+\graphicspath{{images/}}
 \usepackage{listings}
 \usepackage{underscore}
 \usepackage[bookmarks=true]{hyperref}
@@ -21,6 +23,7 @@
 }
 \begin{document}
 \maketitle
+\includegraphics{polimi-logo}
 \clearpage
 \tableofcontents
 \clearpage
@@ -138,16 +141,16 @@ On the user side:\@
 	\item For the non logged in user (on both the WEB and Mobile interface):
 		\begin{itemize}
 			\item Provide informations about taxies queues and availability 
-			\item Allow registration in order to become a regeistered user
-			\item Allow a registered user to login
-			\item Allow a registered user to enter a ``reset password'' procedure
+			\item Registration in order to become a registered user
+			\item Login for registered users
+			\item ``Reset password'' procedure for registered users
 		\end{itemize}
 	\item For the logged in user (on both the WEB and Mobile interface):
 		\begin{itemize}
 			\item Provide informations about taxies queues and availability 
 			\item Place a call for a taxi at the current position 
 			\item Make a reservation for later
-			\item Allow the user to logout
+			\item Logout
 		\end{itemize}
 	\item Through the API:\@
 		\begin{itemize}
@@ -168,12 +171,12 @@ On the taxist side (there will be no Web interface in this case):\@
 \begin{itemize}
 	\item For the non logged in driver:
 		\begin{itemize}
-			\item Allow a registered driver to login
-			\item Allow a registered driver to enter a ``reset password'' procedure
+			\item Login for a registered driver 
+			\item ``Reset password'' procedure for registered drivers
 		\end{itemize}
 	\item For the logged in driver:
 		\begin{itemize}
-			\item If credentials have been invalidated a ``reset password'' procedure will begin
+			\item If credentials have been invalidated a ``reset password'' procedure will be mandatory
 			\item Toggle the availability of the driver
 			\item Notify for new calls
 			\item Allow to accept or refuse a call
@@ -217,7 +220,7 @@ On the admin side:\@
 %TODO Bob
 \begin{itemize}
 	\item There will be a UI for mobile and one for the Web platform
-	\item 
+%	\item 
 \end{itemize}
 \end{document}
 
