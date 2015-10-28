@@ -1,4 +1,6 @@
 \documentclass{article}
+\usepackage{graphicx}
+\graphicspath{{images/}}
 \usepackage{listings}
 \usepackage{underscore}
 \usepackage[bookmarks=true]{hyperref}
@@ -6,129 +8,227 @@
 \author{Roberto Clapis, Erica Stella}
 \date{\today}
 \title{Politecnico di Milano
-\\A.A. 2015\@-\@2016
+	\\A.A. 2015\@-\@2016
 	\\Software Engineering 2: ``TAXInseconds''
-\\\textbf{R}equirements \textbf{A}nalysis and \textbf{S}pecifications \textbf{D}ocument}
-\hypersetup{pdftitle={Software Requirement Specification},    % title
-    pdfauthor={Roberto Clapis, Erica Stella},                     % author
-    pdfsubject={TeX and LaTeX},                        % subject of the document
-    pdfkeywords={TeX, LaTeX, taxi, RASD, SoftwareEngineering2}, % list of keywords
-    colorlinks=true,       % false: boxed links; true: colored links
-    linkcolor=black,       % color of internal links
-    citecolor=blue,       % color of links to bibliography
-    filecolor=black,        % color of file links
-    urlcolor=purple,        % color of external links
+	\\\textbf{R}equirements \textbf{A}nalysis \\and\\ \textbf{S}pecifications \textbf{D}ocument}
+	\hypersetup{pdftitle={Software Requirement Specification},    % title
+	pdfauthor={Roberto Clapis, Erica Stella},                     % author
+	pdfsubject={TeX and LaTeX},                        % subject of the document
+	pdfkeywords={TeX, LaTeX, taxi, RASD, SoftwareEngineering2}, % list of keywords
+	colorlinks=true,       % false: boxed links; true: colored links
+	linkcolor=black,       % color of internal links
+	citecolor=blue,       % color of links to bibliography
+	filecolor=black,        % color of file links
+	urlcolor=purple,        % color of external links
 }
-	\begin{document}
-	\maketitle
-	\clearpage
-	\tableofcontents
-	\clearpage
+\begin{document}
+\maketitle
+\includegraphics{polimi-logo}
+\clearpage
+\tableofcontents
+\clearpage
 
-	\section{Introduction}
+\section{Introduction}
 
-	\subsection{Purpose}
-	This document represent the Requirement Analysis and Specification Document (RASD). It aims at explaining the application domain of the system to be developed and the system itself in terms of functional requirements, nonfunctional requirements and constraints. It also provides several modelizations of the system and typical use cases. It is intended for all the developers who will have to implement the system, the testers who will have to determine if the requirements have been met and the system analysts who will have to write specifications for other system that will relate to this one. It is also intended as a contractual basis thus being legally binding.
+\subsection{Purpose}
+This document represent the Requirement Analysis and Specification Document (RASD). It aims at explaining the application domain of the system to be developed and the system itself in terms of functional requirements, nonfunctional requirements and constraints. It also provides several models of the system and typical use cases. It is intended for all the developers who will have to implement the system, the testers who will have to determine if the requirements have been met and the system analysts who will have to write specifications for other system that will relate to this one. It is also intended as a contractual basis thus being legally binding.
 
-	\subsection{Actual System}
-	The government of the city wants to optimize its taxi service with a completely new application. Therefore, we assume there are no previous systems to take into account.
+\subsection{Actual System}
+The government of the city wants to optimise its taxi service with a completely new application. Therefore, we assume there are no previous systems to take into account.
 
-	\subsection{Scope}
-	The aim of the project TAXINASECOND is to provide a new application to optimize the taxi service of the city. 
-	\\The application will be available to the users in web and mobile forms and will have public APIs in order to expand and improve the service with additional features.
-	\\The city managed by TAXINASECOND is divided in zones of 2 kmÂ² and each and every zone has its own queue of taxis. The queues are automatically computed by the system with the information it receives from the GPS of the taxis. When a taxi driver changes her state from not available to available the system automatically adds her to the queue of the zone she is currently in, based on the information of the GPS of the taxi. 
-	\\Users that are not registered can only see the estimated time of arrival of the nearest taxi with TAXINASECOND.\@
-	\\Registered users can also request a taxi or make a reservation for a taxi. Reservations can only be made at least two hours before the ride and must be done specifying the starting location, the destination and the meeting time. Requests, instead, only need the starting location and the destination.
-	\\When a request is made the first taxi driver of the queue of the starting location's zone is notified for accepting or rejecting the request. If a taxi driver rejects a request her state is put on unavailable until her changes it back to available. [PROMPT FOR CHANGE STATE?] If a taxi driver doesn't accept or refuse a request within 1 minute, the request will be passed on to the next taxi driver in the queue and the first one will be moved to the end of the queue. If there are no available taxis in the zone of the request the system will propagate the request to the closest not empty queue.
-	\\When a request is accepted the registered user that has made the request receives a notification from the system informing her of the code of the incoming taxi and the estimated waiting time.
-	\\When a reservation is made, the system confirms it to the user and allocates a taxi 10 minutes before the meeting time. If a taxi for that zone is not available the request is then handled by finding the closest available taxi. 
-	\\If in any kind of call a taxi does not reach the client's location in an amount of time determined by the system using traffic and position information the call is by default canceled without penalties and both parts are notified.
+\subsection{Scope}
+The aim of the project TAXINSECONDS is to provide a new application to optimise the taxi service of the city. 
+\\The application will be available to the users in web and mobile forms and will have public APIs in order to expand and improve the service with additional features.
+\\The city managed by TAXINSECONDS is divided in zones of 2 km² and each and every zone has its own queue of taxis. The queues are automatically computed by the system with the information it receives from the GPS of the taxis. When a taxi driver changes her state from not available to available the system automatically adds her to the queue of the zone she is currently in, based on the information of the GPS of the taxi. 
+\\Users that are not registered can only see the estimated time of arrival of the nearest taxi with TAXINSECONDS.\@
+\\Registered users can also request a taxi or make a reservation for a taxi. Reservations can only be made at least two hours before the ride and must be done specifying the starting location, the destination and the meeting time. Requests, instead, only need the starting location and the destination.
+\\When a request is made the first taxi driver of the queue of the starting location's zone is notified for accepting or rejecting the request. If a taxi driver rejects a request her state is put on unavailable until her changes it back to available. [PROMPT FOR CHANGE STATE?] If a taxi driver doesn't accept or refuse a request within 1 minute, the request will be passed on to the next taxi driver in the queue and the first one will be moved to the end of the queue. If there are no available taxis in the zone of the request the system will propagate the request to the closest not empty queue.
+\\When a request is accepted the registered user that has made the request receives a notification from the system informing her of the code of the incoming taxi and the estimated waiting time.
+\\When a reservation is made, the system confirms it to the user and allocates a taxi 10 minutes before the meeting time. If a taxi for that zone is not available the request is then handled by finding the closest available taxi. 
+\\If in any kind of call a taxi does not reach the client's location in an amount of time determined by the system using traffic and position information the call is by default cancelled without penalties and both parts are notified.
 
-	\subsection{Goals}
+\subsection{Goals}
+\begin{itemize}
+	\item Provide an easy way to request a taxi.
+	\item Provide an easy way to reserve a taxi.
+	\item Guarantee a fair management of the taxis queue.
+\end{itemize}
+
+\subsection{Definition and Acronyms}
+
+\subsubsection{Definitions}
+\begin{itemize}
+	\item registered user
+	\item guest
+	\item administrator
+	\item request
+	\item reservation
+	\item state of a taxi driver
+	\item meeting time
+	\item nearest taxi
+\end{itemize}
+
+\subsubsection{Acronyms}
+\begin{itemize}
+	\item ETA:\@ estimated time of arrival: the time, estimated by the system, that the nearest taxi to the location of the call will take to get to the client's position.
+\end{itemize}
+
+\subsection{Actors}
+\begin{itemize}
+	\item Taxi drivers: after successfully logging in, taxi drivers are able to set their current state as available or not and to accept or refuse requests.
+	\item Users: user are able to login or to ask the system for an ETA.\@
+	\item Registered users: after successfully logging in, registered users can request or reserve taxis.
+		%registered user
+		%guest
+		%administrator
+\end{itemize}
+
+\subsection{References}
+
+\subsection{Overview}
+This document is structured in three parts:
+\begin{itemize}
+	\item Introduction: gives an high-level description of the software purposes and context.
+	\item Overall Description: gives a general description of the application, focusing on the context of the system, going in details about domain assumptions and constraint. The aim of this section is to provide a context to the whole project and show its integration with the real world.
+	\item Specific Requirements: this section contains all of the software requirements to a level of detail aimed to be enough to design a system to satisfy the said requirements, and testers to test that the system actually satisfies them. It also contains the detailed description of the possible interactions between the system and the world with a simulation and preview of the expected response of the system with given stimulation. (Details are given with Alloy specifications and UML diagrams)
+\end{itemize}
+
+
+\section{Overall description}
+\subsection{Product perspective}
+The TAXINSECONDS application will be released as a web application and as a mobile application. 
+There are no existing systems to integrate it with. 
+\\It will provide a total of 4 main interfaces:
+\begin{itemize}
+	\item for the users in both the
+		\begin{itemize}
+			\item registered user mode
+			\item guest mode
+		\end{itemize}
+	\item for taxi drivers 
+	\item for administrators
+	\item a lower level interface for APIs
+\end{itemize}
+
+\subsubsection{System interfaces}
+\subsubsection{User Interfaces}
+\subsubsection{Hardware Interfaces}		DOPO NEI REQUIREMENTS
+\subsubsection{Software Interfaces}
+\subsubsection{Communication Interfaces}
+\subsubsection{Operations} 
+\subsection{Product functions}
+\subsection{User characteristics}
+\subsection{Constraints}
+\subsection{Assumptions and dependencies}
+\subsubsection{Domain Assumptions}
+\begin{itemize}
+	\item All taxi drivers who intend to use the service will have a mobile phone with one of the supported mobile OSs
+	\item All taxi drivers will have a phone with GPS functionality
+	\item The taxi drivers will have to grant the system the rights to handle their taxi codes
+	\item Taxi drivers' phones will have an internet connection
+	\item Clients will have access to the internet and a device with GPS integrated 
+	\item When accessing from the website the clients will have to grant permission to the application to read the device's position
+	\item  
+\end{itemize}
+%TODO Bob
+%All taxi drivers have the mobile version of the TAXINASECOND application.
+%registrazione(direi che quando il taxi si registra connette il suo account al suo codice taxi) After logging in, 
+\clearpage
+\section{Specific requirements}
+\subsection{Functional Requirements}
+%TODO Bob
+On the user side:\@
+\begin{itemize}
+	\item For the non logged in user (on both the WEB and Mobile interface):
+		\begin{itemize}
+			\item Provide informations about taxies queues and availability 
+			\item Registration in order to become a registered user
+			\item Login for registered users
+			\item ``Reset password'' procedure for registered users
+		\end{itemize}
+	\item For the logged in user (on both the WEB and Mobile interface):
+		\begin{itemize}
+			\item Provide informations about taxies queues and availability 
+			\item Place a call for a taxi at the current position 
+			\item Make a reservation for later
+			\item Logout
+		\end{itemize}
+	\item Through the API:\@
+		\begin{itemize}
+			\item Get the queue status for a given position
+			\item Get the ETA for a taxi for a given position
+			\item Establish a Secure Channel %TODO add this to definitions 
+			\item Obtain a login-token using valid credentials through a previously established Secure Channel
+			\item Using a valid login-token:\@
+				\begin{itemize}
+					\item Place a call for a given position
+					\item Place a reservation for a given position
+					\item Require the sytem to send a push message for updates about the status of a previous request
+					\item Logout (this will close the secure channel and invalidate the login token) %TODO add ``login token'' to definitions 
+				\end{itemize}
+		\end{itemize}
+\end{itemize}
+On the taxist side (there will be no Web interface in this case):\@
+\begin{itemize}
+	\item For the non logged in driver:
+		\begin{itemize}
+			\item Login for a registered driver 
+			\item ``Reset password'' procedure for registered drivers
+		\end{itemize}
+	\item For the logged in driver:
+		\begin{itemize}
+			\item If credentials have been invalidated a ``reset password'' procedure will be mandatory
+			\item Toggle the availability of the driver
+			\item Notify for new calls
+			\item Allow to accept or refuse a call
+			\item Handle disconnection 
+			\item Handle timeout (if reaching the client takes too much time)
+			\item Log out
+		\end{itemize}
+	\item Through the API:\@
+		\begin{itemize}
+			\item Establish a Secure Channel 
+			\item Obtain a login-token using valid credentials through a previously established Secure Channel
+			\item Using a valid login-token:\@
+				\begin{itemize}
+					\item Toggle the driver state
+					\item Send a notification when a call is made for the driver
+					\item Accept the answer to the call, whether the answer is Acceptance or Refusal
+					\item Handle disconnection
+					\item Handle timeout (if no taxi reach the client in time)%TODO e come fa a saperlo?
+					\item Log out (invalidation of the token)
+				\end{itemize}
+			\item 
+		\end{itemize}
+\end{itemize}
+On the admin side:\@
+\begin{itemize}
+	\item For the non logged in admin:
+		\begin{itemize}
+			\item Log in
+		\end{itemize}
+	\item For the logged in admin:
+		\begin{itemize}
+			\item Add a new taxi driver
+			\item Remove a taxi driver
+			\item Invalidate a taxi driver's credentials 
+			\item Set the area of the map handled by the system
+			\item Change credentials for the admin
+			\item Log out
+		\end{itemize}
+\end{itemize}
+\subsection{Non functional requirements}
+%TODO Bob
+\begin{itemize}
+	\item There will be a UI for mobile and one for the Web platform
+%	\item 
+\end{itemize}
+\end{document}
+
+
+
+\comment{%TEMPLATE FOR BULLETS
 	\begin{itemize}
-		\item Provide an easy way to request a taxi.
-		\item Provide an easy way to reserve a taxi.
-		\item Guarantee a fair management of the taxis queue.
+		\item  
 	\end{itemize}
-
-	\subsection{Definition and Acronyms}
-
-	\subsubsection{Definitions}
-	\begin{itemize}
-		\item registered user
-		\item guest
-		\item administrator
-		\item request
-		\item reservation
-		\item state of a taxi driver
-		\item meeting time
-		\item nearest taxi
-	\end{itemize}
-
-	\subsubsection{Acronyms}
-	\begin{itemize}
-		\item ETA:\@ estimated time of arrival: the time, estimated by the system, that the nearest taxi to the location of the call will take to get to the client's position.
-	\end{itemize}
-
-	\subsection{Actors}
-	\begin{itemize}
-		\item Taxi drivers: after successfully logging in, taxi drivers are able to set their current state as available or not and to accept or refuse requests.
-		\item Users: user are able to login or to ask the system for an ETA.\@
-		\item Registered users: after successfully logging in, registered users can request or reserve taxis.
-%registered user
-%guest
-%administrator
-	\end{itemize}
-
-	\subsection{References}
-
-	\subsection{Overview}
-	This document is structured in three parts:
-	\begin{itemize}
-		\item Introduction: gives an high-level description of the software purposes and context.
-		\item Overall Description: gives a general description of the application, focusing on the context of the system, going in details about domain assumptions and constraint. The aim of this section is to provide a context to the whole project and show its integration with the real world.
-		\item Specific Requirements: this section contains all of the software requirements to a level of detail aimed to be enough to design a system to satisfy the said requirements, and testers to test that the system actually satisfies them. It also contains the detailed description of the possible interactions between the system and the world with a simulation and preview of the expected response of the system with given stimulation. (Details are given with Alloy specifications and UML diagrams)
-	\end{itemize}
-
-
-	\section{Overall description}
-	\subsection{Product perspective}
-	The TAXINASECOND application will be released as a web application and as a mobile application. 
-	There are no existing systems to integrate it with. 
-	\\It will provide a total of 4 main interfaces:
-	\begin{itemize}
-		\item for the users in both the
-			\begin{itemize}
-				\item registered user mode
-				\item guest mode
-			\end{itemize}
-		\item for taxi drivers 
-		\item for administrators
-		\item a lower level interface for APIs
-	\end{itemize}
-
-	\subsubsection{System interfaces}
-	\subsubsection{User Interfaces}
-	\subsubsection{Hardware Interfaces}		DOPO NEI REQUIREMENTS
-	\subsubsection{Software Interfaces}
-	\subsubsection{Communication Interfaces}
-	\subsubsection{Operations} 
-	\subsection{Product functions}
-	\subsection{User characteristics}
-	\subsection{Constraints}
-	\subsection{Assumptions and dependencies}
-	\subsubsection{Domain assumptions}
-	\begin{itemize}
-		\item all taxi drivers who intend to use the service will have a mobile phone with one of the supported mobile OSs
-		\item all taxi drivers will have a phone with GPS and it will be enabled to use the applications
-		\item the taxi drivers will have to grant the system the rights to handle their taxi codes
-	\end{itemize}
-		%TODO Bob
-		%All taxi drivers have the mobile version of the TAXINASECOND application.
-		%registrazione(direi che quando il taxi si registra connette il suo account al suo codice taxi) After logging in, 
-	\section{Specific requirements}
-	\subsection{Functional Requirements}
-		%TODO Bob
-	\subsection{Non functional requirements}
-		%TODO Bob
-	\end{document}
+}

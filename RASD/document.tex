@@ -133,6 +133,7 @@ There are no existing systems to integrate it with.
 %TODO Bob
 %All taxi drivers have the mobile version of the TAXINASECOND application.
 %registrazione(direi che quando il taxi si registra connette il suo account al suo codice taxi) After logging in, 
+\clearpage
 \section{Specific requirements}
 \subsection{Functional Requirements}
 %TODO Bob
@@ -140,14 +141,14 @@ On the user side:\@
 \begin{itemize}
 	\item For the non logged in user (on both the WEB and Mobile interface):
 		\begin{itemize}
-			\item Provide informations about taxies queues and availability 
+			\item Provide information about taxis queues and availability 
 			\item Registration in order to become a registered user
 			\item Login for registered users
 			\item ``Reset password'' procedure for registered users
 		\end{itemize}
 	\item For the logged in user (on both the WEB and Mobile interface):
 		\begin{itemize}
-			\item Provide informations about taxies queues and availability 
+			\item Provide information about taxis queues and availability 
 			\item Place a call for a taxi at the current position 
 			\item Make a reservation for later
 			\item Logout
@@ -162,12 +163,12 @@ On the user side:\@
 				\begin{itemize}
 					\item Place a call for a given position
 					\item Place a reservation for a given position
-					\item Require the sytem to send a push message for updates about the status of a previous request
+					\item Require the system to send a push message for updates about the status of a previous request
 					\item Logout (this will close the secure channel and invalidate the login token) %TODO add ``login token'' to definitions 
 				\end{itemize}
 		\end{itemize}
 \end{itemize}
-On the taxist side (there will be no Web interface in this case):\@
+On the taxi driver side (there will be no Web interface in this case):\@
 \begin{itemize}
 	\item For the non logged in driver:
 		\begin{itemize}
