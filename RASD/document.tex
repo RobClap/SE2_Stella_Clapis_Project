@@ -39,13 +39,14 @@ The government of the city wants to optimize its taxi service with a completely 
 \subsection{Scope}
 The aim of the project TAXINSECONDS is to provide a new application to optimize the taxi service of the city. 
 \\The application will be available to the users in web and mobile forms and will have public APIs in order to expand and improve the service with additional features.
-\\The city managed by TAXINSECONDS is divided in zones of 2 km² each and every zone has its own queue of taxis. The queues are automatically computed by the system with the information it receives from the GPS of the taxis. Taxi drivers can be available or not. Only available taxi drivers can be in a queue. When a taxi driver changes her state from not available to available the system automatically adds her to the queue of the zone she is currently in, based on the information of the GPS of the taxi. 
+\\The city managed by TAXINSECONDS is divided in zones of 2 km² each and every zone has its own queue of taxis. The queues are automatically computed by the system with the information it receives from the GPS of the taxis. 
+\\Taxi drivers can be available or not. Only available taxi drivers can be in a queue. When a taxi driver changes her state from not available to available the system automatically adds her to the queue of the zone she is currently in, based on the information of the GPS of her taxi. 
 \\Users that are not registered can only see the estimated time of arrival of the nearest taxi with TAXINSECONDS.\@
 \\Registered users can also request a taxi or make a reservation for a taxi. Reservations can only be made at least two hours before the ride and must be done specifying the starting location, the destination and the meeting time. Requests, instead, only need the starting location and the destination.
-\\When a request is made, the first taxi driver of the queue of the starting location's zone is notified for accepting or rejecting the request. If a taxi driver rejects a request her state is put on unavailable until her changes it back to available. If a taxi driver doesn't accept or reject a request within 1 minute, the request will be passed on to the next taxi driver in the queue and the first one will be moved to the end of the queue. If there are no available taxis in the zone of the request the system will propagate the request to the closest not empty queue.
+\\When a request is made, the first taxi driver of the queue of the starting location's zone is notified for accepting or rejecting the request. If a taxi driver rejects a request her state is put on unavailable until she changes it back to available. If a taxi driver doesn't accept or reject a request within 1 minute, the request will be passed on to the next taxi driver in the queue and the first one will be moved to the end of the queue. If there are no available taxis in the zone of the request the system will propagate the request to the closest not empty queue.
 \\When a request is accepted the registered user that has made the request receives a notification from the system informing her of the code of the incoming taxi and the estimated waiting time.
-\\When a reservation is made, the system confirms it to the user and allocates a taxi 10 minutes before the meeting time. If a taxi for that zone is not available the request is then handled by finding the closest available taxi. 
-\\If a taxi does not reach the client's location in an amount of time determined by the system using traffic and position information the call is by default cancelled without penalties and both parts are notified.
+\\When a reservation is made, the system confirms it to the user and allocates a taxi 10 minutes before the meeting time. If a taxi for that zone is not available the request is then handled by finding the closest available taxi.
+\\Requests can be canceled before they'have been accepted by a taxi driver while reservation can be canceled until 10 minutes before the meeting time.
 
 \subsection{Goals}
 \begin{itemize}
@@ -247,6 +248,13 @@ On the admin side:\@
 	\item The service must be always
 %	\item 
 \end{itemize}
+\subsection{Scenarios}
+\subsubsection{Scenario 1}
+Blair The Witch had to take her magical broom to the mechanic for the annual revision but she needs to go shopping to refill her stockpile of frog?s tails. Her friend Mizune has told her about TAXINASECOND, so she decides to give it a try. After downloading it on her smartphone, she signs up compiling the registration form with her username, password, email and credit card data. Now she can complain about how slow car-based transports are!
+\subsubsection{Scenario 2}
+Suzuka is having a date tonight but, unfortunately, her car doesn?t want to start. After several failures, she decides to use TAXINASECOND. After logging in, she requests a taxi specifying her home as the starting location and the restaurant?s address as the destination. The system notifies Takeshi, the first taxi driver of the queue in Suzuka?s zone, of the request. Takeshi accepts the request and the system sends Suzuka the code of Takeshi?s taxi and the ETA so she can finally get to her date.
+\subsubsection{Scenario 3}
+Ash Ketchum has to start his new adventure in Hoenn tomorrow but his mom is busy cleaning the house with Mr. Mime so she can?t take him to the airport to meet Prof. Oak. Ash decides to use once again TAXINSECONDS to reserve a taxi. After logging in, he makes a reservation for a taxi specifying the starting location as Pallet town, the destination and the meeting time. The morning after, the system allocates Brock?s taxi for the reservation and sends his code to Ash so that he knows who he?ll meet to start his new adventure. 
 \end{document}
 
 
