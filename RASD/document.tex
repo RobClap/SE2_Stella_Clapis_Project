@@ -5,7 +5,7 @@
 \usepackage{underscore}
 \usepackage[bookmarks=true]{hyperref}
 \newcommand{\comment}[1]{}
-\author{Roberto Clapis, Erica Stella}
+\author{Roberto Clapis, Erica Stella} %TODO matricole
 \date{\today}
 \title{Politecnico di Milano
 	\\A.A. 2015\@-\@2016
@@ -127,6 +127,9 @@ There are no existing systems to integrate it with.
 	\item The taxi drivers will have to grant the system the rights to handle their taxi codes
 	\item Taxi drivers' phones will have an internet connection
 	\item Clients will have access to the internet and a device with GPS integrated 
+	\item Clients have a valid email address
+	\item Clients have a credit/debt card 
+	\item Clients allow the app to access their credit in order to pay for the service
 	\item When accessing from the website the clients will have to grant permission to the application to read the device's position
 	\item  
 \end{itemize}
@@ -144,7 +147,7 @@ On the user side:\@
 			\item Provide information about taxis queues and availability 
 			\item Registration in order to become a registered user
 			\item Login for registered users
-			\item ``Reset password'' procedure for registered users
+			\item ``change personal data'' procedure for registered users
 		\end{itemize}
 	\item For the logged in user (on both the WEB and Mobile interface):
 		\begin{itemize}
@@ -220,7 +223,28 @@ On the admin side:\@
 \subsection{Non functional requirements}
 %TODO Bob
 \begin{itemize}
-	\item There will be a UI for mobile and one for the Web platform
+	\item \textit{Cross platform}
+		\begin{itemize}
+			\item There will be a UI for mobile and one for the Web platform
+			\item At least Android>=4.0 and iOS will be supported for the mobile version %TODO insert a meaningful frocio OS version
+			\item At least Edge, Chrome and Firefox will ahve to be supported
+			\item The web application will have to use HTML5
+		\end{itemize}
+	\item \textit{Responsiveness and availability}
+		\begin{itemize}
+			\item The application must always respond, even if no taxi are available
+			\item If a query is taking some time a spinner will be shown, the app must never freeze
+		\end{itemize}
+	\item \textit{Usability}
+		\begin{itemize}
+			\item The UIs have to be user friendly and with a few, clear functionalities
+		\end{itemize}
+	\item \textit{Security}
+		\begin{itemize}
+			\item In no situation sensible data will pass through an insecure channel
+			\item 
+		\end{itemize}
+	\item The service must be always
 %	\item 
 \end{itemize}
 \end{document}
