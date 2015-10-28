@@ -1,3 +1,3 @@
 #/bin/bash
 evince document.pdf &
-latexmk -pvc document.tex -pdf > /dev/null&
+latexmk -pvc document.tex -pdf 

@@ -5,13 +5,13 @@
 \usepackage{underscore}
 \usepackage[bookmarks=true]{hyperref}
 \newcommand{\comment}[1]{}
-\author{Roberto Clapis, Erica Stella} %TODO matricole
+\author{Roberto Clapis (841859), Erica Stella (854443)} 
 \date{\today}
 \title{Politecnico di Milano
 	\\A.A. 2015\@-\@2016
 	\\Software Engineering 2: ``TAXInseconds''
 	\\\textbf{R}equirements \textbf{A}nalysis \\and\\ \textbf{S}pecifications \textbf{D}ocument}
-	\hypersetup{pdftitle={Software Requirement Specification},    % title
+\hypersetup{pdftitle={Software Requirement Specification},    % title
 	pdfauthor={Roberto Clapis, Erica Stella},                     % author
 	pdfsubject={TeX and LaTeX},                        % subject of the document
 	pdfkeywords={TeX, LaTeX, taxi, RASD, SoftwareEngineering2}, % list of keywords
@@ -37,9 +37,9 @@ This document represent the Requirement Analysis and Specification Document (RAS
 The government of the city wants to optimize its taxi service with a completely new application. Therefore, we assume there are no previous systems to take into account.
 
 \subsection{Scope}
-The aim of the project TAXINSECONDS is to provide a new application to optimize the taxi service of the city. 
+The aim of the project TAXINSECONDS is to provide a new application to optimize the taxi service of the city that will be accessible via browser, mobile or public APIs.
 \\The application will be available to the users in web and mobile forms and will have public APIs in order to expand and improve the service with additional features.
-\\The city managed by TAXINSECONDS is divided in zones of 2 km² each and every zone has its own queue of taxis. The queues are automatically computed by the system with the information it receives from the GPS of the taxis. 
+\\The city managed by TAXINSECONDS is divided in zones of 2 km\textsuperscript{2} each and every zone has its own queue of taxis. The queues are automatically computed by the system with the information it receives from the GPS of the taxis. 
 \\Taxi drivers can be available or not. Only available taxi drivers can be in a queue. When a taxi driver changes her state from not available to available the system automatically adds her to the queue of the zone she is currently in, based on the information of the GPS of her taxi. 
 \\Users that are not registered can only see the estimated time of arrival of the nearest taxi with TAXINSECONDS.\@
 \\Registered users can also request a taxi or make a reservation for a taxi. Reservations can only be made at least two hours before the ride and must be done specifying the starting location, the destination and the meeting time. Requests, instead, only need the starting location and the destination.
@@ -47,12 +47,12 @@ The aim of the project TAXINSECONDS is to provide a new application to optimize 
 \\When a request is accepted the registered user that has made the request receives a notification from the system informing her of the code of the incoming taxi and the estimated waiting time.
 \\When a reservation is made, the system confirms it to the user and allocates a taxi 10 minutes before the meeting time. If a taxi for that zone is not available the request is then handled by finding the closest available taxi.
 \\Requests can be canceled before they'have been accepted by a taxi driver while reservation can be canceled until 10 minutes before the meeting time.
-
 \subsection{Goals}
 \begin{itemize}
 	\item Provide an easy way to request a taxi.
 	\item Provide an easy way to reserve a taxi.
 	\item Guarantee a fair management of the taxis queue.
+	\item Create a flexible system that allows expansion and interactions with other services.
 \end{itemize}
 
 \subsection{Definition and Acronyms}
@@ -66,6 +66,8 @@ The aim of the project TAXINSECONDS is to provide a new application to optimize 
 	\item reservation
 	\item state of a taxi driver
 	\item meeting time
+	\item login token
+	\item Secure Channel
 	\item nearest taxi
 \end{itemize}
 
@@ -73,19 +75,19 @@ The aim of the project TAXINSECONDS is to provide a new application to optimize 
 \begin{itemize}
 	\item ETA:\@ estimated time of arrival: the time, estimated by the system, that the nearest taxi to the location of the call will take to get to the client's position.
 \end{itemize}
-
 \subsection{Actors}
 \begin{itemize}
-	\item Taxi drivers: after successfully logging in, taxi drivers are able to set their current state as available or not and to accept or refuse requests.
-	\item Users: user are able to login or to ask the system for an ETA.\@
-	\item Registered users: after successfully logging in, registered users can request or reserve taxis.
-		%registered user
-		%guest
-		%administrator
+	\item \textit{Users}: user are able to login or to ask the system for an ETA.\@
+	\item \textit{Registered users}: after successfully logging in, registered users can request or reserve taxis.
+	\item \textit{Taxi drivers}: after successfully logging in, taxi drivers are able to set their current state as available or not and to accept or refuse requests.
+	\item \textit{Administrator}: after logging in the admin will be the only user allowed to edit the drivers list.
 \end{itemize}
 
 \subsection{References}
-
+\begin{itemize}
+	\item The \href{run:./external_references/assignments.pdf}{document} with the assignment for the project
+	\item The \href{run:./external_references/assignments.pdf}{IEEE Standard for SRS } 
+\end{itemize}
 \subsection{Overview}
 This document is structured in three parts:
 \begin{itemize}
@@ -101,19 +103,19 @@ The TAXINSECONDS application will be released as a web application and as a mobi
 There are no existing systems to integrate it with. 
 \\It will provide a total of 4 main interfaces:
 \begin{itemize}
-	\item for the users in both the
+	\item For the users in both the
 		\begin{itemize}
-			\item registered user mode
-			\item guest mode
+			\item Registered user mode
+			\item Guest mode
 		\end{itemize}
-	\item for taxi drivers 
-	\item for administrators
-	\item a lower level interface for APIs
+	\item For taxi drivers 
+	\item For administrators
+	\item A lower level interface for APIs
 \end{itemize}
 
 \subsubsection{System interfaces}
 \subsubsection{User Interfaces}
-\subsubsection{Hardware Interfaces}		DOPO NEI REQUIREMENTS
+\subsubsection{Hardware Interfaces}%		DOPO NEI REQUIREMENTS
 \subsubsection{Software Interfaces}
 \subsubsection{Communication Interfaces}
 \subsubsection{Operations} 
@@ -132,15 +134,11 @@ There are no existing systems to integrate it with.
 	\item Clients have a credit/debt card 
 	\item Clients allow the app to access their credit in order to pay for the service
 	\item When accessing from the website the clients will have to grant permission to the application to read the device's position
-	\item  
+	\item The Owner of the app will have to build or rent an always-on DBMS and host for the Server-Side part of the app
 \end{itemize}
-%TODO Bob
-%All taxi drivers have the mobile version of the TAXINASECOND application.
-%registrazione(direi che quando il taxi si registra connette il suo account al suo codice taxi) After logging in, 
 \clearpage
 \section{Specific requirements}
 \subsection{Functional Requirements}
-%TODO Bob
 On the user side:\@
 \begin{itemize}
 	\item For the non logged in user (on both the WEB and Mobile interface):
@@ -161,14 +159,14 @@ On the user side:\@
 		\begin{itemize}
 			\item Get the queue status for a given position
 			\item Get the ETA for a taxi for a given position
-			\item Establish a Secure Channel %TODO add this to definitions 
+			\item Establish a Secure Channel 
 			\item Obtain a login-token using valid credentials through a previously established Secure Channel
 			\item Using a valid login-token:\@
 				\begin{itemize}
 					\item Place a call for a given position
 					\item Place a reservation for a given position
 					\item Require the system to send a push message for updates about the status of a previous request
-					\item Logout (this will close the secure channel and invalidate the login token) %TODO add ``login token'' to definitions 
+					\item Logout (this will close the secure channel and invalidate the login token) 
 				\end{itemize}
 		\end{itemize}
 \end{itemize}
@@ -222,19 +220,20 @@ On the admin side:\@
 		\end{itemize}
 \end{itemize}
 \subsection{Non functional requirements}
-%TODO Bob
 \begin{itemize}
 	\item \textit{Cross platform}
 		\begin{itemize}
 			\item There will be a UI for mobile and one for the Web platform
-			\item At least Android>=4.0 and iOS will be supported for the mobile version %TODO insert a meaningful frocio OS version
+			\item At least Android>=4.0 and iOS will be supported for the mobile version %TODO insert a meaningful iOS version
 			\item At least Edge, Chrome and Firefox will ahve to be supported
 			\item The web application will have to use HTML5
 		\end{itemize}
-	\item \textit{Responsiveness and availability}
+	\item \textit{Availability}
 		\begin{itemize}
 			\item The application must always respond, even if no taxi are available at least with a ``No taxi available'' response
 			\item If a query is taking some time a spinner will be shown, the app must never freeze
+			\item The system must store securely user data for both drivers and clients in an always-reachable database
+			\item Regular Backups will be made in order to reduce or prevent data loss
 		\end{itemize}
 	\item \textit{Usability}
 		\begin{itemize}
@@ -245,16 +244,15 @@ On the admin side:\@
 			\item In no situation sensible data will pass through an insecure channel
 			\item No one should generally be able to impersonate the taxi drivers, the clients or the admin without proper autentication
 		\end{itemize}
-	\item The service must be always
 %	\item 
 \end{itemize}
 \subsection{Scenarios}
 \subsubsection{Scenario 1}
-Blair The Witch had to take her magical broom to the mechanic for the annual revision but she needs to go shopping to refill her stockpile of frog?s tails. Her friend Mizune has told her about TAXINASECOND, so she decides to give it a try. After downloading it on her smartphone, she signs up compiling the registration form with her username, password, email and credit card data. Now she can complain about how slow car-based transports are!
+Blair The Witch had to take her magical broom to the mechanic for the annual revision but she needs to go shopping to refill her stockpile of frog?s tails. Her friend Mizune has told her about TAXInseconds, so she decides to give it a try. After downloading it on her smartphone, she signs up compiling the registration form with her username, password, email and credit card data. Now she can complain about how slow car-based transports are!
 \subsubsection{Scenario 2}
-Suzuka is having a date tonight but, unfortunately, her car doesn?t want to start. After several failures, she decides to use TAXINASECOND. After logging in, she requests a taxi specifying her home as the starting location and the restaurant?s address as the destination. The system notifies Takeshi, the first taxi driver of the queue in Suzuka?s zone, of the request. Takeshi accepts the request and the system sends Suzuka the code of Takeshi?s taxi and the ETA so she can finally get to her date.
+Suzuka is having a date tonight but, unfortunately, her car doesn?t want to start. After several failures, she decides to use TAXInasecond. After logging in, she requests a taxi specifying her home as the starting location and the restaurant?s address as the destination. The system notifies Takeshi, the first taxi driver of the queue in Suzuka?s zone, of the request. Takeshi accepts the request and the system sends Suzuka the code of Takeshi?s taxi and the ETA so she can finally get to her date.
 \subsubsection{Scenario 3}
-Ash Ketchum has to start his new adventure in Hoenn tomorrow but his mom is busy cleaning the house with Mr. Mime so she can?t take him to the airport to meet Prof. Oak. Ash decides to use once again TAXINSECONDS to reserve a taxi. After logging in, he makes a reservation for a taxi specifying the starting location as Pallet town, the destination and the meeting time. The morning after, the system allocates Brock?s taxi for the reservation and sends his code to Ash so that he knows who he?ll meet to start his new adventure. 
+Ash Ketchum has to start his new adventure in Hoenn tomorrow but his mom is busy cleaning the house with Mr.\ Mime so she can?t take him to the airport to meet Prof.\ Oak. Ash decides to use once again TAXINSECONDS to reserve a taxi. After logging in, he makes a reservation for a taxi specifying the starting location as Pallet town, the destination and the meeting time. The morning after, the system allocates Brock?s taxi for the reservation and sends his code to Ash so that he knows who he?ll meet to start his new adventure. 
 \end{document}
 
 
