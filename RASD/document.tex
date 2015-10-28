@@ -43,10 +43,11 @@ The aim of the project TAXINSECONDS is to provide a new application to optimize 
 \\Taxi drivers can be available or not. Only available taxi drivers can be in a queue. When a taxi driver changes her state from not available to available the system automatically adds her to the queue of the zone she is currently in, based on the information of the GPS of her taxi. 
 \\Users that are not registered can only see the estimated time of arrival of the nearest taxi with TAXINSECONDS.\@
 \\Registered users can also request a taxi or make a reservation for a taxi. Reservations can only be made at least two hours before the ride and must be done specifying the starting location, the destination and the meeting time. Requests, instead, only need the starting location and the destination.
-\\When a request is made, the first taxi driver of the queue of the starting location's zone is notified for accepting or rejecting the request. If a taxi driver rejects a request her state is put on unavailable until she changes it back to available. If a taxi driver doesn't accept or reject a request within 1 minute, the request will be passed on to the next taxi driver in the queue and the first one will be moved to the end of the queue. If there are no available taxis in the zone of the request the system will propagate the request to the closest not empty queue.
-\\When a request is accepted the registered user that has made the request receives a notification from the system informing her of the code of the incoming taxi and the estimated waiting time.
+\\When a request is made, the first taxi driver of the queue of the starting location's zone is notified for accepting or rejecting the request. If a taxi driver rejects a request her state is put on unavailable until she changes it back to available. If a taxi driver doesn't accept or reject a request within 1 minute, the request will be passed on to the next taxi driver in the queue and the first one will be moved to the end of the queue. If there are no available taxis in the zone of the request the system will propagate the request to the closest available taxi.
+\\When a request is accepted, the registered user that has made the request receives a notification from the system informing her of the code of the incoming taxi and the estimated time of arrival.
 \\When a reservation is made, the system confirms it to the user and allocates a taxi 10 minutes before the meeting time. If a taxi for that zone is not available the request is then handled by finding the closest available taxi.
-\\Requests can be canceled before they'have been accepted by a taxi driver while reservation can be canceled until 10 minutes before the meeting time.
+\\Requests can be cancelled before they have been accepted by a taxi driver while reservation can be cancelled until 10 minutes before the meeting time.
+
 \subsection{Goals}
 \begin{itemize}
 	\item Provide an easy way to request a taxi.
@@ -59,21 +60,21 @@ The aim of the project TAXINSECONDS is to provide a new application to optimize 
 
 \subsubsection{Definitions}
 \begin{itemize}
-	\item registered user
-	\item guest
-	\item administrator
-	\item request
-	\item reservation
-	\item state of a taxi driver
-	\item meeting time
 	\item login token
 	\item Secure Channel
-	\item nearest taxi
+	\item \textit{Registered user:} a person that has already signed up and logged in the system.
+	\item \textit{Administrator:} a person authorized to modify the content of the DBMS of the system.
+	\item \textit{Request:} a call from a registered user who needs a taxi as soon as possible.
+	\item \textit{Meeting time:} the date and time in which the registered user needs the taxi.
+	\item \textit{Reservation:} a %TODO fare fucking definizione
+	\item \textit{State of a taxi driver:} the state the taxi driver is currently in. The state can be available or not available. Taxi drivers can be assigned to a request or a reservation by the system only if they're available.
+	\item \textit{Closest available taxi:} if there are no taxis in the zone of the request or of the reservation, the system automatically finds the closest available taxi choosing the one with the smallest estimated time of arrival from the available taxis of the other zones.
 \end{itemize}
 
 \subsubsection{Acronyms}
 \begin{itemize}
-	\item ETA:\@ estimated time of arrival: the time, estimated by the system, that the nearest taxi to the location of the call will take to get to the client's position.
+	\item ETA:\@ estimated time of arrival: the time, estimated by the system, that the closest available taxi will take to get to the starting location of the ride.
+	\item CAT:\@ closest available taxi (see definition in the previous paragraph).
 \end{itemize}
 \subsection{Actors}
 \begin{itemize}
@@ -135,6 +136,7 @@ There are no existing systems to integrate it with.
 	\item Clients allow the app to access their credit in order to pay for the service
 	\item When accessing from the website the clients will have to grant permission to the application to read the device's position
 	\item The Owner of the app will have to build or rent an always-on DBMS and host for the Server-Side part of the app
+	\item A taxi driver can't be available and not available at the same time
 \end{itemize}
 \clearpage
 \section{Specific requirements}
