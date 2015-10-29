@@ -80,10 +80,11 @@ The aim of the project TAXINSECONDS is to provide a new application to optimize 
 	\item ETA:\@ estimated time of arrival: the time, estimated by the system, that the closest available taxi will take to get to the starting location of the ride.
 	\item CAT:\@ closest available taxi (see definition in the previous paragraph).
 	\item API:\@ application programming interface is a set of routines, protocols, and tools for building software applications on top of this one.
+	\item MAD:\@ maximum allowed delay; the maximum time, calculated by the system according to its information about distance and traffic, that a taxi driver has to get to the starting location of a request. %TODO aggiunto questo
 \end{itemize}
 \subsection{Actors}
 \begin{itemize}
-	\item \textit{Guest}: user are able to sign up, login or to ask the system for an ETA.\@
+	\item \textit{Guest}: guests are able to sign up, login or ask the system for an ETA.\@
 	\item \textit{Registered users}: after successfully logging in, registered users can request or reserve taxis or ask the system for an ETA.\@
 	\item \textit{Taxi drivers}: after successfully logging in, taxi drivers are able to set their current state as available or not and to accept or refuse requests.
 	\item \textit{Administrator}: after successfully logging in, the administrator will be the only user allowed to edit the taxi drivers list stored by the system.
@@ -216,15 +217,15 @@ Backup and recovery operations.
 \subsubsection{Domain Assumptions}
 \begin{itemize}
 	\item All taxi drivers who intend to use the service will have a mobile phone with one of the supported mobile OSs
-	\item All taxi drivers will have a phone with GPS functionality
+	\item All taxi drivers will have a phone with active GPS functionality
 	\item The taxi drivers will have to grant the system the rights to handle their taxi codes
-	\item Taxi drivers' phones will have an internet connection
-	\item Clients will have access to the internet and a device with GPS integrated 
-	\item Clients have a valid email address
-	\item Clients have a credit/debt card 
+	\item Taxi drivers' phones will always have an internet connection
+	\item Clients will have access to the internet and a device with GPS integrated %TODO non necessaria
+	\item Clients have a valid email address %TODO non necessaria
+	\item Clients have a credit/debt card %TODO non necessaria, basta che mettiamo un controllo alla registrazione
 	\item Clients allow the app to access their credit in order to pay for the service
-	\item When accessing from the website the clients will have to grant permission to the application to read the device's position
-	\item The Owner of the app will have to build or rent an always-on DBMS and host for the Server-Side part of the app
+	\item When accessing from the website the clients will have to grant permission to the application to read the device's position %TODO non basta inserirla a mano come starting location?
+	\item The Owner of the app will have to build or rent an always-on DBMS and host for the Server-Side part of the app %TODO troppo specifica
 %too obvious	\item A taxi driver can't be available and not available at the same time
 \end{itemize}
 \clearpage
@@ -341,7 +342,33 @@ Blair The Witch had to take her magical broom to the mechanic for the annual rev
 \subsubsection{Scenario 2}
 Suzuka is having a date tonight but, unfortunately, her car doesn?t want to start. After several failures, she decides to use TAXInasecond. After logging in, she requests a taxi specifying her home as the starting location and the restaurant?s address as the destination. The system notifies Takeshi, the first taxi driver of the queue in Suzuka?s zone, of the request. Takeshi accepts the request and the system sends Suzuka the code of Takeshi?s taxi and the ETA so she can finally get to her date.
 \subsubsection{Scenario 3}
-Ash Ketchum has to start his new adventure in Hoenn tomorrow but his mom is busy cleaning the house with Mr.\ Mime so she can?t take him to the airport to meet Prof.\ Oak. Ash decides to use once again TAXINSECONDS to reserve a taxi. After logging in, he makes a reservation for a taxi specifying the starting location as Pallet town, the destination and the meeting time. The morning after, the system allocates Brock?s taxi for the reservation and sends his code to Ash so that he knows who he?ll meet to start his new adventure. 
+Ash Ketchum has to start his new adventure in Hoenn tomorrow but his mom is busy cleaning the house with Mr.\ Mime so she can?t take him to the airport to meet Prof.\ Oak. Ash decides to use once again TAXINSECONDS to reserve a taxi. After logging in, he makes a reservation for a taxi specifying the starting location as Pallet town, the destination and the meeting time. The morning after, the system allocates Brock?s taxi for the reservation and sends his code to Ash so that he knows who he'll meet to start his new adventure. 
+\subsubsection{Scenario 4}
+Donald Duck is ready to start his first day as a taxi driver in Paperopoli. He jumps on his car, logs in TAXINSECONDS and changes his state to available to wait for clients. Unfortunately he doesn't know that in his zone there are 15 taxis the joined the queue before him, so he'll have to be patient for quite some time.
+\subsubsection{Scenario 5}
+After quite some time, Daisy requests a taxi and it's finally Donald's turn! The system notifies him but...it was breakfast time so Donald's having a cappuccino in a very crowded bar. He doesn't hear the notification popping on his phone so, after 1 minute, the system forwards Daisy's request to the next taxi driver in the queue and changes Donald's state to not available.
+
+\subsection{Use cases}
+\subsubsection{Request a taxi}
+\textit{Actors:} Registered user, taxi driver
+\textit{Preconditions:} The user is on the homepage of the application %TODO va bene homepage anche per la mobile app?
+\textit{Flow of Events:}
+	\begin{itemize}
+		\item  The user clicks the "Request a taxi" button
+		\item  The system shows the user a page where she can enter the starting location and destination of the request
+		\item  The user inserts the starting location and the destination and then clicks the "Request" button
+		\item  The system notifies the first taxi driver of the starting location's zone's queue. If there are no taxis in that zone, the system notifies the CAT. If a taxi driver rejects the request the system passes the request on to the next taxi driver in the queue and changes the first one's state to not available. If a taxi driver doesn't accept or reject the request within 1 minute, the system passes the request on to the next taxi driver in the queue and moves the first one to the end of the queue
+		\item  The taxi driver accepts the request and goes to the starting location
+		\item  The system changes the state of the taxi driver to not available and notifies the user of the code of the incoming taxi and the ETA
+		\item  When the taxi driver arrives at the starting location, according to her GPS information, the system automatically makes the user pay the minimum fare %TODO va bene cosi?
+	\end{itemize}
+\textit{Postconditions:} The taxi driver is not available anymore and has been removed from the queue. The user has been charged with the minimum fare. %TODO non sapevo che mettere
+\textit{Exceptions:}
+	\begin{itemize}
+		\item If there are no available taxis in the entire city an error message is shown and the request is not made
+		\item If a taxi driver doesn't get to the starting location of the request within the MAD the system will pass on the request to the next taxi driver in the queue and will notify the user of the change with the new ETA and taxi code.
+		\item If 
+	\end{itemize}
 \end{document}
 
 
