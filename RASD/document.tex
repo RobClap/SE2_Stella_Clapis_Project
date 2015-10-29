@@ -1,11 +1,12 @@
 \documentclass{article}
-\graphicspath{{images/}}
-\usepackage{verbatim}
 \usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{booktabs}
+\usepackage{verbatim}
 \usepackage{listings}
 \usepackage{underscore}
+\setcounter{secnumdepth}{5}
 \usepackage[bookmarks=true]{hyperref}
-\newcommand{\comment}[1]{}
 \author{Roberto Clapis (841859), Erica Stella (854443)} 
 \date{\today}
 \title{Politecnico di Milano
@@ -118,7 +119,7 @@ There are no existing systems to integrate it with.
 \end{itemize}
 
 \subsubsection{System interfaces}
-\subsubsection{User Interfaces}
+\paragraph{User Interfaces}
 %TODO
 \begin{comment}
 	This should specify the following:
@@ -133,33 +134,82 @@ There are no existing systems to integrate it with.
 	rather than Òa typist can do function X. Ó (This may also be speciÞed in the Software System
 Attributes under a section titled Ease of Use.)
 \end{comment}
-\subsubsection{Hardware Interfaces}
-Owned by the clients/drivers:
+\paragraph{Hardware Interfaces}
+\begin{itemize}
+\item Owned by the clients/drivers:
 	\begin{itemize}
 		\item Any GPS-capable device running Android>=4.0 or iOS>=6
 		\item Any computer able to run a browser HTML5-compatible
 	\end{itemize}
-Owned by the company:
+\item Owned by the company:
 	\begin{itemize}
-		\item The server on which the core of the application will run, and to which the applications, the web UI and the API-related clients will connect to.
-			\\The connection of the non-logged user will use the port 80, for secure layer port 443 will be the choice
+		\item The server on which the core of the application will run, and to which the applications, 
+			the web UI and the API-related clients will connect to.
+		\item Two machines optimized for a stateful firewall use
+		\item A machine with the DBMS that will operate behind the second firewall 
 	\end{itemize}
-\subsubsection{Software Interfaces}
-\subsubsection{Communication Interfaces}
-\subsubsection{Memory constraints} 
-Primary memory:
-\begin{itemize}
-	\item for both taxi dirvers' and clients's mobile devices at least 500MB 
-	\item for the web application 1GB or more is suggested
-	\item for the server side 32GB+ are suggested, but with great traffic a bigger memory could be required (5MB per average active user is a minimum size)
 \end{itemize}
-Secondary memory:
+\paragraph{Software Interfaces}
+%TODO
 \begin{itemize}
-	\item mobile devices will need to have 50MB of free space on the device
-	\item the web application require little to none secondary memory
-	\item the server will need to have the storage for the DBMS (with all users data), the application code and system logs, so 1TB of hard drive is required. (50MB for user at least)
+	\item Database Management System (DBMS):
+		\begin{itemize}
+			\item Name: MariaDB.\@
+			\item Version: 10.0.21
+			\item Source: https://mariadb.org/
+		\end{itemize}
+	\item HTTP/HTTPS server:
+		\begin{itemize}
+			\item Name: Nginx
+			\item Version: 1.8.0 
+			\item Source: http://nginx.org/
+		\end{itemize}
+	\item Operating System:
+		\begin{itemize}
+			\item Name: CentOS
+			\item Version: 7.1--1503 
+			\item Source: https://www.centos.org/ 
+		\end{itemize}
 \end{itemize}
-\subsubsection{Operations} 
+\paragraph{Communication Interfaces}
+\begin{center}
+	\begin{tabular}{*{4}{c}}
+	\toprule
+    Protocol & Application layer Protocol & Port & Scope \\
+	\midrule
+	TCP & HTTP & 80 & Upgrade to a secure connection over HTTPS \\ 
+    TCP & HTTPS & 443 & The web interface or the mobile apps \\ 
+    TCP & HTTPS/JSON & 443 & The APIs \\ 
+    TCP & HTTPS & 443 & The web interface or the mobile apps \\ 
+    TCP & DBMS over SSL & 3306 & Communication between the webserver and the DBMS \\ 
+    \bottomrule
+    \end{tabular}
+\end{center}
+\paragraph{Memory constraints} 
+\begin{itemize}
+	\item Primary memory:
+		\begin{itemize}
+			\item for both taxi dirvers' and clients's mobile devices at least 500MB 
+			\item for the web application 1GB or more is suggested
+		%TODO Redo this 			\item for the server side 32GB+ are suggested, but with great traffic a bigger memory could be required (5MB per average active user is a minimum size)
+
+		\end{itemize}
+	\item Secondary memory:
+		\begin{itemize}
+			\item mobile devices will need to have 50MB of free space on the device
+			\item the web application require little to none secondary memory
+		%TODO Redo this			\item the server will need to have the storage for the DBMS (with all users data), the application code and system logs, so 1TB of hard drive is required. (50MB for user at least)
+		\end{itemize}
+\end{itemize}
+\paragraph{Operations} 
+%TODO
+\begin{comment}
+This should specify the normal and special operations required by the user such as
+The various modes of operations in the user organization (e.g., user-initiated operations);
+Periods of interactive operations and periods of unattended operations;
+Data processing support functions;
+Backup and recovery operations.
+\end{comment}
 \subsection{Product functions}
 \subsection{User characteristics}
 \subsection{Constraints}
@@ -273,7 +323,7 @@ On the admin side:\@
 		\begin{itemize}
 			\item The application must always respond, even if no taxi are available at least with a ``No taxi available'' response
 			\item If a query is taking some time a spinner will be shown, the app must never freeze
-			\item The system must store securely user data for both drivers and clients in an always-reachable database
+			\item The system must store data for both drivers and clients in an always-reachable database
 			\item Regular Backups will be made in order to reduce or prevent data loss
 		\end{itemize}
 	\item \textit{Usability}
@@ -299,9 +349,7 @@ Ash Ketchum has to start his new adventure in Hoenn tomorrow but his mom is busy
 \end{document}
 
 
-
-\comment{%TEMPLATE FOR BULLETS
-	\begin{itemize}
-		\item  
-	\end{itemize}
-}
+%
+%	\begin{itemize}
+%		\item  
+%	\end{itemize}
