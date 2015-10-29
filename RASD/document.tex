@@ -50,26 +50,27 @@ The aim of the project TAXINSECONDS is to provide a new application to optimize 
 \\When a request is accepted, the registered user that has made the request receives a notification from the system informing her of the code of the incoming taxi and the estimated time of arrival.
 \\When a reservation is made, the system confirms it to the user and allocates a taxi 10 minutes before the meeting time. If a taxi for that zone is not available the request is then handled by finding the closest available taxi.
 \\Requests can be cancelled before they have been accepted by a taxi driver while reservation can be cancelled until 10 minutes before the meeting time.
+\\%TODO se non si presentano entro 5 minuti pagano minimum fare
 
 \subsection{Goals}
 \begin{itemize}
 	\item Provide an easy way to request a taxi.
 	\item Provide an easy way to reserve a taxi.
 	\item Guarantee a fair management of the taxis queue.
-	\item Create a flexible system that allows expansion and interactions with other services.
+	\item Create an extensible system that allows expansion and interactions with other services.
 \end{itemize}
 
 \subsection{Definition and Acronyms}
 
 \subsubsection{Definitions}
 \begin{itemize}
-	\item \textit{Secure Channel:} a communication tunnel (TLS) to ensure privacy and autenticity for both the server and the clients 
+	\item \textit{Secure Channel:} a communication tunnel (TLS) to ensure privacy and autenticity for both the server and the clients %TODO serve davvero?
 	\item \textit{Registered user:} a person that has already signed up and logged in the system.
 	\item \textit{Administrator:} a person authorized to modify the content of the DBMS of the system.
-	\item \textit{Request:} a call from a registered user who needs a taxi as soon as possible.
-	\item \textit{Meeting time:} the date and time in which the registered user needs the taxi.
-	\item \textit{Reservation:} a %TODO fare fucking definizione
-	\item \textit{State of a taxi driver:} the state the taxi driver is currently in. The state can be available or not available. Taxi drivers can be assigned to a request or a reservation by the system only if they're available.
+	\item \textit{Request:} a call from a registered user who needs a taxi immediately.
+	\item \textit{Meeting time:} the date and time in which the registered user needs the taxi in case of reservation.
+	\item \textit{Reservation:} a booking of a taxi at a certain meeting time.
+	\item \textit{State of a taxi driver:} the state the taxi driver is currently in. It can be available or not available. Taxi drivers can be assigned to a request or a reservation by the system only if they're available.
 	\item \textit{Closest available taxi:} if there are no taxis in the zone of the request or of the reservation, the system automatically finds the closest available taxi choosing the one with the smallest estimated time of arrival from the available taxis of the other zones.
 \end{itemize}
 
