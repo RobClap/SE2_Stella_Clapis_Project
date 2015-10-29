@@ -46,9 +46,9 @@ The aim of the project TAXINSECONDS is to provide a new application to optimize 
 \\Taxi drivers can be available or not. Only available taxi drivers can be in a queue. When a taxi driver changes her state from not available to available the system automatically adds her to the queue of the zone she is currently in, based on the information of the GPS of her taxi. 
 \\Users that are not registered can only see the estimated time of arrival of the nearest taxi with TAXINSECONDS.\@
 \\Registered users can also request a taxi or make a reservation for a taxi. Reservations can only be made at least two hours before the ride and must be done specifying the starting location, the destination and the meeting time. Requests, instead, only need the starting location and the destination.
-\\When a request is made, the first taxi driver of the queue of the starting location's zone is notified for accepting or rejecting the request. If a taxi driver rejects a request her state is put on unavailable until she changes it back to available. If a taxi driver doesn't accept or reject a request within 1 minute, the request will be passed on to the next taxi driver in the queue and the first one will be moved to the end of the queue. If there are no available taxis in the zone of the request the system will propagate the request to the closest available taxi.
+\\When a request or a reservation is made, the first taxi driver of the queue of the starting location's zone is notified for accepting or rejecting it. If a taxi driver rejects it her state is put on unavailable until she changes it back to available. If a taxi driver doesn't accept or reject within 1 minute, it will be passed on to the next taxi driver in the queue and the first one will be moved to the end of the queue. If there are no available taxis in the zone of the request the system will propagate the request to the closest available taxi.
 \\When a request is accepted, the registered user that has made the request receives a notification from the system informing her of the code of the incoming taxi and the estimated time of arrival.
-\\When a reservation is made, the system confirms it to the user and allocates a taxi 10 minutes before the meeting time. If a taxi for that zone is not available the request is then handled by finding the closest available taxi.
+\\When a reservation is made, the system confirms it to the user and allocates a taxi 10 minutes before the meeting time. If a taxi for that zone is not available the request is then handled by finding the closest available taxi. When a taxi driver accepts the reservation, the user receives from the system the code of the incoming taxi. %TODO c'è da accettare le richieste o rifiutarle anche per le reservation-->fatte ma da controllare che vada bene
 \\Requests can be cancelled before they have been accepted by a taxi driver while reservation can be cancelled until 10 minutes before the meeting time.
 \\%TODO se non si presentano entro 5 minuti pagano minimum fare
 
@@ -64,9 +64,14 @@ The aim of the project TAXINSECONDS is to provide a new application to optimize 
 
 \subsubsection{Definitions}
 \begin{itemize}
+<<<<<<< HEAD
+	\item \textit{Secure Channel:} a communication tunnel (TLS) to ensure privacy and autenticity for both the server and the clients %TODO serve davvero?
+	\item \textit{Guest:} a person that has to sign up or log in the system.
+=======
 	\item \textit{Secure Channel:} a communication tunnel (TLS) to ensure privacy and autenticity for both the server and the clients %TODO serve davvero? %Affermativo
+>>>>>>> origin/master
 	\item \textit{Registered user:} a person that has already signed up and logged in the system.
-	\item \textit{Administrator:} a person authorized to modify the content of the DBMS of the system.
+	\item \textit{Administrator:} a person authorized to modify the list of taxi drivers stored by the system.
 	\item \textit{Request:} a call from a registered user who needs a taxi immediately.
 	\item \textit{Meeting time:} the date and time in which the registered user needs the taxi in case of reservation.
 	\item \textit{Reservation:} a booking of a taxi at a certain meeting time.
@@ -79,14 +84,14 @@ The aim of the project TAXINSECONDS is to provide a new application to optimize 
 	\item ETA:\@ estimated time of arrival: the time, estimated by the system, that the closest available taxi will take to get to the starting location of the ride.
 	\item CAT:\@ closest available taxi (see definition in the previous paragraph).
 	\item API:\@ application programming interface is a set of routines, protocols, and tools for building software applications on top of this one.
-	\item TLS:\@ Transport Layer Security, a cryptographic protocol which is designed to provide communication security over the Internet.
+	\item TLS:\@ Transport Layer Security, a cryptographic protocol which is designed to provide communication security over the Internet. %TODO serve davero pt2? non essere troppo specifico nelle scelte di implementazione
 \end{itemize}
 \subsection{Actors}
 \begin{itemize}
-	\item \textit{Users}: user are able to login or to ask the system for an ETA.\@
-	\item \textit{Registered users}: after successfully logging in, registered users can request or reserve taxis.
+	\item \textit{Guest}: user are able to sign up, login or to ask the system for an ETA.\@
+	\item \textit{Registered users}: after successfully logging in, registered users can request or reserve taxis or ask the system for an ETA.
 	\item \textit{Taxi drivers}: after successfully logging in, taxi drivers are able to set their current state as available or not and to accept or refuse requests.
-	\item \textit{Administrator}: after logging in the admin will be the only user allowed to edit the drivers list.
+	\item \textit{Administrator}: after successfully logging in, the administrator will be the only user allowed to edit the taxi drivers list stored by the system.
 \end{itemize}
 
 \subsection{References}
@@ -98,8 +103,8 @@ The aim of the project TAXINSECONDS is to provide a new application to optimize 
 This document is structured in three parts:
 \begin{itemize}
 	\item Introduction: gives an high-level description of the software purposes and context.
-	\item Overall Description: gives a general description of the application, focusing on the context of the system, going in details about domain assumptions and constraint. The aim of this section is to provide a context to the whole project and show its integration with the real world.
-	\item Specific Requirements: this section contains all of the software requirements to a level of detail aimed to be enough to design a system to satisfy the said requirements, and testers to test that the system actually satisfies them. It also contains the detailed description of the possible interactions between the system and the world with a simulation and preview of the expected response of the system with given stimulation. (Details are given with Alloy specifications and UML diagrams)
+	\item Overall Description: gives a general description of the application, focusing on the context of the system, going in details about domain assumptions and constraintS. The aim of this section is to provide a context to the whole project and show its integration with the real world.
+	\item Specific Requirements: this section contains all of the software requirements to a level of detail aimed to be enough to design a system to satisfy said requirements, and testers to test that the system actually satisfies them. It also contains the detailed description of the possible interactions between the system and the world with a simulation and preview of the expected response of the system with given stimulation. (Details are given with Alloy specifications and UML diagrams)
 \end{itemize}
 
 
@@ -109,19 +114,24 @@ The TAXINSECONDS application will be released as a web application and as a mobi
 There are no existing systems to integrate it with. 
 \\It will provide a total of 4 main interfaces:
 \begin{itemize}
-	\item For the users in both the
+	\item For both type of users
 		\begin{itemize}
-			\item Registered user mode
-			\item Guest mode
+			\item Registered users
+			\item Guests
 		\end{itemize}
 	\item For taxi drivers 
 	\item For administrators
-	\item A lower level interface for APIs
+	\item A lower level interface for APIs %TODO lower?
 \end{itemize}
 
+<<<<<<< HEAD
+\subsubsection{User Interfaces}
+%TODO
+=======
 \subsubsection{System interfaces}
 \paragraph{User Interfaces}
 %TODO Erica
+>>>>>>> origin/master
 \begin{comment}
 	This should specify the following:
 	a) The logical characteristics of each interface between the software product and its users. This
