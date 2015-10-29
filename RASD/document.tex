@@ -225,7 +225,7 @@ Backup and recovery operations.
 	\item Clients allow the app to access their credit in order to pay for the service
 	\item When accessing from the website the clients will have to grant permission to the application to read the device's position
 	\item The Owner of the app will have to build or rent an always-on DBMS and host for the Server-Side part of the app
-	\item A taxi driver can't be available and not available at the same time
+%too obvious	\item A taxi driver can't be available and not available at the same time
 \end{itemize}
 \clearpage
 \section{Specific requirements}
@@ -251,13 +251,11 @@ On the user side:\@
 			\item Get the queue status for a given position
 			\item Get the ETA for a taxi for a given position
 			\item Establish a Secure Channel 
-			\item Obtain a login-token using valid credentials through a previously established Secure Channel
-			\item Using a valid login-token:\@
+			\item Using a Secure Channel and valid credentials:\@
 				\begin{itemize}
 					\item Place a call for a given position
 					\item Place a reservation for a given position
 					\item Require the system to send a push message for updates about the status of a previous request
-					\item Logout (this will close the secure channel and invalidate the login token) 
 				\end{itemize}
 		\end{itemize}
 \end{itemize}
@@ -280,15 +278,14 @@ On the taxi driver side (there will be no Web interface in this case):\@
 		\end{itemize}
 	\item Through the API:\@
 		\begin{itemize}
-			\item Establish a Secure Channel using valid credentials 
-			\item Through a Secure Channel:\@
+			\item Establish a Secure Channel
+			\item Through a Secure Channel and with valid credentials:\@
 				\begin{itemize}
 					\item Toggle the driver state
 					\item Send a notification when a call is made for the driver
 					\item Accept the answer to the call, whether the answer is Acceptance or Refusal
 					\item Handle disconnection
 					\item Handle timeout (if no taxi reach the client in time)%TODO e come fa a saperlo?
-					\item Log out (invalidation of the token)
 				\end{itemize}
 			\item 
 		\end{itemize}
