@@ -18,7 +18,7 @@ fact allActiveTaxiesBelongToOneQueue {
 //Clients
 abstract sig Client{}
 sig WaitingClient extends Client{next:lone WaitingClient}
-sig nonWaitingClient{}
+sig nonWaitingClient extends Client{}
 sig ClientQueue{root:WaitingClient}
 
 fact nextClientNotReflexive { 
@@ -35,8 +35,13 @@ fact allWaitingClientsBelongToOneQueue {
 sig Area{taxies: one TaxiQueue, clients: one ClientQueue}
 fact oneQueueoneArea{
 	no c:ClientQueue | some disjoint a,a':Area | c=a.clients  and  c=a'.clients
-	no c:ClientQueue | some disjoint a,a':Area | c=a.clients  and  c=a'.clients
+	no t:TaxiQueue | some disjoint a,a':Area | t=a.taxies  and  t=a'.taxies
+}
+
+fact allQueuesInAreas{
+	all c:ClientQueue | some a:Area | c=a.clients
+	all t:TaxiQueue | some a:Area | t=a.taxies
 }
 
 pred show{}
-run show{} for 5 but 10 Area
+run show{} for 10 but 2 Area, 2 TaxiQueue, 2 ClientQueue, 1 InactiveTaxi,  1 nonWaitingClient, 6 ActiveTaxi, 4 WaitingClient
