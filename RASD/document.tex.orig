@@ -1,10 +1,12 @@
 \documentclass{article}
 \usepackage{graphicx}
 \graphicspath{{images/}}
+\usepackage{booktabs}
+\usepackage{verbatim}
 \usepackage{listings}
 \usepackage{underscore}
+\setcounter{secnumdepth}{5}
 \usepackage[bookmarks=true]{hyperref}
-\newcommand{\comment}[1]{}
 \author{Roberto Clapis (841859), Erica Stella (854443)} 
 \date{\today}
 \title{Politecnico di Milano
@@ -36,6 +38,7 @@ This document represent the Requirement Analysis and Specification Document (RAS
 \subsection{Actual System}
 The government of the city wants to optimize its taxi service with a completely new application. Therefore, we assume there are no previous systems to take into account.
 
+
 \subsection{Scope}
 The aim of the project TAXINSECONDS is to provide a new application to optimize the taxi service of the city that will be accessible via browser, mobile or public APIs.
 \\The application will be available to the users in web and mobile forms and will have public APIs in order to expand and improve the service with additional features.
@@ -43,69 +46,48 @@ The aim of the project TAXINSECONDS is to provide a new application to optimize 
 \\Taxi drivers can be available or not. Only available taxi drivers can be in a queue. When a taxi driver changes her state from not available to available the system automatically adds her to the queue of the zone she is currently in, based on the information of the GPS of her taxi. 
 \\Users that are not registered can only see the estimated time of arrival of the nearest taxi with TAXINSECONDS.\@
 \\Registered users can also request a taxi or make a reservation for a taxi. Reservations can only be made at least two hours before the ride and must be done specifying the starting location, the destination and the meeting time. Requests, instead, only need the starting location and the destination.
-\\When a request is made, the first taxi driver of the queue of the starting location's zone is notified for accepting or rejecting the request. If a taxi driver rejects a request her state is put on unavailable until she changes it back to available. If a taxi driver doesn't accept or reject a request within 1 minute, the request will be passed on to the next taxi driver in the queue and the first one will be moved to the end of the queue. If there are no available taxis in the zone of the request the system will propagate the request to the closest available taxi.
+\\When a request is made, the first taxi driver of the queue of the starting location's zone is notified for accepting or rejecting it. If the taxi driver rejects it her state is put on unavailable until she changes it back to available. If a taxi driver doesn't accept or reject within 1 minute, it will be passed on to the next taxi driver in the queue and the first one will be moved to the end of the queue. If there are no available taxis in the zone of the request the system will propagate the request to the closest available taxi.
 \\When a request is accepted, the registered user that has made the request receives a notification from the system informing her of the code of the incoming taxi and the estimated time of arrival.
-\\When a reservation is made, the system confirms it to the user and allocates a taxi 10 minutes before the meeting time. If a taxi for that zone is not available the request is then handled by finding the closest available taxi.
-<<<<<<< HEAD
-\\Requests can be canceled before they'have been accepted by a taxi driver while reservation can be canceled until 10 minutes before the meeting time.
-=======
+\\When a reservation is made, the system confirms it to the user and allocates a taxi 10 minutes before the meeting time. If a taxi for that zone is not available the request is then handled by finding the closest available taxi. When a taxi driver accepts the reservation, the user receives from the system the code of the incoming taxi. If a taxi driver doesn't accept or reject within 1 minute, it will be passed on to the next taxi driver in the queue and the first one will be moved to the end of the queue.
 \\Requests can be cancelled before they have been accepted by a taxi driver while reservation can be cancelled until 10 minutes before the meeting time.
+%TODO credo di volermi dimenticare del fatto che qualcuno non si presenti dopo aver prenotato il taxi
 
->>>>>>> 4da00d1d1f6305b5d5e13a05210018b3fbe10876
 \subsection{Goals}
 \begin{itemize}
 	\item Provide an easy way to request a taxi.
 	\item Provide an easy way to reserve a taxi.
 	\item Guarantee a fair management of the taxis queue.
-	\item Create a flexible system that allows expansion and interactions with other services.
+	\item Create an extensible system that allows expansion and interactions with other services.
 \end{itemize}
 
 \subsection{Definition and Acronyms}
 
 \subsubsection{Definitions}
 \begin{itemize}
-<<<<<<< HEAD
-	\item registered user
-	\item guest
-	\item administrator
-	\item request
-	\item reservation
-	\item state of a taxi driver
-	\item meeting time
-	\item login token
-	\item Secure Channel
-	\item nearest taxi
-=======
-	\item \textit{Registered user:} a person that has already signed up and logged in the system.
-	\item \textit{Administrator:} a person authorized to modify the content of the DBMS of the system.
-	\item \textit{Request:} a call from a registered user who needs a taxi as soon as possible.
-	\item \textit{Meeting time:} the date and time in which the registered user needs the taxi.
-	\item \textit{Reservation:} a %TODO fare fucking definizione
-	\item \textit{State of a taxi driver:} the state the taxi driver is currently in. The state can be available or not available. Taxi drivers can be assigned to a request or a reservation by the system only if they're available.
+	\item \textit{Guest:} a person that has to sign up or log in the system.
+	\item \textit{Secure Channel:} a communication channel to ensure privacy and autenticity for both the server and the clients %TODO rende tutto molto più giusto e semplice,ho tolto la parte implementativa 
+	\item \textit{Registered user:} a person that has already signed up and logged in the system. %TODO tremendamente imprecisa
+	\item \textit{Administrator:} a person authorized to modify the list of taxi drivers stored by the system.
+	\item \textit{Request:} a call from a registered user who needs a taxi immediately.
+	\item \textit{Meeting time:} the date and time in which the registered user needs the taxi in case of reservation.
+	\item \textit{Reservation:} a booking of a taxi at a certain meeting time.
+	\item \textit{State of a taxi driver:} the state the taxi driver is currently in. It can be available or not available. Taxi drivers can be assigned to a request or a reservation by the system only if they're available.
 	\item \textit{Closest available taxi:} if there are no taxis in the zone of the request or of the reservation, the system automatically finds the closest available taxi choosing the one with the smallest estimated time of arrival from the available taxis of the other zones.
->>>>>>> 4da00d1d1f6305b5d5e13a05210018b3fbe10876
 \end{itemize}
 
 \subsubsection{Acronyms}
 \begin{itemize}
 	\item ETA:\@ estimated time of arrival: the time, estimated by the system, that the closest available taxi will take to get to the starting location of the ride.
 	\item CAT:\@ closest available taxi (see definition in the previous paragraph).
+	\item API:\@ application programming interface is a set of routines, protocols, and tools for building software applications on top of this one.
+	\item MAD:\@ maximum allowed delay; the maximum time, calculated by the system according to its information about distance and traffic, that a taxi driver has to get to the starting location of a request. %TODO aggiunto questo
 \end{itemize}
 \subsection{Actors}
 \begin{itemize}
-<<<<<<< HEAD
-	\item \textit{Users}: user are able to login or to ask the system for an ETA.\@
-	\item \textit{Registered users}: after successfully logging in, registered users can request or reserve taxis.
+	\item \textit{Guest}: guests are able to sign up, login or ask the system for an ETA.\@
+	\item \textit{Registered users}: after successfully logging in, registered users can request or reserve taxis or ask the system for an ETA.\@
 	\item \textit{Taxi drivers}: after successfully logging in, taxi drivers are able to set their current state as available or not and to accept or refuse requests.
-	\item \textit{Administrator}: after logging in the admin will be the only user allowed to edit the drivers list.
-=======
-	\item Taxi driver: after successfully logging in, taxi drivers are able to set their current state as available or not and to accept or refuse requests.
-	\item User: user are able to login or to ask the system for an ETA.\@
-	\item Registered user: after successfully logging in, registered users can request or reserve taxis.
-		%registered user
-		%guest
-		%administrator
->>>>>>> 4da00d1d1f6305b5d5e13a05210018b3fbe10876
+	\item \textit{Administrator}: after successfully logging in, the administrator will be the only user allowed to edit the taxi drivers list stored by the system.
 \end{itemize}
 
 \subsection{References}
@@ -117,8 +99,8 @@ The aim of the project TAXINSECONDS is to provide a new application to optimize 
 This document is structured in three parts:
 \begin{itemize}
 	\item Introduction: gives an high-level description of the software purposes and context.
-	\item Overall Description: gives a general description of the application, focusing on the context of the system, going in details about domain assumptions and constraint. The aim of this section is to provide a context to the whole project and show its integration with the real world.
-	\item Specific Requirements: this section contains all of the software requirements to a level of detail aimed to be enough to design a system to satisfy the said requirements, and testers to test that the system actually satisfies them. It also contains the detailed description of the possible interactions between the system and the world with a simulation and preview of the expected response of the system with given stimulation. (Details are given with Alloy specifications and UML diagrams)
+	\item Overall Description: gives a general description of the application, focusing on the context of the system, going in details about domain assumptions and constraintS. The aim of this section is to provide a context to the whole project and show its integration with the real world.
+	\item Specific Requirements: this section contains all of the software requirements to a level of detail aimed to be enough to design a system to satisfy said requirements, and testers to test that the system actually satisfies them. It also contains the detailed description of the possible interactions between the system and the world with a simulation and preview of the expected response of the system with given stimulation. (Details are given with Alloy specifications and UML diagrams)
 \end{itemize}
 
 
@@ -128,52 +110,135 @@ The TAXINSECONDS application will be released as a web application and as a mobi
 There are no existing systems to integrate it with. 
 \\It will provide a total of 4 main interfaces:
 \begin{itemize}
-	\item For the users in both the
+	\item For both type of users
 		\begin{itemize}
-			\item Registered user mode
-			\item Guest mode
+			\item Registered users
+			\item Guests
 		\end{itemize}
 	\item For taxi drivers 
 	\item For administrators
-	\item A lower level interface for APIs
+	\item A non graphical interface for APIs 
 \end{itemize}
 
-\subsubsection{System interfaces}
 \subsubsection{User Interfaces}
-\subsubsection{Hardware Interfaces}%		DOPO NEI REQUIREMENTS
-\subsubsection{Software Interfaces}
-\subsubsection{Communication Interfaces}
-\subsubsection{Operations} 
+%TODO Erica
+\subsubsection{System interfaces}
+\begin{comment}
+This should list each system interface and identify the functionality of the software to accomplish the system requirement and the interface description to match the system.
+\end{comment} %TODO non ho capito davvero cosa sia questa
+\paragraph{Hardware Interfaces}
+\begin{itemize}
+\item Owned by the users and taxi drivers:
+	\begin{itemize}
+		\item Any GPS-capable device running Android>=4.0 or iOS>=6 %TODO in realtà i clienti possono anche non avere il GPS tanto devono inserire a mano la starting location
+		\item Any computer able to run a browser HTML5-compatible
+	\end{itemize}
+\item Owned by the company:
+	\begin{itemize}
+		\item The server on which the core of the application will run, and to which the applications, 
+			the web UI and the API-related clients will connect to.
+		\item Two machines optimized for a stateful firewall use
+		\item A machine with the DBMS that will operate behind the second firewall %TODO mi sa che qui è un po troppo implementativo :/
+	\end{itemize}
+\end{itemize}
+\paragraph{Software Interfaces}
+\begin{itemize}
+	\item Database Management System (DBMS):
+		\begin{itemize}
+			\item Name: MySQL.\@
+			\item Version: 5.1.73 
+			\item Source: https://www.mysql.com/
+		\end{itemize}
+	\item HTTP/HTTPS server:
+		\begin{itemize}
+			\item Name: Nginx
+			\item Version: 1.8.0 
+			\item Source: http://nginx.org/
+		\end{itemize}
+<<<<<<< HEAD
+	\item PHP interpreter:
+		\begin{itemize}
+			\item Name: PHP
+			\item Version: 5.3.3 
+			\item Source: https://secure.php.net/
+		\end{itemize}
+	\item Operating System:
+=======
+	\item Operating System: %TODO OS per il server http?
+>>>>>>> 36bec352f4cb04250e8c66fdd87cec402d6076a7
+		\begin{itemize}
+			\item Name: CentOS
+			\item Version: 7.1--1503 
+			\item Source: https://www.centos.org/ 
+		\end{itemize}
+\end{itemize}
+\paragraph{Communication Interfaces}
+\begin{center}
+	\begin{tabular}{*{4}{c}}
+	\toprule
+    Protocol & Application layer Protocol & Port & Scope \\
+	\midrule
+	TCP & HTTP & 80 & Upgrade to a secure connection over HTTPS \\ 
+    TCP & HTTPS & 443 & The web interface or the mobile apps \\ 
+    TCP & HTTPS/JSON & 443 & The APIs \\ 
+    TCP & HTTPS & 443 & The web interface or the mobile apps \\ 
+    TCP & DBMS over SSL & 3306 & Communication between the webserver and the DBMS \\ 
+    \bottomrule
+    \end{tabular}
+\end{center}
+\paragraph{Memory constraints} 
+\begin{itemize}
+	\item Primary memory:
+		\begin{itemize}
+			\item for both taxi drivers' and clients's mobile devices at least 500MB 
+			\item for the web application 1GB or more is suggested
+			\item for the server it is suggested to use a cloud service in order to resize memory according to traffic
+		\end{itemize}
+	\item Secondary memory:
+		\begin{itemize}
+			\item mobile devices will need to have 50MB of free space on the device
+			\item the web application requires little to none secondary memory %TODO mi sa che little è troppo vago per i loro gusti
+			\item for the server it is suggested to use a cloud service in order to resize memory according to traffic
+		\end{itemize}
+\end{itemize}
+\paragraph{Operations} 
+%TODO
+\begin{comment}
+This should specify the normal and special operations required by the user such as
+The various modes of operations in the user organization (e.g., user-initiated operations);
+Periods of interactive operations and periods of unattended operations;
+Data processing support functions;
+Backup and recovery operations.
+\end{comment}
 \subsection{Product functions}
 \subsection{User characteristics}
+The TAXINSECONDS application is intended for all users who are at least 18 years old.
 \subsection{Constraints}
+%TODO non credo che il nostro progetto abbia constraints tipo quelli elencati nello standard anche perchè credo che i requisiti di reliability tipo del dbms siano nei requisiti non funzionali, no?
 \subsection{Assumptions and dependencies}
 \subsubsection{Domain Assumptions}
 \begin{itemize}
 	\item All taxi drivers who intend to use the service will have a mobile phone with one of the supported mobile OSs
-	\item All taxi drivers will have a phone with GPS functionality
-	\item The taxi drivers will have to grant the system the rights to handle their taxi codes
-	\item Taxi drivers' phones will have an internet connection
-	\item Clients will have access to the internet and a device with GPS integrated 
-	\item Clients have a valid email address
-	\item Clients have a credit/debt card 
+	\item All taxi drivers will have a phone with active GPS functionality
+	\item The taxi drivers will have to grant the system the rights to handle their taxi codes %TODO lol really? non sapevo servisse xD
+	\item Taxi drivers' phones will always have an internet connection
+	\item Clients will have access to the internet and a device with GPS integrated %TODO non necessaria se inserisco starting location a mano
+	\item Clients have a valid email address %TODO non necessaria vedi sotto
+	\item Clients have a credit/debt card %TODO non necessaria, basta che mettiamo un controllo alla registrazione
 	\item Clients allow the app to access their credit in order to pay for the service
-	\item When accessing from the website the clients will have to grant permission to the application to read the device's position
-<<<<<<< HEAD
-	\item The Owner of the app will have to build or rent an always-on DBMS and host for the Server-Side part of the app
-=======
-	\item A taxi driver can't be available and not available at the same time
->>>>>>> 4da00d1d1f6305b5d5e13a05210018b3fbe10876
+	\item When accessing from the website the clients will have to grant permission to the application to read the device's position %TODO non basta inserirla a mano come starting location?
+	\item The Owner of the app will have to build or rent an always-on DBMS and host for the Server-Side part of the app %TODO ma non era già nei requisiti sopra?
+%too obvious	\item A taxi driver can't be available and not available at the same time
 \end{itemize}
 \clearpage
 \section{Specific requirements}
 \subsection{Functional Requirements}
 On the user side:\@
 \begin{itemize}
-	\item For the non logged in user (on both the WEB and Mobile interface):
+	\item For non logged in user (on both the WEB and Mobile interface):
 		\begin{itemize}
-			\item Provide information about taxis queues and availability 
-			\item Registration in order to become a registered user
+			\item Provide information about taxis queues and availability %TODO non dovrebbero essere divisi per goal? comunque qua sarei più specifica
+			\item Registration in order to become a registered user %TODO the system will provide a sign up functionality
 			\item Login for registered users
 			\item ``change personal data'' procedure for registered users
 		\end{itemize}
@@ -189,13 +254,11 @@ On the user side:\@
 			\item Get the queue status for a given position
 			\item Get the ETA for a taxi for a given position
 			\item Establish a Secure Channel 
-			\item Obtain a login-token using valid credentials through a previously established Secure Channel
-			\item Using a valid login-token:\@
+			\item Using a Secure Channel and valid credentials:\@
 				\begin{itemize}
 					\item Place a call for a given position
 					\item Place a reservation for a given position
 					\item Require the system to send a push message for updates about the status of a previous request
-					\item Logout (this will close the secure channel and invalidate the login token) 
 				\end{itemize}
 		\end{itemize}
 \end{itemize}
@@ -218,16 +281,14 @@ On the taxi driver side (there will be no Web interface in this case):\@
 		\end{itemize}
 	\item Through the API:\@
 		\begin{itemize}
-			\item Establish a Secure Channel 
-			\item Obtain a login-token using valid credentials through a previously established Secure Channel
-			\item Using a valid login-token:\@
+			\item Establish a Secure Channel
+			\item Through a Secure Channel and with valid credentials:\@
 				\begin{itemize}
 					\item Toggle the driver state
 					\item Send a notification when a call is made for the driver
 					\item Accept the answer to the call, whether the answer is Acceptance or Refusal
 					\item Handle disconnection
 					\item Handle timeout (if no taxi reach the client in time)%TODO e come fa a saperlo?
-					\item Log out (invalidation of the token)
 				\end{itemize}
 			\item 
 		\end{itemize}
@@ -261,12 +322,14 @@ On the admin side:\@
 		\begin{itemize}
 			\item The application must always respond, even if no taxi are available at least with a ``No taxi available'' response
 			\item If a query is taking some time a spinner will be shown, the app must never freeze
-			\item The system must store securely user data for both drivers and clients in an always-reachable database
+			\item The system must store data for both drivers and clients in an always-reachable database
 			\item Regular Backups will be made in order to reduce or prevent data loss
 		\end{itemize}
 	\item \textit{Usability}
 		\begin{itemize}
 			\item The UIs have to be user friendly and with a few, clear functionalities
+			\item The app will have few activities, mainly the login, the register and the call form.
+			\item When inserting a location for a reservation the user will be helped with autocompletion for locations.
 		\end{itemize}
 	\item \textit{Security}
 		\begin{itemize}
@@ -277,17 +340,63 @@ On the admin side:\@
 \end{itemize}
 \subsection{Scenarios}
 \subsubsection{Scenario 1}
-Blair The Witch had to take her magical broom to the mechanic for the annual revision but she needs to go shopping to refill her stockpile of frog?s tails. Her friend Mizune has told her about TAXInseconds, so she decides to give it a try. After downloading it on her smartphone, she signs up compiling the registration form with her username, password, email and credit card data. Now she can complain about how slow car-based transports are!
+Blair The Witch had to take her magical broom to the mechanic for the annual revision but she needs to go shopping to refill her stockpile of frog's tails. Her friend Mizune has told her about TAXInseconds, so she decides to give it a try. After downloading it on her smartphone, she signs up compiling the registration form with her username, password, email and credit card data. Now she can complain about how slow car-based transports are!
 \subsubsection{Scenario 2}
-Suzuka is having a date tonight but, unfortunately, her car doesn?t want to start. After several failures, she decides to use TAXInasecond. After logging in, she requests a taxi specifying her home as the starting location and the restaurant?s address as the destination. The system notifies Takeshi, the first taxi driver of the queue in Suzuka?s zone, of the request. Takeshi accepts the request and the system sends Suzuka the code of Takeshi?s taxi and the ETA so she can finally get to her date.
+Suzuka is having a date tonight but, unfortunately, her car doesn't want to start. After several failures, she decides to use TAXINSECONDS. After logging in, she requests a taxi specifying her home as the starting location and the restaurant's address as the destination. The system notifies Takeshi, the first taxi driver of the queue in Suzuka's zone, of the request. Takeshi accepts the request and the system sends Suzuka the code of Takeshi's taxi and the ETA so she can finally get to her date.
 \subsubsection{Scenario 3}
-Ash Ketchum has to start his new adventure in Hoenn tomorrow but his mom is busy cleaning the house with Mr.\ Mime so she can?t take him to the airport to meet Prof.\ Oak. Ash decides to use once again TAXINSECONDS to reserve a taxi. After logging in, he makes a reservation for a taxi specifying the starting location as Pallet town, the destination and the meeting time. The morning after, the system allocates Brock?s taxi for the reservation and sends his code to Ash so that he knows who he?ll meet to start his new adventure. 
+Ash Ketchum has to start his new adventure in Hoenn tomorrow but his mother is busy cleaning the house with Mr. Mime, so she can't take him to the airport to meet Prof. Oak. Ash decides to use once again TAXINSECONDS to reserve a taxi. After logging in, he makes a reservation for a taxi specifying the starting location as Pallet town, the destination and the meeting time. The morning after, 10 minutes before the meeting time, the system allocates Brock's taxi for the reservation and sends his code to Ash so that he knows who he'll meet to start his new adventure. 
+\subsubsection{Scenario 4}
+Donald Duck is ready to start his first day as a taxi driver in Paperopoli. He jumps on his car, logs in TAXINSECONDS and changes his state to availables. Unfortunately he doesn't know that, in his zone, there are 15 taxis in the queue before him, so he'll have to be patient for some time.
+\subsubsection{Scenario 5}
+After quite some time, Daisy requests a taxi and it's finally Donald's turn! The system notifies him but...it's breakfast time and Donald's having a cappuccino in a very crowded bar. He doesn't hear the notification popping on his phone so, after 1 minute, the system forwards Daisy's request to the next taxi driver in the queue and changes Donald's state to not available.
+\subsubsection{Scenario 6}
+Mickey Mouse is 
+
+\subsection{Use cases}
+\subsubsection{Request a taxi}
+\textit{Actors:} Registered user, taxi driver
+\textit{Preconditions:} The user is on the homepage of the application %TODO va bene homepage anche per la mobile app?
+\textit{Flow of Events:}
+	\begin{itemize}
+		\item  The user clicks the "Request a taxi" button
+		\item  The system shows the user a page where she can enter the starting location and destination of the request
+		\item  The user inserts the starting location and the destination and then clicks the "Request" button
+		\item  The system notifies the first taxi driver of the starting location's zone's queue. If there are no taxis in that zone, the system notifies the CAT. If a taxi driver rejects the request the system passes the request on to the next taxi driver in the queue and changes the first one's state to not available. If a taxi driver doesn't accept or reject the request within 1 minute, the system passes the request on to the next taxi driver in the queue and moves the first one to the end of the queue
+		\item  The taxi driver accepts the request and goes to the starting location
+		\item  The system changes the state of the taxi driver to not available and notifies the user of the code of the incoming taxi and the ETA
+		\item  When the taxi driver arrives at the starting location, according to her GPS information, the system automatically makes the user pay the minimum fare %TODO va bene cosi?
+	\end{itemize}
+\textit{Postconditions:} The taxi driver is not available anymore and has been removed from the queue. The user has been charged with the minimum fare. %TODO non sapevo che mettere
+\textit{Exceptions:}
+	\begin{itemize}
+		\item If there are no available taxis in the entire city an error message is shown and the request is not made
+		\item If a taxi driver doesn't get to the starting location of the request within the MAD the system will pass on the request to the next taxi driver in the queue and will notify the user of the change with the new ETA and taxi code.
+	\end{itemize}
+	
+	\subsubsection{Reserve a taxi}
+	\textit{Actors:} Registered user, taxi driver
+	\textit{Preconditions:} The user is on the homepage of the application %TODO va bene homepage anche per la mobile app?
+	\textit{Flow of Events:}
+	\begin{itemize}
+		\item  The user clicks the "Reserve a taxi" button
+		\item  The system shows the user a page where she can enter the starting location, destination and the meeting time of the reservation.
+		\item  The user inserts the starting location, destination and meeting time and then clicks the "Reserve" button
+		\item  Ten minutes before the meeting time, the system notifies the first taxi driver of the starting location's zone's queue. If there are no taxis in that zone, the system notifies the CAT. If a taxi driver rejects the reservation the system passes it on to the next taxi driver in the queue and changes the first one's state to not available. If a taxi driver doesn't accept or reject the reservation within 1 minute, the system passes it on to the next taxi driver in the queue and moves the first one to the end of the queue
+		\item  The taxi driver accepts the reservation and goes to the starting location
+		\item  The system changes the state of the taxi driver to not available and notifies the user of the code of the incoming taxi and the ETA
+		\item  When the taxi driver arrives at the starting location, according to her GPS information, the system automatically makes the user pay the minimum fare
+	\end{itemize}
+	\textit{Postconditions:} The taxi driver is not available anymore and has been removed from the queue. The user has been charged with the minimum fare. %TODO non sapevo che mettere
+	\textit{Exceptions:}
+	\begin{itemize}
+		\item If there are no available taxis in the entire city an error message is shown and..... %TODO dobbiamo pensare a come fare per garantire comunque un taxi per le reservations altrimenti è inutile fare la reservation
+		\item If a taxi driver doesn't get to the starting location of the request within the MAD after the meeting time, the system will pass on the reservation to the next taxi driver in the queue and will notify the user of the change with the new ETA and taxi code.
+		\item If the meeting time is not at least two hours after the reservation an error message will be displayed and the reservation won't be made.
+	\end{itemize}
 \end{document}
 
 
-
-\comment{%TEMPLATE FOR BULLETS
-	\begin{itemize}
-		\item  
-	\end{itemize}
-}
+%
+%	\begin{itemize}
+%		\item  
+%	\end{itemize}

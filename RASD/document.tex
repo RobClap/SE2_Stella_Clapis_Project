@@ -338,13 +338,13 @@ On the admin side:\@
 \subsubsection{Scenario 1}
 Blair The Witch had to take her magical broom to the mechanic for the annual revision but she needs to go shopping to refill her stockpile of frog's tails. Her friend Mizune has told her about TAXInseconds, so she decides to give it a try. After downloading it on her smartphone, she signs up compiling the registration form with her username, password, email and credit card data. Now she can complain about how slow car-based transports are!
 \subsubsection{Scenario 2}
-Suzuka is having a date tonight but, unfortunately, her car doesn't want to start. After several failures, she decides to use TAXINSECONDS. After logging in, she requests a taxi specifying her home as the starting location and the restaurant's address as the destination. The system notifies Takeshi, the first taxi driver of the queue in Suzuka's zone, of the request. Takeshi accepts the request and the system sends Suzuka the code of Takeshi's taxi and the ETA so she can finally get to her date.
+Suzuka is having a date tonight but, unfortunately, her car doesn't want to start. After several failures, she decides to use TAXINSECONDS\@. After logging in, she requests a taxi specifying her home as the starting location and the restaurant's address as the destination. The system notifies Takeshi, the first taxi driver of the queue in Suzuka's zone, of the request. Takeshi accepts the request and the system sends Suzuka the code of Takeshi's taxi and the ETA so she can finally get to her date.
 \subsubsection{Scenario 3}
-Ash Ketchum has to start his new adventure in Hoenn tomorrow but his mother is busy cleaning the house with Mr. Mime, so she can't take him to the airport to meet Prof. Oak. Ash decides to use once again TAXINSECONDS to reserve a taxi. After logging in, he makes a reservation for a taxi specifying the starting location as Pallet town, the destination and the meeting time. The morning after, 10 minutes before the meeting time, the system allocates Brock's taxi for the reservation and sends his code to Ash so that he knows who he'll meet to start his new adventure. 
+Ash Ketchum has to start his new adventure in Hoenn tomorrow but his mother is busy cleaning the house with Mr.\ Mime, so she can't take him to the airport to meet Prof.\ Oak. Ash decides to use once again TAXINSECONDS to reserve a taxi. After logging in, he makes a reservation for a taxi specifying the starting location as Pallet town, the destination and the meeting time. The morning after, 10 minutes before the meeting time, the system allocates Brock's taxi for the reservation and sends his code to Ash so that he knows who he'll meet to start his new adventure. 
 \subsubsection{Scenario 4}
 Donald Duck is ready to start his first day as a taxi driver in Paperopoli. He jumps on his car, logs in TAXINSECONDS and changes his state to availables. Unfortunately he doesn't know that, in his zone, there are 15 taxis in the queue before him, so he'll have to be patient for some time.
 \subsubsection{Scenario 5}
-After quite some time, Daisy requests a taxi and it's finally Donald's turn! The system notifies him but...it's breakfast time and Donald's having a cappuccino in a very crowded bar. He doesn't hear the notification popping on his phone so, after 1 minute, the system forwards Daisy's request to the next taxi driver in the queue and changes Donald's state to not available.
+After quite some time, Daisy requests a taxi and it's finally Donald's turn! The system notifies him but\ldots it's breakfast time and Donald's having a cappuccino in a very crowded bar. He doesn't hear the notification popping on his phone so, after 1 minute, the system forwards Daisy's request to the next taxi driver in the queue and changes Donald's state to not available.
 \subsubsection{Scenario 6}
 Mickey Mouse is 
 
@@ -354,10 +354,10 @@ Mickey Mouse is
 \textit{Preconditions:} The user is on the homepage of the application %TODO va bene homepage anche per la mobile app?
 \textit{Flow of Events:}
 	\begin{itemize}
-		\item  The user clicks the "Request a taxi" button
+		\item  The user clicks the ``Request a taxi'' button
 		\item  The system shows the user a page where she can enter the starting location and destination of the request
-		\item  The user inserts the starting location and the destination and then clicks the "Request" button
-		\item  The system notifies the first taxi driver of the starting location's zone's queue. If there are no taxis in that zone, the system notifies the CAT. If a taxi driver rejects the request the system passes the request on to the next taxi driver in the queue and changes the first one's state to not available. If a taxi driver doesn't accept or reject the request within 1 minute, the system passes the request on to the next taxi driver in the queue and moves the first one to the end of the queue
+		\item  The user inserts the starting location and the destination and then clicks the ``Request'' button
+		\item  The system notifies the first taxi driver of the starting location's zone's queue. If there are no taxis in that zone, the system notifies the CAT\@. If a taxi driver rejects the request the system passes the request on to the next taxi driver in the queue and changes the first one's state to not available. If a taxi driver doesn't accept or reject the request within 1 minute, the system passes the request on to the next taxi driver in the queue and moves the first one to the end of the queue
 		\item  The taxi driver accepts the request and goes to the starting location
 		\item  The system changes the state of the taxi driver to not available and notifies the user of the code of the incoming taxi and the ETA
 		\item  When the taxi driver arrives at the starting location, according to her GPS information, the system automatically makes the user pay the minimum fare %TODO va bene cosi?
@@ -374,10 +374,10 @@ Mickey Mouse is
 	\textit{Preconditions:} The user is on the homepage of the application %TODO va bene homepage anche per la mobile app?
 	\textit{Flow of Events:}
 	\begin{itemize}
-		\item  The user clicks the "Reserve a taxi" button
+		\item  The user clicks the ``Reserve a taxi'' button
 		\item  The system shows the user a page where she can enter the starting location, destination and the meeting time of the reservation.
-		\item  The user inserts the starting location, destination and meeting time and then clicks the "Reserve" button
-		\item  Ten minutes before the meeting time, the system notifies the first taxi driver of the starting location's zone's queue. If there are no taxis in that zone, the system notifies the CAT. If a taxi driver rejects the reservation the system passes it on to the next taxi driver in the queue and changes the first one's state to not available. If a taxi driver doesn't accept or reject the reservation within 1 minute, the system passes it on to the next taxi driver in the queue and moves the first one to the end of the queue
+		\item  The user inserts the starting location, destination and meeting time and then clicks the ``Reserve'' button
+		\item  Ten minutes before the meeting time, the system notifies the first taxi driver of the starting location's zone's queue. If there are no taxis in that zone, the system notifies the CAT\@. If a taxi driver rejects the reservation the system passes it on to the next taxi driver in the queue and changes the first one's state to not available. If a taxi driver doesn't accept or reject the reservation within 1 minute, the system passes it on to the next taxi driver in the queue and moves the first one to the end of the queue
 		\item  The taxi driver accepts the reservation and goes to the starting location
 		\item  The system changes the state of the taxi driver to not available and notifies the user of the code of the incoming taxi and the ETA
 		\item  When the taxi driver arrives at the starting location, according to her GPS information, the system automatically makes the user pay the minimum fare
@@ -385,7 +385,7 @@ Mickey Mouse is
 	\textit{Postconditions:} The taxi driver is not available anymore and has been removed from the queue. The user has been charged with the minimum fare. %TODO non sapevo che mettere
 	\textit{Exceptions:}
 	\begin{itemize}
-		\item If there are no available taxis in the entire city an error message is shown and..... %TODO dobbiamo pensare a come fare per garantire comunque un taxi per le reservations altrimenti è inutile fare la reservation
+		\item If there are no available taxis in the entire city an error message is shown and\ldots %TODO dobbiamo pensare a come fare per garantire comunque un taxi per le reservations altrimenti è inutile fare la reservation
 		\item If a taxi driver doesn't get to the starting location of the request within the MAD after the meeting time, the system will pass on the reservation to the next taxi driver in the queue and will notify the user of the change with the new ETA and taxi code.
 		\item If the meeting time is not at least two hours after the reservation an error message will be displayed and the reservation won't be made.
 	\end{itemize}
