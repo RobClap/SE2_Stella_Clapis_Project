@@ -88,16 +88,7 @@ fact{
 fun getTaxiClient[t:ActiveTaxi]: lone ActiveClient{
 	t.serve
 }
-/*
-//Get the area of a ActiveClient
-fun getAClientsArea[c:ActiveClient]: one Area{
-	a:Area | c in a.clients.root.*next
-}
-//Get the area of an ActiveTaxi
-fun getATaxisArea[t:ActiveTaxi]: one Area{
-	a:Area | t in a.taxis.*next
-}
-*/
+
 //Get who serves a client
 fun getClientServer[c:ActiveClient]: lone ActiveTaxi{
 	c.~serve
@@ -109,10 +100,6 @@ fun getTaxisInArea[a:Area]: set ActiveTaxi{
 fun getActiveClientsInArea[a:Area]: set ActiveClient{
 	a.clients.root.*nextClient
 }
-
-//TODO
-//Get the answer to THE QUESTION
-//Understand the whole universe
 
 //PREDICATES
 //Make a call
