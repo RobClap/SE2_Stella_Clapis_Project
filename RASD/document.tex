@@ -2,6 +2,7 @@
 \usepackage{graphicx}
 \graphicspath{{images/}}
 \usepackage{booktabs}
+\usepackage{color}
 \usepackage{verbatim}
 \usepackage{listings}
 \usepackage{underscore}
@@ -39,13 +40,13 @@ This document represent the Requirement Analysis and Specification Document (RAS
 The government of the city wants to optimize its taxi service with a completely new application. Therefore, we assume there are no previous systems to take into account.
 
 \subsection{Scope}
-The aim of the project TAXINSECONDS is to provide a new application to optimize the taxi service of the city that will be accessible via browser, mobile or public APIs.
+The aim of the project TAXInseconds is to provide a new application to optimize the taxi service of the city that will be accessible via browser, mobile or public APIs.
 \\The application will be available to the users in web and mobile forms and will have public APIs in order to expand and improve the service with additional features. %TODO ripetuto due volte? %TODO togli pure
-\\The city managed by TAXINSECONDS is divided in zones of 2 km\textsuperscript{2} each and every zone has its own queue of taxis. The queues are automatically computed by the system with the information it receives from the GPS of the taxis. %TODO non quello dei telefoni? come ti aspetti che comunichino i telefoni con le automobili?
-\\Taxi drivers can be available or not. Only available taxi drivers can be in a queue. When a taxi driver changes her state from not available to available the system automatically adds her to the queue of the zone she is currently in, based on the information of the GPS of her taxi. 
-\\Users that are not registered can only see the estimated time of arrival of the nearest taxi with TAXINSECONDS.\@
+\\The city managed by TAXInseconds is divided in zones of 2 km\textsuperscript{2} each and every zone has its own queue of taxis. The queues are automatically computed by the system with the information it receives from the GPS of the phones of the taxi drivers.
+\\Taxi drivers can be available or not. Only available taxi drivers can be in a queue. When a taxi driver changes her state from not available to available the system automatically adds her to the queue of the zone she is currently in, based on the information of the GPS of her phone. 
+\\Users that are not registered can only see the estimated time of arrival of the nearest taxi with TAXInseconds.\@
 \\Registered users can also request a taxi or make a reservation for a taxi. Reservations can only be made at least two hours before the ride and must be done specifying the starting location, the destination and the meeting time. Requests, instead, only need the starting location and the destination.
-\\When a request is made, the first taxi driver of the queue of the starting location's zone is notified for accepting or rejecting it. If the taxi driver rejects it her state is automatically put on unavailable by the system. If a taxi driver doesn't accept or reject the request within 1 minute, it will be passed on to the next taxi driver in the queue and the first one will be moved to the end of the queue. If there are no available taxis in the zone of the request the system will propagate the request to the closest available taxi.
+\\When a request is made, the first taxi driver of the queue of the starting location's zone is prompted to accept or reject it. If the taxi driver rejects it her state is automatically put on unavailable by the system. If a taxi driver doesn't accept or reject the request within 1 minute, it will be passed on to the next taxi driver in the queue and the first one will be moved to the end of the queue. If there are no available taxis in the zone of the request the system will propagate the request to the closest available taxi.
 \\When a request is accepted, the user that has made the request receives a notification from the system informing her of the code of the incoming taxi and the estimated time of arrival.
 \\When a reservation is made, the system confirms it to the user and allocates a taxi 10 minutes before the meeting time. If a taxi for that zone is not available the closest available taxi will be notified. When a taxi driver accepts the reservation, the user receives from the system the code of the incoming taxi. If a taxi driver doesn't accept or reject the reservation within 1 minute, it will be passed on to the next taxi driver in the queue and the first one will be moved to the end of the queue.
 \\Requests can be cancelled before they have been accepted by a taxi driver while reservation can be cancelled until 10 minutes before the meeting time.
@@ -69,15 +70,15 @@ The aim of the project TAXINSECONDS is to provide a new application to optimize 
 	\item \textit{Request:} a call from a registered user who needs a taxi immediately.
 	\item \textit{Meeting time:} the date and time in which the registered user needs the taxi in case of reservation. %TODO ricordare che meeting time comprende anche la data -> erica polla
 	\item \textit{Reservation:} a booking of a taxi at a certain meeting time.
-	\item \textit{State of a taxi driver:} the state the taxi driver is currently in. It can be available or not available. Taxi drivers can be in a queue if and only if they're available.
+	\item \textit{State of a taxi driver:} the state the taxi driver is currently in. It can be available or not available. Taxi drivers are in a queue if and only if they're available.
 	\item \textit{Closest available taxi:} if there are no taxis in the zone of the request or of the reservation, the system automatically finds the closest available taxi choosing the one with the smallest estimated time of arrival from the taxi queues of the other zones.
 \end{itemize}
 
 \subsubsection{Acronyms}
 \begin{itemize}
 	\item ETA:\@ estimated time of arrival: the time, estimated by the system, that the closest available taxi will take to get to the starting location of the ride.
-	\item CAT:\@ closest available taxi (see definition in the previous paragraph).
-	\item API:\@ application programming interface is a set of routines, protocols, and tools for building software applications on top of this one.
+	\item CAT:\@ closest available taxi (see definition in the previous period).
+	\item API:\@ application programming interface; it is a set of routines, protocols, and tools for building software applications on top of this one.
 	\item MAD:\@ maximum allowed delay; the maximum time, calculated by the system according to its information about distance and traffic, that a taxi driver has to get to the starting location of a request. 
 \end{itemize}
 \subsection{Actors}
@@ -104,7 +105,7 @@ This document is structured in three parts:
 
 \section{Overall description}
 \subsection{Product perspective}
-The TAXINSECONDS application will be released as a web application and as a mobile application. 
+The TAXInseconds application will be released as a web application and as a mobile application. 
 There are no existing systems to integrate it with. 
 \\It will provide a total of 4 main interfaces:
 \begin{itemize}
@@ -206,7 +207,7 @@ Backup and recovery operations.
 \end{comment}
 \subsection{Product functions}
 \subsection{User characteristics}
-The TAXINSECONDS application is intended for all users who are at least 18 years old.
+The TAXInseconds application is intended for all users who are at least 18 years old.
 
 %\subsection{Constraints}
 %TODO non credo che il nostro progetto abbia constraints tipo quelli elencati nello standard anche perchè credo che i requisiti di reliability tipo del dbms siano nei requisiti non funzionali, no?  %Mi scazza che qua chieda cose tecnicissime come aCK NACK e il resto sia vaghissimo cmq no, direi che la balziamo %approvato
@@ -216,7 +217,7 @@ The TAXINSECONDS application is intended for all users who are at least 18 years
 	\item All taxi drivers who intend to use the service will have a mobile phone with one of the supported mobile OSs
 	\item All taxi drivers will have a phone with active GPS functionality %TODO mettiamo i gps delle macchine, no?	%NO, come li fai comunicare con la APP?
 	\item The taxi drivers will grant the system the rights to handle their taxi codes
-	\item Taxi drivers' phones will always have an internet connection while TAXINSECONDS is running
+	\item Taxi drivers' phones will always have an internet connection while TAXInseconds is running
 	\item Users will have access to the internet %TODO dici che serve? %Si, come fanno a rpenotare se no? piccioni?
 	\item In order to help the client to select the current location a phone with GPS capability will be required %TODO non credo sia una domain assumption %cos'è allora?
 	\item Users will enter a valid email address during registration 
@@ -271,7 +272,7 @@ On the taxi driver side:\@ %TODO (there will be no Web interface in this case) <
 	\item Handle timeout (if reaching the client takes too much time) %TODO questa funzione e le altre per gestire le eccezioni secondo me sono da spostare in una sottosezione utilities insieme ai pagamenti, al fatto che controlla la posizione dei taxi driver, al computare le queue e metterei cosa salva di ogni utente %TODO non ho capito un cazzo
 	\item The system will provide a logout functionality
 \end{itemize}
-	\item Through the API:\@ %TODO le api mi sono oscure T.T %TODO te le spiego lunedi
+Through the API:\@ %TODO le api mi sono oscure T.T %TODO te le spiego lunedi
 		\begin{itemize}
 			\item Establish a Secure Channel
 			\item Through a Secure Channel and with valid credentials:\@
@@ -326,11 +327,11 @@ On the admin side:\@
 \subsubsection{Scenario 1}
 Blair The Witch had to take her magical broom to the mechanic for the annual revision but she needs to go shopping to refill her stockpile of frog's tails. Her friend Mizune has told her about TAXInseconds, so she decides to give it a try. After downloading it on her smartphone, she signs up compiling the registration form with her username, password, email and credit card data. Now she can complain about how slow car-based transports are!
 \subsubsection{Scenario 2}
-Suzuka is having a date tonight but, unfortunately, her car doesn't want to start. After several failures, she decides to use TAXINSECONDS\@. After logging in, she requests a taxi specifying her home as the starting location and the restaurant's address as the destination. The system notifies Takeshi, the first taxi driver of the queue in Suzuka's zone, of the request. Takeshi accepts the request and the system sends Suzuka the code of Takeshi's taxi and the ETA so she can finally get to her date.
+Suzuka is having a date tonight but, unfortunately, her car doesn't want to start. After several failures, she decides to use TAXInseconds\@. After logging in, she requests a taxi specifying her home as the starting location and the restaurant's address as the destination. The system notifies Takeshi, the first taxi driver of the queue in Suzuka's zone, of the request. Takeshi accepts the request and the system sends Suzuka the code of Takeshi's taxi and the ETA so she can finally get to her date.
 \subsubsection{Scenario 3}
-Ash Ketchum has to start his new adventure in Hoenn tomorrow but his mother is busy cleaning the house with Mr.\ Mime, so she can't take him to the airport to meet Prof.\ Oak. Ash decides to use once again TAXINSECONDS to reserve a taxi. After logging in, he makes a reservation for a taxi specifying the starting location as Pallet town, the destination and the meeting time. The morning after, 10 minutes before the meeting time, the system allocates Brock's taxi for the reservation and sends his code to Ash so that he knows who he'll meet to start his new adventure. 
+Ash Ketchum has to start his new adventure in Hoenn tomorrow but his mother is busy cleaning the house with Mr.\ Mime, so she can't take him to the airport to meet Prof.\ Oak. Ash decides to use once again TAXInseconds to reserve a taxi. After logging in, he makes a reservation for a taxi specifying the starting location as Pallet town, the destination and the meeting time. The morning after, 10 minutes before the meeting time, the system allocates Brock's taxi for the reservation and sends his code to Ash so that he knows who he'll meet to start his new adventure. 
 \subsubsection{Scenario 4}
-Donald Duck is ready to start his first day as a taxi driver in Paperopoli. He jumps on his car, logs in TAXINSECONDS and changes his state to availables. Unfortunately he doesn't know that, in his zone, there are 15 taxis in the queue before him, so he'll have to be patient for some time.
+Donald Duck is ready to start his first day as a taxi driver in Paperopoli. He jumps on his car, logs in TAXInseconds and changes his state to availables. Unfortunately he doesn't know that, in his zone, there are 15 taxis in the queue before him, so he'll have to be patient for some time.
 \subsubsection{Scenario 5}
 After quite some time, Daisy requests a taxi and it's finally Donald's turn! The system notifies him but\ldots it's breakfast time and Donald's having a cappuccino in a very crowded bar. He doesn't hear the notification popping on his phone so, after 1 minute, the system forwards Daisy's request to the next taxi driver in the queue and changes Donald's state to not available.
 \subsubsection{Scenario 6}
@@ -372,15 +373,21 @@ Mickey Mouse is
 	\end{itemize}
 	\textit{Postconditions:} The taxi driver is not available anymore and has been removed from the queue. The user has been charged with the minimum fare. %TODO non sapevo che mettere %TODO vedi sopra
 	\textit{Exceptions:}
-	\begin{itemize}
+	\begin{itemize} 
 		\item If there are no available taxis in the entire city an error message is shown and\ldots %TODO dobbiamo pensare a come fare per garantire comunque un taxi per le reservations altrimenti è inutile fare la reservation
 		\item If a taxi driver doesn't get to the starting location of the request within the MAD after the meeting time, the system will pass on the reservation to the next taxi driver in the queue and will notify the user of the change with the new ETA and taxi code.
 		\item If the meeting time is not at least two hours after the reservation an error message will be displayed and the reservation won't be made.
 	\end{itemize}
-\end{document}
+	\clearpage
+	\section{Alloy}
+	\subsection{Model}
+	\texttt{\input{Alloy/TAXInseconds.tex}}	
+	\subsection{Result}
+	%TODO put screenshot of successful build
+	\subsection{Worlds Generated}
+	\end{document}
 
 
-%
 %	\begin{itemize}
 %		\item  
 %	\end{itemize}

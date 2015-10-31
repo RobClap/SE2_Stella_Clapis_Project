@@ -1,26 +1,26 @@
 module TAXInseconds
 //TAXIES
 abstract sig Taxi{}
-sig ActiveTaxi extends Taxi{
+sig AvailableTaxi extends Taxi{
 	//For the queues
-	nextTaxi:lone ActiveTaxi, 
+	nextTaxi:lone AvailableTaxi, 
 	//For the service
 	serve:lone ActiveClient
 }
 sig InactiveTaxi extends Taxi{}
-sig TaxiQueue{root:ActiveTaxi}
+sig TaxiQueue{root:AvailableTaxi}
 
 //A Taxi can't be his next
 fact nextTaxiNotReflexive { 
-	no t:ActiveTaxi| t = t.nextTaxi 
+	no t:AvailableTaxi| t = t.nextTaxi 
 }
 //A Taxi can't be one of his followers in the queue
 fact nextTaxiNotCyclic {
-	no t:ActiveTaxi | t in t.^nextTaxi
+	no t:AvailableTaxi | t in t.^nextTaxi
 } 
 //If a taxi is active he must be in exactly one queue
-fact allActiveTaxiesBelongToOneQueue {
-	all t:ActiveTaxi | one q:TaxiQueue | t in q.root.*nextTaxi
+fact allAvailableTaxiesBelongToOneQueue {
+	all t:AvailableTaxi | one q:TaxiQueue | t in q.root.*nextTaxi
 }
 
 //CLIENTS
@@ -64,51 +64,55 @@ fact allQueuesInAreas{
 //INTERACTIONS
 //Clients are served only by one taxi
 fact noClientsObiquity{
-	no disjoint t,t':ActiveTaxi | t'.serve=t.serve
+	no disjoint t,t':AvailableTaxi | t'.serve=t.serve
 }
 
 //Clients are served in order
 fact ClientsRespectQueuesEvenInItaly{
-	no c:ActiveClient | some t:ActiveTaxi | c=t.serve and no t':ActiveTaxi | t'.serve=c.~nextClient 
+	no c:ActiveClient | some t:AvailableTaxi | c=t.serve and no t':AvailableTaxi | t'.serve=c.~nextClient 
 }
 
 //Taxies are serving in order
 fact TaxisServeInOrder{
-	no t,t':ActiveTaxi | some c:ActiveClient | t'=t.~nextTaxi and c=t.serve and no c':ActiveClient| c'=t'.serve
+	no t,t':AvailableTaxi | some c:ActiveClient | t'=t.~nextTaxi and c=t.serve and no c':ActiveClient| c'=t'.serve
 }
 
 //Taxies only serve clients in the same area
 fact{
-	no t:ActiveTaxi | some a:Area | some c:ActiveClient | 
+	no t:AvailableTaxi | some a:Area | some c:ActiveClient | 
 	c=t.serve and t in a.taxis.root.*nextTaxi and c not in a.clients.root.*nextClient
 }
 
 //FUNCTIONS
 //Get who a taxi is serving
-fun getTaxiClient[t:ActiveTaxi]: lone ActiveClient{
+fun getTaxiClient[t:AvailableTaxi]: lone ActiveClient{
 	t.serve
 }
 
 //Get who serves a client
-fun getClientServer[c:ActiveClient]: lone ActiveTaxi{
+fun getClientServer[c:ActiveClient]: lone AvailableTaxi{
 	c.~serve
 }
 //Get Queues for an area
-fun getTaxisInArea[a:Area]: set ActiveTaxi{
+fun getTaxisInArea[a:Area]: set AvailableTaxi{
 	a.taxis.root.*nextTaxi
 }
 fun getActiveClientsInArea[a:Area]: set ActiveClient{
 	a.clients.root.*nextClient
 }
 
+//ASSERTIONS
+//hm, what?
+
 //PREDICATES
+//Just show stuff in different ways
 //Make a call
 //Add a new taxi?
 //Activate a taxi?
 
 //TODO reservations?
-
+//TODO database?
 
 
 pred show{}
-run show{} for 5 but 2 Area, 2 TaxiQueue, 2 ClientQueue, 0 InactiveTaxi,  0 nonActiveClient, 6 ActiveTaxi, 6 ActiveClient
+run show{} for 5 but 2 Area, 2 TaxiQueue, 2 ClientQueue, 0 InactiveTaxi,  0 nonActiveClient, 6 AvailableTaxi, 6 ActiveClient
