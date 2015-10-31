@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2015.9.17)  31 OCT 2015 22:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2015.9.17)  31 OCT 2015 23:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -358,57 +358,63 @@ LaTeX Font Warning: Font shape `OMS/cmtt/m/n' undefined
 (Font)              for symbol `textbraceleft' on input line 3.
 
 )
-Overfull \hbox (11.99686pt too wide) in paragraph at lines 384--385
-\OT1/cmtt/m/n/10 23 - []all[] t:AvailableTaxi | []one[] q:TaxiQueue | t []in[] 
-q.root.*nextTaxi 
- []
-
-
-Overfull \hbox (27.74675pt too wide) in paragraph at lines 384--385
-\OT1/cmtt/m/n/10 43 []//If a client is Waiting for a Taxi, he must be in exactl
-y one queue[] 
- []
-
-
-Overfull \hbox (17.24681pt too wide) in paragraph at lines 384--385
-\OT1/cmtt/m/n/10 45 - []all[] c:ActiveClient| []one[] q:ClientQueue| c []in[] q
-.root.*nextClient 
+Overfull \hbox (43.49655pt too wide) in paragraph at lines 384--385
+\OT1/cmtt/m/n/10 -  23  - []all[] t:AvailableTaxi | []one[] q:TaxiQueue | t []i
+n[] q.root.*nextTaxi 
  []
 
 
 Overfull \hbox (6.7469pt too wide) in paragraph at lines 384--385
-\OT1/cmtt/m/n/10 54 - []no[] c:ClientQueue | []some[] disjoint a,a':Area | c=a.
-clients []and[]
+\OT1/cmtt/m/n/10 -  43  []//If a client is Waiting for a Taxi, he must be in ex
+actly
  []
 
 
-Overfull \hbox (43.49658pt too wide) in paragraph at lines 384--385
-\OT1/cmtt/m/n/10 55 - []no[] t:TaxiQueue | []some[] disjoint a,a':Area | t=a.ta
-xis []and[] t=a'.taxis 
+Overfull \hbox (48.7465pt too wide) in paragraph at lines 384--385
+\OT1/cmtt/m/n/10 -  45  - []all[] c:ActiveClient| []one[] q:ClientQueue| c []in
+[] q.root.*nextClient 
  []
 
 
-Overfull \hbox (1.49695pt too wide) in paragraph at lines 384--385
-\OT1/cmtt/m/n/10 72 - []no[] c:ActiveClient | []some[] t:AvailableTaxi | c=t.se
-rve []and[] no
+Overfull \hbox (27.74669pt too wide) in paragraph at lines 384--385
+\OT1/cmtt/m/n/10 -  75  - c=t.serve []and[] no t':AvailableTaxi | t'.serve=c. n
+extClient 
  []
 
 
-Overfull \hbox (6.7469pt too wide) in paragraph at lines 384--385
-\OT1/cmtt/m/n/10 77 - []no[] t,t':AvailableTaxi | []some[] c:ActiveClient | t'=
-t. nextTaxi
+Overfull \hbox (59.24641pt too wide) in paragraph at lines 384--385
+\OT1/cmtt/m/n/10 -  81  - t'=t. nextTaxi []and[] c=t.serve []and[] no c':Active
+Client| c'=t'.serve 
  []
 
 
-Overfull \hbox (116.99594pt too wide) in paragraph at lines 384--385
-\OT1/cmtt/m/n/10 83 - c=t.serve []and[] t []in[] a.taxis.root.*nextTaxi []and[]
- c []not[] in a.clients.root.*nextClient 
+Overfull \hbox (6.74687pt too wide) in paragraph at lines 384--385
+\OT1/cmtt/m/n/10 -  86  - []no[] t:AvailableTaxi | []some[] a:Area | []some[] c
+:ActiveClient
  []
 
 
-Overfull \hbox (53.49664pt too wide) in paragraph at lines 384--385
-\OT1/cmtt/m/n/10 118 []run[] show\OMS/cmtt/m/n/10 fg []\OT1/cmtt/m/n/10 for[] 5
- []but[] 2 Area, 2 TaxiQueue, 2 ClientQueue, 0 InactiveTaxi,
+Overfull \hbox (1.24701pt too wide) in paragraph at lines 384--385
+\OT1/cmtt/m/n/10 -  98  []fun[] getClientServer[c:ActiveClient]: []lone[] Avail
+ableTaxi\OMS/cmtt/m/n/10 f 
+ []
+
+
+Overfull \hbox (53.99649pt too wide) in paragraph at lines 384--385
+\OT1/cmtt/m/n/10 - 110  []//hm, can't get what is the difference between facts 
+and assertions[] 
+ []
+
+
+Overfull \hbox (79.74626pt too wide) in paragraph at lines 384--385
+\OT1/cmtt/m/n/10 - 121  []run[] show\OMS/cmtt/m/n/10 fg []\OT1/cmtt/m/n/10 for[
+] 5  []but[] 2  Area, 2  TaxiQueue, 2  ClientQueue,
+ []
+
+
+Overfull \hbox (85.49612pt too wide) in paragraph at lines 384--385
+\OT1/cmtt/m/n/10 0  InactiveTaxi, 0  nonActiveClient, 6  AvailableTaxi, 6  Acti
+veClient 
  []
 
 
@@ -436,7 +442,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 388.
 Here is how much of TeX's memory you used:
  6507 strings out of 493089
  96259 string characters out of 6140694
- 186993 words of memory out of 5000000
+ 187993 words of memory out of 5000000
  9875 multiletter control sequences out of 15000+600000
  8716 words of font info for 31 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -449,7 +455,7 @@ r17.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/sh
 are/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/p
 ublic/amsfonts/cm/cmtt10.pfb>
-Output written on document.pdf (17 pages, 259334 bytes).
+Output written on document.pdf (17 pages, 259497 bytes).
 PDF statistics:
  322 PDF objects out of 1000 (max. 8388607)
  289 compressed objects within 3 object streams

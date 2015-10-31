@@ -40,7 +40,8 @@ fact nextClientNotReflexive {
 fact nextClientNotCyclic {
 	no c:ActiveClient| c in c.^nextClient
 } 
-//If a client is Waiting for a Taxi, he must be in exactly one queue
+//If a client is Waiting for a Taxi
+//he must be in exactly one queue
 fact allActiveClientsBelongToOneQueue {
 	all c:ActiveClient| one q:ClientQueue| c in q.root.*nextClient
 }
@@ -51,8 +52,10 @@ sig Area{
 	clients: one ClientQueue
 }
 fact oneQueueoneArea{
-	no c:ClientQueue | some disjoint a,a':Area | c=a.clients  and  c=a'.clients
-	no t:TaxiQueue | some disjoint a,a':Area | t=a.taxis  and  t=a'.taxis
+	no c:ClientQueue | some disjoint a,a':Area | 
+		c=a.clients  and  c=a'.clients
+	no t:TaxiQueue | some disjoint a,a':Area |
+		 t=a.taxis  and  t=a'.taxis
 }
 
 //All queues must be connected to an Area
@@ -69,18 +72,21 @@ fact noClientsObiquity{
 
 //Clients are served in order
 fact ClientsRespectQueuesEvenInItaly{
-	no c:ActiveClient | some t:AvailableTaxi | c=t.serve and no t':AvailableTaxi | t'.serve=c.~nextClient 
+	no c:ActiveClient | some t:AvailableTaxi | 
+	c=t.serve and no t':AvailableTaxi | t'.serve=c.~nextClient 
 }
 
 //Taxies are serving in order
 fact TaxisServeInOrder{
-	no t,t':AvailableTaxi | some c:ActiveClient | t'=t.~nextTaxi and c=t.serve and no c':ActiveClient| c'=t'.serve
+	no t,t':AvailableTaxi | some c:ActiveClient | 
+	t'=t.~nextTaxi and c=t.serve and no c':ActiveClient| c'=t'.serve
 }
 
 //Taxies only serve clients in the same area
 fact{
 	no t:AvailableTaxi | some a:Area | some c:ActiveClient | 
-	c=t.serve and t in a.taxis.root.*nextTaxi and c not in a.clients.root.*nextClient
+	c=t.serve and t in a.taxis.root.*nextTaxi and 
+	c not in a.clients.root.*nextClient
 }
 
 //FUNCTIONS
@@ -102,16 +108,14 @@ fun getActiveClientsInArea[a:Area]: set ActiveClient{
 }
 
 //ASSERTIONS
-//hm, what?
+//hm, can't get what is the difference between facts and assertions
 
 //PREDICATES
 //Just show stuff in different ways
 //Make a call
-//Add a new taxi?
-//Activate a taxi?
 
-//TODO reservations?
-//TODO database?
+//TODO reservations (i can't understand how)
+//TODO database (maybe)
 
 
 pred show{}
