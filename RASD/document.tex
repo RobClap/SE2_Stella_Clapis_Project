@@ -40,8 +40,8 @@ The government of the city wants to optimize its taxi service with a completely 
 
 \subsection{Scope}
 The aim of the project TAXINSECONDS is to provide a new application to optimize the taxi service of the city that will be accessible via browser, mobile or public APIs.
-\\The application will be available to the users in web and mobile forms and will have public APIs in order to expand and improve the service with additional features. %TODO ripetuto due volte?
-\\The city managed by TAXINSECONDS is divided in zones of 2 km\textsuperscript{2} each and every zone has its own queue of taxis. The queues are automatically computed by the system with the information it receives from the GPS of the taxis. 
+\\The application will be available to the users in web and mobile forms and will have public APIs in order to expand and improve the service with additional features. %TODO ripetuto due volte? %TODO togli pure
+\\The city managed by TAXINSECONDS is divided in zones of 2 km\textsuperscript{2} each and every zone has its own queue of taxis. The queues are automatically computed by the system with the information it receives from the GPS of the taxis. %TODO non quello dei telefoni? come ti aspetti che comunichino i telefoni con le automobili?
 \\Taxi drivers can be available or not. Only available taxi drivers can be in a queue. When a taxi driver changes her state from not available to available the system automatically adds her to the queue of the zone she is currently in, based on the information of the GPS of her taxi. 
 \\Users that are not registered can only see the estimated time of arrival of the nearest taxi with TAXINSECONDS.\@
 \\Registered users can also request a taxi or make a reservation for a taxi. Reservations can only be made at least two hours before the ride and must be done specifying the starting location, the destination and the meeting time. Requests, instead, only need the starting location and the destination.
@@ -123,12 +123,12 @@ There are no existing systems to integrate it with.
 \subsubsection{System interfaces}
 \begin{comment}
 This should list each system interface and identify the functionality of the software to accomplish the system requirement and the interface description to match the system.
-\end{comment} %TODO non ho capito davvero cosa sia questa %non dovrebbe essere semplicemente il titolo che raccoglie el successive? in teoria no, è una subsection come le altre
+\end{comment} %TODO non ho capito davvero cosa sia questa %non dovrebbe essere semplicemente il titolo che raccoglie el successive? in teoria no, è una subsection come le altre %TODO ottimo, e che ci facciamo?
 \paragraph{Hardware Interfaces}
 \begin{itemize}
 \item Owned by the users and taxi drivers:
 	\begin{itemize}
-		\item Any GPS-capable device running Android 4.0+ or iOS 6+ %TODO in realtà i clienti possono anche non avere il GPS tanto devono inserire a mano la starting location %AH, buono a sapersi, XD non vogliamo almeno facilitare la selezione? E poi ormai il GPS ce l'hanno tutti non è restrittivo (se però puzza lo tolgo, non mi interessa)% mah...io lo toglierei e metterei come domain assumption che i taxi abbiamo un gps nella macchina e basta
+		\item Any device running Android 4.0+ or iOS 6+ (GPS capability will make more functionalities available)
 		\item Any computer able to run an HTML5-compatible browser 
 	\end{itemize}
 \item Owned by the company:
@@ -159,7 +159,7 @@ This should list each system interface and identify the functionality of the sof
 			\item Version: 5.3.3 
 			\item Source: https://secure.php.net/
 		\end{itemize}
-	\item Operating System: %TODO OS per il server http? %cosa intendi? centos è per entrambi i server va bene sia per dbms che http %aaah ok xD non sapevo cosa fosse
+	\item Operating System: 
 		\begin{itemize}
 			\item Name: CentOS
 			\item Version: 7.1--1503 
@@ -207,24 +207,24 @@ Backup and recovery operations.
 \subsection{Product functions}
 \subsection{User characteristics}
 The TAXINSECONDS application is intended for all users who are at least 18 years old.
-%TODO PEGI 18, contiene uso di alcol droga violenza o bestemmie %sono morta XDDDDDDD
-\subsection{Constraints}
+
+%\subsection{Constraints}
 %TODO non credo che il nostro progetto abbia constraints tipo quelli elencati nello standard anche perchè credo che i requisiti di reliability tipo del dbms siano nei requisiti non funzionali, no?  %Mi scazza che qua chieda cose tecnicissime come aCK NACK e il resto sia vaghissimo cmq no, direi che la balziamo %approvato
 \subsection{Assumptions and dependencies}
 \subsubsection{Domain Assumptions}
 \begin{itemize}
 	\item All taxi drivers who intend to use the service will have a mobile phone with one of the supported mobile OSs
-%TODO mettiamo i gps delle macchine, no?	\item All taxi drivers will have a phone with active GPS functionality
+	\item All taxi drivers will have a phone with active GPS functionality %TODO mettiamo i gps delle macchine, no?	%NO, come li fai comunicare con la APP?
 	\item The taxi drivers will grant the system the rights to handle their taxi codes
 	\item Taxi drivers' phones will always have an internet connection while TAXINSECONDS is running
-	\item Users will have access to the internet %TODO dici che serve?
-	\item In order to help the client to select the current location a phone with GPS capability will be required %TODO non credo sia una domain assumption
+	\item Users will have access to the internet %TODO dici che serve? %Si, come fanno a rpenotare se no? piccioni?
+	\item In order to help the client to select the current location a phone with GPS capability will be required %TODO non credo sia una domain assumption %cos'è allora?
 	\item Users will enter a valid email address during registration 
 	\item Users will enter valid credit card data during registration
 	\item Users allow the app to access their credit in order to pay for the service
-	\item The Owner of the app will have to build or rent an always-on DBMS and host for the Server-Side part of the app %TODO ma non era già nei requisiti sopra? non so dove sia più giusto metterlo, per me sta in entrambi i casi % non so se va nei non funct come availability 24/7 del db o qui
-	\item Users who have requested or reserved a taxi will always be present when the taxi arrives. %TODO aggiunta
-	\item There is always at least an available taxi to fulfil a request or a reservation %TODO aggiunta
+	\item The Owner of the app will have to build or rent an always-on DBMS and host for the Server-Side part of the app %per ora lascialo 
+	\item Users who have requested or reserved a taxi will always be present when the taxi arrives.
+	\item There is always at least an available taxi to fulfill a request or a reservation in the whole city.
 \end{itemize}
 \clearpage
 \section{Specific requirements}
@@ -233,14 +233,14 @@ On the user side:\@
 \begin{itemize}
 	\item For non logged in users (on both the WEB and Mobile interface):
 		\begin{itemize}
-			\item The system will be able to calculate the ETA. %TODO modificata
-			\item The system will provide a registration functionality %TODO modificata
+			\item The system will be able to calculate and show the ETA.\@ 
+			\item The system will provide a registration functionality 
 			\item The system will provide a login functionality
 		\end{itemize}
 	\item For logged in users (on both the WEB and Mobile interface):
 		\begin{itemize}
-			\item Provide information about taxis queues and availability %TODO è già scritta sopra di calcolare l'ETA io direi di toglierla, oppure di aggiungere un'altra funzionalità che ti fa vedere la queue, in questo caso devo aggiungerla anche nelle interfacce
-			\item The system will store the username, password, email and credit card data of every user %TODO non trovo più dove c'erano scritte le altre cose che devi scrivere nel login e che deve salvare-->sotto ho scritto magari di metterle in un posto comune con altre funct
+			\item The system will be able to calculate and show the ETA.\@ 
+%TODO questa è una nonfunctional requirement			\item The system will store the username, password, email and credit card data of every user %TODO non trovo più dove c'erano scritte le altre cose che devi scrivere nel login e che deve salvare-->sotto ho scritto magari di metterle in un posto comune con altre funct
 			\item The system will provide a functionality to request a taxi at the given starting location 
 			\item The system will provide a functionality to reserve a taxi at the given starting location and meeting time
 			\item The system will provide a functionality to modify the personal data of the user
@@ -251,8 +251,7 @@ On the user side:\@
 		\end{itemize}
 	\item Through the API:\@ %TODO c'è qualquadra che non cosa, ti va se ne parliamo quando hai tempo?
 		\begin{itemize}
-			\item Get the queue status for a given position %TODO vedi todo sopra sulle queue
-			\item Get the ETA for a taxi for a given position
+			\item The system will be able to calculate and show the ETA.\@ 
 			\item Establish a Secure Channel 
 			\item Using a Secure Channel and valid credentials:\@
 				\begin{itemize}
@@ -262,27 +261,17 @@ On the user side:\@
 				\end{itemize}
 		\end{itemize}
 \end{itemize}
-On the taxi driver side:\@ %TODO (there will be no Web interface in this case) <- non è meglio specificarlo dove abbiamo detto che interfacce abbiamo?
-%TODO i taxi driver sono già considerati loggati per cui non servono le funct di login, piuttosto dobbiamo mettere davvero le funzionalità di reset password? non è meglio mettere una funct di modifica dati personali e basta?
-\begin{comment}
+On the taxi driver side:\@ %TODO (there will be no Web interface in this case) <- non è meglio specificarlo dove abbiamo detto che interfacce abbiamo? %TODO io non ho fatto la parte di interfacce, se lo vuoi specificare specificalo
 \begin{itemize}
-	\item For the non logged in driver:
-		\begin{itemize}
-			\item Login for a registered driver 
-			\item ``Reset password'' procedure for registered drivers
-		\end{itemize}
-\end{comment}
-	\begin{itemize}
-		\item If credentials have been invalidated a ``reset password'' procedure will be mandatory %TODO ?.?
-		\item The system will provide a functionality to switch the state of the taxi driver from available to not available or vice versa
-		\item The system will notify the taxi driver of an incoming request showing the starting location
-		\item The system will notify the taxi driver of a reservation showing the starting location and the meeting time
-		\item The system will provide a functionality to allow taxi drivers to accept or reject reservations and requests
-		\item Handle disconnection %TODO da togliere, abbiamo detto come domain assumption che hanno sempre internet
-		\item Handle timeout (if reaching the client takes too much time) %TODO questa funzione e le altre per gestire le eccezioni secondo me sono da spostare in una sottosezione utilities insieme ai pagamenti, al fatto che controlla la posizione dei taxi driver, al computare le queue e metterei cosa salva di ogni utente
-		\item The system will provide a logout functionality
-	\end{itemize}
-	\item Through the API:\@ %TODO le api mi sono oscure T.T
+	\item If credentials have been invalidated a ``reset password'' procedure will be mandatory %TODO ?.? ti spiego luned\label{}<++>
+	\item The system will provide a functionality to switch the state of the taxi driver from available to not available or vice versa
+	\item The system will notify the taxi driver of an incoming request showing the starting location
+	\item The system will notify the taxi driver of a reservation showing the starting location and the meeting time
+	\item The system will provide a functionality to allow taxi drivers to accept or reject reservations and requests
+	\item Handle timeout (if reaching the client takes too much time) %TODO questa funzione e le altre per gestire le eccezioni secondo me sono da spostare in una sottosezione utilities insieme ai pagamenti, al fatto che controlla la posizione dei taxi driver, al computare le queue e metterei cosa salva di ogni utente %TODO non ho capito un cazzo
+	\item The system will provide a logout functionality
+\end{itemize}
+	\item Through the API:\@ %TODO le api mi sono oscure T.T %TODO te le spiego lunedi
 		\begin{itemize}
 			\item Establish a Secure Channel
 			\item Through a Secure Channel and with valid credentials:\@
@@ -295,34 +284,32 @@ On the taxi driver side:\@ %TODO (there will be no Web interface in this case) <
 				\end{itemize}
 			\item 
 		\end{itemize}
-\end{itemize}
 On the admin side:\@
 		\begin{itemize}
 			\item Add a new taxi driver
 			\item Remove a taxi driver
-			\item Invalidate a taxi driver's credentials %TODO se rimuove il taxista dal db non può più accedere per cui non deve invalidare le sue credenziali-->dobbiamo scrivere da qualche parte che l'accesso viene fatto su credenziali?
-			\item Set the area of the map handled by the system %TODO davvero? tra l'altro, dove mettiamo le cose che gli input sono suggeriti? nelle funct degli utenti?
+			\item Invalidate a taxi driver's credentials %TODO se rimuove il taxista dal db non può più accedere per cui non deve invalidare le sue credenziali-->dobbiamo scrivere da qualche parte che l'accesso viene fatto su credenziali? %TODO invalidarle, non eliminarlo, significa che sospettano che qualcuno le abbia rubate, quindi gliele annullano, e lui deve selezionare una nuova pw
+			\item Set the area of the map handled by the system %TODO davvero? tra l'altro, dove mettiamo le cose che gli input sono suggeriti? nelle funct degli utenti? %TODO vedi ``USABILITY'' in nonfunct req. (non sono cosi' ovvie a quanto pare)
 			\item Modify registration data
 			\item Log out
 		\end{itemize}
-\end{itemize}
 \subsection{Non functional requirements}
 \begin{itemize}
-	\item \textit{Cross platform} %TODO sono un po in dubbio su questo req
+	\item \textit{Cross platform} %TODO sono un po in dubbio su questo req %TODO ovvero?
 		\begin{itemize}
 			\item There will be a UI for mobile and one for the Web platform 
-			\item At least Android>=4.0 and iOS will be supported for the mobile version %TODO insert a meaningful iOS version
+			\item At least Android 4.0+ and iOS 6+ will be supported for the mobile version 
 			\item At least Edge, Chrome and Firefox will have to be supported
-			\item The web application will have to use HTML5 %TODO questo non credo sia un nonfunctional req
+			\item The web application will have to use HTML5 %TODO questo non credo sia un nonfunctional req %TODO allora cosa è?
 		\end{itemize}
 	\item \textit{Availability}
 		\begin{itemize}
 			\item The application must always be available
-			\item If a query is taking some time a spinner will be shown, the app must never freeze %TODO questo non è un req di availability
+			\item If a query is taking some time a spinner will be shown, the app must never freeze %TODO questo non è un req di availability %TODO quindi cosa è?
 			\item The system must store all of its data in an always-reachable database
 			\item Regular backups will be made in order to reduce or prevent data loss
 		\end{itemize}
-	\item \textit{Usability} %TODO credo che usability non sia un req, nel senso che da noi han detto che è una di quelle cose che dici "ma va?"
+	\item \textit{Usability} %TODO credo che usability non sia un req, nel senso che da noi han detto che è una di quelle cose che dici "ma va?" %TODO ma se sopra mi hai detto di mettere che l'utente è aiutato con posizioni suggerite..
 		\begin{itemize}
 			\item The UIs have to be user friendly and with a few, clear functionalities
 			\item The app will have few activities, mainly the login, the register and the call form.
@@ -331,7 +318,7 @@ On the admin side:\@
 	\item \textit{Security}
 		\begin{itemize}
 			\item In no situation sensible data will pass through an insecure channel
-			\item No one should be able to impersonate the taxi drivers, the clients or the admin without proper authentication %TODO mmmhhh questa non mi convince
+			\item No one should be able to impersonate the taxi drivers, the clients or the admin without proper authentication %TODO mmmhhh questa non mi convince %TODO preferisci che sia vero il contrario?
 		\end{itemize}
 %	\item 
 \end{itemize}
@@ -352,7 +339,7 @@ Mickey Mouse is
 \subsection{Use cases}
 \subsubsection{Request a taxi}
 \textit{Actors:} Registered user, taxi driver
-\textit{Preconditions:} The user is on the homepage of the application %TODO va bene homepage anche per la mobile app?
+\textit{Preconditions:} The user is on the homepage of the application
 \textit{Flow of Events:}
 	\begin{itemize}
 		\item  The user clicks the ``Request a taxi'' button
@@ -360,10 +347,10 @@ Mickey Mouse is
 		\item  The user inserts the starting location and the destination and then clicks the ``Request'' button
 		\item  The system notifies the first taxi driver of the starting location's zone's queue. If there are no taxis in that zone, the system notifies the CAT\@. If a taxi driver rejects the request the system passes the request on to the next taxi driver in the queue and changes the first one's state to not available. If a taxi driver doesn't accept or reject the request within 1 minute, the system passes the request on to the next taxi driver in the queue and moves the first one to the end of the queue
 		\item  The taxi driver accepts the request and goes to the starting location
-		\item  The system changes the state of the taxi driver to not available and notifies the user of the code of the incoming taxi and the ETA
-		\item  When the taxi driver arrives at the starting location, according to her GPS information, the system automatically makes the user pay the minimum fare %TODO va bene cosi?
+		\item  The system changes the state of the taxi driver to not available and notifies the user of the code of the incoming taxi and the ETA %TODO perchè lo mette come non disponibile? semplicemente lo toglie dalla coda, no?
+		\item  When the taxi driver arrives at the starting location, according to her GPS information, the system automatically makes the user pay the minimum fare 
 	\end{itemize}
-\textit{Postconditions:} The taxi driver is not available anymore and has been removed from the queue. The user has been charged with the minimum fare. %TODO non sapevo che mettere
+\textit{Postconditions:} The taxi driver is not available anymore and has been removed from the queue. The user has been charged with the minimum fare. %perchè il taxi non è disponibile? più disponibile di cosi'! sta servendo!
 \textit{Exceptions:}
 	\begin{itemize}
 		\item If there are no available taxis in the entire city an error message is shown and the request is not made
@@ -383,7 +370,7 @@ Mickey Mouse is
 		\item  The system changes the state of the taxi driver to not available and notifies the user of the code of the incoming taxi and the ETA
 		\item  When the taxi driver arrives at the starting location, according to her GPS information, the system automatically makes the user pay the minimum fare
 	\end{itemize}
-	\textit{Postconditions:} The taxi driver is not available anymore and has been removed from the queue. The user has been charged with the minimum fare. %TODO non sapevo che mettere
+	\textit{Postconditions:} The taxi driver is not available anymore and has been removed from the queue. The user has been charged with the minimum fare. %TODO non sapevo che mettere %TODO vedi sopra
 	\textit{Exceptions:}
 	\begin{itemize}
 		\item If there are no available taxis in the entire city an error message is shown and\ldots %TODO dobbiamo pensare a come fare per garantire comunque un taxi per le reservations altrimenti è inutile fare la reservation
