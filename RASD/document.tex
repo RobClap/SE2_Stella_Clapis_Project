@@ -41,7 +41,6 @@ The government of the city wants to optimize its taxi service with a completely 
 
 \subsection{Scope}
 The aim of the project TAXInseconds is to provide a new application to optimize the taxi service of the city that will be accessible via browser, mobile or public APIs.
-\\The application will be available to the users in web and mobile forms and will have public APIs in order to expand and improve the service with additional features. %TODO ripetuto due volte? %TODO togli pure
 \\The city managed by TAXInseconds is divided in zones of 2 km\textsuperscript{2} each and every zone has its own queue of taxis. The queues are automatically computed by the system with the information it receives from the GPS of the phones of the taxi drivers.
 \\Taxi drivers can be available or not. Only available taxi drivers can be in a queue. When a taxi driver changes her state from not available to available the system automatically adds her to the queue of the zone she is currently in, based on the information of the GPS of her phone. 
 \\Users that are not registered can only see the estimated time of arrival of the nearest taxi with TAXInseconds.\@
@@ -84,7 +83,7 @@ The aim of the project TAXInseconds is to provide a new application to optimize 
 \subsection{Actors}
 \begin{itemize}
 	\item \textit{Guest}: guests are able to sign up, login or ask the system for an ETA.\@
-	\item \textit{Registered users}: after successfully logging in, registered users can request or reserve taxis or ask the system for an ETA.\@
+	\item \textit{Logged in users}: after successfully logging in, registered users can request or reserve taxis or ask the system for an ETA.\@
 	\item \textit{Taxi drivers}: after successfully logging in, taxi drivers are able to set their current state as available or not and to accept or refuse requests.
 	\item \textit{Administrator}: after successfully logging in, the administrator will be the only user allowed to edit the taxi drivers list stored by the system.
 \end{itemize}
@@ -124,7 +123,7 @@ There are no existing systems to integrate it with.
 \subsubsection{System interfaces}
 \begin{comment}
 This should list each system interface and identify the functionality of the software to accomplish the system requirement and the interface description to match the system.
-\end{comment} %TODO non ho capito davvero cosa sia questa %non dovrebbe essere semplicemente il titolo che raccoglie el successive? in teoria no, è una subsection come le altre %TODO ottimo, e che ci facciamo?
+\end{comment} %TODO non ho capito davvero cosa sia questa %non dovrebbe essere semplicemente il titolo che raccoglie el successive? in teoria no, è una subsection come le altre %TODO ottimo, e che ci facciamo? secondo me è da togliere anche perchè non saprei cosa metterci
 \paragraph{Hardware Interfaces}
 \begin{itemize}
 \item Owned by the users and taxi drivers:
@@ -215,11 +214,11 @@ The TAXInseconds application is intended for all users who are at least 18 years
 \subsubsection{Domain Assumptions}
 \begin{itemize}
 	\item All taxi drivers who intend to use the service will have a mobile phone with one of the supported mobile OSs
-	\item All taxi drivers will have a phone with active GPS functionality %TODO mettiamo i gps delle macchine, no?	%NO, come li fai comunicare con la APP?
+	\item All taxi drivers will have a phone with active GPS functionality 
 	\item The taxi drivers will grant the system the rights to handle their taxi codes
 	\item Taxi drivers' phones will always have an internet connection while TAXInseconds is running
-	\item Users will have access to the internet %TODO dici che serve? %Si, come fanno a rpenotare se no? piccioni?
-	\item In order to help the client to select the current location a phone with GPS capability will be required %TODO non credo sia una domain assumption %cos'è allora?
+	\item Users will have access to the internet
+	\item In order to help the client to select the current location a phone with GPS capability will be required %TODO non credo sia una domain assumption %cos'è allora? credo sia da togliere tanto la starting location la mettono a mano
 	\item Users will enter a valid email address during registration 
 	\item Users will enter valid credit card data during registration
 	\item Users allow the app to access their credit in order to pay for the service
@@ -241,7 +240,7 @@ On the user side:\@
 	\item For logged in users (on both the WEB and Mobile interface):
 		\begin{itemize}
 			\item The system will be able to calculate and show the ETA.\@ 
-%TODO questa è una nonfunctional requirement			\item The system will store the username, password, email and credit card data of every user %TODO non trovo più dove c'erano scritte le altre cose che devi scrivere nel login e che deve salvare-->sotto ho scritto magari di metterle in un posto comune con altre funct
+%TODO questa è una nonfunctional requirement %no questo è un funct req :3			\item The system will store the username, password, email and credit card data of every user %TODO non trovo più dove c'erano scritte le altre cose che devi scrivere nel login e che deve salvare-->sotto ho scritto magari di metterle in un posto comune con altre funct
 			\item The system will provide a functionality to request a taxi at the given starting location 
 			\item The system will provide a functionality to reserve a taxi at the given starting location and meeting time
 			\item The system will provide a functionality to modify the personal data of the user
@@ -262,7 +261,7 @@ On the user side:\@
 				\end{itemize}
 		\end{itemize}
 \end{itemize}
-On the taxi driver side:\@ %TODO (there will be no Web interface in this case) <- non è meglio specificarlo dove abbiamo detto che interfacce abbiamo? %TODO io non ho fatto la parte di interfacce, se lo vuoi specificare specificalo
+On the taxi driver side:\@ 
 \begin{itemize}
 	\item If credentials have been invalidated a ``reset password'' procedure will be mandatory %TODO ?.? ti spiego luned\label{}<++>
 	\item The system will provide a functionality to switch the state of the taxi driver from available to not available or vice versa
@@ -310,7 +309,7 @@ On the admin side:\@
 			\item The system must store all of its data in an always-reachable database
 			\item Regular backups will be made in order to reduce or prevent data loss
 		\end{itemize}
-	\item \textit{Usability} %TODO credo che usability non sia un req, nel senso che da noi han detto che è una di quelle cose che dici "ma va?" %TODO ma se sopra mi hai detto di mettere che l'utente è aiutato con posizioni suggerite..
+	\item \textit{Usability} %TODO credo che usability non sia un req, nel senso che da noi han detto che è una di quelle cose che dici "ma va?" %TODO ma se sopra mi hai detto di mettere che l'utente è aiutato con posizioni suggerite..%TODO si ma lo pensavo più come una qualche funzione 
 		\begin{itemize}
 			\item The UIs have to be user friendly and with a few, clear functionalities
 			\item The app will have few activities, mainly the login, the register and the call form.
@@ -339,23 +338,23 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 
 \subsection{Use cases}
 \subsubsection{Request a taxi}
-\textit{Actors:} Registered user, taxi driver
+\textit{Actors:} Logged in user, taxi driver
 \textit{Preconditions:} The user is on the homepage of the application
 \textit{Flow of Events:}
 	\begin{itemize}
-		\item  The user clicks the ``Request a taxi'' button
+		\item  The user clicks the ''Request a taxi'' button
 		\item  The system shows the user a page where she can enter the starting location and destination of the request
-		\item  The user inserts the starting location and the destination and then clicks the ``Request'' button
+		\item  The user inserts the starting location and the destination and then clicks the ''Request'' button
 		\item  The system notifies the first taxi driver of the starting location's zone's queue. If there are no taxis in that zone, the system notifies the CAT\@. If a taxi driver rejects the request the system passes the request on to the next taxi driver in the queue and changes the first one's state to not available. If a taxi driver doesn't accept or reject the request within 1 minute, the system passes the request on to the next taxi driver in the queue and moves the first one to the end of the queue
 		\item  The taxi driver accepts the request and goes to the starting location
 		\item  The system changes the state of the taxi driver to not available and notifies the user of the code of the incoming taxi and the ETA %TODO perchè lo mette come non disponibile? semplicemente lo toglie dalla coda, no?
-		\item  When the taxi driver arrives at the starting location, according to her GPS information, the system automatically makes the user pay the minimum fare 
+		%TODO da togliere questo\item  When the taxi driver arrives at the starting location, according to her GPS information, the system automatically makes the user pay the minimum fare 
+		\item The taxi driver goes to the starting location to pick up the user
 	\end{itemize}
-\textit{Postconditions:} The taxi driver is not available anymore and has been removed from the queue. The user has been charged with the minimum fare. %perchè il taxi non è disponibile? più disponibile di cosi'! sta servendo!
-\textit{Exceptions:}
+\textit{Postconditions:} The taxi driver is not available anymore and has been removed from the queue. %TODOperchè il taxi non è disponibile? più disponibile di cosi'! sta servendo! %proprio perchè sta servendo non è disponibile ad accettare altre richieste
+\\\textit{Exceptions:}
 	\begin{itemize}
-		\item If there are no available taxis in the entire city an error message is shown and the request is not made
-		\item If a taxi driver doesn't get to the starting location of the request within the MAD the system will pass on the request to the next taxi driver in the queue and will notify the user of the change with the new ETA and taxi code.
+		\item If a taxi driver doesn't get to the starting location of the request within the MAD, the system will pass on the request to the next taxi driver in the queue and will notify the user of the change with the new ETA and taxi code. If the queue is empty, the system will notify the CAT.
 	\end{itemize}
 	
 	\subsubsection{Reserve a taxi}
@@ -363,20 +362,83 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 	\\\textit{Preconditions:} The user is on the homepage of the application %TODO va bene homepage anche per la mobile app?
 	\\\textit{Flow of Events:}
 	\begin{itemize}
-		\item  The user clicks the ``Reserve a taxi'' button
+		\item  The user clicks the ''Reserve a taxi'' button
 		\item  The system shows the user a page where she can enter the starting location, destination and the meeting time of the reservation.
-		\item  The user inserts the starting location, destination and meeting time and then clicks the ``Reserve'' button
+		\item  The user inserts the starting location, destination and meeting time and then clicks the ''Reserve'' button
 		\item  Ten minutes before the meeting time, the system notifies the first taxi driver of the starting location's zone's queue. If there are no taxis in that zone, the system notifies the CAT\@. If a taxi driver rejects the reservation the system passes it on to the next taxi driver in the queue and changes the first one's state to not available. If a taxi driver doesn't accept or reject the reservation within 1 minute, the system passes it on to the next taxi driver in the queue and moves the first one to the end of the queue
 		\item  The taxi driver accepts the reservation and goes to the starting location
-		\item  The system changes the state of the taxi driver to not available and notifies the user of the code of the incoming taxi and the ETA
-		\item  When the taxi driver arrives at the starting location, according to her GPS information, the system automatically makes the user pay the minimum fare
+		\item  The system changes the state of the taxi driver to not available and notifies the user of the code of the incoming taxi %TODO anche questo?-> and the ETA
+		\item  The taxi driver goes to the starting location to pick up the user
 	\end{itemize}
-	\textit{Postconditions:} The taxi driver is not available anymore and has been removed from the queue. The user has been charged with the minimum fare. %TODO non sapevo che mettere %TODO vedi sopra
-	\textit{Exceptions:}
+	\textit{Postconditions:} The taxi driver is not available anymore and has been removed from the queue. %TODO non sapevo che mettere %TODO vedi sopra
+	\\\textit{Exceptions:}
 	\begin{itemize} 
-		\item If there are no available taxis in the entire city an error message is shown and\ldots %TODO dobbiamo pensare a come fare per garantire comunque un taxi per le reservations altrimenti è inutile fare la reservation
-		\item If a taxi driver doesn't get to the starting location of the request within the MAD after the meeting time, the system will pass on the reservation to the next taxi driver in the queue and will notify the user of the change with the new ETA and taxi code.
+		\item If a taxi driver doesn't get to the starting location of the request within the MAD after the meeting time, the system will pass on the reservation to the next taxi driver in the queue and will notify the user of the change with the new%TODO--> ETA?<--- and taxi code.
 		\item If the meeting time is not at least two hours after the reservation an error message will be displayed and the reservation won't be made.
+	\end{itemize}
+	
+	\subsubsection{Cancel a reservation}
+	\textit{Actors:} Registered user
+	\\\textit{Preconditions:} The user is on the homepage of the application and has at least one reservation for which a taxi has not yet been allocated
+	\\\textit{Flow of Events:}
+	\begin{itemize}
+		\item  The user clicks on the reservation she wants to cancel
+		\item  The system shows the user a page with the details of the reservation
+		\item  The user clicks the "Cancel button"
+		\item  The system shows a ''successful deletion'' message and brings the user back to her homepage
+	\end{itemize}
+	\textit{Postconditions:} The reservation has been cancelled.
+	\\\textit{Exceptions:}
+	\begin{itemize} 
+		\item If a taxi is allocated while the user is cancelling the reservation the system will show an error message and won't cancel the reservation
+	\end{itemize}
+		
+	\subsubsection{Cancel a reservation}
+	\textit{Actors:} Registered user
+	\\\textit{Preconditions:} The user is on the homepage of the application and has at least one reservation for which a taxi has not yet been allocated
+	\\\textit{Flow of Events:}
+	\begin{itemize}
+		\item  The user clicks on the reservation she wants to cancel
+		\item  The system shows the user a page with the details of the reservation
+		\item  The user clicks the "Cancel reservation" button
+		\item  The system shows a ''successful deletion'' message and brings the user back to her homepage
+	\end{itemize}
+	\textit{Postconditions:} The reservation has been cancelled.
+	\\\textit{Exceptions:}
+	\begin{itemize} 
+		\item If a taxi is allocated while the user is cancelling the reservation the system will show an error message and won't cancel the reservation
+	\end{itemize}
+	
+	\subsubsection{Cancel a request}
+	\textit{Actors:} Registered user
+	\\\textit{Preconditions:} The user is on the homepage of the application and has at least one request that hasn't been accepted by a taxi driver yet
+	\\\textit{Flow of Events:}
+	\begin{itemize}
+		\item  The user clicks on the request she wants to cancel
+		\item  The system shows the user a page with the details of the request
+		\item  The user clicks the "Cancel request" button
+		\item  The system shows a ''successful deletion'' message and brings the user back to her homepage
+	\end{itemize}
+	\textit{Postconditions:} The request has been cancelled.
+	\\\textit{Exceptions:}
+	\begin{itemize} 
+		\item If a taxi driver accepts the request while the user is cancelling it the system will show an error message and won't cancel the request
+	\end{itemize}
+	
+	\subsubsection{Registration}
+	\textit{Actors:} Guest
+	\\\textit{Preconditions:} The user is on the homepage of the application
+	\\\textit{Flow of Events:}
+	\begin{itemize}
+		\item  The guest clicks on the ''Register here'' button
+		\item  The system shows a page where the guest can enter her username, password and email
+		\item  The guest clicks the "Register" button
+		\item  The system shows a ''successful registration'' message and brings the guest to the login page
+	\end{itemize}
+	\textit{Postconditions:} The request has been cancelled.
+	\\\textit{Exceptions:}
+	\begin{itemize} 
+		\item If a taxi driver accepts the request while the user is cancelling it the system will show an error message and won't cancel the request
 	\end{itemize}
 	\clearpage
 	\section{Alloy}
