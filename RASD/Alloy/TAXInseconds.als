@@ -85,15 +85,8 @@ fact noClientsObiquity{
 	no disjoint t,t':AvailableTaxi | t'.serve=t.serve
 }
 
-//If a taxi is available and a client is in need the taxi must serve her
-fact taxiesServeClientsIfPossible{
-	all a:Area | 
-	#a.taxis.root.*nextTaxi >= #a.clients.root.*nextClient implies
-	no t:AvailableTaxi | t in a.taxis.root.*nextTaxi and #t.serve=0
-}
-
 //Clients are served in order
-fact ClientsRespectQueuesEvenInItaly{
+fact ClientsRespectQueues{
 	no c:ActiveClient | some t:AvailableTaxi | 
 	c=t.serve and no t':AvailableTaxi | t'.serve=c.~nextClient 
 }
@@ -104,47 +97,21 @@ fact TaxisServeInOrder{
 	t'=t.~nextTaxi and c=t.serve and no c':ActiveClient| c'=t'.serve
 }
 
-//Taxies only serve clients in the same area if there are taxies
-//available in that clients' area
+//If an area has more clients than taxies all taxies must be serving
+fact TaxiServeIfNeeded{
+	no t:AvailableTaxi | some a:Area | 
+	t in a.taxis.root.*nextTaxi and
+	#a.taxis.root.*nextTaxi <= #a.clients.root.*nextClient and
+	#t.serve=0 
+}
+
+//Serving local clients is preferrable
 fact TaxiStayIfNeeded{
 	no t:AvailableTaxi | some a:Area | 
 	t in a.taxis.root.*nextTaxi and
-	#a.taxis.root.*nextTaxi < #a.clients.root.*nextClient and
-	t.serve not in a.clients.root.*nextClient
+	#a.taxis.root.*nextTaxi <= #a.clients.root.*nextClient and
+	t.serve not in a.clients.root.*nextClient 
 }
-
-
-
-//TODO non è corretta, rivederla di modo che un taxi serva in un'
-//altra area SE E SOLO SE in quell'area ci sono meno clienti che taxi
-/*
-fact TaxisDontLeaveAreaIfTheyHaveLocalClients{
-	all t:AvailableTaxi | some a:Area | all c:ActiveClient |
-	not (c in a.clients.root.*nextClient and
-	t in a.taxis.root.*nextTaxi and
-	#a.clients.root.*nextClient >= #a.taxis.root.*nextTaxi)
-	or
-	(#t.serve =1 and
-	t.serve in a.clients.root.*nextClient)
-}
-/*
-fact TaxisLeaveAreaIFFNecessary1{
-	all c:ActiveClient | some a:Area | all t:AvailableTaxi |
-	(c in a.clients.root.*nextClient
-	and #a.clients.root.*nextClient < #a.taxis.root.*nextTaxi)
-	implies
-	(c=t.serve implies t in a.taxis.root.*nextTaxi)
-}*/
-
-
-//OLD:
-/*
-fact{
-	no t:AvailableTaxi | some a:Area | some c:ActiveClient | 
-	c=t.serve and t in a.taxis.root.*nextTaxi and 
-	c not in a.clients.root.*nextClient
-}//*/
-
 
 //FUNCTIONS
 //Get who a taxi is serving
@@ -164,15 +131,12 @@ fun getActiveClientsInArea[a:Area]: set ActiveClient{
 	a.clients.root.*nextClient
 }
 
-/*TODO
-fun getAreaOfClient[c:ActiveClient]: one Area{
-	one a:Area |
-	c in a.clients.root.*nextClient
-}*/
+/*TODO get area of client?
 
 //ASSERTIONS
-//Taxies cross areas only if the client they are serving is in an area without taxies
-assert TaxisRespectAreas {
+//Taxies cross areas only if the client they are serving is in 
+//an area without taxies
+assert TaxisRespectAreas1 {
 	all t:AvailableTaxi | some ca,ta:Area | some c:ActiveClient | 
 	c in ca.clients.root.*nextClient and
 	t in ta.taxis.root.*nextTaxi and
@@ -180,13 +144,26 @@ assert TaxisRespectAreas {
 	ca!=ta implies 
 	#ca.taxis.root.*nextTaxi = 0
 }
-//TODO uncomment: check TaxisRespectAreas for 10
+check TaxisRespectAreas1 for 10
+
+//Taxies cross areas only if the client they are serving is in an 
+//area with less taxies than clients
+assert TaxisRespectAreas2 {
+	all t:AvailableTaxi | some ca,ta:Area | some c:ActiveClient | 
+	c in ca.clients.root.*nextClient and
+	t in ta.taxis.root.*nextTaxi and
+	c=t.serve and 
+	ca!=ta implies 
+	#ca.taxis.root.*nextTaxi < #ca.clients.root.*nextClient
+}
+
+check TaxisRespectAreas2 for 10
 
 assert ActiveClientsMustBeInOneArea {
 	all c:ActiveClient | some t:AvailableTaxi | some a:Area | 
 	c=t.serve implies c in a.clients.root.*nextClient
 }
-//TODO uncomment: check ActiveClientsMustBeInOneArea for 10
+check ActiveClientsMustBeInOneArea for 10
 
 assert TaxiQueuesAreRespected{
 	no t:AvailableTaxi | some t':AvailableTaxi | 
@@ -195,7 +172,7 @@ assert TaxiQueuesAreRespected{
 	#t.serve = 0 
 }
 
-//TODO uncomment: check TaxiQueuesAreRespected for 8
+check TaxiQueuesAreRespected for 7
 
 assert ClientQueuesAreRespected{
 	all c,c':ActiveClient | some t,t':AvailableTaxi | 
@@ -204,20 +181,30 @@ assert ClientQueuesAreRespected{
 	c in t'.serve
 }
 
-//check ClientQueuesAreRespected for 10
+check ClientQueuesAreRespected for 9
 
 
 
 //PREDICATES
-/*
+
 pred OneAreaFewAgents{
 	#AvailableTaxi = 2
 	#Area = 1
 	#ActiveClient = 1
 }
-run OneAreaFewAgents{} for 4
+//run OneAreaFewAgents{} for 2 but 1 Area, 1 ActiveClient, 2 AvailableTaxi
+
+
+pred ALotOfTaxis{
+	#AvailableTaxi = 5
+	#Area = 1
+	#ActiveClient=1
+}
+
+
+run ALotOfTaxis{} for 2 but 1 Area,1 ActiveClient,5 AvailableTaxi
 */
-
-
 pred show{}
-run show{} for 5 but 2 Area, 2 TaxiQueue, 2 ClientQueue, 0 InactiveTaxi,  0 nonActiveClient, 4 AvailableTaxi, 3 ActiveClient
+run show{} for 6 but 1 Area,1 ActiveClient,5 AvailableTaxi, 2 TaxiQueue, 
+2 ClientQueue, 1 InactiveTaxi, 1 nonActiveClient,  1 ActiveClient
+
