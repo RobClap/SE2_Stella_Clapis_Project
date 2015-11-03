@@ -119,12 +119,44 @@ There are no existing systems to integrate it with.
 \end{itemize}
 
 \subsubsection{User Interfaces}
-%TODO Erica
+This section presents some mockups to provide an approximate idea of how the application's pages will be structured.
+\paragraph{Guest interface}
+This is the first page of the application where guests can choose to register, login or see the ETA.
+\includegraphics{Guest interface}
+\clearpage
+\paragraph{Login}
+This is the login page where guests can log in the application and become either logged in users, administrators or taxi drivers.
+\includegraphics{Login interface}
+\clearpage
+\paragraph{Register}
+This is the mockup of registration form.
+\includegraphics{Register interface}
+\clearpage
+\paragraph{ETA}
+This is the page where guests or logged in users can see the ETA to their starting location.
+\includegraphics{ETA interface}
+\clearpage
+\paragraph{Logged in user interface}
+This is the homepage of a logged in user where she can also see all the active requests and reservations.
+\includegraphics{Logged in user interface}
+\clearpage
+\paragraph{Request a taxi interface}
+This is the mockup of the page where a logged in user can request a taxi
+\includegraphics{Request a taxi interface}
+\clearpage
+\paragraph{Reserve a taxi interface}
+This is the mockup of the page where a logged in user can reserve a taxi
+\includegraphics{Reserve a taxi}
+\clearpage
+\paragraph{Administrator interface}
+This is the page of an administrator for which there is no mobile 
+\includegraphics{Reserve a taxi}
+\clearpage
 \subsubsection{System interfaces}
 \begin{comment}
 This should list each system interface and identify the functionality of the software to accomplish the system requirement and the interface description to match the system.
 \end{comment} %TODO non ho capito davvero cosa sia questa %non dovrebbe essere semplicemente il titolo che raccoglie el successive? in teoria no, è una subsection come le altre %TODO ottimo, e che ci facciamo? secondo me è da togliere anche perchè non saprei cosa metterci
-\paragraph{Hardware Interfaces}
+\subsubsection{Hardware Interfaces}
 \begin{itemize}
 \item Owned by the users and taxi drivers:
 	\begin{itemize}
@@ -195,21 +227,8 @@ This should list each system interface and identify the functionality of the sof
 			\item for the server it is suggested to use a cloud service in order to resize memory according to traffic
 		\end{itemize}
 \end{itemize}
-\paragraph{Operations} 
-%TODO
-\begin{comment}
-This should specify the normal and special operations required by the user such as
-The various modes of operations in the user organization (e.g., user-initiated operations);
-Periods of interactive operations and periods of unattended operations;
-Data processing support functions;
-Backup and recovery operations.
-\end{comment}
-\subsection{Product functions}
 \subsection{User characteristics}
-The TAXInseconds application is intended for all users who are at least 18 years old.
-
-%\subsection{Constraints}
-%TODO non credo che il nostro progetto abbia constraints tipo quelli elencati nello standard anche perchè credo che i requisiti di reliability tipo del dbms siano nei requisiti non funzionali, no?  %Mi scazza che qua chieda cose tecnicissime come aCK NACK e il resto sia vaghissimo cmq no, direi che la balziamo %approvato
+The TAXInseconds application is intended for all users who are at least 18 years old. %TODO se non serve più la carta di credito possiamo estenderla ad altri user
 \subsection{Assumptions and dependencies}
 \subsubsection{Domain Assumptions}
 \begin{itemize}
@@ -347,11 +366,10 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 		\item  The user inserts the starting location and the destination and then clicks the ''Request'' button
 		\item  The system notifies the first taxi driver of the starting location's zone's queue. If there are no taxis in that zone, the system notifies the CAT\@. If a taxi driver rejects the request the system passes the request on to the next taxi driver in the queue and changes the first one's state to not available. If a taxi driver doesn't accept or reject the request within 1 minute, the system passes the request on to the next taxi driver in the queue and moves the first one to the end of the queue
 		\item  The taxi driver accepts the request and goes to the starting location
-		\item  The system changes the state of the taxi driver to not available and notifies the user of the code of the incoming taxi and the ETA %TODO perchè lo mette come non disponibile? semplicemente lo toglie dalla coda, no?
-		%TODO da togliere questo\item  When the taxi driver arrives at the starting location, according to her GPS information, the system automatically makes the user pay the minimum fare 
+		\item  The system changes the state of the taxi driver to not available and notifies the user of the code of the incoming taxi and the ETA 
 		\item The taxi driver goes to the starting location to pick up the user
 	\end{itemize}
-\textit{Postconditions:} The taxi driver is not available anymore and has been removed from the queue. %TODOperchè il taxi non è disponibile? più disponibile di cosi'! sta servendo! %proprio perchè sta servendo non è disponibile ad accettare altre richieste
+\textit{Postconditions:} The taxi driver is not available anymore and has been removed from the queue.
 \\\textit{Exceptions:}
 	\begin{itemize}
 		\item If a taxi driver doesn't get to the starting location of the request within the MAD, the system will pass on the request to the next taxi driver in the queue and will notify the user of the change with the new ETA and taxi code. If the queue is empty, the system will notify the CAT.
@@ -427,19 +445,98 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 	
 	\subsubsection{Registration}
 	\textit{Actors:} Guest
-	\\\textit{Preconditions:} The user is on the homepage of the application
+	\\\textit{Preconditions:} The guest is on the homepage of the application
 	\\\textit{Flow of Events:}
 	\begin{itemize}
 		\item  The guest clicks on the ''Register here'' button
 		\item  The system shows a page where the guest can enter her username, password and email
-		\item  The guest clicks the "Register" button
-		\item  The system shows a ''successful registration'' message and brings the guest to the login page
+		\item  The guest inserts the requested data and clicks the "Register" button
+		\item  The system shows a ''successful registration'' message 
 	\end{itemize}
-	\textit{Postconditions:} The request has been cancelled.
+	\textit{Postconditions:} The guest can now log in the system whenever she wants with the inserted credentials
 	\\\textit{Exceptions:}
-	\begin{itemize} 
-		\item If a taxi driver accepts the request while the user is cancelling it the system will show an error message and won't cancel the request
+	
+	\subsubsection{Login}
+	\textit{Actors:} Guest
+	\\\textit{Preconditions:} The guest is on the homepage of the application
+	\\\textit{Flow of Events:}
+	\begin{itemize}
+		\item  The guest clicks on the ''Login'' button
+		\item  The system shows a page where the guest can enter her username and password
+		\item  The guest clicks the "Login" button
+		\item  The system logs in the guest and shows her her page
 	\end{itemize}
+	\textit{Postconditions:} The guest is now logged in the system, thus becoming a taxi driver or a logged in user or an administrator depending on the inserted credentials.
+	\\\textit{Exceptions:} The inserted credentials are not valid so the guest is not logged in and an error message is shown
+	
+	The following use case is described using logged in users as actors but it also valid for taxi drivers or administrators
+	\subsubsection{Logout}
+	\textit{Actors:} Logged in user
+	\\\textit{Preconditions:} The user is on the homepage of the application
+	\\\textit{Flow of Events:}
+	\begin{itemize}
+		\item  The user clicks on the ''Logout'' button
+		\item  The system logs the user out and brings her back to the homepage of the application for guests
+	\end{itemize}
+	\textit{Postconditions:} The user is now logged out of the system thus becoming a guest
+	\\\textit{Exceptions:}
+	
+	The following use case is described using logged in users as actor but is also valid for guests
+	\subsubsection{Search for ETA}
+	\textit{Actors:} Logged in user
+	\\\textit{Preconditions:} The user is on the homepage of the application
+	\\\textit{Flow of Events:}
+	\begin{itemize}
+		\item  The user clicks on the ''See estimated time of arrival'' button
+		\item  The system shows a page where the user is prompted to insert the starting location from which the ETA must be calculated
+		\item  The user inserts the starting location and clicks the "See estimated time of arrival" button
+		\item  The system shows the ETA 
+	\end{itemize}
+	\textit{Postconditions:} The user has been shown the ETA
+	\\\textit{Exceptions:}
+	
+	\subsubsection{Modify taxi driver}
+	\textit{Actors:} Administrator
+	\\\textit{Preconditions:} The administrator is on the homepage of the application
+	\\\textit{Flow of Events:}
+	\begin{itemize}
+		\item  The administrator clicks on the ''Modify taxi driver'' button
+		\item  The system shows the administrator the list of taxi drivers retrieved from the database
+		\item  The administrator clicks on the taxi driver she wants to modify
+		\item  The system shows the administrator a page where she can change the values of the fields of the taxi driver
+		\item  The administrator changes the needed fields and then clicks the "Save changes" button
+		\item  The system update the taxi driver's information with the new ones that have been inserted
+	\end{itemize}
+	\textit{Postconditions:} The taxi driver's information have been updated and she can no longer access the application with the old credentials but she must use the new ones
+	\\\textit{Exceptions:} %TODO possono essere non valide?
+	
+	\subsubsection{Add taxi driver}
+	\textit{Actors:} Administrator
+	\\\textit{Preconditions:} The administrator is on the homepage of the application
+	\\\textit{Flow of Events:}
+	\begin{itemize}
+		\item  The administrator clicks on the ''Add taxi driver'' button
+		\item  The system shows the administrator a form where she can enter all the information of the taxi driver %TODO quali sono le info da inserire?
+		\item  The administrator inserts the information then clicks on the "Add taxi driver" button
+		\item  The system adds the taxi driver to the database
+	\end{itemize}
+	\textit{Postconditions:} The taxi driver's information have been added to the database and she can now log in the application as a taxi driver
+	\\\textit{Exceptions:}
+	
+	\subsubsection{Delete taxi driver}
+	\textit{Actors:} Administrator
+	\\\textit{Preconditions:} The administrator is on the homepage of the application
+	\\\textit{Flow of Events:}
+	\begin{itemize}
+		\item  The administrator clicks on the ''Delete taxi driver'' button
+		\item  The system shows the administrator the list of taxi drivers retrieved from the database
+		\item  The administrator clicks on the taxi driver she wants to delete
+		\item  The system shows the administrator a page with the details of the taxi driver
+		\item  The administrator clicks the "Delete taxi driver" button
+		\item  The system deletes the taxi driver from the database
+	\end{itemize}
+	\textit{Postconditions:} The taxi driver's information have been deleted from the database and she can no longer access the application with those credentials
+	\\\textit{Exceptions:}
 	\clearpage
 	\section{Alloy}
 	\subsection{Model}
