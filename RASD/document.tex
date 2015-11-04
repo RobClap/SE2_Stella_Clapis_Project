@@ -386,7 +386,7 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 \textit{Postconditions:} The taxi driver is not available anymore and has been removed from the queue.
 \\\textit{Exceptions:}
 \begin{itemize} 
-	\item If a taxi driver doesn't get to the starting location of the request within the MAD after the meeting time, the system will pass on the reservation to the next taxi driver in the queue and will notify the user of the change with the new%TODO--> ETA?<--- and taxi code.
+	\item If a taxi driver doesn't get to the starting location of the request within the MAD after the meeting time, the system will pass on the reservation to the next taxi driver in the queue and will notify the user of the change with the new ETA and taxi code.
 	\item If the meeting time is not at least two hours after the reservation an error message will be displayed and the reservation won't be made.
 \end{itemize}
 
@@ -487,7 +487,7 @@ The following use case is described using logged in users as actor but is also v
 	\item  The system update the taxi driver's information with the new ones that have been inserted
 \end{itemize}
 \textit{Postconditions:} The taxi driver's information have been updated and she can no longer access the application with the old credentials but she must use the new ones
-\\\textit{Exceptions:} %TODO possono essere non valide?
+\\\textit{Exceptions:} 
 
 \subsubsection{Add taxi driver}
 \textit{Actors:} Administrator
