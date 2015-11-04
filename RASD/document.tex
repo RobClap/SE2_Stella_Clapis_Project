@@ -559,8 +559,23 @@ The following use case is described using logged in users as actor but is also v
 \subsection{Model}
 \texttt{\input{Alloy/TAXInseconds.tex}}	
 \subsection{Result}
-	%TODO put screenshot of successful build
+\begin{center}
+	\includegraphics[width=.9\textwidth,height=.9\textheight,keepaspectratio]{AlloyChecks}
+\end{center}
 \subsection{Worlds Generated}
+The following worlds were generated changing parameters about arity of present signatures.\\
+\begin{center}
+	This is a clean example of two areas, each one with a single client, no unusual interaction occour.\\
+	\includegraphics[width=.9\textwidth,height=.9\textheight,keepaspectratio]{2Areas}
+\end{center}
+\begin{center}
+	This is a more complex example, here we can see how the system behaves and the model adjusts if there aren't enough taxies in an area in order to serve all the clients.
+	\includegraphics[width=.9\textwidth,height=.9\textheight,keepaspectratio]{CrossAreaService}
+\end{center}
+\begin{center}
+	In the following scenario we can see both a reservation of a client for a determined area and a refusal of a taxi for a client (now being served by an other taxi)
+	\includegraphics[width=.9\textwidth,height=.9\textheight,keepaspectratio]{reserved-and-refused}
+\end{center}
 \end{document}
 
 

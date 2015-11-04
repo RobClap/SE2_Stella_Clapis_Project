@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2015.9.17)  4 NOV 2015 14:03
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Arch Linux) (preloaded format=pdflatex 2015.9.17)  4 NOV 2015 14:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -536,26 +536,53 @@ Underfull \hbox (badness 10000) in paragraph at lines 560--561
 
 [29
 
-] [30] [31] [32]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 564.
+] [30] [31] [32] <images/AlloyChecks.png, id=410, 757.83125pt x 220.825pt>
+File: images/AlloyChecks.png Graphic file (type png)
+
+<use images/AlloyChecks.png>
+Package pdftex.def Info: images/AlloyChecks.png used on input line 563.
+(pdftex.def)             Requested size: 310.50468pt x 90.47818pt.
  [33]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 564.
+<images/2Areas.png, id=415, 1254.6875pt x 679.53876pt>
+File: images/2Areas.png Graphic file (type png)
+ <use images/2Areas.png>
+Package pdftex.def Info: images/2Areas.png used on input line 567.
+(pdftex.def)             Requested size: 310.49304pt x 168.16302pt.
+
+<images/CrossAreaService.png, id=416, 793.96625pt x 679.53876pt>
+File: images/CrossAreaService.png Graphic file (type png)
+
+<use images/CrossAreaService.png>
+Package pdftex.def Info: images/CrossAreaService.png used on input line 570.
+(pdftex.def)             Requested size: 310.50575pt x 265.75525pt.
+ [34 <./images/AlloyChecks.png> <./images/2Areas.png (PNG copy)>]
+<images/reserved-and-refused.png, id=422, 1198.4775pt x 679.53876pt>
+File: images/reserved-and-refused.png Graphic file (type png)
+
+<use images/reserved-and-refused.png>
+Package pdftex.def Info: images/reserved-and-refused.png used on input line 573
+.
+(pdftex.def)             Requested size: 310.48128pt x 176.04341pt.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 575.
+ [35 <./images/CrossAreaService.png (PNG copy)> <./images/reserved-and-refused.
+png (PNG copy)>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 575.
  (./document.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 564.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 564.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 575.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 575.
 Package rerunfilecheck Info: File `document.out' has not changed.
 (rerunfilecheck)             Checksum: 37B19E3C22B87C5F764B6A32D4630D66;3094.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 564.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 575.
  ) 
 Here is how much of TeX's memory you used:
- 6584 strings out of 493089
- 97908 string characters out of 6140694
+ 6606 strings out of 493089
+ 98455 string characters out of 6140694
  194993 words of memory out of 5000000
- 9913 multiletter control sequences out of 15000+600000
+ 9929 multiletter control sequences out of 15000+600000
  8716 words of font info for 31 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  29i,6n,32p,663b,450s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -567,10 +594,10 @@ r17.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/sh
 are/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-dist
 /fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-dist/fonts/type1/p
 ublic/amsfonts/cm/cmtt10.pfb>
-Output written on document.pdf (33 pages, 1733393 bytes).
+Output written on document.pdf (35 pages, 1899934 bytes).
 PDF statistics:
- 468 PDF objects out of 1000 (max. 8388607)
- 403 compressed objects within 5 object streams
- 92 named destinations out of 1000 (max. 500000)
- 409 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 480 PDF objects out of 1000 (max. 8388607)
+ 409 compressed objects within 5 object streams
+ 94 named destinations out of 1000 (max. 500000)
+ 429 words of extra memory for PDF output out of 10000 (max. 10000000)
 
