@@ -7,115 +7,210 @@
 \-     \ \ 7	\qquad \-\qquad {\color{green}//For the service}\\
 \-     \ \ 8	\qquad \-\qquad serve:lone ActiveClient\\
 \-     \ \ 9	\qquad \}\\
-\-    \ 10	\qquad {\color{blue}sig} InactiveTaxi {\color{blue}extends} Taxi\{\}\\
-\-    \ 11	\qquad {\color{blue}sig} TaxiQueue\{root:AvailableTaxi\}\\
-\-    \ 12	\qquad \\
-\-    \ 13	\qquad {\color{green}//A Taxi can't be his next}\\
-\-    \ 14	\qquad {\color{blue}fact} nextTaxiNotReflexive \{ \\
-\-    \ 15	\qquad \-\qquad {\color{blue}no} t:AvailableTaxi| t = t.nextTaxi \\
-\-    \ 16	\qquad \}\\
-\-    \ 17	\qquad {\color{green}//A Taxi can't be one of his followers in the queue}\\
-\-    \ 18	\qquad {\color{blue}fact} nextTaxiNotCyclic \{\\
-\-    \ 19	\qquad \-\qquad {\color{blue}no} t:AvailableTaxi | t {\color{blue}in} t.\string^nextTaxi\\
-\-    \ 20	\qquad \} \\
-\-    \ 21	\qquad {\color{green}//If a taxi is active he must be in exactly one queue}\\
-\-    \ 22	\qquad {\color{blue}fact} allAvailableTaxiesBelongToOneQueue \{\\
-\-    \ 23	\qquad \-\qquad {\color{blue}all} t:AvailableTaxi | {\color{blue}one} q:TaxiQueue | t {\color{blue}in} q.root.*nextTaxi\\
-\-    \ 24	\qquad \}\\
-\-    \ 25	\qquad \\
-\-    \ 26	\qquad {\color{green}//CLIENTS}\\
-\-    \ 27	\qquad {\color{blue}abstract} {\color{blue}sig} Client\{\}\\
-\-    \ 28	\qquad {\color{blue}sig} ActiveClient {\color{blue}extends} Client\{\\
-\-    \ 29	\qquad \-\qquad {\color{green}//For the queue}\\
-\-    \ 30	\qquad \-\qquad nextClient:lone ActiveClient\\
-\-    \ 31	\qquad \}\\
-\-    \ 32	\qquad {\color{blue}sig} nonActiveClient {\color{blue}extends} Client\{\}\\
-\-    \ 33	\qquad {\color{blue}sig} ClientQueue\{root:ActiveClient\}\\
-\-    \ 34	\qquad \\
-\-    \ 35	\qquad {\color{green}//A Client can't be his next}\\
-\-    \ 36	\qquad {\color{blue}fact} nextClientNotReflexive \{ \\
-\-    \ 37	\qquad \-\qquad {\color{blue}no} c:ActiveClient| c= c.nextClient\\
-\-    \ 38	\qquad \}\\
-\-    \ 39	\qquad {\color{green}//A Client can't be one of his followers in the queue}\\
-\-    \ 40	\qquad {\color{blue}fact} nextClientNotCyclic \{\\
-\-    \ 41	\qquad \-\qquad {\color{blue}no} c:ActiveClient| c {\color{blue}in} c.\string^nextClient\\
-\-    \ 42	\qquad \} \\
-\-    \ 43	\qquad {\color{green}//If a client is Waiting for a Taxi, he must be in exactly one queue}\\
-\-    \ 44	\qquad {\color{blue}fact} allActiveClientsBelongToOneQueue \{\\
-\-    \ 45	\qquad \-\qquad {\color{blue}all} c:ActiveClient| {\color{blue}one} q:ClientQueue| c {\color{blue}in} q.root.*nextClient\\
-\-    \ 46	\qquad \}\\
-\-    \ 47	\qquad \\
-\-    \ 48	\qquad {\color{green}//AREAS}\\
-\-    \ 49	\qquad {\color{blue}sig} Area\{\\
-\-    \ 50	\qquad \-\qquad taxis: {\color{blue}one} TaxiQueue, \\
-\-    \ 51	\qquad \-\qquad clients: {\color{blue}one} ClientQueue\\
-\-    \ 52	\qquad \}\\
-\-    \ 53	\qquad {\color{blue}fact} oneQueueoneArea\{\\
-\-    \ 54	\qquad \-\qquad {\color{blue}no} c:ClientQueue | {\color{blue}some} disjoint a,a':Area | \\
-\-    \ 55	\qquad \-\qquad \-\qquad c=a.clients  {\color{blue}and}  c=a'.clients\\
-\-    \ 56	\qquad \-\qquad {\color{blue}no} t:TaxiQueue | {\color{blue}some} disjoint a,a':Area |\\
-\-    \ 57	\qquad \-\qquad \-\qquad  t=a.taxis  {\color{blue}and}  t=a'.taxis\\
+\-    \ 10	\qquad {\color{blue}sig} InactiveTaxi {\color{blue}extends} Taxi\{\\
+\-    \ 11	\qquad \-\qquad refused:lone ActiveClient\\
+\-    \ 12	\qquad \}\\
+\-    \ 13	\qquad {\color{blue}sig} TaxiQueue\{root:AvailableTaxi\}\\
+\-    \ 14	\qquad \\
+\-    \ 15	\qquad {\color{green}//A Taxi can't be his next}\\
+\-    \ 16	\qquad {\color{blue}fact} nextTaxiNotReflexive \{ \\
+\-    \ 17	\qquad \-\qquad {\color{blue}no} t:AvailableTaxi| t = t.nextTaxi \\
+\-    \ 18	\qquad \}\\
+\-    \ 19	\qquad {\color{green}//A Taxi can't be one of his followers in the queue}\\
+\-    \ 20	\qquad {\color{blue}fact} nextTaxiNotCyclic \{\\
+\-    \ 21	\qquad \-\qquad {\color{blue}no} t:AvailableTaxi | t {\color{blue}in} t.\string^nextTaxi\\
+\-    \ 22	\qquad \} \\
+\-    \ 23	\qquad {\color{green}//If a taxi is active he must be in exactly one queue}\\
+\-    \ 24	\qquad {\color{blue}fact} allAvailableTaxiesBelongToOneQueue \{\\
+\-    \ 25	\qquad \-\qquad {\color{blue}all} t:AvailableTaxi | {\color{blue}one} q:TaxiQueue | t {\color{blue}in} q.root.*nextTaxi\\
+\-    \ 26	\qquad \}\\
+\-    \ 27	\qquad \\
+\-    \ 28	\qquad {\color{green}//Domain Assumption}\\
+\-    \ 29	\qquad {\color{blue}fact} thereIsAtLeastOneFreeTaxi\{\\
+\-    \ 30	\qquad \-\qquad {\color{blue}some} t:AvailableTaxi | {\color{blue}no} c:ActiveClient |\\
+\-    \ 31	\qquad \-\qquad t.serve = c\\
+\-    \ 32	\qquad \}\\
+\-    \ 33	\qquad \\
+\-    \ 34	\qquad {\color{green}//CLIENTS}\\
+\-    \ 35	\qquad {\color{blue}abstract} {\color{blue}sig} Client\{\}\\
+\-    \ 36	\qquad {\color{blue}sig} ActiveClient {\color{blue}extends} Client\{\\
+\-    \ 37	\qquad \-\qquad {\color{green}//For the queue}\\
+\-    \ 38	\qquad \-\qquad nextClient:lone ActiveClient\\
+\-    \ 39	\qquad \}\\
+\-    \ 40	\qquad {\color{blue}sig} nonActiveClient {\color{blue}extends} Client\{\\
+\-    \ 41	\qquad \-\qquad {\color{green}//For reservations}\\
+\-    \ 42	\qquad \-\qquad reserved: {\color{blue}lone} Area\\
+\-    \ 43	\qquad \}\\
+\-    \ 44	\qquad {\color{blue}sig} ClientQueue\{root:ActiveClient\}\\
+\-    \ 45	\qquad \\
+\-    \ 46	\qquad {\color{green}//A Client can't be his next}\\
+\-    \ 47	\qquad {\color{blue}fact} nextClientNotReflexive \{ \\
+\-    \ 48	\qquad \-\qquad {\color{blue}no} c:ActiveClient| c= c.nextClient\\
+\-    \ 49	\qquad \}\\
+\-    \ 50	\qquad {\color{green}//A Client can't be one of his followers in the queue}\\
+\-    \ 51	\qquad {\color{blue}fact} nextClientNotCyclic \{\\
+\-    \ 52	\qquad \-\qquad {\color{blue}no} c:ActiveClient| c {\color{blue}in} c.\string^nextClient\\
+\-    \ 53	\qquad \} \\
+\-    \ 54	\qquad {\color{green}//If a client is Waiting for a Taxi}\\
+\-    \ 55	\qquad {\color{green}//he must be in exactly one queue}\\
+\-    \ 56	\qquad {\color{blue}fact} allActiveClientsBelongToOneQueue \{\\
+\-    \ 57	\qquad \-\qquad {\color{blue}all} c:ActiveClient| {\color{blue}one} q:ClientQueue| c {\color{blue}in} q.root.*nextClient\\
 \-    \ 58	\qquad \}\\
 \-    \ 59	\qquad \\
-\-    \ 60	\qquad {\color{green}//All queues must be connected to an Area}\\
-\-    \ 61	\qquad {\color{blue}fact} allQueuesInAreas\{\\
-\-    \ 62	\qquad \-\qquad {\color{blue}all} c:ClientQueue | {\color{blue}some} a:Area | c=a.clients\\
-\-    \ 63	\qquad \-\qquad {\color{blue}all} t:TaxiQueue | {\color{blue}some} a:Area | t=a.taxis\\
-\-    \ 64	\qquad \}\\
-\-    \ 65	\qquad \\
-\-    \ 66	\qquad {\color{green}//INTERACTIONS}\\
-\-    \ 67	\qquad {\color{green}//Clients are served only by one taxi}\\
-\-    \ 68	\qquad {\color{blue}fact} noClientsObiquity\{\\
-\-    \ 69	\qquad \-\qquad {\color{blue}no} disjoint t,t':AvailableTaxi | t'.serve=t.serve\\
-\-    \ 70	\qquad \}\\
-\-    \ 71	\qquad \\
-\-    \ 72	\qquad {\color{green}//Clients are served in order}\\
-\-    \ 73	\qquad {\color{blue}fact} ClientsRespectQueuesEvenInItaly\{\\
-\-    \ 74	\qquad \-\qquad {\color{blue}no} c:ActiveClient | {\color{blue}some} t:AvailableTaxi | \\
-\-    \ 75	\qquad \-\qquad c=t.serve {\color{blue}and} no t':AvailableTaxi | t'.serve=c.~nextClient \\
-\-    \ 76	\qquad \}\\
-\-    \ 77	\qquad \\
-\-    \ 78	\qquad {\color{green}//Taxies are serving in order}\\
-\-    \ 79	\qquad {\color{blue}fact} TaxisServeInOrder\{\\
-\-    \ 80	\qquad \-\qquad {\color{blue}no} t,t':AvailableTaxi | {\color{blue}some} c:ActiveClient | \\
-\-    \ 81	\qquad \-\qquad t'=t.~nextTaxi {\color{blue}and} c=t.serve {\color{blue}and} no c':ActiveClient| c'=t'.serve\\
-\-    \ 82	\qquad \}\\
-\-    \ 83	\qquad \\
-\-    \ 84	\qquad {\color{green}//Taxies only serve clients in the same area}\\
-\-    \ 85	\qquad fact\{\\
-\-    \ 86	\qquad \-\qquad {\color{blue}no} t:AvailableTaxi | {\color{blue}some} a:Area | {\color{blue}some} c:ActiveClient | \\
-\-    \ 87	\qquad \-\qquad c=t.serve {\color{blue}and} t {\color{blue}in} a.taxis.root.*nextTaxi {\color{blue}and} \\
-\-    \ 88	\qquad \-\qquad c {\color{blue}not} in a.clients.root.*nextClient\\
+\-    \ 60	\qquad {\color{green}//All clients must have a taxi serving them}\\
+\-    \ 61	\qquad {\color{blue}fact} allClientsAreServed\{\\
+\-    \ 62	\qquad \-\qquad {\color{blue}all} c:ActiveClient |\\
+\-    \ 63	\qquad \-\qquad {\color{blue}some} t:AvailableTaxi |\\
+\-    \ 64	\qquad \-\qquad c=t.serve\\
+\-    \ 65	\qquad \}\\
+\-    \ 66	\qquad \\
+\-    \ 67	\qquad {\color{green}//AREAS}\\
+\-    \ 68	\qquad {\color{blue}sig} Area\{\\
+\-    \ 69	\qquad \-\qquad taxis: {\color{blue}one} TaxiQueue, \\
+\-    \ 70	\qquad \-\qquad clients: {\color{blue}one} ClientQueue\\
+\-    \ 71	\qquad \}\\
+\-    \ 72	\qquad {\color{blue}fact} oneQueueoneArea\{\\
+\-    \ 73	\qquad \-\qquad {\color{blue}no} c:ClientQueue | {\color{blue}some} disjoint a,a':Area | \\
+\-    \ 74	\qquad \-\qquad \-\qquad c=a.clients  {\color{blue}and}  c=a'.clients\\
+\-    \ 75	\qquad \-\qquad {\color{blue}no} t:TaxiQueue | {\color{blue}some} disjoint a,a':Area |\\
+\-    \ 76	\qquad \-\qquad \-\qquad  t=a.taxis  {\color{blue}and}  t=a'.taxis\\
+\-    \ 77	\qquad \}\\
+\-    \ 78	\qquad \\
+\-    \ 79	\qquad {\color{green}//All queues must be connected to an Area}\\
+\-    \ 80	\qquad {\color{blue}fact} allQueuesInAreas\{\\
+\-    \ 81	\qquad \-\qquad {\color{blue}all} c:ClientQueue | {\color{blue}some} a:Area | c=a.clients\\
+\-    \ 82	\qquad \-\qquad {\color{blue}all} t:TaxiQueue | {\color{blue}some} a:Area | t=a.taxis\\
+\-    \ 83	\qquad \}\\
+\-    \ 84	\qquad \\
+\-    \ 85	\qquad {\color{green}//INTERACTIONS}\\
+\-    \ 86	\qquad {\color{green}//Clients are served only by one taxi}\\
+\-    \ 87	\qquad {\color{blue}fact} noClientsObiquity\{\\
+\-    \ 88	\qquad \-\qquad {\color{blue}no} disjoint t,t':AvailableTaxi | t'.serve=t.serve\\
 \-    \ 89	\qquad \}\\
 \-    \ 90	\qquad \\
-\-    \ 91	\qquad {\color{green}//FUNCTIONS}\\
-\-    \ 92	\qquad {\color{green}//Get who a taxi is serving}\\
-\-    \ 93	\qquad {\color{blue}fun} getTaxiClient[t:AvailableTaxi]: {\color{blue}lone} ActiveClient\{\\
-\-    \ 94	\qquad \-\qquad t.serve\\
+\-    \ 91	\qquad {\color{green}//Clients are served in order}\\
+\-    \ 92	\qquad {\color{blue}fact} ClientsRespectQueues\{\\
+\-    \ 93	\qquad \-\qquad {\color{blue}no} c:ActiveClient | {\color{blue}some} t:AvailableTaxi | \\
+\-    \ 94	\qquad \-\qquad c=t.serve {\color{blue}and} no t':AvailableTaxi | t'.serve=c.~nextClient\\
 \-    \ 95	\qquad \}\\
 \-    \ 96	\qquad \\
-\-    \ 97	\qquad {\color{green}//Get who serves a client}\\
-\-    \ 98	\qquad {\color{blue}fun} getClientServer[c:ActiveClient]: {\color{blue}lone} AvailableTaxi\{\\
-\-    \ 99	\qquad \-\qquad c.~serve\\
-\-   100	\qquad \}\\
-\-   101	\qquad {\color{green}//Get Queues for an area}\\
-\-   102	\qquad {\color{blue}fun} getTaxisInArea[a:Area]: {\color{blue}set} AvailableTaxi\{\\
-\-   103	\qquad \-\qquad a.taxis.root.*nextTaxi\\
-\-   104	\qquad \}\\
-\-   105	\qquad {\color{blue}fun} getActiveClientsInArea[a:Area]: {\color{blue}set} ActiveClient\{\\
-\-   106	\qquad \-\qquad a.clients.root.*nextClient\\
-\-   107	\qquad \}\\
-\-   108	\qquad \\
-\-   109	\qquad {\color{green}//ASSERTIONS}\\
-\-   110	\qquad {\color{green}//hm, can't get what is the difference between facts and assertions}\\
+\-    \ 97	\qquad {\color{green}//Taxies are serving in order}\\
+\-    \ 98	\qquad {\color{blue}fact} TaxisServeInOrder\{\\
+\-    \ 99	\qquad \-\qquad {\color{blue}no} t,t':AvailableTaxi | {\color{blue}some} c:ActiveClient | \\
+\-   100	\qquad \-\qquad t'=t.~nextTaxi {\color{blue}and} c=t.serve {\color{blue}and} no c':ActiveClient| c'=t'.serve\\
+\-   101	\qquad \}\\
+\-   102	\qquad \\
+\-   103	\qquad {\color{green}//If an area has more clients than taxies }\\
+\-   104	\qquad {\color{green}//all taxies must be serving}\\
+\-   105	\qquad {\color{blue}fact} TaxiServeIfNeeded\{\\
+\-   106	\qquad \-\qquad {\color{blue}no} t:AvailableTaxi | {\color{blue}some} a:Area | \\
+\-   107	\qquad \-\qquad t {\color{blue}in} a.taxis.root.*nextTaxi and\\
+\-   108	\qquad \-\qquad \#a.taxis.root.*nextTaxi <= \#a.clients.root.*nextClient \\
+\-   109	\qquad \-\qquad and\-\qquad \#t.serve=0 \qquad \\
+\-   110	\qquad \}\\
 \-   111	\qquad \\
-\-   112	\qquad {\color{green}//PREDICATES}\\
-\-   113	\qquad {\color{green}//Just show stuff in different ways}\\
-\-   114	\qquad {\color{green}//Make a call}\\
-\-   115	\qquad \\
-\-   116	\qquad {\color{green}//TODO reservations (i can't understand how)}\\
-\-   117	\qquad {\color{green}//TODO database (maybe)}\\
-\-   118	\qquad \\
+\-   112	\qquad {\color{green}//Serving local clients is preferrable}\\
+\-   113	\qquad {\color{blue}fact} TaxiStayIfNeeded\{\\
+\-   114	\qquad \-\qquad {\color{blue}no} t:AvailableTaxi | {\color{blue}some} a:Area | \\
+\-   115	\qquad \-\qquad t {\color{blue}in} a.taxis.root.*nextTaxi and\\
+\-   116	\qquad \-\qquad \#a.taxis.root.*nextTaxi <= \#a.clients.root.*nextClient \\
+\-   117	\qquad \-\qquad and\-\qquad t.serve {\color{blue}not} in a.clients.root.*nextClient \\
+\-   118	\qquad \}\\
 \-   119	\qquad \\
-\-   120	\qquad {\color{blue}pred} show\{\}\\
-\-   121	\qquad {\color{blue}run} show\{\} {\color{blue}for} 5 \qquad {\color{blue}but} 2 \qquad Area, 2 \qquad TaxiQueue, 2 \qquad ClientQueue, 0 \qquad InactiveTaxi,  0 \qquad nonActiveClient, 6 \qquad AvailableTaxi, 6 \qquad ActiveClient\\
+\-   120	\qquad {\color{green}//FUNCTIONS}\\
+\-   121	\qquad {\color{green}//Get who a taxi is serving}\\
+\-   122	\qquad {\color{blue}fun} getTaxiClient[t:AvailableTaxi]: {\color{blue}lone} ActiveClient\{\\
+\-   123	\qquad \-\qquad t.serve\\
+\-   124	\qquad \}\\
+\-   125	\qquad \\
+\-   126	\qquad {\color{green}//Get who serves a client}\\
+\-   127	\qquad {\color{blue}fun} getClientServer[c:ActiveClient]: {\color{blue}lone} AvailableTaxi\{\\
+\-   128	\qquad \-\qquad c.~serve\\
+\-   129	\qquad \}\\
+\-   130	\qquad {\color{green}//Get Queues for an area}\\
+\-   131	\qquad {\color{blue}fun} getTaxisInArea[a:Area]: {\color{blue}set} AvailableTaxi\{\\
+\-   132	\qquad \-\qquad a.taxis.root.*nextTaxi\\
+\-   133	\qquad \}\\
+\-   134	\qquad {\color{blue}fun} getActiveClientsInArea[a:Area]: {\color{blue}set} ActiveClient\{\\
+\-   135	\qquad \-\qquad a.clients.root.*nextClient\\
+\-   136	\qquad \}\\
+\-   137	\qquad \\
+\-   138	\qquad {\color{green}//ASSERTIONS}\\
+\-   139	\qquad {\color{green}//Taxies cross areas only if the client they are serving  }\\
+\-   140	\qquad {\color{green}//is in an area without taxies}\\
+\-   141	\qquad {\color{blue}assert} TaxisRespectAreas1 \qquad \{\\
+\-   142	\qquad \-\qquad {\color{blue}all} t:AvailableTaxi | {\color{blue}some} ca,ta:Area | \\
+\-   143	\qquad \-\qquad {\color{blue}some} c:ActiveClient | \\
+\-   144	\qquad \-\qquad c {\color{blue}in} ca.clients.root.*nextClient and\\
+\-   145	\qquad \-\qquad t {\color{blue}in} ta.taxis.root.*nextTaxi and\\
+\-   146	\qquad \-\qquad c=t.serve {\color{blue}and} \\
+\-   147	\qquad \-\qquad ca!=ta {\color{blue}implies} \\
+\-   148	\qquad \-\qquad \#ca.taxis.root.*nextTaxi = 0\\
+\-   149	\qquad \}\\
+\-   150	\qquad {\color{blue}check} TaxisRespectAreas1 \qquad {\color{blue}for} 3\\
+\-   151	\qquad \\
+\-   152	\qquad {\color{green}//Taxies cross areas only if the client they are serving  }\\
+\-   153	\qquad {\color{green}//is in an area with less taxies than clients}\\
+\-   154	\qquad {\color{blue}assert} TaxisRespectAreas2 \qquad \{\\
+\-   155	\qquad \-\qquad {\color{blue}all} t:AvailableTaxi | {\color{blue}some} ca,ta:Area | \\
+\-   156	\qquad \-\qquad {\color{blue}some} c:ActiveClient | \\
+\-   157	\qquad \-\qquad c {\color{blue}in} ca.clients.root.*nextClient and\\
+\-   158	\qquad \-\qquad t {\color{blue}in} ta.taxis.root.*nextTaxi and\\
+\-   159	\qquad \-\qquad c=t.serve {\color{blue}and} \\
+\-   160	\qquad \-\qquad ca!=ta {\color{blue}implies} \\
+\-   161	\qquad \-\qquad \#ca.taxis.root.*nextTaxi < \#ca.clients.root.*nextClient\\
+\-   162	\qquad \}\\
+\-   163	\qquad \\
+\-   164	\qquad {\color{blue}check} TaxisRespectAreas2 \qquad {\color{blue}for} 3\\
+\-   165	\qquad \\
+\-   166	\qquad {\color{blue}assert} ActiveClientsMustBeInOneArea \{\\
+\-   167	\qquad \-\qquad {\color{blue}all} c:ActiveClient | {\color{blue}some} t:AvailableTaxi | \\
+\-   168	\qquad \-\qquad {\color{blue}some} a:Area | \\
+\-   169	\qquad \-\qquad c=t.serve {\color{blue}implies} c {\color{blue}in} a.clients.root.*nextClient\\
+\-   170	\qquad \}\\
+\-   171	\qquad {\color{blue}check} ActiveClientsMustBeInOneArea {\color{blue}for} 3\\
+\-   172	\qquad \\
+\-   173	\qquad {\color{blue}assert} TaxiQueuesAreRespected\{\\
+\-   174	\qquad \-\qquad {\color{blue}no} t:AvailableTaxi | {\color{blue}some} t':AvailableTaxi | \\
+\-   175	\qquad \-\qquad t' {\color{blue}in} t.*nextTaxi and\\
+\-   176	\qquad \-\qquad \#t'.serve = 1 \qquad and\\
+\-   177	\qquad \-\qquad \#t.serve = 0 \qquad \\
+\-   178	\qquad \}\\
+\-   179	\qquad \\
+\-   180	\qquad {\color{blue}check} TaxiQueuesAreRespected {\color{blue}for} 3\\
+\-   181	\qquad \\
+\-   182	\qquad {\color{blue}assert} ClientQueuesAreRespected\{\\
+\-   183	\qquad \-\qquad {\color{blue}all} c,c':ActiveClient | {\color{blue}some} t,t':AvailableTaxi | \\
+\-   184	\qquad \-\qquad c' {\color{blue}in} c.*nextClient and\\
+\-   185	\qquad \-\qquad c' {\color{blue}in} t.serve implies\\
+\-   186	\qquad \-\qquad c {\color{blue}in} t'.serve\\
+\-   187	\qquad \}\\
+\-   188	\qquad \\
+\-   189	\qquad {\color{blue}check} ClientQueuesAreRespected {\color{blue}for} 3\\
+\-   190	\qquad \\
+\-   191	\qquad {\color{green}//PREDICATES}\\
+\-   192	\qquad \\
+\-   193	\qquad {\color{blue}pred} OneAreaFewAgents\{\\
+\-   194	\qquad \-\qquad \#AvailableTaxi = 2\\
+\-   195	\qquad \-\qquad \#Area = 1\\
+\-   196	\qquad \-\qquad \#ActiveClient = 1\\
+\-   197	\qquad \}\\
+\-   198	\qquad {\color{blue}run} OneAreaFewAgents\{\} {\color{blue}for} 2 \qquad \\
+\-   199	\qquad \\
+\-   200	\qquad \\
+\-   201	\qquad {\color{blue}pred} ALotOfTaxis\{\\
+\-   202	\qquad \-\qquad \#AvailableTaxi = 5\\
+\-   203	\qquad \-\qquad \#Area = 1\\
+\-   204	\qquad \-\qquad \#ActiveClient=1\\
+\-   205	\qquad \}\\
+\-   206	\qquad \\
+\-   207	\qquad {\color{blue}run} ALotOfTaxis\{\} {\color{blue}for} 2 \qquad \\
+\-   208	\qquad \\
+\-   209	\qquad {\color{blue}pred} TwoAreas\{\\
+\-   210	\qquad \-\qquad \#Area=2\\
+\-   211	\qquad \}\\
+\-   212	\qquad \\
+\-   213	\qquad {\color{blue}run} TwoAreas\{\} {\color{blue}for} 2\\
+\-   214	\qquad \\
+\-   215	\qquad {\color{blue}pred} show\{\}\\
+\-   216	\qquad {\color{blue}run} show\{\} {\color{blue}for} 3\\
