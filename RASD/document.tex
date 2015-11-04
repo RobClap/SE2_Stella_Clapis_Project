@@ -1,4 +1,5 @@
 \documentclass{article}
+\usepackage{textcomp}
 \usepackage{graphicx}
 \graphicspath{{images/}}
 \usepackage{booktabs}
@@ -521,28 +522,29 @@ The following use case is described using logged in users as actor but is also v
 \subsection{Model}
 %TODO dire che ``serve'' indica solo l'associazione da prima che il servizio prenda luogo
 %TODO definire tutte le varie cose
+In order to adapt a pure logical model to a system that changes with time and, in the mean time, not lose meaningfulness the following
+main adaptations were made:
+\begin{itemize}
+	\item The ``serve'' relation (AvailableTaxi \textrightarrow\-ActiveClient) is used to represent the association the system made before a taxi was removed from the queue in order to serve a client.
+	\item The ``refused'' relation (InactiveTaxi \textrightarrow\-ActiveClient) is used to represent a refusal of a request by a taxi that was active.
+\end{itemize}
 \texttt{\input{Alloy/TAXInseconds.tex}}	
 \subsection{Result}
 \begin{center}
 	\includegraphics[width=.9\textwidth,height=.9\textheight,keepaspectratio]{AlloyChecks}
 \end{center}
 \subsection{Worlds Generated}
-The following worlds were generated changing parameters about arity of present signatures.\\
+The following worlds were generated changing parameters about arity of present signatures in the show\{\} predicate.\\
 \begin{center}
-	This is a clean example of two areas, each one with a single client, no unusual interaction occour.\\
 	\includegraphics[width=.9\textwidth,height=.9\textheight,keepaspectratio]{2Areas}
+	\\This is a clean example of two areas, each one with a single client, no unusual interaction occour.\\
 \end{center}
 \begin{center}
-	This is a more complex example, here we can see how the system behaves and the model adjusts if there aren't enough taxies in an area in order to serve all the clients.
 	\includegraphics[width=.9\textwidth,height=.9\textheight,keepaspectratio]{CrossAreaService}
+	\\This is a more complex example, here we can see how the system behaves and the model adjusts if there aren't enough taxies in an area in order to serve all the clients.
 \end{center}
 \begin{center}
-	In the following scenario we can see both a reservation of a client for a determined area and a refusal of a taxi for a client (now being served by an other taxi)
 	\includegraphics[width=.9\textwidth,height=.9\textheight,keepaspectratio]{reserved-and-refused}
+	\\In the following scenario we can see both a reservation of a client for a determined area and a refusal of a taxi for a client (now being served by an other taxi)
 \end{center}
 \end{document}
-
-
-%	\begin{itemize}
-%		\item  
-%	\end{itemize}
