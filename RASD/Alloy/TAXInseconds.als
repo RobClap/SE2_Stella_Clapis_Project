@@ -37,7 +37,10 @@ sig ActiveClient extends Client{
 	//For the queue
 	nextClient:lone ActiveClient
 }
-sig nonActiveClient extends Client{}
+sig nonActiveClient extends Client{
+	//For reservations
+	reserved: lone Area
+}
 sig ClientQueue{root:ActiveClient}
 
 //A Client can't be his next
@@ -88,7 +91,7 @@ fact noClientsObiquity{
 //Clients are served in order
 fact ClientsRespectQueues{
 	no c:ActiveClient | some t:AvailableTaxi | 
-	c=t.serve and no t':AvailableTaxi | t'.serve=c.~nextClient 
+	c=t.serve and no t':AvailableTaxi | t'.serve=c.~nextClient
 }
 
 //Taxies are serving in order
@@ -97,20 +100,21 @@ fact TaxisServeInOrder{
 	t'=t.~nextTaxi and c=t.serve and no c':ActiveClient| c'=t'.serve
 }
 
-//If an area has more clients than taxies all taxies must be serving
+//If an area has more clients than taxies 
+//all taxies must be serving
 fact TaxiServeIfNeeded{
 	no t:AvailableTaxi | some a:Area | 
 	t in a.taxis.root.*nextTaxi and
-	#a.taxis.root.*nextTaxi <= #a.clients.root.*nextClient and
-	#t.serve=0 
+	#a.taxis.root.*nextTaxi <= #a.clients.root.*nextClient 
+	and	#t.serve=0 
 }
 
 //Serving local clients is preferrable
 fact TaxiStayIfNeeded{
 	no t:AvailableTaxi | some a:Area | 
 	t in a.taxis.root.*nextTaxi and
-	#a.taxis.root.*nextTaxi <= #a.clients.root.*nextClient and
-	t.serve not in a.clients.root.*nextClient 
+	#a.taxis.root.*nextTaxi <= #a.clients.root.*nextClient 
+	and	t.serve not in a.clients.root.*nextClient 
 }
 
 //FUNCTIONS
@@ -131,25 +135,25 @@ fun getActiveClientsInArea[a:Area]: set ActiveClient{
 	a.clients.root.*nextClient
 }
 
-/*TODO get area of client?
-
 //ASSERTIONS
-//Taxies cross areas only if the client they are serving is in 
-//an area without taxies
+//Taxies cross areas only if the client they are serving  
+//is in an area without taxies
 assert TaxisRespectAreas1 {
-	all t:AvailableTaxi | some ca,ta:Area | some c:ActiveClient | 
+	all t:AvailableTaxi | some ca,ta:Area | 
+	some c:ActiveClient | 
 	c in ca.clients.root.*nextClient and
 	t in ta.taxis.root.*nextTaxi and
 	c=t.serve and 
 	ca!=ta implies 
 	#ca.taxis.root.*nextTaxi = 0
 }
-check TaxisRespectAreas1 for 10
+check TaxisRespectAreas1 for 3
 
-//Taxies cross areas only if the client they are serving is in an 
-//area with less taxies than clients
+//Taxies cross areas only if the client they are serving  
+//is in an area with less taxies than clients
 assert TaxisRespectAreas2 {
-	all t:AvailableTaxi | some ca,ta:Area | some c:ActiveClient | 
+	all t:AvailableTaxi | some ca,ta:Area | 
+	some c:ActiveClient | 
 	c in ca.clients.root.*nextClient and
 	t in ta.taxis.root.*nextTaxi and
 	c=t.serve and 
@@ -157,13 +161,14 @@ assert TaxisRespectAreas2 {
 	#ca.taxis.root.*nextTaxi < #ca.clients.root.*nextClient
 }
 
-check TaxisRespectAreas2 for 10
+check TaxisRespectAreas2 for 3
 
 assert ActiveClientsMustBeInOneArea {
-	all c:ActiveClient | some t:AvailableTaxi | some a:Area | 
+	all c:ActiveClient | some t:AvailableTaxi | 
+	some a:Area | 
 	c=t.serve implies c in a.clients.root.*nextClient
 }
-check ActiveClientsMustBeInOneArea for 10
+check ActiveClientsMustBeInOneArea for 3
 
 assert TaxiQueuesAreRespected{
 	no t:AvailableTaxi | some t':AvailableTaxi | 
@@ -172,7 +177,7 @@ assert TaxiQueuesAreRespected{
 	#t.serve = 0 
 }
 
-check TaxiQueuesAreRespected for 7
+check TaxiQueuesAreRespected for 3
 
 assert ClientQueuesAreRespected{
 	all c,c':ActiveClient | some t,t':AvailableTaxi | 
@@ -181,9 +186,7 @@ assert ClientQueuesAreRespected{
 	c in t'.serve
 }
 
-check ClientQueuesAreRespected for 9
-
-
+check ClientQueuesAreRespected for 3
 
 //PREDICATES
 
@@ -192,7 +195,7 @@ pred OneAreaFewAgents{
 	#Area = 1
 	#ActiveClient = 1
 }
-//run OneAreaFewAgents{} for 2 but 1 Area, 1 ActiveClient, 2 AvailableTaxi
+run OneAreaFewAgents{} for 2 
 
 
 pred ALotOfTaxis{
@@ -201,10 +204,14 @@ pred ALotOfTaxis{
 	#ActiveClient=1
 }
 
+run ALotOfTaxis{} for 2 
 
-run ALotOfTaxis{} for 2 but 1 Area,1 ActiveClient,5 AvailableTaxi
-*/
+pred TwoAreas{
+	#Area=2
+}
+
+run TwoAreas{} for 2 but 2 Area
+
 pred show{}
-run show{} for 6 but 1 Area,1 ActiveClient,5 AvailableTaxi, 2 TaxiQueue, 
-2 ClientQueue, 1 InactiveTaxi, 1 nonActiveClient,  1 ActiveClient
-
+run show{} for 3 but 2 Area,4 ActiveClient,5 AvailableTaxi, 2 TaxiQueue, 
+2 ClientQueue, 1 InactiveTaxi, 1 nonActiveClient
