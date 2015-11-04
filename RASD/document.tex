@@ -120,37 +120,54 @@ There are no existing systems to integrate it with.
 
 \subsubsection{User Interfaces}
 This section presents some mockups to provide an approximate idea of how the application's pages will be structured.
+\clearpage
 \paragraph{Guest interface}
-This is the first page of the application where guests can choose to register, login or see the ETA.
-\includegraphics{Guest interface}
+This is the first page of the application where guests can choose to register, login or see the ETA.\\
+\begin{center}
+\includegraphics[width=.8\textwidth,height=.8\textheight,keepaspectratio]{GuestInterface}
+\end{center}
 \clearpage
 \paragraph{Login}
-This is the login page where guests can log in the application and become either logged in users, administrators or taxi drivers.
-\includegraphics{Login interface}
+This is the login page where guests can log in the application and become either logged in users, administrators or taxi drivers.\\
+\begin{center}
+\includegraphics[width=.8\textwidth,height=.8\textheight,keepaspectratio]{LoginInterface}
+\end{center}
 \clearpage
 \paragraph{Register}
-This is the mockup of registration form.
-\includegraphics{Register interface}
+This is the mockup of registration form.\\
+\begin{center}
+\includegraphics[width=.8\textwidth,height=.8\textheight,keepaspectratio]{RegisterInterface}
+\end{center}
 \clearpage
 \paragraph{ETA}
-This is the page where guests or logged in users can see the ETA to their starting location.
-\includegraphics{ETA interface}
+This is the page where guests or logged in users can see the ETA to their starting location.\\
+\begin{center}
+\includegraphics[width=.8\textwidth,height=.8\textheight,keepaspectratio]{ETA-interface}
+\end{center}
 \clearpage
 \paragraph{Logged in user interface}
-This is the homepage of a logged in user where she can also see all the active requests and reservations.
-\includegraphics{Logged in user interface}
+This is the homepage of a logged in user where she can also see all the active requests and reservations.\\
+\begin{center}
+\includegraphics[width=.8\textwidth,height=.8\textheight,keepaspectratio]{LoggedinUserInterface}
+\end{center}
 \clearpage
 \paragraph{Request a taxi interface}
-This is the mockup of the page where a logged in user can request a taxi
-\includegraphics{Request a taxi interface}
+This is the mockup of the page where a logged in user can request a taxi\\
+\begin{center}
+\includegraphics[width=.8\textwidth,height=.8\textheight,keepaspectratio]{RequestTaxiInterface}
+\end{center}
 \clearpage
 \paragraph{Reserve a taxi interface}
-This is the mockup of the page where a logged in user can reserve a taxi
-\includegraphics{Reserve a taxi}
+This is the mockup of the page where a logged in user can reserve a taxi\\
+\begin{center}
+\includegraphics[width=.8\textwidth,height=.8\textheight,keepaspectratio]{ReserveTaxi}
+\end{center}
 \clearpage
 \paragraph{Administrator interface}
-This is the page of an administrator for which there is no mobile 
-\includegraphics{Reserve a taxi}
+This is the page of an administrator for which there is no mobile\\ 
+\begin{center}
+\includegraphics[width=.8\textwidth,height=.8\textheight,keepaspectratio]{ReserveTaxi}
+\end{center}
 \clearpage
 \subsubsection{System interfaces}
 \begin{comment}
@@ -361,9 +378,9 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 \textit{Preconditions:} The user is on the homepage of the application
 \textit{Flow of Events:}
 	\begin{itemize}
-		\item  The user clicks the ''Request a taxi'' button
+		\item  The user clicks the ``Request a taxi'' button
 		\item  The system shows the user a page where she can enter the starting location and destination of the request
-		\item  The user inserts the starting location and the destination and then clicks the ''Request'' button
+		\item  The user inserts the starting location and the destination and then clicks the ``Request'' button
 		\item  The system notifies the first taxi driver of the starting location's zone's queue. If there are no taxis in that zone, the system notifies the CAT\@. If a taxi driver rejects the request the system passes the request on to the next taxi driver in the queue and changes the first one's state to not available. If a taxi driver doesn't accept or reject the request within 1 minute, the system passes the request on to the next taxi driver in the queue and moves the first one to the end of the queue
 		\item  The taxi driver accepts the request and goes to the starting location
 		\item  The system changes the state of the taxi driver to not available and notifies the user of the code of the incoming taxi and the ETA 
@@ -372,7 +389,7 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 \textit{Postconditions:} The taxi driver is not available anymore and has been removed from the queue.
 \\\textit{Exceptions:}
 	\begin{itemize}
-		\item If a taxi driver doesn't get to the starting location of the request within the MAD, the system will pass on the request to the next taxi driver in the queue and will notify the user of the change with the new ETA and taxi code. If the queue is empty, the system will notify the CAT.
+		\item If a taxi driver doesn't get to the starting location of the request within the MAD, the system will pass on the request to the next taxi driver in the queue and will notify the user of the change with the new ETA and taxi code. If the queue is empty, the system will notify the CAT.\@
 	\end{itemize}
 	
 	\subsubsection{Reserve a taxi}
@@ -380,9 +397,9 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 	\\\textit{Preconditions:} The user is on the homepage of the application %TODO va bene homepage anche per la mobile app?
 	\\\textit{Flow of Events:}
 	\begin{itemize}
-		\item  The user clicks the ''Reserve a taxi'' button
+		\item  The user clicks the ``Reserve a taxi'' button
 		\item  The system shows the user a page where she can enter the starting location, destination and the meeting time of the reservation.
-		\item  The user inserts the starting location, destination and meeting time and then clicks the ''Reserve'' button
+		\item  The user inserts the starting location, destination and meeting time and then clicks the ``Reserve'' button
 		\item  Ten minutes before the meeting time, the system notifies the first taxi driver of the starting location's zone's queue. If there are no taxis in that zone, the system notifies the CAT\@. If a taxi driver rejects the reservation the system passes it on to the next taxi driver in the queue and changes the first one's state to not available. If a taxi driver doesn't accept or reject the reservation within 1 minute, the system passes it on to the next taxi driver in the queue and moves the first one to the end of the queue
 		\item  The taxi driver accepts the reservation and goes to the starting location
 		\item  The system changes the state of the taxi driver to not available and notifies the user of the code of the incoming taxi %TODO anche questo?-> and the ETA
@@ -402,8 +419,8 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 	\begin{itemize}
 		\item  The user clicks on the reservation she wants to cancel
 		\item  The system shows the user a page with the details of the reservation
-		\item  The user clicks the "Cancel button"
-		\item  The system shows a ''successful deletion'' message and brings the user back to her homepage
+		\item  The user clicks the ``Cancel button''
+		\item  The system shows a ``successful deletion'' message and brings the user back to her homepage
 	\end{itemize}
 	\textit{Postconditions:} The reservation has been cancelled.
 	\\\textit{Exceptions:}
@@ -418,8 +435,8 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 	\begin{itemize}
 		\item  The user clicks on the reservation she wants to cancel
 		\item  The system shows the user a page with the details of the reservation
-		\item  The user clicks the "Cancel reservation" button
-		\item  The system shows a ''successful deletion'' message and brings the user back to her homepage
+		\item  The user clicks the ``Cancel reservation'' button
+		\item  The system shows a ``successful deletion'' message and brings the user back to her homepage
 	\end{itemize}
 	\textit{Postconditions:} The reservation has been cancelled.
 	\\\textit{Exceptions:}
@@ -434,8 +451,8 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 	\begin{itemize}
 		\item  The user clicks on the request she wants to cancel
 		\item  The system shows the user a page with the details of the request
-		\item  The user clicks the "Cancel request" button
-		\item  The system shows a ''successful deletion'' message and brings the user back to her homepage
+		\item  The user clicks the ``Cancel request'' button
+		\item  The system shows a ``successful deletion'' message and brings the user back to her homepage
 	\end{itemize}
 	\textit{Postconditions:} The request has been cancelled.
 	\\\textit{Exceptions:}
@@ -448,10 +465,10 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 	\\\textit{Preconditions:} The guest is on the homepage of the application
 	\\\textit{Flow of Events:}
 	\begin{itemize}
-		\item  The guest clicks on the ''Register here'' button
+		\item  The guest clicks on the ``Register here'' button
 		\item  The system shows a page where the guest can enter her username, password and email
-		\item  The guest inserts the requested data and clicks the "Register" button
-		\item  The system shows a ''successful registration'' message 
+		\item  The guest inserts the requested data and clicks the ``Register'' button
+		\item  The system shows a ``successful registration'' message 
 	\end{itemize}
 	\textit{Postconditions:} The guest can now log in the system whenever she wants with the inserted credentials
 	\\\textit{Exceptions:}
@@ -461,9 +478,9 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 	\\\textit{Preconditions:} The guest is on the homepage of the application
 	\\\textit{Flow of Events:}
 	\begin{itemize}
-		\item  The guest clicks on the ''Login'' button
+		\item  The guest clicks on the ``Login'' button
 		\item  The system shows a page where the guest can enter her username and password
-		\item  The guest clicks the "Login" button
+		\item  The guest clicks the ``Login'' button
 		\item  The system logs in the guest and shows her her page
 	\end{itemize}
 	\textit{Postconditions:} The guest is now logged in the system, thus becoming a taxi driver or a logged in user or an administrator depending on the inserted credentials.
@@ -475,7 +492,7 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 	\\\textit{Preconditions:} The user is on the homepage of the application
 	\\\textit{Flow of Events:}
 	\begin{itemize}
-		\item  The user clicks on the ''Logout'' button
+		\item  The user clicks on the ``Logout'' button
 		\item  The system logs the user out and brings her back to the homepage of the application for guests
 	\end{itemize}
 	\textit{Postconditions:} The user is now logged out of the system thus becoming a guest
@@ -487,9 +504,9 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 	\\\textit{Preconditions:} The user is on the homepage of the application
 	\\\textit{Flow of Events:}
 	\begin{itemize}
-		\item  The user clicks on the ''See estimated time of arrival'' button
+		\item  The user clicks on the ``See estimated time of arrival'' button
 		\item  The system shows a page where the user is prompted to insert the starting location from which the ETA must be calculated
-		\item  The user inserts the starting location and clicks the "See estimated time of arrival" button
+		\item  The user inserts the starting location and clicks the ``See estimated time of arrival'' button
 		\item  The system shows the ETA 
 	\end{itemize}
 	\textit{Postconditions:} The user has been shown the ETA
@@ -500,11 +517,11 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 	\\\textit{Preconditions:} The administrator is on the homepage of the application
 	\\\textit{Flow of Events:}
 	\begin{itemize}
-		\item  The administrator clicks on the ''Modify taxi driver'' button
+		\item  The administrator clicks on the ``Modify taxi driver'' button
 		\item  The system shows the administrator the list of taxi drivers retrieved from the database
 		\item  The administrator clicks on the taxi driver she wants to modify
 		\item  The system shows the administrator a page where she can change the values of the fields of the taxi driver
-		\item  The administrator changes the needed fields and then clicks the "Save changes" button
+		\item  The administrator changes the needed fields and then clicks the ``Save changes'' button
 		\item  The system update the taxi driver's information with the new ones that have been inserted
 	\end{itemize}
 	\textit{Postconditions:} The taxi driver's information have been updated and she can no longer access the application with the old credentials but she must use the new ones
@@ -515,9 +532,9 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 	\\\textit{Preconditions:} The administrator is on the homepage of the application
 	\\\textit{Flow of Events:}
 	\begin{itemize}
-		\item  The administrator clicks on the ''Add taxi driver'' button
+		\item  The administrator clicks on the ``Add taxi driver'' button
 		\item  The system shows the administrator a form where she can enter all the information of the taxi driver %TODO quali sono le info da inserire?
-		\item  The administrator inserts the information then clicks on the "Add taxi driver" button
+		\item  The administrator inserts the information then clicks on the ``Add taxi driver'' button
 		\item  The system adds the taxi driver to the database
 	\end{itemize}
 	\textit{Postconditions:} The taxi driver's information have been added to the database and she can now log in the application as a taxi driver
@@ -528,11 +545,11 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 	\\\textit{Preconditions:} The administrator is on the homepage of the application
 	\\\textit{Flow of Events:}
 	\begin{itemize}
-		\item  The administrator clicks on the ''Delete taxi driver'' button
+		\item  The administrator clicks on the ``Delete taxi driver'' button
 		\item  The system shows the administrator the list of taxi drivers retrieved from the database
 		\item  The administrator clicks on the taxi driver she wants to delete
 		\item  The system shows the administrator a page with the details of the taxi driver
-		\item  The administrator clicks the "Delete taxi driver" button
+		\item  The administrator clicks the ``Delete taxi driver'' button
 		\item  The system deletes the taxi driver from the database
 	\end{itemize}
 	\textit{Postconditions:} The taxi driver's information have been deleted from the database and she can no longer access the application with those credentials
