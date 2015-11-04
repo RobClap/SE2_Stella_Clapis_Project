@@ -144,13 +144,33 @@ This is the homepage of a logged in user where she can also see all the active r
 This is the mockup of the page where a logged in user can request a taxi
 \includegraphics{Request a taxi interface}
 \clearpage
-\paragraph{Reserve a taxi interface}
+\paragraph{Cancel a request interface}%TODO
+This is the mockup of the page where a logged in user can request a taxi
+\includegraphics{Request a taxi interface}
+\clearpage
+\paragraph{Cancel a reservation interface}%TODO
 This is the mockup of the page where a logged in user can reserve a taxi
 \includegraphics{Reserve a taxi}
 \clearpage
 \paragraph{Administrator interface}
-This is the page of an administrator for which there is no mobile 
-\includegraphics{Reserve a taxi}
+This is the page of an administrator for which there is no mobile interface
+\includegraphics{administrator interface}
+\clearpage
+\paragraph{Modify taxi driver interface} %TODO finire i mockup con i campi
+This is where an administrator can modify the information of a taxi driver
+\includegraphics{}
+\clearpage
+\paragraph{Add taxi driver interface} %TODO finire i mockup con i campi
+This is where an administrator can add a taxi driver to the database
+\includegraphics{}
+\clearpage
+\paragraph{Modify taxi driver interface} %TODO finire i mockup con i campi
+This is where an administrator can delete a taxi driver from the database
+\includegraphics{}
+\clearpage
+\paragraph{Taxi driver interface} 
+This is the page of a taxi driver where she can toggle between her states. As taxi drivers are supposed to use the mobile version of the app, no web interface is provided for them.
+\includegraphics{Taxi driver interface}
 \clearpage
 \subsubsection{System interfaces}
 \begin{comment}
@@ -343,17 +363,17 @@ On the admin side:\@
 \end{itemize}
 \subsection{Scenarios}
 \subsubsection{Scenario 1}
-Blair The Witch had to take her magical broom to the mechanic for the annual revision but she needs to go shopping to refill her stockpile of frog's tails. Her friend Mizune has told her about TAXInseconds, so she decides to give it a try. After downloading it on her smartphone, she signs up compiling the registration form with her username, password, email and credit card data. Now she can complain about how slow car-based transports are!
+Blair The Witch had to take her magical broom to the mechanic for the annual revision but she needs to go shopping to refill her stockpile of frog's tails. Her friend Mizune has told her about TAXInseconds, so she decides to give it a try. After downloading it on her smartphone, she signs up compiling the registration form with her username, password and email. Now she can complain about how slow car-based transports are!
 \subsubsection{Scenario 2}
 Suzuka is having a date tonight but, unfortunately, her car doesn't want to start. After several failures, she decides to use TAXInseconds\@. After logging in, she requests a taxi specifying her home as the starting location and the restaurant's address as the destination. The system notifies Takeshi, the first taxi driver of the queue in Suzuka's zone, of the request. Takeshi accepts the request and the system sends Suzuka the code of Takeshi's taxi and the ETA so she can finally get to her date.
 \subsubsection{Scenario 3}
 Ash Ketchum has to start his new adventure in Hoenn tomorrow but his mother is busy cleaning the house with Mr.\ Mime, so she can't take him to the airport to meet Prof.\ Oak. Ash decides to use once again TAXInseconds to reserve a taxi. After logging in, he makes a reservation for a taxi specifying the starting location as Pallet town, the destination and the meeting time. The morning after, 10 minutes before the meeting time, the system allocates Brock's taxi for the reservation and sends his code to Ash so that he knows who he'll meet to start his new adventure. 
 \subsubsection{Scenario 4}
-Donald Duck is ready to start his first day as a taxi driver in Paperopoli. He jumps on his car, logs in TAXInseconds and changes his state to availables. Unfortunately he doesn't know that, in his zone, there are 15 taxis in the queue before him, so he'll have to be patient for some time.
+Donald Duck is ready to start his first day as a taxi driver in Paperopoli. He jumps on his car, logs in TAXInseconds and changes his state to available. Unfortunately he doesn't know that, in his zone, there are 15 taxis in the queue before him, so he'll have to be patient for some time.
 \subsubsection{Scenario 5}
 After quite some time, Daisy requests a taxi and it's finally Donald's turn! The system notifies him but\ldots it's breakfast time and Donald's having a cappuccino in a very crowded bar. He doesn't hear the notification popping on his phone so, after 1 minute, the system forwards Daisy's request to the next taxi driver in the queue and changes Donald's state to not available.
 \subsubsection{Scenario 6}
-Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAXINSECONDS, he makes two reservations: one for the morning and one for the evening. %TODO finire
+Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAXINSECONDS, he makes two reservations: one for the morning and one for the evening. But, while he's enjoying his evening watching a movie, the phone rings. It's Minnie and she's reminding Mickey that they he had promised to go shopping with her the day after. Sadly, he has to say goodbye to his fishing trip and cancels the taxi reservations.
 
 \subsection{Use cases}
 \subsubsection{Request a taxi}
@@ -495,7 +515,7 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 	\textit{Postconditions:} The user has been shown the ETA
 	\\\textit{Exceptions:}
 	
-	\subsubsection{Modify taxi driver}
+	\subsubsection{Modify taxi driver}%TODO controllare campi
 	\textit{Actors:} Administrator
 	\\\textit{Preconditions:} The administrator is on the homepage of the application
 	\\\textit{Flow of Events:}
