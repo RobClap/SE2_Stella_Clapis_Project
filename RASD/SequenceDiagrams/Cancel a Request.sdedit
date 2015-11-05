@@ -4,6 +4,8 @@ user:Actor
 UI:WEB Interface or Mobile application
 server:The online core of the application
 
+
+
 user:UI.request a taxi 
 UI:user.Insert starting location and destination
 user:insert start and end of trip
@@ -17,16 +19,25 @@ UI:>server.request_taxi(Start,End)
 	[c:alt Accept]
 		taxi:taxiUI.accept call&
 		taxiUI:>server.accept call&
-		--[refusal or timeout]
+		user:UI.cancel request&
+		UI:abortion refused=server.abort()&
+		UI:user.cancellation refused
+	--[refusal or timeout]
 		taxi:taxiUI.refuse call or no interaction until timeout&
 		taxiUI:>server.refuse call&
 		taxiUI:stop
 		server: mark the taxi 
 		server: who refused as not available
+		user:UI.cancel request&
+		UI:abortion confirmed=server.abort()&
+		UI:user.cancellation confirmed
+		server:>taxiUI.user aborted
+		taxiUI:taxi.user aborted&
+		taxiUI:stop
+		server:stop
+
 	[/c]
 [/c]
-server: mark taxi 
-server: who accepted as not available
-server:>UI.ETA and taxi code&
-server:stop
-UI:user.show ETA and taxi code
+
+
+

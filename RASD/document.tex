@@ -367,9 +367,8 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 \end{itemize}
 \textit{Postconditions:} The taxi driver is not available anymore and has been removed from the queue.
 \\\textit{Exceptions:}
-\begin{itemize}
-	\item If a taxi driver doesn't get to the starting location of the request within the MAD, the system will pass on the request to the next taxi driver in the queue and will notify the user of the change with the new ETA and taxi code. If the queue is empty, the system will notify the CAT.\@
-\end{itemize}
+%TODO add to sequence
+\\If a taxi driver doesn't get to the starting location of the request within the MAD, the system will pass on the request to the next taxi driver in the queue and will notify the user of the change with the new ETA and taxi code. If the queue is empty, the system will notify the CAT.\@
 
 \subsubsection{Reserve a taxi}
 \textit{Actors:} Registered user, taxi driver
@@ -386,10 +385,9 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 \end{itemize}
 \textit{Postconditions:} The taxi driver is not available anymore and has been removed from the queue.
 \\\textit{Exceptions:}
-\begin{itemize} 
-	\item If a taxi driver doesn't get to the starting location of the request within the MAD after the meeting time, the system will pass on the reservation to the next taxi driver in the queue and will notify the user of the change with the new ETA and taxi code.
-	\item If the meeting time is not at least two hours after the reservation an error message will be displayed and the reservation won't be made.
-\end{itemize}
+%TODO add to sequence
+\\If a taxi driver doesn't get to the starting location of the request within the MAD after the meeting time, the system will pass on the reservation to the next taxi driver in the queue and will notify the user of the change with the new ETA and taxi code.
+\\If the meeting time is not at least two hours after the reservation an error message will be displayed and the reservation won't be made.
 
 \subsubsection{Cancel a reservation}
 \textit{Actors:} Registered user
