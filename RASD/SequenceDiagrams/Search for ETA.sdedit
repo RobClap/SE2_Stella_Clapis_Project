@@ -4,6 +4,7 @@ server:The online core of the application
 
 user:UI.see ETA 
 UI:user.Insert starting location 
+user:insert location
 user:UI.see ETA (Starting location)&
 UI:ETA=server.calculateETA(Location)
 UI:user.ETA

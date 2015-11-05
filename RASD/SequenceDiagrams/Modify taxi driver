@@ -3,15 +3,16 @@ UI:WEB Interface
 server:The online core of the application
 
 admin:UI.Modify taxi driver
-UI:List of drivers=server.Request Drivers()
+UI:List of drivers=server.request_drivers()
 UI:admin.List of taxi drivers
 admin:UI.Select taxi driver&
 UI:admin.Modify taxi driver form
+admin:fill in data
 admin:UI.Save changes&
 [c:alt Valid data]
-	UI:Success=server.Save changes(Changes)
+	UI:Success=server.save_changes(Changes)
 	UI:admin.List of drivers { + Success message}
 	--[Invalid data]
-	UI:Failure=server.Save changes(Changes)
+	UI:Failure=server.save_changes(Changes)
 	UI:admin.Modify taxi driver form { + Failure message}
 [/c]

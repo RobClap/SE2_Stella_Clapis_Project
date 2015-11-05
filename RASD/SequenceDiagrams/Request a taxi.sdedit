@@ -1,0 +1,32 @@
+taxi:Actor[ID]
+taxiUI:Mobile application
+user:Actor
+UI:WEB Interface or Mobile application
+server:The online core of the application
+
+user:UI.request a taxi 
+UI:user.Insert starting location and destination
+user:insert start and end of trip
+user:UI.request taxi(Start,End)&
+UI:>server.request_taxi(Start,End)
+[c:loop until a taxi accept]
+	server:compute the right taxi to notify
+	server:(first in queue or CAT if queue is empty)
+	server:>taxiUI.Notify call
+	taxiUI:taxi.Notification
+	[c:alt Accept]
+		taxi:taxiUI.accept call&
+		taxiUI:>server.accept call&
+		--[refusal or timeout]
+		taxi:taxiUI.refuse call&
+		taxiUI:>server.refuse call&
+		taxiUI:stop
+		server: mark the taxi 
+		server: who refused as not available
+	[/c]
+[/c]
+server: mark taxi 
+server: who accepted as not available
+server:>UI.ETA and taxi code&
+server:stop
+UI:user.show ETA and taxi code

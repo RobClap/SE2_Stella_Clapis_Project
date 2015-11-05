@@ -1,3 +1,15 @@
 admin:Actor
 UI:WEB Interface
 server:The online core of the application
+
+admin:UI.add taxi driver
+UI:admin.Insert driver data form
+admin:fill in data
+admin:UI.add taxi driver (Data)&
+[c:alt Valid data]
+	UI:Success=server.add_driver(Data)
+	UI:admin.Home Screen { + Success message}
+	--[Invalid data]
+	UI:Failure=server.add_driver(Data)
+	UI:admin.Insert driver data form { + Failure message}
+[/c]
