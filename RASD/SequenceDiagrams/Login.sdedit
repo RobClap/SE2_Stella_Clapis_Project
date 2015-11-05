@@ -4,12 +4,13 @@ server:The online core of the application
 
 guest:UI.login &
 UI:guest.login form&
+guest:
 guest:fill form
-guest:UI.filled form&
+guest:UI.login&
 [c:alt valid credentials]
-	UI:Authorized (account type)=server.attempt_login()
+	UI:Authorized for (user | taxi | admin)=server.attempt_login()
 	UI:guest.Interface for Logged user OR Taxi driver OR Admin
 	-- [Invalid credentials]
 	UI:Unauthorized=server.attempt_login()
-	UI:guest.{Error message} Please check your credentials
+	UI:guest.Please check your credentials { + Error message}
 [/c]

@@ -380,9 +380,11 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 \end{itemize}
 \textit{Postconditions:} The taxi driver is not available anymore and has been removed from the queue.
 \\\textit{Exceptions:}
-%TODO add to sequence
-\\If a taxi driver doesn't get to the starting location of the request within the MAD, the system will pass on the request to the next taxi driver in the queue and will notify the user of the change with the new ETA and taxi code. If the queue is empty, the system will notify the CAT.\@
+\\If a taxi driver doesn't get to the starting location of the request within the MAD, the system will pass on the request to the next taxi driver in the queue and will notify the user of the change with the new ETA and taxi code. If the queue is empty, the system will notify the CAT.\@\\
 
+\begin{center}	
+	\includegraphics[width=\textwidth,keepaspectratio]{Sequence-Diagrams/request-a-taxi}
+\end{center}
 \subsubsection{Reserve a taxi}
 \textit{Actors:} Registered user, taxi driver
 \\\textit{Preconditions:} The user is on the homepage of the application 
@@ -398,10 +400,13 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 \end{itemize}
 \textit{Postconditions:} The taxi driver is not available anymore and has been removed from the queue.
 \\\textit{Exceptions:}
-%TODO add to sequence
-\\If a taxi driver doesn't get to the starting location of the request within the MAD after the meeting time, the system will pass on the reservation to the next taxi driver in the queue and will notify the user of the change with the new ETA and taxi code.
-\\If the meeting time is not at least two hours after the reservation an error message will be displayed and the reservation won't be made.
-
+\begin{itemize}
+	\item If a taxi driver doesn't get to the starting location of the request within the MAD after the meeting time, the system will pass on the reservation to the next taxi driver in the queue and will notify the user of the change with the new ETA and taxi code.
+	\item If the meeting time is not at least two hours after the reservation an error message will be displayed and the reservation won't be made.
+\end{itemize}
+\begin{center}	
+	\includegraphics[width=\textwidth,keepaspectratio]{Sequence-Diagrams/reserve-a-taxi}
+\end{center}
 \subsubsection{Cancel a reservation}
 \textit{Actors:} Registered user
 \\\textit{Preconditions:} The user is on the homepage of the application and has at least one reservation for which a taxi has not yet been allocated
@@ -414,9 +419,10 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 \end{itemize}
 \textit{Postconditions:} The reservation has been cancelled.
 \\\textit{Exceptions:}
-\begin{itemize} 
-	\item If a taxi is allocated while the user is cancelling the reservation the system will show an error message and won't cancel the reservation
-\end{itemize}
+\\If a taxi is allocated while the user is cancelling the reservation the system will show an error message and won't cancel the reservation
+\begin{center}	
+	\includegraphics[width=\textwidth,keepaspectratio]{Sequence-Diagrams/cancel-reservation}
+\end{center}
 
 \subsubsection{Cancel a request}
 \textit{Actors:} Registered user
@@ -430,7 +436,10 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 \end{itemize}
 \textit{Postconditions:} The request has been cancelled.
 \\\textit{Exceptions:} If a taxi driver accepts the request while the user is cancelling it the system will show an error message and won't cancel the request
-
+\begin{center}	
+In order to avoid redundancy the situation in which the client cancels before a taxi accepts is not in the sequence diagram but it is totally alike the one in which the taxi refuses the call, just the client cancels before the taxi can accept.\\
+	\includegraphics[width=\textwidth,keepaspectratio]{Sequence-Diagrams/cancel-request}
+\end{center}
 \subsubsection{Registration}
 \textit{Actors:} Guest
 \\\textit{Preconditions:} The guest is on the homepage of the application
@@ -443,6 +452,9 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 \end{itemize}
 \textit{Postconditions:} The guest can now log in the system whenever she wants with the inserted credentials
 \\\textit{Exceptions:} The username or the email are already registered and an error message is shown
+\begin{center}	
+	\includegraphics[width=\textwidth,keepaspectratio]{Sequence-Diagrams/registration}
+\end{center}
 
 \subsubsection{Login}
 \textit{Actors:} Guest
@@ -457,6 +469,9 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 \end{itemize}
 \textit{Postconditions:} The guest is now logged in the system, thus becoming a taxi driver or a logged in user or an administrator depending on the inserted credentials.
 \\\textit{Exceptions:} The inserted credentials are not valid so the guest is not logged in and an error message is shown
+\begin{center}	
+	\includegraphics[width=\textwidth,keepaspectratio]{Sequence-Diagrams/login}
+\end{center}
 
 The following use case is described using logged in users as actors but it also valid for taxi drivers or administrators
 \subsubsection{Logout}
@@ -468,8 +483,10 @@ The following use case is described using logged in users as actors but it also 
 	\item  The system logs the user out and brings her back to the homepage of the application for guests
 \end{itemize}
 \textit{Postconditions:} The user is now logged out of the system thus becoming a guest
-%\\\textit{Exceptions:}
-\\
+\begin{center}	
+	\includegraphics[width=\textwidth,keepaspectratio]{Sequence-Diagrams/logout}
+\end{center}
+\-\\
 The following use case is described using logged in users as actor but is also valid for guests
 \subsubsection{Search for ETA}
 \textit{Actors:} Logged in user
@@ -482,7 +499,9 @@ The following use case is described using logged in users as actor but is also v
 	\item  The system shows the ETA 
 \end{itemize}
 \textit{Postconditions:} The user has been shown the ETA
-%\\\textit{Exceptions:}
+\begin{center}	
+	\includegraphics[width=\textwidth,keepaspectratio]{Sequence-Diagrams/search-for-eta}
+\end{center}
 
 \subsubsection{Modify taxi driver}
 \textit{Actors:} Administrator
@@ -498,6 +517,9 @@ The following use case is described using logged in users as actor but is also v
 \end{itemize}
 \textit{Postconditions:} The taxi driver's information have been updated and she can no longer access the application with the old credentials but she must use the new ones
 \\\textit{Exceptions:} The inserted data is incorrect, and an error message is displayed 
+\begin{center}	
+	\includegraphics[width=\textwidth,keepaspectratio]{Sequence-Diagrams/modify-driver}
+\end{center}
 
 \subsubsection{Add taxi driver}
 \textit{Actors:} Administrator
@@ -511,6 +533,9 @@ The following use case is described using logged in users as actor but is also v
 \end{itemize}
 \textit{Postconditions:} The taxi driver's information have been added to the database and she can now log in the application as a taxi driver
 \\\textit{Exceptions:} The inserted data is incorrect, and an error message is displayed 
+\begin{center}	
+	\includegraphics[width=\textwidth,keepaspectratio]{Sequence-Diagrams/add-taxi-driver}
+\end{center}
 
 \subsubsection{Delete taxi driver}
 \textit{Actors:} Administrator
@@ -525,7 +550,9 @@ The following use case is described using logged in users as actor but is also v
 	\item  The system deletes the taxi driver from the database
 \end{itemize}
 \textit{Postconditions:} The taxi driver's information have been deleted from the database and she can no longer access the application with those credentials
-%\\\textit{Exceptions:}
+\begin{center}	
+	\includegraphics[width=\textwidth,keepaspectratio]{Sequence-Diagrams/delete-taxi-driver}
+\end{center}
 \clearpage
 \section{Alloy}
 \subsection{Model}
@@ -540,20 +567,20 @@ main adaptations were made:
 \texttt{\input{Alloy/TAXInseconds.tex}}	
 \subsection{Result}
 \begin{center}
-	\includegraphics[width=.9\textwidth,height=.9\textheight,keepaspectratio]{AlloyChecks}
+	\includegraphics[width=.9\textwidth,height=.9\textheight,keepaspectratio]{Alloy/AlloyChecks}
 \end{center}
 \subsection{Worlds Generated}
 The following worlds were generated changing parameters about arity of present signatures in the show\{\} predicate.\\
 \begin{center}
-	\includegraphics[width=.9\textwidth,height=.9\textheight,keepaspectratio]{2Areas}
+	\includegraphics[width=.9\textwidth,height=.9\textheight,keepaspectratio]{Alloy/2Areas}
 	\\This is a clean example of two areas, each one with a single client, no unusual interaction occour.\\
 \end{center}
 \begin{center}
-	\includegraphics[width=.9\textwidth,height=.9\textheight,keepaspectratio]{CrossAreaService}
+	\includegraphics[width=.9\textwidth,height=.9\textheight,keepaspectratio]{Alloy/CrossAreaService}
 	\\This is a more complex example, here we can see how the system behaves and the model adjusts if there aren't enough taxies in an area in order to serve all the clients.
 \end{center}
 \begin{center}
-	\includegraphics[width=.9\textwidth,height=.9\textheight,keepaspectratio]{reserved-and-refused}
+	\includegraphics[width=.9\textwidth,height=.9\textheight,keepaspectratio]{Alloy/reserved-and-refused}
 	\\In this scenario we can see both a reservation of a client for a determined area and a refusal of a taxi for a client (now being served by an other taxi)
 \end{center}
 \end{document}

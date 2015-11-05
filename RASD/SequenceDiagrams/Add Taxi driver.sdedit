@@ -3,8 +3,9 @@ UI:WEB Interface
 server:The online core of the application
 
 admin:UI.add taxi driver
-UI:admin.Insert driver data form
-admin:fill in data
+UI:admin.Insert driver data
+admin:
+admin:fills in data
 admin:UI.add taxi driver (Data)&
 [c:alt Valid data]
 	UI:Success=server.add_driver(Data)

@@ -6,9 +6,10 @@ server:The online core of the application
 
 user:UI.request a taxi 
 UI:user.Insert starting location and destination
+user:
 user:insert start and end of trip
 user:UI.request taxi(Start,End)&
-UI:>server.request_taxi(Start,End)
+UI:>server.request_taxi(Data)
 [c:loop until a taxi accept]
 	server:compute the right taxi to notify
 	server:(first in queue or CAT if queue is empty)

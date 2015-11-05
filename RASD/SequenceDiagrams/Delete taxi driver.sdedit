@@ -6,7 +6,7 @@ admin:UI.Delete taxi driver
 UI:List of drivers=server.request_drivers()
 UI:admin.List of taxi drivers
 admin:UI.Select taxi driver&
-UI:admin.Details about driver form
+UI:admin.Details about driver
 admin:UI.Confirm deletion&
 UI:Success=server.delete_driver(ID)
 UI:admin.Homepage{ + Success message}

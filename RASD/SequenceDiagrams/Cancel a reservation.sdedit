@@ -1,0 +1,14 @@
+user:Actor
+UI:WEB Interface or mobile app
+server:The online core of the application
+
+user:UI.Show Reservation
+UI:user.Reservation details
+user:UI.Cancel reservation&
+[c:alt a taxi hasn't been reserved yet]
+	UI:Succes=server.cancel_reservation(ID)
+	UI:user.Cancellation successful
+	--[a taxi has already accepted a call]
+	UI:Failure=server.cancel_reservation(ID)
+	UI:user.Cancellation unsuccessful
+[/c]

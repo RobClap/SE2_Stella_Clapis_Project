@@ -6,11 +6,13 @@ server:The online core of the application
 
 user:UI.reserve a taxi 
 UI:user.Insert starting location, destination and time
+user:
 user:insert data
 user:UI.reserve taxi(data)&
 UI:>server.reserve_taxi(data)
 server:>UI.reservation_confirmed&
-server:time passes until it's 
+server:
+server:time passes, until it's 
 server:10 minutes before due time
 [c:loop until a taxi accept]
 	server:compute the right taxi to notify

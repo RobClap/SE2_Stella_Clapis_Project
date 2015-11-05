@@ -4,19 +4,17 @@ server:The online core of the application
 
 guest:UI.register 
 UI:guest.register form&
+guest:
 guest:fill form
 guest:UI.filled form&
 [c:alt new username and email]
-	UI:Success=server.attempt_registration()
+	UI:Success=server.attempt_registration(Data)
 	UI:guest.registration confirmed
-	[c:alt FAILURE]
 	--[email already present in database]
-	UI:Failure (email already registered)=server.attempt_registration()
-	UI:guest.{Error Message} Please login with you email
+	UI:Failure [email already registered]=server.attempt_registration(Data)
+	UI:guest.Registration Form { + Error Message: Please login with you email}
 	--[username already taken]
-	UI:Failure (username already taken)=server.attempt_registration()
-	UI:guest.{Error message} Please change username
-	[/c]
-	
+	UI:Failure (username already taken)=server.attempt_registration(Data)
+	UI:guest.Registration Form { + Error Message: Please change username}	
 [/c]
 
