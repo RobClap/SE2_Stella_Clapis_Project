@@ -170,6 +170,18 @@ This is the page of an administrator for which there is no mobile\\
 	\includegraphics[width=.8\textwidth,height=.8\textheight,keepaspectratio]{ReserveTaxi}
 \end{center}
 \clearpage
+\paragraph{Modify taxi driver interface}
+This is the flow of pages to modify a taxi drivers' credentials\\ 
+\begin{center}
+	\includegraphics[width=.8\textwidth,height=.8\textheight,keepaspectratio]{Modifytaxidriver}
+\end{center}
+\clearpage
+\paragraph{Add taxi driver interface}
+This is the interface where an administrator can add a new taxi driver into the database\\ 
+\begin{center}
+	\includegraphics[width=.8\textwidth,height=.8\textheight,keepaspectratio]{Addtaxidriver}
+\end{center}
+\clearpage
 \subsubsection{Hardware Interfaces}
 \begin{itemize}
 	\item Owned by the users and taxi drivers:
@@ -254,6 +266,7 @@ The TAXInseconds application is intended for all users who are at least 16 years
 	\item Users will enter a valid email address during registration 
 	\item Users who have requested or reserved a taxi will always be present when the taxi arrives.
 	\item There is always at least an available taxi to fulfil a request or a reservation in the whole city
+	\item Taxi drivers that want to be part of TAXINSECONDS must ask the administrator to be added to the system
 \end{itemize}
 \clearpage
 \section{Specific requirements}
@@ -492,7 +505,7 @@ The following use case is described using logged in users as actor but is also v
 \\\textit{Flow of Events:}
 \begin{itemize}
 	\item  The administrator clicks on the ``Add taxi driver'' button
-	\item  The system shows the administrator a form where she can enter all the information of the taxi driver %TODO quali sono le info da inserire?
+	\item  The system shows the administrator a form where she can enter the username, password, taxi code and email of the taxi driver 
 	\item  The administrator inserts the information then clicks on the ``Add taxi driver'' button
 	\item  The system adds the taxi driver to the database
 \end{itemize}
