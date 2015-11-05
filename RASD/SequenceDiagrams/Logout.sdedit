@@ -1,0 +1,6 @@
+user:Actor
+UI:WEB Interface or Mobile application
+#server:The online core of the application
+
+user:UI.logout 
+UI:user.home screen

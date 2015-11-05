@@ -1,0 +1,14 @@
+guest:Actor
+UI:WEB Interface or Mobile application
+server:The online core of the application
+
+guest:UI.login &
+UI:guest.login form&
+guest:UI.filled form&
+[c:alt valid credentials]
+	UI:Authorized (account type)=server.attempt login()
+	UI:guest.Interface for Logged user OR Taxi driver OR Admin
+	-- [Invalid credentials]
+	UI:Unauthorized=server.attempt login()
+	UI:guest.{Error message} Please check your credentials
+[/c]

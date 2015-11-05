@@ -1,0 +1,22 @@
+guest:Actor
+UI:WEB Interface or Mobile application
+server:The online core of the application
+
+guest:UI.register 
+UI:guest.register form&
+
+guest:UI.filled form&
+[c:alt new username and email]
+	UI:Success=server.attempt registration()
+	UI:guest.registration confirmed
+	[c:alt FAILURE]
+	--[email already present in database]
+	UI:Failure (email already registered)=server.attempt registration()
+	UI:guest.{Error Message} Please login with you email
+	--[username already taken]
+	UI:Failure (username already taken)=server.attempt registration()
+	UI:guest.{Error message} Please change username
+	[/c]
+	
+[/c]
+

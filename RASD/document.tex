@@ -418,10 +418,7 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 	\item  The system shows a ``successful deletion'' message and brings the user back to her homepage
 \end{itemize}
 \textit{Postconditions:} The request has been cancelled.
-\\\textit{Exceptions:}
-\begin{itemize} 
-	\item If a taxi driver accepts the request while the user is cancelling it the system will show an error message and won't cancel the request
-\end{itemize}
+\\\textit{Exceptions:} If a taxi driver accepts the request while the user is cancelling it the system will show an error message and won't cancel the request
 
 \subsubsection{Registration}
 \textit{Actors:} Guest
@@ -434,7 +431,7 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 	\item  The system shows a ``successful registration'' message 
 \end{itemize}
 \textit{Postconditions:} The guest can now log in the system whenever she wants with the inserted credentials
-\\\textit{Exceptions:}
+\\\textit{Exceptions:} The username or the email are already registered and an error message is shown
 
 \subsubsection{Login}
 \textit{Actors:} Guest
@@ -443,6 +440,7 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 \begin{itemize}
 	\item  The guest clicks on the ``Login'' button
 	\item  The system shows a page where the guest can enter her username and password
+	\item  The guest fills in the page with his data
 	\item  The guest clicks the ``Login'' button
 	\item  The system logs in the guest and shows her her page
 \end{itemize}
@@ -459,8 +457,8 @@ The following use case is described using logged in users as actors but it also 
 	\item  The system logs the user out and brings her back to the homepage of the application for guests
 \end{itemize}
 \textit{Postconditions:} The user is now logged out of the system thus becoming a guest
-\\\textit{Exceptions:}
-
+%\\\textit{Exceptions:}
+\\
 The following use case is described using logged in users as actor but is also valid for guests
 \subsubsection{Search for ETA}
 \textit{Actors:} Logged in user
@@ -473,7 +471,7 @@ The following use case is described using logged in users as actor but is also v
 	\item  The system shows the ETA 
 \end{itemize}
 \textit{Postconditions:} The user has been shown the ETA
-\\\textit{Exceptions:}
+%\\\textit{Exceptions:}
 
 \subsubsection{Modify taxi driver}
 \textit{Actors:} Administrator
@@ -488,7 +486,7 @@ The following use case is described using logged in users as actor but is also v
 	\item  The system update the taxi driver's information with the new ones that have been inserted
 \end{itemize}
 \textit{Postconditions:} The taxi driver's information have been updated and she can no longer access the application with the old credentials but she must use the new ones
-\\\textit{Exceptions:} 
+\\\textit{Exceptions:} The inserted data is incorrect, and an error message is displayed 
 
 \subsubsection{Add taxi driver}
 \textit{Actors:} Administrator
