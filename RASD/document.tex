@@ -27,7 +27,9 @@
 }
 \begin{document}
 \maketitle
-\includegraphics{polimi-logo}
+\begin{center}
+	\includegraphics{polimi-logo}
+\end{center}
 \clearpage
 \tableofcontents
 \clearpage
@@ -357,7 +359,7 @@ On the admin side:\@
 		\end{itemize}
 \end{itemize}
 \subsection{The world and the machine}
-The first model of the system to be presented is the model "The world and the machine" by M. Jackson and P. Zave. This model highlights the division between phenomena that happen entirely either in the world or in the machine, and those that are shared between the two of them.
+The first model of the system to be presented is the model ``The world and the machine'' by M. Jackson and P. Zave. This model highlights the division between phenomena that happen entirely either in the world or in the machine, and those that are shared between the two of them.
 \includegraphics[width=.9\textwidth,height=.9\textheight,keepaspectratio]{TWATM}
 
 \subsection{Scenarios}
@@ -376,7 +378,7 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 \subsection{Scenario 7}
 It's almost Christmas and Tokyo is very crowded! Holo needs to go to Supergulp to buy the last Christmas gifts but it's cold and it's snowing so she logs in TAXINSECONDS and requests a taxi. But the snow is scaring taxi drivers so they keep rejecting Holo's request one after the other. 5 minutes later, Holo sees that her request has yet to be accepted so she cancels it and decides to walk.
 \subsection{Scenario 8}
-Asuna is getting bored at home so she comes up with the idea of visiting Leafa. As she doesn't have a driving license, she switches on her computer and goes to TAXINSECONDS website to look for the ETA. Unfortunately, today there's a party at Yato's shrine and the CAT is very far from Asuna's home so she decides to change her plans and cook something to kill the time.
+Asuna is getting bored at home so she comes up with the idea of visiting Leafa. As she doesn't have a driving license, she switches on her computer and goes to TAXINSECONDS website to look for the ETA\@. Unfortunately, today there's a party at Yato's shrine and the CAT is very far from Asuna's home so she decides to change her plans and cook something to kill the time.
 
 \subsection{Use cases}
 This section contains all the use cases initially described with the use cases uml model of the whole system, and then analysed one by one. A sequence diagram for every use case will also be provided to further enhance their comprehensibility.
@@ -453,7 +455,7 @@ This section contains all the use cases initially described with the use cases u
 \textit{Postconditions:} The request has been cancelled.
 \\\textit{Exceptions:} If a taxi driver accepts the request while the user is cancelling it the system will show an error message and won't cancel the request
 \begin{center}	
-In order to avoid redundancy the situation in which the client cancels before a taxi accepts is not in the sequence diagram but it is totally alike the one in which the taxi refuses the call, just the client cancels before the taxi can accept.\\
+	In order to avoid redundancy the situation in which the client cancels before a taxi accepts is not in the sequence diagram but it is totally alike the one in which the taxi refuses the call, just the client cancels before the taxi can accept.\\
 	\includegraphics[width=\textwidth,keepaspectratio]{Sequence-Diagrams/cancel-request}
 \end{center}
 \subsubsection{Registration}
@@ -571,7 +573,7 @@ The following use case is described using logged in users as actor but is also v
 \end{center}
 \clearpage
 \subsection{Class Diagram}
-The following class diagram is a conceptual representation of the basic structure of TAXINSECONDS.
+The following class diagram is a conceptual representation of the basic structure of TAXINSECONDS.\@
 \includegraphics[width=.8\textwidth,height=.8\textheight,keepaspectratio]{ClassDiagram}
 \section{Alloy}
 \subsection{Model}
