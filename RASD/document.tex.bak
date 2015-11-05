@@ -1,4 +1,5 @@
 \documentclass{article}
+\usepackage{float}
 \usepackage{textcomp}
 \usepackage{graphicx}
 \graphicspath{{images/}}
@@ -27,7 +28,9 @@
 }
 \begin{document}
 \maketitle
-\includegraphics{polimi-logo}
+\begin{center}
+	\includegraphics{polimi-logo}
+\end{center}
 \clearpage
 \tableofcontents
 \clearpage
@@ -102,7 +105,7 @@ This document is structured in three parts:
 	\item Specific Requirements: this section contains all of the software requirements to a level of detail aimed to be enough to design a system to satisfy said requirements, and testers to test that the system actually satisfies them. It also contains the detailed description of the possible interactions between the system and the world with a simulation and preview of the expected response of the system with given stimulation. (Details are given with Alloy specifications and UML diagrams)
 \end{itemize}
 
-
+\clearpage
 \section{Overall description}
 \subsection{Product perspective}
 The TAXInseconds application will be released as a web application and as a mobile application. 
@@ -180,6 +183,12 @@ This is the flow of pages to modify a taxi drivers' credentials\\
 This is the interface where an administrator can add a new taxi driver into the database\\ 
 \begin{center}
 	\includegraphics[width=.8\textwidth,height=.8\textheight,keepaspectratio]{Addtaxidriver}
+\end{center}
+\clearpage
+\paragraph{Delete taxi driver interface}
+This is the page where an administrator can delete a taxi driver from the database\\ 
+\begin{center}
+	\includegraphics[width=.8\textwidth,height=.8\textheight,keepaspectratio]{deletetaxidriver}
 \end{center}
 \clearpage
 \subsubsection{Hardware Interfaces}
@@ -350,6 +359,12 @@ On the admin side:\@
 			\item In no situation sensible data will pass through an insecure channel
 		\end{itemize}
 \end{itemize}
+\subsection{The world and the machine}
+The first model of the system to be presented is the model ``The world and the machine'' by M. Jackson and P. Zave. This model highlights the division between phenomena that happen entirely either in the world or in the machine, and those that are shared between the two of them.
+\begin{figure}[H]
+	  \makebox[\textwidth][c]{\includegraphics[width=1.5\textwidth]{TWATM}}%
+\end{figure}
+
 \subsection{Scenarios}
 \subsubsection{Scenario 1}
 Blair The Witch had to take her magical broom to the mechanic for the annual revision but she needs to go shopping to refill her stockpile of frog's tails. Her friend Mizune has told her about TAXInseconds, so she decides to give it a try. After downloading it on her smartphone, she signs up compiling the registration form with her username, password and email. Now she can complain about how slow car-based transports are!
@@ -363,8 +378,16 @@ Donald Duck is ready to start his first day as a taxi driver in Paperopoli. He j
 After quite some time, Daisy requests a taxi and it's finally Donald's turn! The system notifies him but\ldots it's breakfast time and Donald's having a cappuccino in a very crowded bar. He doesn't hear the notification popping on his phone so, after 1 minute, the system forwards Daisy's request to the next taxi driver in the queue and changes Donald's state to not available.
 \subsubsection{Scenario 6}
 Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAXINSECONDS, he makes two reservations: one for the morning and one for the evening. But, while he's enjoying his evening watching a movie, the phone rings. It's Minnie and she's reminding Mickey that they he had promised to go shopping with her the day after. Sadly, he has to say goodbye to his fishing trip and cancels the taxi reservations.
-
+\subsubsection{Scenario 7}
+It's almost Christmas and Tokyo is very crowded! Holo needs to go to Supergulp to buy the last Christmas gifts but it's cold and it's snowing so she logs in TAXINSECONDS and requests a taxi. But the snow is scaring taxi drivers so they keep rejecting Holo's request one after the other. 5 minutes later, Holo sees that her request has yet to be accepted so she cancels it and decides to walk.
+\subsubsection{Scenario 8}
+Asuna is getting bored at home so she comes up with the idea of visiting Leafa. As she doesn't have a driving license, she switches on her computer and goes to TAXINSECONDS website to look for the ETA\@. Unfortunately, today there's a party at Yato's shrine and the CAT is very far from Asuna's home so she decides to change her plans and cook something to kill the time.
+\clearpage
 \subsection{Use cases}
+This section contains all the use cases initially described with the use cases uml model of the whole system, and then analysed one by one. A sequence diagram for every use case will also be provided to further enhance their comprehensibility.\\
+\begin{figure}[H]
+	  \makebox[\textwidth][c]{\includegraphics[width=1.5\textwidth]{UseCaseDiagram}}%
+\end{figure}
 \subsubsection{Request a taxi}
 \textit{Actors:} Logged in user, taxi driver
 \textit{Preconditions:} The user is on the homepage of the application
@@ -382,9 +405,10 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 \\\textit{Exceptions:}
 \\If a taxi driver doesn't get to the starting location of the request within the MAD, the system will pass on the request to the next taxi driver in the queue and will notify the user of the change with the new ETA and taxi code. If the queue is empty, the system will notify the CAT.\@\\
 
-\begin{center}	
-	\includegraphics[width=\textwidth,keepaspectratio]{Sequence-Diagrams/request-a-taxi}
-\end{center}
+\begin{figure}[H]
+	  \makebox[\textwidth][c]{\includegraphics[width=1.5\textwidth]{Sequence-Diagrams/request-a-taxi}}%
+\end{figure}
+\clearpage
 \subsubsection{Reserve a taxi}
 \textit{Actors:} Registered user, taxi driver
 \\\textit{Preconditions:} The user is on the homepage of the application 
@@ -404,9 +428,10 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 	\item If a taxi driver doesn't get to the starting location of the request within the MAD after the meeting time, the system will pass on the reservation to the next taxi driver in the queue and will notify the user of the change with the new ETA and taxi code.
 	\item If the meeting time is not at least two hours after the reservation an error message will be displayed and the reservation won't be made.
 \end{itemize}
-\begin{center}	
-	\includegraphics[width=\textwidth,keepaspectratio]{Sequence-Diagrams/reserve-a-taxi}
-\end{center}
+\begin{figure}[H]
+	  \makebox[\textwidth][c]{\includegraphics[width=1.5\textwidth]{Sequence-Diagrams/reserve-a-taxi}}%
+\end{figure}
+\clearpage
 \subsubsection{Cancel a reservation}
 \textit{Actors:} Registered user
 \\\textit{Preconditions:} The user is on the homepage of the application and has at least one reservation for which a taxi has not yet been allocated
@@ -420,10 +445,12 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 \textit{Postconditions:} The reservation has been cancelled.
 \\\textit{Exceptions:}
 \\If a taxi is allocated while the user is cancelling the reservation the system will show an error message and won't cancel the reservation
-\begin{center}	
-	\includegraphics[width=\textwidth,keepaspectratio]{Sequence-Diagrams/cancel-reservation}
-\end{center}
 
+\begin{figure}[H]
+	  \makebox[\textwidth][c]{\includegraphics[width=1.2\textwidth]{Sequence-Diagrams/cancel-reservation}}%
+\end{figure}
+
+\clearpage
 \subsubsection{Cancel a request}
 \textit{Actors:} Registered user
 \\\textit{Preconditions:} The user is on the homepage of the application and has at least one request that hasn't been accepted by a taxi driver yet
@@ -436,10 +463,11 @@ Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAX
 \end{itemize}
 \textit{Postconditions:} The request has been cancelled.
 \\\textit{Exceptions:} If a taxi driver accepts the request while the user is cancelling it the system will show an error message and won't cancel the request
-\begin{center}	
-In order to avoid redundancy the situation in which the client cancels before a taxi accepts is not in the sequence diagram but it is totally alike the one in which the taxi refuses the call, just the client cancels before the taxi can accept.\\
-	\includegraphics[width=\textwidth,keepaspectratio]{Sequence-Diagrams/cancel-request}
-\end{center}
+\begin{figure}[H]
+	In order to avoid redundancy the situation in which the client cancels before a taxi accepts is not in the sequence diagram but it is totally alike the one in which the taxi refuses the call, just the client cancels before the taxi can accept.\\
+	\makebox[\textwidth][c]{\includegraphics[width=1.5\textwidth]{Sequence-Diagrams/cancel-request}}%
+\end{figure}
+\clearpage
 \subsubsection{Registration}
 \textit{Actors:} Guest
 \\\textit{Preconditions:} The guest is on the homepage of the application
@@ -452,10 +480,11 @@ In order to avoid redundancy the situation in which the client cancels before a 
 \end{itemize}
 \textit{Postconditions:} The guest can now log in the system whenever she wants with the inserted credentials
 \\\textit{Exceptions:} The username or the email are already registered and an error message is shown
-\begin{center}	
-	\includegraphics[width=\textwidth,keepaspectratio]{Sequence-Diagrams/registration}
-\end{center}
+\begin{figure}[H]
+	  \makebox[\textwidth][c]{\includegraphics[width=1.5\textwidth]{Sequence-Diagrams/registration}}%
+\end{figure}
 
+\clearpage
 \subsubsection{Login}
 \textit{Actors:} Guest
 \\\textit{Preconditions:} The guest is on the homepage of the application
@@ -469,10 +498,11 @@ In order to avoid redundancy the situation in which the client cancels before a 
 \end{itemize}
 \textit{Postconditions:} The guest is now logged in the system, thus becoming a taxi driver or a logged in user or an administrator depending on the inserted credentials.
 \\\textit{Exceptions:} The inserted credentials are not valid so the guest is not logged in and an error message is shown
-\begin{center}	
-	\includegraphics[width=\textwidth,keepaspectratio]{Sequence-Diagrams/login}
-\end{center}
+\begin{figure}[H]
+	  \makebox[\textwidth][c]{\includegraphics[width=1.5\textwidth]{Sequence-Diagrams/login}}%
+\end{figure}
 
+\clearpage
 The following use case is described using logged in users as actors but it also valid for taxi drivers or administrators
 \subsubsection{Logout}
 \textit{Actors:} Logged in user
@@ -483,10 +513,11 @@ The following use case is described using logged in users as actors but it also 
 	\item  The system logs the user out and brings her back to the homepage of the application for guests
 \end{itemize}
 \textit{Postconditions:} The user is now logged out of the system thus becoming a guest
-\begin{center}	
-	\includegraphics[width=\textwidth,keepaspectratio]{Sequence-Diagrams/logout}
-\end{center}
+\begin{figure}[H]
+	  \makebox[\textwidth][c]{\includegraphics[width=.8\textwidth]{Sequence-Diagrams/logout}}%
+\end{figure}
 \-\\
+\clearpage
 The following use case is described using logged in users as actor but is also valid for guests
 \subsubsection{Search for ETA}
 \textit{Actors:} Logged in user
@@ -499,10 +530,11 @@ The following use case is described using logged in users as actor but is also v
 	\item  The system shows the ETA 
 \end{itemize}
 \textit{Postconditions:} The user has been shown the ETA
-\begin{center}	
-	\includegraphics[width=\textwidth,keepaspectratio]{Sequence-Diagrams/search-for-eta}
-\end{center}
+\begin{figure}[H]
+	  \makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{Sequence-Diagrams/search-for-eta}}%
+\end{figure}
 
+\clearpage
 \subsubsection{Modify taxi driver}
 \textit{Actors:} Administrator
 \\\textit{Preconditions:} The administrator is on the homepage of the application
@@ -517,10 +549,11 @@ The following use case is described using logged in users as actor but is also v
 \end{itemize}
 \textit{Postconditions:} The taxi driver's information have been updated and she can no longer access the application with the old credentials but she must use the new ones
 \\\textit{Exceptions:} The inserted data is incorrect, and an error message is displayed 
-\begin{center}	
-	\includegraphics[width=\textwidth,keepaspectratio]{Sequence-Diagrams/modify-driver}
-\end{center}
+\begin{figure}[H]
+	  \makebox[\textwidth][c]{\includegraphics[width=1.5\textwidth]{Sequence-Diagrams/modify-driver}}%
+\end{figure}
 
+\clearpage
 \subsubsection{Add taxi driver}
 \textit{Actors:} Administrator
 \\\textit{Preconditions:} The administrator is on the homepage of the application
@@ -533,10 +566,11 @@ The following use case is described using logged in users as actor but is also v
 \end{itemize}
 \textit{Postconditions:} The taxi driver's information have been added to the database and she can now log in the application as a taxi driver
 \\\textit{Exceptions:} The inserted data is incorrect, and an error message is displayed 
-\begin{center}	
-	\includegraphics[width=\textwidth,keepaspectratio]{Sequence-Diagrams/add-taxi-driver}
-\end{center}
+\begin{figure}[H]
+	  \makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{Sequence-Diagrams/add-taxi-driver}}%
+\end{figure}
 
+\clearpage
 \subsubsection{Delete taxi driver}
 \textit{Actors:} Administrator
 \\\textit{Preconditions:} The administrator is on the homepage of the application
@@ -549,15 +583,18 @@ The following use case is described using logged in users as actor but is also v
 	\item  The administrator clicks the ``Delete taxi driver'' button
 	\item  The system deletes the taxi driver from the database
 \end{itemize}
-\textit{Postconditions:} The taxi driver's information have been deleted from the database and she can no longer access the application with those credentials
-\begin{center}	
-	\includegraphics[width=\textwidth,keepaspectratio]{Sequence-Diagrams/delete-taxi-driver}
-\end{center}
+\textit{Postconditions:} The taxi driver's credentials have been deleted from the database and she can no longer access the application with those credentials
+\begin{figure}[H]
+	  \makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{Sequence-Diagrams/delete-taxi-driver}}%
+\end{figure}
 \clearpage
+\subsection{Class Diagram}
+The following class diagram is a conceptual representation of the basic structure of TAXINSECONDS.\@\\
+\begin{figure}[H]
+	  \makebox[\textwidth][c]{\includegraphics[width=1.5\textwidth]{ClassDiagram}}%
+\end{figure}
 \section{Alloy}
 \subsection{Model}
-%TODO dire che ``serve'' indica solo l'associazione da prima che il servizio prenda luogo
-%TODO definire tutte le varie cose
 In order to adapt a pure logical model to a system that changes with time and, in the mean time, not lose meaningfulness the following
 main adaptations were made:
 \begin{itemize}
@@ -571,16 +608,42 @@ main adaptations were made:
 \end{center}
 \subsection{Worlds Generated}
 The following worlds were generated changing parameters about arity of present signatures in the show\{\} predicate.\\
-\begin{center}
-	\includegraphics[width=.9\textwidth,height=.9\textheight,keepaspectratio]{Alloy/2Areas}
+
+\begin{figure}[H]
+	  \makebox[\textwidth][c]{\includegraphics[width=1.5\textwidth]{Alloy/2Areas}}%
 	\\This is a clean example of two areas, each one with a single client, no unusual interaction occour.\\
-\end{center}
-\begin{center}
-	\includegraphics[width=.9\textwidth,height=.9\textheight,keepaspectratio]{Alloy/CrossAreaService}
+\end{figure}
+\begin{figure}[H]
+	  \makebox[\textwidth][c]{\includegraphics[width=1.5\textwidth]{Alloy/CrossAreaService}}%
 	\\This is a more complex example, here we can see how the system behaves and the model adjusts if there aren't enough taxies in an area in order to serve all the clients.
-\end{center}
-\begin{center}
-	\includegraphics[width=.9\textwidth,height=.9\textheight,keepaspectratio]{Alloy/reserved-and-refused}
+\end{figure}
+\begin{figure}[H]
+	  \makebox[\textwidth][c]{\includegraphics[width=1.5\textwidth]{Alloy/reserved-and-refused}}%
 	\\In this scenario we can see both a reservation of a client for a determined area and a refusal of a taxi for a client (now being served by an other taxi)
+\end{figure}
+\clearpage
+\clearpage
+\section{Appendix}
+Appendix for Roberto Clapis\\
+Work hours: 40
+\begin{center}
+	Software Used:\\
+	\-\\
+	\begin{tabular}{*{2}{c}}
+		\toprule
+		Task & Software \\
+		\midrule
+		Edit \LaTeX\ Source & Vim\\
+		Edit Alloy & Vim\\
+		Edit sources for Sequence Diagrams & Vim\\
+		Compile and run Alloy & Alloy Modeling IDE\\
+		Convert Sequence Diagrams to images & Quick Sequence Diagram Editor\\
+		General images mangling and cropping & ImageMagick \& Shotwell\\
+		Convert \LaTeX\ source to pdf & \LaTeX\-MK\\
+		Convert Alloy to \LaTeX\ & sed\\
+		Spell Check & Aspell \\
+		\LaTeX\ Check & LaCheck\\
+		\bottomrule
+	\end{tabular}
 \end{center}
 \end{document}
