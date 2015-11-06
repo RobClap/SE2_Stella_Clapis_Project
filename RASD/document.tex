@@ -14,7 +14,7 @@
 \date{\today}
 \title{Politecnico di Milano
 	\\A.A. 2015\@-\@2016
-	\\Software Engineering 2: ``TAXInseconds''
+	\\Software Engineering 2: ``myTaxiService''
 	\\\textbf{R}equirements \textbf{A}nalysis \\and\\ \textbf{S}pecifications \textbf{D}ocument}
 	\hypersetup{pdftitle={Software Requirement Specification},    % title
 	pdfauthor={Roberto Clapis, Erica Stella},                     % author
@@ -108,7 +108,7 @@ This document is structured in three parts:
 \clearpage
 \section{Overall description}
 \subsection{Product perspective}
-The TAXInseconds application will be released as a web application and as a mobile application. 
+The myTaxiService application will be released as a web application and as a mobile application. 
 There are no existing systems to integrate it with. 
 \\It will provide a total of 4 main interfaces:
 \begin{itemize}
@@ -195,7 +195,7 @@ This is the page where an administrator can delete a taxi driver from the databa
 \begin{itemize}
 	\item Owned by the users and taxi drivers:
 		\begin{itemize}
-			\item Any device running Android 4.0+ or iOS 6+ (GPS capability will make more functionalities available)
+			\item Any device running Android 4.0+ or iOS 6+
 			\item Any computer able to run an HTML5-compatible browser 
 		\end{itemize}
 	\item Owned by the company:
@@ -389,6 +389,7 @@ This section contains all the use cases initially described with the use cases U
 \begin{figure}[H]
 	  \makebox[\textwidth][c]{\includegraphics[width=1.5\textwidth]{UseCaseDiagram}}%
 \end{figure}
+\clearpage
 \subsubsection{Request a taxi}
 \textit{Actors:} Logged in user, taxi driver
 \\\textit{Preconditions:} The user is on the homepage of the application
@@ -615,7 +616,7 @@ The following worlds were generated changing parameters about arity of present s
 	\\This is a clean example of two areas, each one with a single client, no unusual interaction occur.\\
 \end{figure}
 \begin{figure}[H]
-	  \makebox[\textwidth][c]{\includegraphics[width=1.5\textwidth]{Alloy/CrossAreaService}}%
+	  \makebox[\textwidth][c]{\includegraphics[width=1.5\textwidth]{Alloy/ACrossAreaService}}
 	\\This is a more complex example, here we can see how the system behaves and the model adjusts if there aren't enough taxis in an area in order to serve all the clients.
 \end{figure}
 \begin{figure}[H]
@@ -647,6 +648,9 @@ Work hours: 40
 		\bottomrule
 	\end{tabular}
 \end{center}
+\-\\
+\-\\
+
 Appendix for Erica Stella\\
 Work hours: 40
 \begin{center}

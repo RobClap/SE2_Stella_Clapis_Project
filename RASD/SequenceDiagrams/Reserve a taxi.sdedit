@@ -21,11 +21,15 @@ server:10 minutes before due time
 	[c:alt Accept]
 		taxi:taxiUI.accept call&
 		taxiUI:>server.accept call&
-		--[refusal or timeout]
-		taxi:taxiUI.refuse call or no interaction until timeout&
+		--[refusal]
+		taxi:taxiUI.refuse call&
+		taxiUI:>server.refuse call&
+		server:>server.mark the taxi who refused as not available&
+		--[timeout]
+		taxi:taxiUI.no interaction until timeout&
 		taxiUI:>server.refuse call&
 		taxiUI:stop
-		server:>server.mark the taxi who refused as not available&
+		server:>server.move the taxi who timed out at the end of the queue&
 	[/c]
 [/c]
 server:>server.mark the taxi who accepted as not available&
