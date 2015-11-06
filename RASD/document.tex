@@ -38,16 +38,16 @@
 \section{Introduction}
 
 \subsection{Purpose}
-This document represent the Requirement Analysis and Specification Document (RASD). It aims at explaining the domain of the system to be developed and the system itself in terms of functional requirements, nonfunctional requirements and constraints. It also provides several models of the system and typical use cases. It is intended for all the developers who will have to implement the system, the testers who will have to determine if the requirements have been met and the system analysts who will have to write specifications for other system that will relate to this one. It is also intended as a contractual basis thus being legally binding.
+This document represents the Requirement Analysis and Specification Document (RASD). It aims at explaining the domain of the system to be developed and the system itself in terms of functional requirements, nonfunctional requirements and constraints. It also provides several models of the system and typical use cases. It is intended for all the developers who will have to implement the system, the testers who will have to determine if the requirements have been met and the system analysts who will have to write specifications for other system that will relate to this one. It is also intended as a contractual basis thus being legally binding.
 
 \subsection{Actual System}
 The government of the city wants to optimise its taxi service with a completely new application. Therefore, we assume there are no previous systems to take into account.
 
 \subsection{Scope}
-The aim of the project TAXInseconds is to provide a new application to optimise the taxi service of the city that will be accessible via browser, mobile or public APIs.
-\\The city managed by TAXInseconds is divided in zones of 2 km\textsuperscript{2} each and every zone has its own queue of taxis. The queues are automatically computed by the system with the information it receives from the GPS of the phones of the taxi drivers.
+The aim of the project myTaxiService is to provide a new application to optimise the taxi service of the city that will be accessible via browser, mobile or public APIs.
+\\The city managed by myTaxiService is divided in zones of 2 km\textsuperscript{2} each and every zone has its own queue of taxis. The queues are automatically computed by the system with the information it receives from the GPS of the phones of the taxi drivers.
 \\Taxi drivers can be available or not. Only available taxi drivers can be in a queue. When a taxi driver changes her state from not available to available the system automatically adds her to the queue of the zone she is currently in, based on the information of the GPS of her phone. 
-\\Users that are not registered can only see the estimated time of arrival of the nearest taxi with TAXInseconds.\@
+\\Users that are not registered can only see the estimated time of arrival of the nearest taxi with myTaxiService.\@
 \\Registered users can also request a taxi or make a reservation for a taxi. Reservations can only be made at least two hours before the ride and must be done specifying the starting location, the destination and the meeting time. Requests, instead, only need the starting location and the destination.
 \\When a request is made, the first taxi driver of the queue of the starting location's zone is prompted to accept or reject it. If the taxi driver rejects it her state is automatically put on unavailable by the system. If a taxi driver doesn't accept or reject the request within 1 minute, it will be passed on to the next taxi driver in the queue and the first one will be moved to the end of the queue. If there are no available taxis in the zone of the request the system will propagate the request to the closest available taxi.
 \\When a request is accepted, the user that has made the request receives a notification from the system informing her of the code of the incoming taxi and the estimated time of arrival.
@@ -71,7 +71,7 @@ The aim of the project TAXInseconds is to provide a new application to optimise 
 	\item \textit{Logged in user:} a person that has already signed up and logged in the system.
 	\item \textit{Administrator:} a person authorised to modify the list of taxi drivers stored by the system.
 	\item \textit{Request:} a call from a registered user who needs a taxi immediately.
-	\item \textit{Meeting time:} the date and time in which the registered user needs the taxi in case of reservation. 
+	\item \textit{Meeting time:} the date and time in which the logged in user needs the taxi in case of reservation. 
 	\item \textit{Reservation:} a booking of a taxi at a certain meeting time.
 	\item \textit{State of a taxi driver:} the state the taxi driver is currently in. It can be available or not available. Taxi drivers are in a queue if and only if they're available.
 	\item \textit{Closest available taxi:} if there are no taxis in the zone of the request or of the reservation, the system automatically finds the closest available taxi choosing the one with the smallest estimated time of arrival from the taxi queues of the other zones.
@@ -170,7 +170,7 @@ This is the mockup of the page where a logged in user can reserve a taxi\\
 \paragraph{Administrator interface}
 This is the page of an administrator for which there is no mobile\\ 
 \begin{center}
-	\includegraphics[width=.8\textwidth,height=.8\textheight,keepaspectratio]{ReserveTaxi}
+	\includegraphics[width=.8\textwidth,height=.8\textheight,keepaspectratio]{administratorinterface}
 \end{center}
 \clearpage
 \paragraph{Modify taxi driver interface}
@@ -263,19 +263,20 @@ This is the page where an administrator can delete a taxi driver from the databa
 		\end{itemize}
 \end{itemize}
 \subsection{User characteristics}
-The TAXInseconds application is intended for all users who are at least 16 years old. 
+The myTaxiService application is intended for all users who are at least 16 years old. 
 \subsection{Assumptions and dependencies}
 \subsubsection{Domain Assumptions}
 \begin{itemize}
 	\item All taxi drivers who intend to use the service will have a mobile phone with one of the supported mobile OSs
 	\item All taxi drivers will have a phone with active GPS functionality 
 	\item The taxi drivers will grant the system the rights to handle their taxi codes
-	\item Taxi drivers' phones will always have an internet connection while TAXInseconds is running
+	\item The GPS information about the position of the available taxi drivers sent to the system will always be accurate
+	\item Taxi drivers' phones will always have an internet connection while myTaxiService is running
 	\item Users will have access to the internet
 	\item Users will enter a valid email address during registration 
 	\item Users who have requested or reserved a taxi will always be present when the taxi arrives.
 	\item There is always at least an available taxi to fulfil a request or a reservation in the whole city
-	\item Taxi drivers that want to be part of TAXINSECONDS must ask the administrator to be added to the system
+	\item Taxi drivers that want to be part of myTaxiService must ask the administrator to be added to the system
 \end{itemize}
 \clearpage
 \section{Specific requirements}
@@ -285,9 +286,10 @@ On the user side:\@
 	\item For Guests:
 		\begin{itemize}
 			\item The system will be able to calculate and show the ETA\@ 
-			\item The system will be able to give suggestions to complete the partially inserted starting location.\@ 
+			\item The system will be able to give suggestions to complete the partially inserted starting location and destination.\@ 
 			\item The system will provide a registration functionality 
 			\item The system will provide a login functionality that will also redirect to the right interface based on credentials.
+			\item The system will provide a functionality to check whether the inserted credentials are valid or not
 		\end{itemize}
 	\item For logged in users:
 		\begin{itemize}
@@ -301,7 +303,6 @@ On the user side:\@
 			\item The system will provide a logout functionality
 			\item The system will provide a functionality to notify users of the code of the incoming taxi
 			\item The system will provide a functionality to notify users of the ETA of the incoming taxi
-			\item The system will provide a logout functionality
 		\end{itemize}
 	\item Through the API:\@ 
 		\begin{itemize}
@@ -322,7 +323,7 @@ On the taxi driver side:\@
 	\item The system will notify the taxi driver of an incoming request showing the starting location
 	\item The system will notify the taxi driver of a reservation showing the starting location and the meeting time
 	\item The system will provide a functionality to allow taxi drivers to accept or reject reservations and requests
-	\item The system will be able to always know the location of every available taxi driver
+	\item The system will be able to always know the location of every available taxi driver based on the GPS information of her phone
 	\item The system will be able to compute the MAD and check whether the taxi driver gets to the starting location in time 
 	\item The system will provide a logout functionality
 \end{itemize}
@@ -342,7 +343,7 @@ On the admin side:\@
 	\item The system will store the username, password hash and email of the admin.
 	\item Add a new taxi driver into the system
 	\item Remove a taxi driver from the system
-	\item Modify registration data
+	\item Modify taxi drivers' credentials data
 	\item Log out
 \end{itemize}
 \subsection{Non functional requirements}
@@ -367,21 +368,21 @@ The first model of the system to be presented is the model ``The world and the m
 
 \subsection{Scenarios}
 \subsubsection{Scenario 1}
-Blair The Witch had to take her magical broom to the mechanic for the annual revision but she needs to go shopping to refill her stockpile of frog's tails. Her friend Mizune has told her about TAXInseconds, so she decides to give it a try. After downloading it on her smartphone, she signs up compiling the registration form with her username, password and email. Now she can complain about how slow car-based transports are!
+Blair The Witch had to take her magical broom to the mechanic for the annual revision but she needs to go shopping to refill her stockpile of frog's tails. Her friend Mizune has told her about myTaxiService, so she decides to give it a try. After downloading it on her smartphone, she signs up compiling the registration form with her username, password and email. Now she can complain about how slow car-based transports are!
 \subsubsection{Scenario 2}
-Suzuka is having a date tonight but, unfortunately, her car doesn't want to start. After several failures, she decides to use TAXInseconds\@. After logging in, she requests a taxi specifying her home as the starting location and the restaurant's address as the destination. The system notifies Takeshi, the first taxi driver of the queue in Suzuka's zone, of the request. Takeshi accepts the request and the system sends Suzuka the code of Takeshi's taxi and the ETA so she can finally get to her date.
+Suzuka is having a date tonight but, unfortunately, her car doesn't want to start. After several failures, she decides to use myTaxiService\@. After logging in, she requests a taxi specifying her home as the starting location and the restaurant's address as the destination. The system notifies Takeshi, the first taxi driver of the queue in Suzuka's zone, of the request. Takeshi accepts the request and the system sends Suzuka the code of Takeshi's taxi and the ETA so she can finally get to her date.
 \subsubsection{Scenario 3}
-Ash Ketchum has to start his new adventure in Hoenn tomorrow but his mother is busy cleaning the house with Mr.\ Mime, so she can't take him to the airport to meet Prof.\ Oak. Ash decides to use once again TAXInseconds to reserve a taxi. After logging in, he makes a reservation for a taxi specifying the starting location as Pallet town, the destination and the meeting time. The morning after, 10 minutes before the meeting time, the system allocates Brock's taxi for the reservation and sends his code to Ash so that he knows who he'll meet to start his new adventure. 
+Ash Ketchum has to start his new adventure in Hoenn tomorrow but his mother is busy cleaning the house with Mr.\ Mime, so she can't take him to the airport to meet Prof.\ Oak. Ash decides to use once again myTaxiService to reserve a taxi. After logging in, he makes a reservation for a taxi specifying the starting location as Pallet town, the destination and the meeting time. The morning after, 10 minutes before the meeting time, the system allocates Brock's taxi for the reservation and sends his code to Ash so that he knows who he'll meet to start his new adventure. 
 \subsubsection{Scenario 4}
-Donald Duck is ready to start his first day as a taxi driver in Paperopoli. He jumps on his car, logs in TAXInseconds and changes his state to available. Unfortunately he doesn't know that, in his zone, there are 15 taxis in the queue before him, so he'll have to be patient for some time.
+Donald Duck is ready to start his first day as a taxi driver in Paperopoli. He jumps on his car, logs in myTaxiService and changes his state to available. Unfortunately he doesn't know that, in his zone, there are 15 taxis in the queue before him, so he'll have to be patient for some time.
 \subsubsection{Scenario 5}
-After quite some time, Daisy requests a taxi and it's finally Donald's turn! The system notifies him but\ldots it's breakfast time and Donald's having a cappuccino in a very crowded bar. He doesn't hear the notification popping on his phone so, after 1 minute, the system forwards Daisy's request to the next taxi driver in the queue and changes Donald's state to not available.
+After quite some time, Daisy requests a taxi and it's finally Donald's turn! The system notifies him but it's breakfast time and Donald's having a cappuccino in a very crowded bar. He doesn't hear the notification popping on his phone so, after 1 minute, the system forwards Daisy's request to the next taxi driver in the queue and changes Donald's state to not available.
 \subsubsection{Scenario 6}
-Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in TAXINSECONDS, he makes two reservations: one for the morning and one for the evening. But, while he's enjoying his evening watching a movie, the phone rings. It's Minnie and she's reminding Mickey that they he had promised to go shopping with her the day after. Sadly, he has to say goodbye to his fishing trip and cancels the taxi reservations.
+Mickey Mouse is planning to go fishing with Pluto tomorrow. After logging in myTaxiService, he makes two reservations: one for the morning and one for the evening. But, while he's enjoying his evening watching a movie, the phone rings. It's Minnie and she's reminding Mickey that they he had promised to go shopping with her the day after. Sadly, he has to say goodbye to his fishing trip and cancels the taxi reservations.
 \subsubsection{Scenario 7}
-It's almost Christmas and Tokyo is very crowded! Holo needs to go to Supergulp to buy the last Christmas gifts but it's cold and it's snowing so she logs in TAXINSECONDS and requests a taxi. But the snow is scaring taxi drivers so they keep rejecting Holo's request one after the other. 5 minutes later, Holo sees that her request has yet to be accepted so she cancels it and decides to walk.
+It's almost Christmas and Tokyo is very crowded! Holo needs to go to Supergulp to buy the last Christmas gifts but it's cold and it's snowing so she logs in myTaxiService and requests a taxi. Unfortunately, the snow is scaring taxi drivers and they keep rejecting Holo's request one after the other. 5 minutes later, Holo sees that her request has yet to be accepted so she cancels it and decides to walk.
 \subsubsection{Scenario 8}
-Asuna is getting bored at home so she comes up with the idea of visiting Leafa. As she doesn't have a driving license, she switches on her computer and goes to TAXINSECONDS website to look for the ETA\@. Unfortunately, today there's a party at Yato's shrine and the CAT is very far from Asuna's home so she decides to change her plans and cook something to kill the time.
+Asuna is getting bored at home so she comes up with the idea of visiting Leafa. As she doesn't have a driving license, she switches on her computer and goes to myTaxiService website to look for the ETA\@. Unfortunately, today there's a party at Yato's shrine and the CAT is very far from Asuna's home so she decides to change her plans and cook something to kill the time.
 \clearpage
 \subsection{Use cases}
 This section contains all the use cases initially described with the use cases UML model of the whole system, and then analysed one by one. A sequence diagram for every use case will also be provided to further enhance their comprehensibility.\\
@@ -390,8 +391,8 @@ This section contains all the use cases initially described with the use cases U
 \end{figure}
 \subsubsection{Request a taxi}
 \textit{Actors:} Logged in user, taxi driver
-\textit{Preconditions:} The user is on the homepage of the application
-\textit{Flow of Events:}
+\\\textit{Preconditions:} The user is on the homepage of the application
+\\\textit{Flow of Events:}
 \begin{itemize}
 	\item  The user clicks the ``Request a taxi'' button
 	\item  The system shows the user a page where she can enter the starting location and destination of the request
@@ -399,28 +400,27 @@ This section contains all the use cases initially described with the use cases U
 	\item  The system notifies the first taxi driver of the starting location's zone's queue. If there are no taxis in that zone, the system notifies the CAT\@. If a taxi driver rejects the request the system passes the request on to the next taxi driver in the queue and changes the first one's state to not available. If a taxi driver doesn't accept or reject the request within 1 minute, the system passes the request on to the next taxi driver in the queue and moves the first one to the end of the queue
 	\item  The taxi driver accepts the request and goes to the starting location
 	\item  The system changes the state of the taxi driver to not available and notifies the user of the code of the incoming taxi and the ETA 
-	\item The taxi driver goes to the starting location to pick up the user
+	\item  The taxi driver goes to the starting location to pick up the user
 \end{itemize}
 \textit{Postconditions:} The taxi driver is not available anymore and has been removed from the queue.
-\\\textit{Exceptions:}
-\\If a taxi driver doesn't get to the starting location of the request within the MAD, the system will pass on the request to the next taxi driver in the queue and will notify the user of the change with the new ETA and taxi code. If the queue is empty, the system will notify the CAT.\@\\
+\\\textit{Exceptions:} If a taxi driver doesn't get to the starting location of the request within the MAD, the system will pass on the request to the next taxi driver in the queue and will notify the user of the change with the new ETA and taxi code. If the queue is empty, the system will notify the CAT.\@\\
 
 \begin{figure}[H]
 	  \makebox[\textwidth][c]{\includegraphics[width=1.5\textwidth]{Sequence-Diagrams/request-a-taxi}}%
 \end{figure}
 \clearpage
 \subsubsection{Reserve a taxi}
-\textit{Actors:} Registered user, taxi driver
+\textit{Actors:} Logged in user, taxi driver
 \\\textit{Preconditions:} The user is on the homepage of the application 
 \\\textit{Flow of Events:}
 \begin{itemize}
 	\item  The user clicks the ``Reserve a taxi'' button
 	\item  The system shows the user a page where she can enter the starting location, destination and the meeting time of the reservation.
 	\item  The user inserts the starting location, destination and meeting time and then clicks the ``Reserve'' button
+	\item  The system confirms to the user that the reservation has been made
 	\item  Ten minutes before the meeting time, the system notifies the first taxi driver of the starting location's zone's queue. If there are no taxis in that zone, the system notifies the CAT\@. If a taxi driver rejects the reservation the system passes it on to the next taxi driver in the queue and changes the first one's state to not available. If a taxi driver doesn't accept or reject the reservation within 1 minute, the system passes it on to the next taxi driver in the queue and moves the first one to the end of the queue
 	\item  The taxi driver accepts the reservation and goes to the starting location
 	\item  The system changes the state of the taxi driver to not available and notifies the user of the code of the incoming taxi and the ETA
-	\item  The taxi driver goes to the starting location to pick up the user
 \end{itemize}
 \textit{Postconditions:} The taxi driver is not available anymore and has been removed from the queue.
 \\\textit{Exceptions:}
@@ -433,8 +433,8 @@ This section contains all the use cases initially described with the use cases U
 \end{figure}
 \clearpage
 \subsubsection{Cancel a reservation}
-\textit{Actors:} Registered user
-\\\textit{Preconditions:} The user is on the homepage of the application and has at least one reservation for which a taxi has not yet been allocated
+\textit{Actors:} Logged in user
+\\\textit{Preconditions:} The user is on the homepage of the application and has at least one reservation for which a taxi has not been allocated yet
 \\\textit{Flow of Events:}
 \begin{itemize}
 	\item  The user clicks on the reservation she wants to cancel
@@ -443,8 +443,7 @@ This section contains all the use cases initially described with the use cases U
 	\item  The system shows a ``successful deletion'' message and brings the user back to her homepage
 \end{itemize}
 \textit{Postconditions:} The reservation has been cancelled.
-\\\textit{Exceptions:}
-\\If a taxi is allocated while the user is cancelling the reservation the system will show an error message and won't cancel the reservation
+\\\textit{Exceptions:} If a taxi is allocated while the user is cancelling the reservation the system will show an error message and won't cancel the reservation
 
 \begin{figure}[H]
 	  \makebox[\textwidth][c]{\includegraphics[width=1.2\textwidth]{Sequence-Diagrams/cancel-reservation}}%
@@ -452,7 +451,7 @@ This section contains all the use cases initially described with the use cases U
 
 \clearpage
 \subsubsection{Cancel a request}
-\textit{Actors:} Registered user
+\textit{Actors:} Logged in user
 \\\textit{Preconditions:} The user is on the homepage of the application and has at least one request that hasn't been accepted by a taxi driver yet
 \\\textit{Flow of Events:}
 \begin{itemize}
@@ -492,7 +491,7 @@ This section contains all the use cases initially described with the use cases U
 \begin{itemize}
 	\item  The guest clicks on the ``Login'' button
 	\item  The system shows a page where the guest can enter her username and password
-	\item  The guest fills in the page with his data
+	\item  The guest fills in the page with her data
 	\item  The guest clicks the ``Login'' button
 	\item  The system logs in the guest and shows her her page
 \end{itemize}
@@ -503,8 +502,9 @@ This section contains all the use cases initially described with the use cases U
 \end{figure}
 
 \clearpage
-The following use case is described using logged in users as actors but it also valid for taxi drivers or administrators
+
 \subsubsection{Logout}
+The following use case is described using logged in users as actors but it also valid for taxi drivers or administrators\\
 \textit{Actors:} Logged in user
 \\\textit{Preconditions:} The user is on the homepage of the application
 \\\textit{Flow of Events:}
@@ -518,8 +518,9 @@ The following use case is described using logged in users as actors but it also 
 \end{figure}
 \-\\
 \clearpage
-The following use case is described using logged in users as actor but is also valid for guests
+
 \subsubsection{Search for ETA}
+The following use case is described using logged in users as actor but is also valid for guests\\
 \textit{Actors:} Logged in user
 \\\textit{Preconditions:} The user is on the homepage of the application
 \\\textit{Flow of Events:}
@@ -589,7 +590,7 @@ The following use case is described using logged in users as actor but is also v
 \end{figure}
 \clearpage
 \subsection{Class Diagram}
-The following class diagram is a conceptual representation of the basic structure of TAXINSECONDS.\@\\
+The following class diagram is a conceptual representation of the basic structure of myTaxiService.\@\\
 \begin{figure}[H]
 	  \makebox[\textwidth][c]{\includegraphics[width=1.5\textwidth]{ClassDiagram}}%
 \end{figure}
@@ -643,6 +644,23 @@ Work hours: 40
 		Convert Alloy to \LaTeX\ & sed\\
 		Spell Check & Aspell \\
 		\LaTeX\ Check & LaCheck\\
+		\bottomrule
+	\end{tabular}
+\end{center}
+Appendix for Erica Stella\\
+Work hours: 40
+\begin{center}
+	Software Used:\\
+	\-\\
+	\begin{tabular}{*{2}{c}}
+		\toprule
+		Task & Software \\
+		\midrule
+		Edit \LaTeX\ Source & TexStudio\\
+		Use Case Diagrams & Eclipse\\
+		Class Diagram & Eclipse\\
+		General images mangling and cropping & GIMP\\
+		Mockup & Pencil\\
 		\bottomrule
 	\end{tabular}
 \end{center}
