@@ -11,8 +11,7 @@ user:insert start and end of trip
 user:UI.request taxi(Start,End)&
 UI:>server.request_taxi(Data)
 [c:loop until a taxi accept]
-	server:compute the right taxi to notify
-	server:(first in queue or CAT if queue is empty)
+	server:Right Taxi=server.compute the right taxi to notify&
 	server:>taxiUI.Notify call
 	taxiUI:taxi.Notification
 	[c:alt Accept]
@@ -22,12 +21,10 @@ UI:>server.request_taxi(Data)
 		taxi:taxiUI.refuse call or no interaction until timeout&
 		taxiUI:>server.refuse call&
 		taxiUI:stop
-		server: mark the taxi 
-		server: who refused as not available
+		server:>server.mark the taxi who refused as not available&
 	[/c]
 [/c]
-server: mark taxi 
-server: who accepted as not available
+server:>server.mark the taxi who accepted as not available&
 server:>UI.ETA and taxi code&
 server:stop
 UI:user.show ETA and taxi code
