@@ -1,15 +1,14 @@
-DOT_FILES := $(wildcard graphviz/*.dot)
 
-all: makegraphs makedoc cliean
+all: graphs clean view doc 
 
 doc:
 	latexmk -pvc DesignDocument.tex -pdf 
 
 graphs:
-	dot -Tpng $(DOT_FILES) -O
+	dot -Tpng ./graphviz/Component.dot -o ./images/Component.png
 
 clean:
 	-rm *.out *.log *.fls *.aux *.toc *~ *.fdb_latexmk
 
 view:
-	evince DesignDocument.pdf
+	evince DesignDocument.pdf > /dev/null &
