@@ -1,0 +1,54 @@
+taxiDriver:Actor
+taxiUI:ClientSide Application
+user:Actor
+clientUI:ClientSide Application
+httpHandler:Web Server
+webpageCreator:Web Server
+notificationModule:Web Server
+dbconnector:Web Server
+accounts:DBMS
+requestsAndReservations:DBMS
+
+user:clientUI.request a taxi 
+clientUI:confirmed=httpHandler.request_taxi
+httpHandler:confirmation page=webpageCreator.perform_request
+webpageCreator:request_created=dbconnector.create_request
+dbconnector:auth valid=accounts.check_auth
+dbconnector:placed=requestsAndReservations.create
+webpageCreator:>notificationModule.handle_request
+clientUI:user.confirmation_page
+user:clientUI.cancel
+clientUI:
+[c:loop until a taxi driver accepts]
+	notificationModule:taxi=dbconnector.get_first_taxi
+	dbconnector:active taxi=accounts.get_first_in_queue
+	notificationModule:notified=taxiUI.notify_call
+	taxiUI:taxiDriver.notify
+	notificationModule:listen_for_answer
+	[c:alt possible responses]
+		--[refusal]
+		taxiDriver:taxiUI.refuse
+		taxiUI:ok=notificationModule.refused
+		notificationModule:marked=dbconnector.mark_as_inactive
+		dbconnector:accounts.mark_inactive
+		taxiUI:taxiDriver.confirmed&
+		taxiUI:stop
+		--[timeout]
+		taxiDriver:taxiUI.no_interaction
+		taxiUI:handled=notificationModule.timeout
+		notificationModule:moved=dbconnector.move_to_bottom
+		dbconnector:accounts.set_login_time(Now)
+		taxiUI:stop
+		--[acceptance]
+		taxiDriver:taxiUI.accept
+		taxiUI:accepted=notificationModule.accept
+	[/c]
+[/c]
+notificationModule:marked=dbconnector.mark_request_as_active
+dbconnector:done=requestsAndReservations.update
+taxiUI:taxiDriver.drive_page
+taxiUI:stop
+
+notificationModule:notified=clientUI.taxi_is_coming
+clientUI:user.taxi_is_coming
+clientUI:stop

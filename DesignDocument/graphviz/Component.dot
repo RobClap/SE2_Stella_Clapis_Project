@@ -1,5 +1,5 @@
 digraph Components{
-	rankdir=LR
+//	rankdir=LR
 //	forcelabels=true
 //	concentrate=true
 	node[shape=rect]
@@ -15,9 +15,9 @@ digraph Components{
 		APIBackend,WebpageCreator,DBConnector,NotificationModule, HttpHandler
 		ResponseCreator[shape=ellipse label="Response\nCreator"]
 		ResponseCreator -> HttpHandler[arrowhead=curve label="needed by" constraint=false]	
-		//{APIBackend WebpageCreator}-> ResponseCreator [label="exposes" arrowhead=dot constraint=false]
-		APIBackend:s -> ResponseCreator:e [label="exposes" arrowhead=dot constraint=false]
-		WebpageCreator:se -> ResponseCreator:e [label="exposes" arrowhead=dot constraint=false]
+		{APIBackend WebpageCreator}-> ResponseCreator [label="exposes" arrowhead=dot constraint=false]
+		//APIBackend:s -> ResponseCreator:e [label="exposes" arrowhead=dot constraint=false]
+		//WebpageCreator:se -> ResponseCreator:e [label="exposes" arrowhead=dot constraint=false]
 
 		DbInteractions[shape=ellipse label="DB Interactions"]
 		DBConnector->DbInteractions[label="exposes" arrowhead=dot]

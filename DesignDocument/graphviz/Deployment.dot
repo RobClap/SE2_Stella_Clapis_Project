@@ -27,7 +27,7 @@ graph Deploy{
 			subgraph clusterWebServer{
 				label="<<execution environment>>\n:WebServer"
 					nginx[label="{:NginX|Webpage\nMobileApps Connection\nAPIs}"]
-					php[label="{:PHP|computation of Queues\nNotifications Handling\nBD Connections}"]
+					php[label="{:PHP|computation of Queues\nNotifications Handling\nDB Connections}"]
 			}
 	}
 	subgraph clusterExternalFirewallDevice{
