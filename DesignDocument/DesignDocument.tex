@@ -37,38 +37,47 @@
 
 \section{Introduction}
 \subsection{Purpose}
+The purpose of the Design Document is to provide documentation in order to aid the development of myTaxiService's system by providing a description of how it should be built and how its components are expected to interact with each other.
 \subsection{Scope}
+This Design Document is intended to explain the design and architecture of myTaxiService, a new application that will provide an easy way to access the taxi service in a city. It describes the system both from a software and hardware point of view, in order to clarify the system's structure and how it accomplishes its functionalities. 
 \subsection{Definitions, Acronyms, Abbreviations}
+\paragraph{Definitions}
+\begin{itemize}
+	\item %TODOdevo finire con end users
+\end{itemize}
 \subsection{Reference Documents}
+\begin{itemize}
+	\item \href{run:./external_references/assignments.pdf}{Document} with the assignment for the project
+	\item \href{run:./external_references/Rasd.pdf}{RASD} for myTaxiService
+	\item \href{run:./external_references/DDTOC.pdf}{Template} for the Design Document
+	\item \href{run:./external_references/IEEESoftwareDesignDescriptions.pdf}{IEEE standard} for Software Design Document
+	\item The \href{run:./external_references/IEEEArchitectureDescription.pdf}{IEEE standard} for architecture descriptions
+\end{itemize}
 \subsection{Document Structure}
-
+The following parts of this document are structured in 3 sections: architectural design, user interface design and requirements traceability. The architectural design section describes the software and hardware components of the system and their interactions. The user interface design section which refers to the "User Interfaces" subsection of the RASD. The requirements traceability section that explains how the proposed design meets the requirements that have been defined in the RASD.
+\clearpage
 \section{Architectural Design}
 \subsection{Overview}
+The system to be developed, as mentioned before, will be used to provide an easy access to a taxi service. Therefore, its main functionalities, that will have to be supported by the design and architecture, are: the storage of the taxi drivers' and clients' accounts, the computation of the taxi queue of each zone and the handling of requests and reservations. Furthermore, the system will have to comply to quality of service attributes as specified in the RASD.
 \subsection{High Level Components and Their Interaction}
 %TODO Descrizione alto livello di tutta l'architettura, e del sitema e di interazioni (molto HL)
+myTaxiService's system is composed by three main components: DBMS, Web Server and the client application. The client application provides the UI through which end-users (taxi drivers, administrators and clients) 
 \subsection{Component View}
-%Mettere che la mobile app chiede cmq al webserver ma simula il fatto di avere tutto in cache tranne ciò che serve
 \begin{figure}[H]
-	  \makebox[\textwidth][c]{\includegraphics[width=1.4\textwidth]{Component}}%
+	  \makebox[\textwidth][c]{\includegraphics[width=1.5\textwidth]{Component}}%
 \end{figure}
-\clearpage
-\subsection{Deployment View}
-\begin{figure}[H]
-	  \makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth]{Deployment}}%
-\end{figure}
+%schemino di interfacce componenti hardware slides Arch and styles I pg 16
 \begin{comment}
-	A che livello di particolare lo faccio? 
-	scendo fino al creare l'account e la chiamata o resto più ad alto livello? non saprei :/ sulla slide di riferimento non mi pare scenda molto ma vedi tu come pensi sia meglio
+dbms <firewalled traffic> webservice <firewalled traffic> INTERNET < Clientapp
+TODO capire perchè qua resti una apgina vuota															   < TaxiApp
 \end{comment}
+\subsection{Deployment View}
+%schema slides design I - II pg 8
+\begin{figure}[H]
+	  \makebox[\textwidth][c]{\includegraphics[width=1.5\textwidth]{Deployment}}%
+\end{figure}
 \subsection{Runtime View}
 %sequence diagram
-%Request/alternative/%Cancel
-%Registration
-%Administrator modify
-%Search for eta
-\begin{comment}
-	Di che casi farlo? quanto ricco? quanti devo farne?
-\end{comment}
 \subsection{Component Interfaces}
 %dettagliare le cose della CV
 \subsection{Selected Architectural Styles and Patterns}
@@ -77,56 +86,11 @@
 
 
 \section{User Interface Design}
-%nope
+This section has been explored in RASD's section 2.1.1 "User Interfaces" so we refer to that one.
 
 \section{Requirements Traceability}
 %Explain	 how the requirements you have defined in  the RASD map	 into the design	 elements that you have  defined in this document
 
 \section{References}
-\clearpage
-\section{Appendix}
-Appendix for Roberto Clapis\\
-Work hours: 15
-\begin{center}
-	Software Used:\\
-	\-\\
-	\begin{tabular}{*{2}{c}}
-		\toprule
-		Task & Software \\
-		\midrule
-		Edit \LaTeX\ Source & Vim\\
-		Edit Graphs Sources & Vim\\
-		Edit sources for Sequence Diagrams & Vim\\
-		Convert Sequence Diagrams to images & Quick Sequence Diagram Editor\\
-		Generate and Raster directed graphs& Dot\\
-		Generate and Raster undirected graphs& Fdp\\
-		General images mangling and cropping & ImageMagick \& Shotwell\\
-		Convert \LaTeX\ source to PDF & \LaTeX\-MK\\
-		Spell Check & Aspell \\
-		\LaTeX\ Check & LaCheck\\
-		\bottomrule
-	\end{tabular}
-\end{center}
-\-\\
-\-\\
-\begin{comment}
-TODO Erica
-Appendix for Erica Stella\\
-Work hours: 40
-\begin{center}
-	Software Used:\\
-	\-\\
-	\begin{tabular}{*{2}{c}}
-		\toprule
-		Task & Software \\
-		\midrule
-		Edit \LaTeX\ Source & TexStudio\\
-		Use Case Diagrams & Eclipse\\
-		Class Diagram & Eclipse\\
-		General images mangling and cropping & GIMP\\
-		Mockup & Pencil\\
-		\bottomrule
-	\end{tabular}
-\end{center}
-\end{comment}
+
 \end{document}
