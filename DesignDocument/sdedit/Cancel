@@ -17,38 +17,45 @@ dbconnector:auth valid=accounts.check_auth
 dbconnector:placed=requestsAndReservations.create
 webpageCreator:>notificationModule.handle_request
 clientUI:user.confirmation_page
-user:clientUI.cancel
-clientUI:
-[c:loop until a taxi driver accepts]
-	notificationModule:taxi=dbconnector.get_first_taxi
-	dbconnector:active taxi=accounts.get_first_in_queue
-	notificationModule:notified=taxiUI.notify_call
-	taxiUI:taxiDriver.notify
-	notificationModule:listen_for_answer
-	[c:alt possible responses]
-		--[refusal]
-		taxiDriver:taxiUI.refuse
-		taxiUI:ok=notificationModule.refused
-		notificationModule:marked=dbconnector.mark_as_inactive
-		dbconnector:accounts.mark_inactive
-		taxiUI:taxiDriver.confirmed&
-		taxiUI:stop
-		--[timeout]
-		taxiDriver:taxiUI.no_interaction
-		taxiUI:handled=notificationModule.timeout
-		notificationModule:moved=dbconnector.move_to_bottom
-		dbconnector:accounts.set_login_time(Now)
-		taxiUI:stop
-		--[acceptance]
-		taxiDriver:taxiUI.accept
-		taxiUI:accepted=notificationModule.accept
-	[/c]
-[/c]
-notificationModule:marked=dbconnector.mark_request_as_active
-dbconnector:done=requestsAndReservations.update
-taxiUI:taxiDriver.drive_page
-taxiUI:stop
 
-notificationModule:notified=clientUI.taxi_is_coming
-clientUI:user.taxi_is_coming
-clientUI:stop
+notificationModule:taxi=dbconnector.get_first_taxi
+dbconnector:active taxi=accounts.get_first_in_queue
+notificationModule:notified=taxiUI.notify_call
+taxiUI:taxiDriver.notify
+notificationModule:listen_for_answer
+[c:alt a taxi accepts in time]
+	taxiDriver:taxiUI.accept
+	taxiUI:confirmed=httpHandler.accept
+	httpHandler:confirmed=webpageCreator.accept
+	webpageCreator:marked=dbconnector.mark_request_as_active
+	dbconnector:done=requestsAndReservations.update
+	user:clientUI.cancel
+	clientUI:denied=httpHandler.cancel
+	httpHandler:denied=webpageCreator.cancel
+
+	dbconnector:>notificationModule.request_answered_tigger&
+
+	taxiUI:taxiDriver.drive_page
+	taxiUI:stop
+	webpageCreator:abortion failed=dbconnector.delete_transaction
+	dbconnector:denied=requestsAndReservations.tryDelete
+	clientUI:user.denied
+	clientUI:stop
+
+	notificationModule:>clientUI.taxi_is_coming
+	clientUI:user.taxi_is_coming
+	clientUI:stop
+
+	--[no taxi accepts in time]
+	user:clientUI.cancel
+	clientUI:cancelled=httpHandler.cancel
+	httpHandler:cancelled=webpageCreator.cancel
+	webpageCreator:transaction aborted=dbconnector.delete_transaction
+	dbconnector:confirmed=requestsAndReservations.tryDelete
+	dbconnector:>notificationModule.abort&
+	clientUI:user.homepage
+	clientUI:stop
+	notificationModule:aborted=taxiUI.abort
+	taxiUI:taxiDriver.client aborted
+	taxiUI:stop
+[/c]
