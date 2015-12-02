@@ -44,7 +44,12 @@ This Design Document is intended to explain the design and architecture of myTax
 \subsection{Definitions, Acronyms, Abbreviations}
 \paragraph{Definitions}
 \begin{itemize}
-	\item %TODOdevo finire con end users
+	\item \textit{End users:} this category comprises all those who use the application (for their definition we refer to the RASD's section %TODO inserire sezione
+	): administrators, taxi drivers, logged in users and guests.
+\end{itemize}
+\paragraph{Acronyms}
+\begin{itemize}
+	\item \textit{UI:} user interface through which the end users can interact with the application.
 \end{itemize}
 \subsection{Reference Documents}
 \begin{itemize}
@@ -62,7 +67,7 @@ The following parts of this document are structured in 3 sections: architectural
 The system to be developed, as mentioned before, will be used to provide an easy access to a taxi service. Therefore, its main functionalities, that will have to be supported by the design and architecture, are: the storage of the taxi drivers' and clients' accounts, the computation of the taxi queue of each zone and the handling of requests and reservations. Furthermore, the system will have to comply to quality of service attributes as specified in the RASD\@.
 \subsection{High Level Components and Their Interaction}
 %TODO Descrizione alto livello di tutta l'architettura, e del sitema e di interazioni (molto HL)
-myTaxiService's system is composed by three main components: DBMS, Web Server and the client application. The client application provides the UI through which end-users (taxi drivers, administrators and clients) 
+myTaxiService's system is composed by three main components: DBMS, Web Server and client application. The client application provides the UI through which end users can access the application's services. These requests are forwarded to the Web Server which is in charge of providing a response, eventually querying the Database in the DBMS for information. The Web Server is also responsible for answering to the API calls coming from external applications and notifying the end users for particular events, like when a request is accepted by a taxi driver. The DBMS stores all the information of the end users's accounts, the active requests and reservations and the current state of the queues of every zone. %TODO anche lo stato delle code è nel db giusto?
 \subsection{Component View}
 \begin{figure}[H]
 	  \makebox[\textwidth][c]{\includegraphics[width=1.4\textwidth]{Component}}%
