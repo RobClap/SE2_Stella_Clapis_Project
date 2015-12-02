@@ -84,7 +84,7 @@ myTaxiService's system is composed by three main components: DBMS, Web Server an
 \paragraph{DBConnector}
 The DBConnector encapsulates and exposes all the operations the Web Server needs to interact with the Database. The operations are divided in 2 categories based on the part of the Database they manage:
 \begin{itemize}	
-	\item \textit{Accounts:} this component exposes methods to manage the stored end users accounts.
+	\item \textit{Accounts managing and access:} this interface exposes methods to manage the stored end users accounts.
 	
 		\begin{tabular}{1*{3}{c}}
 			\toprule
@@ -99,7 +99,7 @@ The DBConnector encapsulates and exposes all the operations the Web Server needs
 			\bottomrule
 		\end{tabular}
 		
-	\item \textit{Active Reservations and Requests:}
+	\item \textit{Operations creations and querying:} %TODO aggiungere descrizione
 	
 		\begin{tabular}{1*{3}{c}}
 			\toprule
@@ -118,8 +118,8 @@ The DBConnector encapsulates and exposes all the operations the Web Server needs
 	
 \end{itemize}
 
-\paragraph{HttpHandler}
-The HttpHandler exposes the interface %TODO finire frase
+\paragraph{Http/sRequest}
+This interface exposes  %TODO finire frase
 --> tables divided by type of user that uses the method %TODO sistemare
 \begin{itemize}
 	\item \textit{Client:}
@@ -169,8 +169,8 @@ The HttpHandler exposes the interface %TODO finire frase
 				\end{tabular}
 \end{comment}	
 	
-	
-	
+\paragraph{Notifications}
+This interface exposes methods to notify end users (except for administrators) of particular events. 
 	
 	
 	
