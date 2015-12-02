@@ -1,0 +1,15 @@
+guest:Actor
+unknownApp:App using APIs connection
+httpHandler:Web Server
+APIBackend:Web Server
+dbconnector:Web Server
+accounts:DBMS
+
+guest:unknownApp.get ETA
+unknownApp:ETA=httpHandler.getETA(Zone)
+httpHandler:ETA=APIBackend.getETA(Zone)
+APIBackend:Taxis=dbconnector.getETA(Zone)
+dbconnector:accounts.query active taxis in Zone
+APIBackend:
+APIBackend:compute ETA
+unknownApp:guest.Show ETA

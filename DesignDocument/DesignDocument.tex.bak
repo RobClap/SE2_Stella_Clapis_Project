@@ -62,9 +62,9 @@
 \end{comment}
 \subsection{Runtime View}
 %sequence diagram
-%Request/alternative/%Cancel
-%Registration
-%Administrator modify
+%DONE Request/alternative/%Cancel
+%DONE Registration
+%DONEAdministrator modify
 %Search for eta
 \begin{comment}
 	Di che casi farlo? quanto ricco? quanti devo farne?

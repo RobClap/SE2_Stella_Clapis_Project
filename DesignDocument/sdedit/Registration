@@ -1,0 +1,24 @@
+user:Actor
+clientUI:Mobile App OR Webpage
+httpHandler:Web Server
+webpageCreator:Web Server
+dbconnector:Web Server
+accounts:DBMS
+
+[c:alt Registration successful]
+	user:clientUI.Register
+	clientUI:successful=httpHandler.Register(Data)
+	httpHandler:confirmed=webpageCreator.Register(Data)
+	webpageCreator:success=dbconnector.AttemptLogin(Data)
+	dbconnector:insert performed=accounts.Query
+	clientUI:user.Home Page
+	clientUI:stop
+	--[Registration unsuccessful]
+	user:clientUI.Register
+	clientUI:aborted(Reasons Page)=httpHandler.Register(Data)
+	httpHandler:denied(WebPage with Reasons)=webpageCreator.Register(Data)
+	webpageCreator:denied(Reasons)=dbconnector.AttemptLogin(Data)
+	dbconnector:Replicated OR Invalid data=accounts.Query
+	clientUI:user.RegisterPage(Fields to change)
+	clientUI:stop
+[/c]
