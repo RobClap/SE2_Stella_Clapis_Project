@@ -9,7 +9,7 @@ graphs:
 	dot -Tpng -Kfdp ./graphviz/Deployment.dot -o ./images/Deployment.png
 
 clean:
-	-rm *.out *.log *.fls *.aux *.toc *~ *.fdb_latexmk
+	-git rm *.out *.log *.fls *.aux *.toc *~ *.fdb_latexmk
 
 view:
 	evince DesignDocument.pdf > /dev/null &

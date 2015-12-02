@@ -1,0 +1,63 @@
+\contentsline {section}{\numberline {1}Introduction}{4}{section.1}
+\contentsline {subsection}{\numberline {1.1}Purpose}{4}{subsection.1.1}
+\contentsline {subsection}{\numberline {1.2}Actual System}{4}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}Scope}{4}{subsection.1.3}
+\contentsline {subsection}{\numberline {1.4}Goals}{5}{subsection.1.4}
+\contentsline {subsection}{\numberline {1.5}Definition and Acronyms}{5}{subsection.1.5}
+\contentsline {subsubsection}{\numberline {1.5.1}Definitions}{5}{subsubsection.1.5.1}
+\contentsline {subsubsection}{\numberline {1.5.2}Acronyms}{6}{subsubsection.1.5.2}
+\contentsline {subsection}{\numberline {1.6}Actors}{6}{subsection.1.6}
+\contentsline {subsection}{\numberline {1.7}References}{6}{subsection.1.7}
+\contentsline {subsection}{\numberline {1.8}Overview}{6}{subsection.1.8}
+\contentsline {section}{\numberline {2}Overall description}{8}{section.2}
+\contentsline {subsection}{\numberline {2.1}Product perspective}{8}{subsection.2.1}
+\contentsline {subsubsection}{\numberline {2.1.1}User Interfaces}{8}{subsubsection.2.1.1}
+\contentsline {paragraph}{\numberline {2.1.1.1}Guest interface}{9}{paragraph.2.1.1.1}
+\contentsline {paragraph}{\numberline {2.1.1.2}Login}{10}{paragraph.2.1.1.2}
+\contentsline {paragraph}{\numberline {2.1.1.3}Register}{11}{paragraph.2.1.1.3}
+\contentsline {paragraph}{\numberline {2.1.1.4}ETA}{12}{paragraph.2.1.1.4}
+\contentsline {paragraph}{\numberline {2.1.1.5}Logged in user interface}{13}{paragraph.2.1.1.5}
+\contentsline {paragraph}{\numberline {2.1.1.6}Request a taxi interface}{14}{paragraph.2.1.1.6}
+\contentsline {paragraph}{\numberline {2.1.1.7}Reserve a taxi interface}{15}{paragraph.2.1.1.7}
+\contentsline {paragraph}{\numberline {2.1.1.8}Administrator interface}{16}{paragraph.2.1.1.8}
+\contentsline {paragraph}{\numberline {2.1.1.9}Modify taxi driver interface}{17}{paragraph.2.1.1.9}
+\contentsline {paragraph}{\numberline {2.1.1.10}Add taxi driver interface}{18}{paragraph.2.1.1.10}
+\contentsline {paragraph}{\numberline {2.1.1.11}Delete taxi driver interface}{19}{paragraph.2.1.1.11}
+\contentsline {subsubsection}{\numberline {2.1.2}Hardware Interfaces}{20}{subsubsection.2.1.2}
+\contentsline {paragraph}{\numberline {2.1.2.1}Software Interfaces}{20}{paragraph.2.1.2.1}
+\contentsline {paragraph}{\numberline {2.1.2.2}Communication Interfaces}{20}{paragraph.2.1.2.2}
+\contentsline {paragraph}{\numberline {2.1.2.3}Memory constraints}{21}{paragraph.2.1.2.3}
+\contentsline {subsection}{\numberline {2.2}User characteristics}{21}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Assumptions and dependencies}{21}{subsection.2.3}
+\contentsline {subsubsection}{\numberline {2.3.1}Domain Assumptions}{21}{subsubsection.2.3.1}
+\contentsline {section}{\numberline {3}Specific requirements}{22}{section.3}
+\contentsline {subsection}{\numberline {3.1}Functional Requirements}{22}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}Non functional requirements}{24}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}The world and the machine}{24}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Scenarios}{25}{subsection.3.4}
+\contentsline {subsubsection}{\numberline {3.4.1}Scenario 1}{25}{subsubsection.3.4.1}
+\contentsline {subsubsection}{\numberline {3.4.2}Scenario 2}{25}{subsubsection.3.4.2}
+\contentsline {subsubsection}{\numberline {3.4.3}Scenario 3}{25}{subsubsection.3.4.3}
+\contentsline {subsubsection}{\numberline {3.4.4}Scenario 4}{25}{subsubsection.3.4.4}
+\contentsline {subsubsection}{\numberline {3.4.5}Scenario 5}{25}{subsubsection.3.4.5}
+\contentsline {subsubsection}{\numberline {3.4.6}Scenario 6}{26}{subsubsection.3.4.6}
+\contentsline {subsubsection}{\numberline {3.4.7}Scenario 7}{26}{subsubsection.3.4.7}
+\contentsline {subsubsection}{\numberline {3.4.8}Scenario 8}{26}{subsubsection.3.4.8}
+\contentsline {subsection}{\numberline {3.5}Use cases}{27}{subsection.3.5}
+\contentsline {subsubsection}{\numberline {3.5.1}Request a taxi}{28}{subsubsection.3.5.1}
+\contentsline {subsubsection}{\numberline {3.5.2}Reserve a taxi}{30}{subsubsection.3.5.2}
+\contentsline {subsubsection}{\numberline {3.5.3}Cancel a reservation}{32}{subsubsection.3.5.3}
+\contentsline {subsubsection}{\numberline {3.5.4}Cancel a request}{33}{subsubsection.3.5.4}
+\contentsline {subsubsection}{\numberline {3.5.5}Registration}{34}{subsubsection.3.5.5}
+\contentsline {subsubsection}{\numberline {3.5.6}Login}{35}{subsubsection.3.5.6}
+\contentsline {subsubsection}{\numberline {3.5.7}Logout}{36}{subsubsection.3.5.7}
+\contentsline {subsubsection}{\numberline {3.5.8}Search for ETA}{37}{subsubsection.3.5.8}
+\contentsline {subsubsection}{\numberline {3.5.9}Modify taxi driver}{38}{subsubsection.3.5.9}
+\contentsline {subsubsection}{\numberline {3.5.10}Add taxi driver}{40}{subsubsection.3.5.10}
+\contentsline {subsubsection}{\numberline {3.5.11}Delete taxi driver}{41}{subsubsection.3.5.11}
+\contentsline {subsection}{\numberline {3.6}Class Diagram}{42}{subsection.3.6}
+\contentsline {section}{\numberline {4}Alloy}{42}{section.4}
+\contentsline {subsection}{\numberline {4.1}Model}{42}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Result}{47}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Worlds Generated}{48}{subsection.4.3}
+\contentsline {section}{\numberline {5}Appendix}{51}{section.5}
