@@ -36,8 +36,6 @@
 \tableofcontents
 \clearpage
 
-%TODO noi non abbiamo mai detto qualcosa a proposito di cancellare le richieste o le reservations che son state soddisfatte dopo un certo tempo
-
 \section{Introduction}
 \subsection{Purpose}
 The purpose of the Design Document is to provide documentation in order to aid the development of myTaxiService's system by providing a description of how it should be built and how its components are expected to interact with each other.
@@ -46,14 +44,13 @@ This Design Document is intended to explain the design and architecture of myTax
 \subsection{Definitions, Acronyms, Abbreviations}
 \paragraph{Definitions}
 \begin{itemize}
-	\item \textit{End users:} this category comprises all those who use the application\footnotemark: administrators, taxi drivers, logged in users and guests.
+	\item \textit{End users:} this category comprises all those who use the application (for their definition we refer to the RASD's section %TODO inserire sezione
+	): administrators, taxi drivers, logged in users and guests.
 \end{itemize}
-\footnotetext{For their definition we refer to the RASD's section 1.6}
 \paragraph{Acronyms}
 \begin{itemize}
 	\item \textit{UI:} user interface through which the end users can interact with the application.
 	\item \textit{DB:} Database.
-	\item \textit{DBMS:} Database Management System.
 \end{itemize}
 \subsection{Reference Documents}
 \begin{itemize}
@@ -71,8 +68,7 @@ The following parts of this document are structured in 3 sections: architectural
 The system to be developed, as mentioned before, will be used to provide an easy access to a taxi service. Therefore, its main functionalities, that will have to be supported by the design and architecture, are: the storage of the taxi drivers' and clients' accounts, the computation of the taxi queue of each zone and the handling of requests and reservations. Furthermore, the system will have to comply to quality of service attributes as specified in the RASD\@.
 \subsection{High Level Components and Their Interaction}
 %TODO Descrizione alto livello di tutta l'architettura, e del sitema e di interazioni (molto HL)
-myTaxiService's system is composed by three main components: DBMS, Web Server and client application. The client application provides the UI through which end users can access the application's services. These requests are forwarded to the Web Server which is in charge of providing a response, eventually querying the Database in the DBMS for information. The Web Server is also responsible for answering to the API calls coming from external applications and notifying the end users for particular events, like when a request is accepted by a taxi driver. The DBMS stores all the information of the end users's accounts, the active requests and reservations. %TODO anche lo stato delle code è nel db giusto? NOPE, viene ricalcolato ogni volta che serve saperlo, se no potremmo avere race conditions e stati incoerenti del server, tutta roba in più da gestire
-
+myTaxiService's system is composed by three main components: DBMS, Web Server and client application. The client application provides the UI through which end users can access the application's services. These requests are forwarded to the Web Server which is in charge of providing a response, eventually querying the Database in the DBMS for information. The Web Server is also responsible for answering to the API calls coming from external applications and notifying the end users for particular events, like when a request is accepted by a taxi driver. The DBMS stores all the information of the end users's accounts, the active requests and reservations and the current state of the queues of every zone. %TODO anche lo stato delle code è nel db giusto?
 \subsection{Component View}
 \begin{figure}[H]
 	  \makebox[\textwidth][c]{\includegraphics[width=1.4\textwidth]{Component}}%
@@ -84,105 +80,41 @@ myTaxiService's system is composed by three main components: DBMS, Web Server an
 \subsection{Runtime View}
 %sequence diagram
 \subsection{Component Interfaces}
-\paragraph{DBInteractions}
-This interface encapsulates and exposes all the operations the Web Server needs to interact with the DB\@. The operations are divided in 2 categories based on the DB's part they manage:
+\paragraph{DBConnector}
+The DBConnector encapsulates and exposes all the operations the Web Server needs to interact with the Database. The operations are divided in 2 categories based on the part of the Database they manage:
 \begin{itemize}	
-	\item \textit{Accounts managing and access:} this interface exposes methods to manage the stored end users accounts.	
+	\item Accounts: this component exposes methods to manage the stored end users accounts.
 	
-		%TODO QUESTA COSA ESCE, dobbiamo trovare un modo di centrarla
-		\begin{tabular}{*{3}{c}}
+		\begin{tabular}{1*{3}{c}}
 			\toprule
 			Method & Parameters required & Notes \\
 			\midrule
-			addAccount & type of the account, credentials & adds an account to the DB of the specified type (e.g.\ taxi driver's account, user's account) \\
-			modifyAccount & user ID, attribute to modify, new value of the attribute & modifies the attribute of the account specified by the ID setting it to the new value\\ 
-			deleteAccount & user ID & deletes the account specified by the ID \\
-			getAccount & user ID & returns the account corresponding to the ID with all its attributes \\
+			addAccount & type of the account, credentials & adds an account to the DB \\ %TODO finire
+			modifyAccount & DB key, attribute to modify, new value of the attribute & \\ %TODO finire
+			deleteAccount & & \\
+			getAccount & DB key & returns the account corresponding to the key  \\
 			%TODO aggiungere un getTable che fa vedere quali sono i campi del db?
-			%TODO le code e gli stati dei taxisti dove sono salvati?
-			\bottomrule
-		\end{tabular}	
-	\item \textit{Operations creations and querying:} this interface exposes methods to manage and retrieve requests and reservations.	
-	%TODO forse aggiungere gli user ID nei parametri
-		\begin{tabular}{1*{3}{c}}
-			\toprule
-			Method & Parameters required & Notes \\
-			\midrule
-			addRequest & starting locations's zone, destination's zone, user's ID & adds a new request to the DB from the specified user\\ %TODO deve ritornare l'id della richiesta?
-			deleteRequest & request ID & deletes an existing request from the DB\\ 
-			toggleStateOfTheRequest & request ID & changes the state of the request from ``not accepted'' to ``accepted''\\
-			getRequest & request ID & returns the request specified by its ID with all its attributes \\
-			getAllTheRequestsOfAnUser & user ID & returns all the active requests of the specified user \\
-			addReservation & starting locations's zone, destination's zone, meeting time, user ID & adds a new reservation to the DB from the specified user\\
-			deleteReservation & reservation ID & deletes an existing reservation from the DB\\
-			toggleStateOfTheReservation & reservation ID & changes the state of the reservation from ``not accepted'' to ``accepted''\\
-			getReservation & reservation ID & returns the reservation specified by its ID with all its attributes\\
-			getAllTheReservationsOfAnUser & user ID & returns all the active reservations of the specified user \\ %TODO controllato fino a qui
-			\bottomrule
-		\end{tabular}	
-\end{itemize}
-\paragraph{Http/sRequest}
-This interface exposes  %TODO finire frase
---> tables divided by type of user that uses the method %TODO sistemare
-\begin{itemize}
-	\item \textit{Functionalities exploited by guests:}	
-	
-	\item \textit{Functionalities exploited by logged in user:} %TODO include quelle dei guest
-		\begin{tabular}{1*{3}{c}}
-			\toprule
-			Method & Parameters required & Notes \\
-			\midrule
-			requestTaxi &  & \\ %TODO finire
-			cancelRequest & & \\ %TODO finire
-			showRequestDetails & & \\
-			reserveTaxi & &  \\
-			cancelReservation & & \\
-			showReservationDetails & & \\
-			searchForETA & & \\
-			register & & \\
-			login & & \\
-			logout & & \\
 			\bottomrule
 		\end{tabular}
-
-	\item \textit{Driver:}
-
-				\begin{tabular}{1*{3}{c}}
-					\toprule
-					Method & Parameters required & Notes \\
-					\midrule
-					answerRequest & & \\ %TODO finire
-					answerReservation & & \\ %TODO finire
-					toggleState & & \\
-					\bottomrule
-				\end{tabular}
-
-%TODO dubbissimo: ma qui le interfacce sono semplicemente i 3 metodi che vengono messi a disposizione dell'admin per fare add update e delete degli account?
-\begin{comment}
-	
-	\item Admin
-	
-				\begin{tabular}{1*{3}{c}}
-					\toprule
-					Method & Parameters required & Notes \\
-					\midrule
-					answerRequest & & \\ %TODO finire
-					answerReservation & & \\ %TODO finire
-					toggleState & & \\
-					\bottomrule
-				\end{tabular}
-\end{comment}	
-	
-\paragraph{Notifications}
-This interface exposes methods to notify end users (except for administrators) of particular events. 
 	
 	
+	
+	
+	
+	
+	
+	\begin{itemize}
+		\item 
+	\end{itemize}	
+	\item Active Reservations and Requests:
+	\begin{itemize}
+		\item
+	\end{itemize}
 	
 \end{itemize}
 \subsection{Selected Architectural Styles and Patterns}
 %client-server
 \subsection{Other Design Decisions}
-%
 
 
 \section{User Interface Design}
