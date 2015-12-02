@@ -50,6 +50,7 @@ This Design Document is intended to explain the design and architecture of myTax
 \paragraph{Acronyms}
 \begin{itemize}
 	\item \textit{UI:} user interface through which the end users can interact with the application.
+	\item \textit{DB:} Database.
 \end{itemize}
 \subsection{Reference Documents}
 \begin{itemize}
@@ -80,7 +81,38 @@ myTaxiService's system is composed by three main components: DBMS, Web Server an
 \subsection{Runtime View}
 %sequence diagram
 \subsection{Component Interfaces}
-%dettagliare le cose della CV
+\paragraph{DBConnector}
+The DBConnector encapsulates and exposes all the operations the Web Server needs to interact with the Database. The operations are divided in 2 categories based on the part of the Database they manage:
+\begin{itemize}	
+	\item Accounts: this component exposes methods to manage the stored end users accounts.
+	
+		\begin{tabular}{1*{3}{c}}
+			\toprule
+			Method & Parameters required & Notes \\
+			\midrule
+			addAccount & type of the account, credentials & adds an account to the DB \\ %TODO finire
+			modifyAccount & DB key, attribute to modify, new value of the attribute & \\ %TODO finire
+			deleteAccount & & \\
+			getAccount & DB key & returns the account corresponding to the key  \\
+			%TODO aggiungere un getTable che fa vedere quali sono i campi del db?
+			\bottomrule
+		\end{tabular}
+	
+	
+	
+	
+	
+	
+	
+	\begin{itemize}
+		\item 
+	\end{itemize}	
+	\item Active Reservations and Requests:
+	\begin{itemize}
+		\item
+	\end{itemize}
+	
+\end{itemize}
 \subsection{Selected Architectural Styles and Patterns}
 %client-server
 \subsection{Other Design Decisions}
