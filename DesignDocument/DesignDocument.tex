@@ -142,30 +142,38 @@ The HttpHandler exposes the interface %TODO finire frase
 			\end{tabular}
 	
 	\item \textit{Driver:}
-	\begin{comment}
+
 				\begin{tabular}{1*{3}{c}}
 					\toprule
 					Method & Parameters required & Notes \\
 					\midrule
-					requestTaxi & & \\ %TODO finire
-					cancelRequest & & \\ %TODO finire
-					showRequestDetails & & \\
-					reserveTaxi & &  \\
-					cancelReservation & & \\
-					showReservationDetails & & \\
-					searchForETA & & \\
-					register & & \\
-					login & & \\
-					logout & & \\
+					answerRequest & & \\ %TODO finire
+					answerReservation & & \\ %TODO finire
+					toggleState & & \\
 					\bottomrule
 				\end{tabular}
-	
-	\end{comment}
-	
-	
-	
+
+%TODO dubbissimo: ma qui le interfacce sono semplicemente i 3 metodi che vengono messi a disposizione dell'admin per fare add update e delete degli account?
+\begin{comment}
 	
 	\item Admin
+	
+				\begin{tabular}{1*{3}{c}}
+					\toprule
+					Method & Parameters required & Notes \\
+					\midrule
+					answerRequest & & \\ %TODO finire
+					answerReservation & & \\ %TODO finire
+					toggleState & & \\
+					\bottomrule
+				\end{tabular}
+\end{comment}	
+	
+	
+	
+	
+	
+	
 \end{itemize}
 \subsection{Selected Architectural Styles and Patterns}
 %client-server
