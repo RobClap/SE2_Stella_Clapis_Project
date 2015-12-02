@@ -51,6 +51,7 @@ This Design Document is intended to explain the design and architecture of myTax
 \begin{itemize}
 	\item \textit{UI:} user interface through which the end users can interact with the application.
 	\item \textit{DB:} Database.
+	\item \textit{DBMS:} Database Management System.
 \end{itemize}
 \subsection{Reference Documents}
 \begin{itemize}
@@ -83,7 +84,7 @@ myTaxiService's system is composed by three main components: DBMS, Web Server an
 \paragraph{DBConnector}
 The DBConnector encapsulates and exposes all the operations the Web Server needs to interact with the Database. The operations are divided in 2 categories based on the part of the Database they manage:
 \begin{itemize}	
-	\item Accounts: this component exposes methods to manage the stored end users accounts.
+	\item \textit{Accounts:} this component exposes methods to manage the stored end users accounts.
 	
 		\begin{tabular}{1*{3}{c}}
 			\toprule
@@ -94,23 +95,77 @@ The DBConnector encapsulates and exposes all the operations the Web Server needs
 			deleteAccount & & \\
 			getAccount & DB key & returns the account corresponding to the key  \\
 			%TODO aggiungere un getTable che fa vedere quali sono i campi del db?
+			%TODO le code e gli stati dei taxisti dove sono salvati?
+			\bottomrule
+		\end{tabular}
+		
+	\item \textit{Active Reservations and Requests:}
+	
+		\begin{tabular}{1*{3}{c}}
+			\toprule
+			Method & Parameters required & Notes \\
+			\midrule
+			addRequest & & \\ %TODO finire
+			deleteRequest & & \\ %TODO finire
+			toggleStateOfTheRequest & & \\
+			getRequest & &  \\
+			addReservation & & \\
+			deleteReservation & & \\
+			toggleStateOfTheReservation & & \\
+			getReservation & & \\
 			\bottomrule
 		\end{tabular}
 	
+\end{itemize}
+
+\paragraph{HttpHandler}
+The HttpHandler exposes the interface %TODO finire frase
+--> tables divided by type of user that uses the method %TODO sistemare
+\begin{itemize}
+	\item \textit{Client:}
+	
+			\begin{tabular}{1*{3}{c}}
+				\toprule
+				Method & Parameters required & Notes \\
+				\midrule
+				requestTaxi & & \\ %TODO finire
+				cancelRequest & & \\ %TODO finire
+				showRequestDetails & & \\
+				reserveTaxi & &  \\
+				cancelReservation & & \\
+				showReservationDetails & & \\
+				searchForETA & & \\
+				register & & \\
+				login & & \\
+				logout & & \\
+				\bottomrule
+			\end{tabular}
+	
+	\item \textit{Driver:}
+	\begin{comment}
+				\begin{tabular}{1*{3}{c}}
+					\toprule
+					Method & Parameters required & Notes \\
+					\midrule
+					requestTaxi & & \\ %TODO finire
+					cancelRequest & & \\ %TODO finire
+					showRequestDetails & & \\
+					reserveTaxi & &  \\
+					cancelReservation & & \\
+					showReservationDetails & & \\
+					searchForETA & & \\
+					register & & \\
+					login & & \\
+					logout & & \\
+					\bottomrule
+				\end{tabular}
+	
+	\end{comment}
 	
 	
 	
 	
-	
-	
-	\begin{itemize}
-		\item 
-	\end{itemize}	
-	\item Active Reservations and Requests:
-	\begin{itemize}
-		\item
-	\end{itemize}
-	
+	\item Admin
 \end{itemize}
 \subsection{Selected Architectural Styles and Patterns}
 %client-server
