@@ -99,8 +99,7 @@ This interface encapsulates and exposes all the operations the Web Server needs 
 			modifyAccount & user ID, attribute to modify, new value of the attribute & modifies the attribute of the account specified by the ID setting it to the new value\\ 
 			deleteAccount & user ID & deletes the account specified by the ID \\
 			getAccount & user ID & returns the account corresponding to the ID with all its attributes \\
-			%TODO aggiungere un getTable che fa vedere quali sono i campi del db?
-			%TODO le code e gli stati dei taxisti dove sono salvati?
+			getAllAccountsOfOneType & type of account & returns all the accounts of the specified type \\
 			\bottomrule
 		\end{tabular}	
 	\item \textit{Operations creations and querying:} this interface exposes methods to manage and retrieve requests and reservations.	
@@ -109,7 +108,7 @@ This interface encapsulates and exposes all the operations the Web Server needs 
 			\toprule
 			Method & Parameters required & Notes \\
 			\midrule
-			addRequest & starting locations's zone, destination's zone, user's ID & adds a new request to the DB from the specified user\\ %TODO deve ritornare l'id della richiesta?
+			addRequest & starting location's zone, destination's zone, user's ID & adds a new request to the DB from the specified user and returns its ID to the caller\\ 
 			deleteRequest & request ID & deletes an existing request from the DB\\ 
 			toggleStateOfTheRequest & request ID & changes the state of the request from ``not accepted'' to ``accepted''\\
 			getRequest & request ID & returns the request specified by its ID with all its attributes \\
@@ -118,7 +117,7 @@ This interface encapsulates and exposes all the operations the Web Server needs 
 			deleteReservation & reservation ID & deletes an existing reservation from the DB\\
 			toggleStateOfTheReservation & reservation ID & changes the state of the reservation from ``not accepted'' to ``accepted''\\
 			getReservation & reservation ID & returns the reservation specified by its ID with all its attributes\\
-			getAllTheReservationsOfAnUser & user ID & returns all the active reservations of the specified user \\ %TODO controllato fino a qui
+			getAllTheReservationsOfAnUser & user ID & returns all the active reservations of the specified user \\ 
 			\bottomrule
 		\end{tabular}	
 \end{itemize}
@@ -134,11 +133,13 @@ In the following list the methods are divided by type of end user that needs the
 				\toprule
 				Method & Parameters required & Notes \\
 				\midrule
-				requestTaxi &  & \\ %TODO finire
+				searchForETA & starting location & returns the ETA\footnote of the CAT\footnote \\ %
 				\bottomrule
 			\end{tabular}
+\footnotetext{text}%TODO inserire le sezioni del RASD
+\footnotetext{text}
 	
-	\item \textit{Functionalities exploited by logged in user:} %TODO include quelle dei guest
+	\item \textit{Functionalities exploited by logged in user:} logged in user can access the searchForETA method exposed for guests along the following methods:
 		\begin{tabular}{*{3}{c}}
 			\toprule
 			Method & Parameters required & Notes \\
@@ -149,7 +150,6 @@ In the following list the methods are divided by type of end user that needs the
 			reserveTaxi & &  \\
 			cancelReservation & & \\
 			showReservationDetails & & \\
-			searchForETA & & \\
 			register & & \\
 			login & & \\
 			logout & & \\
