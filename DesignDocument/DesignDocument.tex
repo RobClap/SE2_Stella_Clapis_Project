@@ -37,8 +37,6 @@
 \tableofcontents
 \clearpage
 
-%TODO noi non abbiamo mai detto qualcosa a proposito di cancellare le richieste o le reservations che son state soddisfatte dopo un certo tempo
-
 \section{Introduction}
 \subsection{Purpose}
 The purpose of the Design Document is to provide documentation in order to aid the development of myTaxiService's system by providing a description of how it should be built and how its components are expected to interact with each other.
@@ -72,11 +70,9 @@ The following parts of this document are structured in 3 sections: architectural
 The system to be developed, as mentioned before, will be used to provide an easy access to a taxi service. Therefore, its main functionalities, that will have to be supported by the design and architecture, are: the storage of the taxi drivers' and clients' accounts, the computation of the taxi queue of each zone and the handling of requests and reservations. Furthermore, the system will have to comply to quality of service attributes as specified in the RASD\@.
 \subsection{High Level Components and Their Interaction}
 myTaxiService's system is composed by three main components: DBMS, Web Server and client application. The client application provides the UI through which end users can access the application's services. These requests are forwarded to the Web Server which is in charge of providing a response, eventually querying the Database in the DBMS for information. The Web Server is also responsible for answering to the API calls coming from external applications and notifying the end users for particular events, like when a request is accepted by a taxi driver. The DBMS stores all the information of the end users's accounts, the active requests and reservations. %TODO anche lo stato delle code è nel db giusto? NOPE, viene ricalcolato ogni volta che serve saperlo, se no potremmo avere race conditions e stati incoerenti del server, tutta roba in più da gestire
-
 \subsection{Component View}
 \begin{figure}[H]
 	  \makebox[\textwidth][c]{\includegraphics[width=1.4\textwidth]{Component}}%
-	  %TODO add comment (Webpage creator API backend DBDriver+ metodi Http Handler e interazione phonegap)
 \end{figure}
 	  Meanwhile the DBMS and the ClientSide application are pretty much self explanatory the WebServer part requires some details:
 	  \begin{itemize}
@@ -86,7 +82,6 @@ myTaxiService's system is composed by three main components: DBMS, Web Server an
 \subsection{Deployment View}
 \begin{figure}[H]
 	  \makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth]{Deployment}}%
-	  %TODO add comment (spiegare relazione con component ngix e simili)
 \end{figure}
 		This is just a pretty standard configuration with DMZ, Internal network, double firewall and untrusted network, see more in section 2.8
 \subsection{Runtime View}
@@ -99,7 +94,6 @@ This interface encapsulates and exposes all the operations the Web Server needs 
 	\item \textit{Accounts managing and access:} this interface exposes methods to manage the stored end users accounts.\\	
 	
 		%TODO QUESTA COSA ESCE, dobbiamo trovare un modo di centrarla
-	\begin{table}[H]
 		\centering
 		\begin{tabular}{*{3}{c}}
 			\toprule
@@ -109,18 +103,16 @@ This interface encapsulates and exposes all the operations the Web Server needs 
 			modifyAccount & user ID, attribute to modify, new value of the attribute & modifies the attribute of the account specified by the ID setting it to the new value\\ 
 			deleteAccount & user ID & deletes the account specified by the ID \\
 			getAccount & user ID & returns the account corresponding to the ID with all its attributes \\
-			%TODO aggiungere un getTable che fa vedere quali sono i campi del db?
-			%TODO le code e gli stati dei taxisti dove sono salvati?
+			getAllAccountsOfOneType & type of account & returns all the accounts of the specified type \\
 			\bottomrule
 		\end{tabular}	
-	\end{table}
 	\item \textit{Operations creations and querying:} this interface exposes methods to manage and retrieve requests and reservations.\\	
 	%TODO forse aggiungere gli user ID nei parametri
 		\begin{tabular}{*{3}{c}}
 			\toprule
 			Method & Parameters required & Notes \\
 			\midrule
-			addRequest & starting locations's zone, destination's zone, user's ID & adds a new request to the DB from the specified user\\ %TODO deve ritornare l'id della richiesta?
+			addRequest & starting location's zone, destination's zone, user's ID & adds a new request to the DB from the specified user and returns its ID to the caller\\ 
 			deleteRequest & request ID & deletes an existing request from the DB\\ 
 			toggleStateOfTheRequest & request ID & changes the state of the request from ``not accepted'' to ``accepted''\\
 			getRequest & request ID & returns the request specified by its ID with all its attributes \\
@@ -129,17 +121,29 @@ This interface encapsulates and exposes all the operations the Web Server needs 
 			deleteReservation & reservation ID & deletes an existing reservation from the DB\\
 			toggleStateOfTheReservation & reservation ID & changes the state of the reservation from ``not accepted'' to ``accepted''\\
 			getReservation & reservation ID & returns the reservation specified by its ID with all its attributes\\
-			getAllTheReservationsOfAnUser & user ID & returns all the active reservations of the specified user \\ %TODO controllato fino a qui
+			getAllTheReservationsOfAnUser & user ID & returns all the active reservations of the specified user \\ 
 			\bottomrule
 		\end{tabular}	
 \end{itemize}
 \paragraph{Http/s Request}
 This interface exposes  %TODO finire frase
---> tables divided by type of user that uses the method %TODO sistemare
+
+\paragraph{Response creator}
+This interface exposes all the functionalities end users require to access the services offered by myTaxiService. 
+In the following list the methods are divided by type of end user that needs them.
 \begin{itemize}
-	\item \textit{Functionalities exploited by guests:}\\	
+	\item \textit{Functionalities exploited by guests:}	
+			\begin{tabular}{*{3}{c}}
+				\toprule
+				Method & Parameters required & Notes \\
+				\midrule
+				searchForETA & starting location & returns the ETA\footnotemark\  of the CAT\footnotemark\\ %
+				\bottomrule
+			\end{tabular}
+\footnotetext{text}%TODO inserire le sezioni del RASD
+\footnotetext{text}
 	
-	\item \textit{Functionalities exploited by logged in user:}\\ %TODO include quelle dei guest
+	\item \textit{Functionalities exploited by logged in user:} logged in user can access the searchForETA method exposed for guests along the following methods:
 		\begin{tabular}{*{3}{c}}
 			\toprule
 			Method & Parameters required & Notes \\
@@ -150,7 +154,6 @@ This interface exposes  %TODO finire frase
 			reserveTaxi & &  \\
 			cancelReservation & & \\
 			showReservationDetails & & \\
-			searchForETA & & \\
 			register & & \\
 			login & & \\
 			logout & & \\

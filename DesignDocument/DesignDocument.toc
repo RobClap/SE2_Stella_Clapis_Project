@@ -15,7 +15,8 @@
 \contentsline {subsection}{\numberline {2.6}Component Interfaces}{8}{subsection.2.6}
 \contentsline {paragraph}{\numberline {2.6.0.1}DBInteractions}{8}{paragraph.2.6.0.1}
 \contentsline {paragraph}{\numberline {2.6.0.2}Http/s Request}{8}{paragraph.2.6.0.2}
-\contentsline {paragraph}{\numberline {2.6.0.3}Notifications}{9}{paragraph.2.6.0.3}
+\contentsline {paragraph}{\numberline {2.6.0.3}Response creator}{8}{paragraph.2.6.0.3}
+\contentsline {paragraph}{\numberline {2.6.0.4}Notifications}{9}{paragraph.2.6.0.4}
 \contentsline {subsection}{\numberline {2.7}Selected Architectural Styles and Patterns}{9}{subsection.2.7}
 \contentsline {subsection}{\numberline {2.8}Other Design Decisions}{9}{subsection.2.8}
 \contentsline {section}{\numberline {3}User Interface Design}{9}{section.3}
