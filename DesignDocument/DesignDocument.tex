@@ -1,5 +1,3 @@
-%TODO write that https negotiations are omitted for readability's sake
-%TODO Phonegap interaction with webpage
 \documentclass{article}
 \usepackage{float}
 \usepackage{textcomp}
@@ -85,8 +83,12 @@ myTaxiService's system is composed by three main components: DBMS, Web Server an
 \end{figure}
 		This is just a pretty standard configuration with DMZ, Internal network, double firewall and untrusted network, see more in section 2.8
 \subsection{Runtime View}
-%sequence diagram
-%TODO Spiegare gestione code
+Some details:
+\begin{itemize}
+	\item Https negotiations are omitted in order to preserve readability, but they would all be between the apps (Web or Mobile)  and the httpHandler
+	\item Queues are not represented in the database, but they are all re-computed with a query that selects the taxis that are active, are in the desired area and returns them sorted by the time they were marked as active.
+\end{itemize}
+%TODO sequence diagrams
 \subsection{Component Interfaces}
 \paragraph{DBInteractions}
 This interface encapsulates and exposes all the operations the Web Server needs to interact with the DB\@. The operations are divided in 2 categories based on the DB's part they manage:
@@ -94,21 +96,24 @@ This interface encapsulates and exposes all the operations the Web Server needs 
 	\item \textit{Accounts managing and access:} this interface exposes methods to manage the stored end users accounts.\\	
 	
 		%TODO QUESTA COSA ESCE, dobbiamo trovare un modo di centrarla
-		\centering
-		\begin{tabular}{*{3}{c}}
+	\begin{figure}[H]	
+		\makebox[\textwidth][c]{\begin{tabular}{*{3}{c}}
 			\toprule
 			Method & Parameters required & Notes \\
 			\midrule
-			addAccount & type of the account,credentials & adds an account to the DB of the specified type (e.g.\ taxi driver's account, user's account) \\
-			modifyAccount & user ID, attribute to modify, new value of the attribute & modifies the attribute of the account specified by the ID setting it to the new value\\ 
+			addAccount & account type and credentials & adds an account to the DB of the specified type\\
+			modifyAccount & user ID, attribute to modify, and value & updates the attribute specified to the new value\\ 
 			deleteAccount & user ID & deletes the account specified by the ID \\
 			getAccount & user ID & returns the account corresponding to the ID with all its attributes \\
 			getAllAccountsOfOneType & type of account & returns all the accounts of the specified type \\
 			\bottomrule
 		\end{tabular}	
+	}
+	\end{figure}
 	\item \textit{Operations creations and querying:} this interface exposes methods to manage and retrieve requests and reservations.\\	
-	%TODO forse aggiungere gli user ID nei parametri
-		\begin{tabular}{*{3}{c}}
+	%TODO forse aggiungere gli user ID nei parametri yes
+	\begin{figure}[H]	
+		\makebox[\textwidth][c]{\begin{tabular}{*{3}{c}}
 			\toprule
 			Method & Parameters required & Notes \\
 			\midrule
@@ -124,6 +129,7 @@ This interface encapsulates and exposes all the operations the Web Server needs 
 			getAllTheReservationsOfAnUser & user ID & returns all the active reservations of the specified user \\ 
 			\bottomrule
 		\end{tabular}	
+	}\end{figure}
 \end{itemize}
 \paragraph{Http/s Request}
 This interface exposes  %TODO finire frase
@@ -132,19 +138,21 @@ This interface exposes  %TODO finire frase
 This interface exposes all the functionalities end users require to access the services offered by myTaxiService. 
 In the following list the methods are divided by type of end user that needs them.
 \begin{itemize}
-	\item \textit{Functionalities exploited by guests:}	
-			\begin{tabular}{*{3}{c}}
+	\item \textit{Functionalities exploited by guests:}	\\
+	\begin{figure}[H]	
+		\makebox[\textwidth][c]{\begin{tabular}{*{3}{c}}
 				\toprule
 				Method & Parameters required & Notes \\
 				\midrule
 				searchForETA & starting location & returns the ETA\footnotemark\  of the CAT\footnotemark\\ %
 				\bottomrule
-			\end{tabular}
-\footnotetext{text}%TODO inserire le sezioni del RASD
-\footnotetext{text}
-	
+			\end{tabular}}\end{figure}
+		\footnotetext{text}%TODO inserire le sezioni del RASD
+		\footnotetext{text}
+		
 	\item \textit{Functionalities exploited by logged in user:} logged in user can access the searchForETA method exposed for guests along the following methods:
-		\begin{tabular}{*{3}{c}}
+	\begin{figure}[H]	
+		\makebox[\textwidth][c]{\begin{tabular}{*{3}{c}}
 			\toprule
 			Method & Parameters required & Notes \\
 			\midrule
@@ -158,38 +166,39 @@ In the following list the methods are divided by type of end user that needs the
 			login & & \\
 			logout & & \\
 			\bottomrule
-		\end{tabular}
-
-	\item \textit{Driver:}
-
-				\begin{tabular}{*{3}{c}}
-					\toprule
-					Method & Parameters required & Notes \\
-					\midrule
-					answerRequest & & \\ %TODO finire
-					answerReservation & & \\ %TODO finire
-					toggleState & & \\
-					\bottomrule
-				\end{tabular}
+		\end{tabular}}\end{figure}
+	
+\item \textit{Driver:}
+	
+	\begin{figure}[H]	
+		\makebox[\textwidth][c]{\begin{tabular}{*{3}{c}}
+		\toprule
+		Method & Parameters required & Notes \\
+		\midrule
+		answerRequest & & \\ %TODO finire
+		answerReservation & & \\ %TODO finire
+		toggleState & & \\
+		\bottomrule
+	\end{tabular}}\end{figure}
 
 %TODO dubbissimo: ma qui le interfacce sono semplicemente i 3 metodi che vengono messi a disposizione dell'admin per fare add update e delete degli account?
 \begin{comment}
+
+\item Admin
 	
-	\item Admin
+	\begin{tabular}{*{3}{c}}
+		\toprule
+		Method & Parameters required & Notes \\
+		\midrule
+		answerRequest & & \\ %TODO finire
+		answerReservation & & \\ %TODO finire
+		toggleState & & \\
+		\bottomrule
+	\end{tabular}
+	\end{comment}	
 	
-				\begin{tabular}{*{3}{c}}
-					\toprule
-					Method & Parameters required & Notes \\
-					\midrule
-					answerRequest & & \\ %TODO finire
-					answerReservation & & \\ %TODO finire
-					toggleState & & \\
-					\bottomrule
-				\end{tabular}
-\end{comment}	
-	
-\paragraph{Notifications}
-This interface exposes methods to notify end users (except for administrators) of particular events. 
+	\paragraph{Notifications}
+	This interface exposes methods to notify end users (except for administrators) of particular events. 
 	
 	
 	
@@ -212,11 +221,24 @@ This section has been explored in RASD's section 2.1.1 ``User Interfaces'' so we
 %Explain	 how the requirements you have defined in  the RASD map	 into the design	 elements that you have  defined in this document
 %TODO move both funct and non funct and explain how are they respected
 
+Functional requirements:
+\begin{itemize}
+	\item Data accessibility, modifiability and creation for the 4 kinds of users\footnotemark\ is granted thanks to the http interface exposed on the Internet.
+	\item Notification delivery is granted through the interface exposed by the mobile applications and web applications.
+\end{itemize}
+Non functional requirements:
+\begin{itemize}
+	\item Secure channels will be established using SSL 
+	\item Autentication will always be checked before accessing sensible data.
+	\item Stability, scalability and availability of resources will be granted by using a cloud-based system. The deployment will not be made on phisical machines but virtual machines rented on reliable providers.
+	%TODO add SSL to acronyms
+\end{itemize}
+\footnotetext{Guest, Administrator, Regeistered User and Taxi Driver (RASD section 1.6)}
 \section{References}
 \clearpage
 \section{Appendix}
 Appendix for Roberto Clapis\\
-Work hours: 15
+Work hours: 20
 \begin{center}
 	Software Used:\\
 	\-\\
