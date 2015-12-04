@@ -212,7 +212,19 @@ This interface exposes the same methods as the previous one as the
 		
 \paragraph{Notifications}
 This interface exposes methods to notify end users (except for administrators) of particular events. 
-		
+The following list distinguishes notifications sent to taxi drivers from those sent to logged in users
+\begin{itemize}
+	\item \textit{Notifications sent to logged in users:}
+		\begin{adjustbox}{width=1.2\textwidth}	
+			\begin{tabular}{*{3}{c}}
+				\toprule
+				Method & Parameters required & Notes \\
+				\midrule
+				notifyAcceptedRequest & request ID, taxi driver ID & the user is notified that request specified by the ID %TODO finire\\ 
+				\bottomrule
+			\end{tabular}
+		\end{adjustbox}	
+\end{itemize}		
 		
 		
 \end{itemize}
