@@ -48,7 +48,7 @@ httpHandler:confirmed=webpageCreator.accept
 webpageCreator:marked=dbconnector.activateRequest
 dbconnector:done=requestsAndReservations.UPDATE ...
 dbconnector:done=accounts.UPDATE ...
-dbconnector:>notificationModule.request_answered_tigger&
+dbconnector:>notificationModule.request_answered_trigger&
 notificationModule:notified=clientUI.taxi_is_coming
 clientUI:user.taxi_is_coming
 clientUI:stop

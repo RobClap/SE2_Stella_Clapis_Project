@@ -68,12 +68,13 @@ The following parts of this document are structured in 3 sections: architectural
 \subsection{Overview}
 The system to be developed, as mentioned before, will be used to provide an easy access to a taxi service. Therefore, its main functionalities, that will have to be supported by the design and architecture, are: the storage of the taxi drivers' and clients' accounts, the computation of the taxi queue of each zone and the handling of requests and reservations. Furthermore, the system will have to comply to quality of service attributes as specified in the RASD\@.
 \subsection{High Level Components and Their Interaction}
-myTaxiService's system is composed by three main components: DBMS, Web Server and client application. The client application provides the UI through which end users can access the application's services. These requests are forwarded to the Web Server which is in charge of providing a response, eventually querying the Database in the DBMS for information. The Web Server is also responsible for answering to the API calls coming from external applications and notifying the end users for particular events, like when a request is accepted by a taxi driver. The DBMS stores all the information of the end users's accounts, the active requests and reservations. %TODO anche lo stato delle code è nel db giusto? NOPE, viene ricalcolato ogni volta che serve saperlo, se no potremmo avere race conditions e stati incoerenti del server, tutta roba in più da gestire
+myTaxiService's system is composed by three main components: DBMS, Web Server and client application. The client application provides the UI through which end users can access the application's services. These requests are forwarded to the Web Server which is in charge of providing a response, eventually querying the Database in the DBMS for information. The Web Server is also responsible for answering to the API calls coming from external applications and notifying the end users for particular events, like when a request is accepted by a taxi driver. The DBMS stores all the information of the end users's accounts, the active requests and reservations.
 \subsection{Component View}
+%TODO aggiungere http interfaccia smista
 \begin{figure}[H]
 	  \makebox[\textwidth][c]{\includegraphics[width=1.4\textwidth]{Component}}%
 \end{figure}
-	  Meanwhile the DBMS and the Client Side application are pretty much self explanatory the WebServer part requires some details:
+	  While the DBMS and the Client Side application are pretty much self explanatory the WebServer part requires some details:
 	  \begin{itemize}
 			  \item The Webpage Creator is the responsible for both the Mobile App and Web App responses. The httpHandler will recognize the request by the parameters and ask the Webpage Creator to either create the full HTML page (in the case of the Web App) or just send a partially created page that only contains the dynamic data that the Mobile App will then include in its interface.
 			  \item The API Backend will be called by the httpHandler and will respond with Only the data requested in a JSON format
@@ -95,8 +96,6 @@ Some details:
 This interface encapsulates and exposes all the operations the Web Server needs to interact with the DB\@. The operations are divided in 2 categories based on the DB's part they manage:
 \begin{itemize}	
 	\item \textit{Accounts managing and access:} this interface exposes methods to manage the stored end users accounts.\\	
-	
-		%TODO QUESTA COSA ESCE, dobbiamo trovare un modo di centrarla
 	\begin{table}[H]
 		\begin{adjustbox}{width=1.2\textwidth}
 			\begin{tabular}{*{3}{c}}
@@ -109,41 +108,37 @@ This interface encapsulates and exposes all the operations the Web Server needs 
 				getAccount & user ID & returns the account corresponding to the ID with all its attributes \\
 				getAllAccounts & type of the accounts & returns all the accounts of the specified type \\
 				getFirstInQueue & location & returns the first taxi (by activation time) that is in the given location\\
+				checkAuthenticity & user ID & returns true if the specified account is in the DB, false otherwise \\
+				%TODO mi sa che devo aggiungere getfirstinqueue
 				\bottomrule
 			\end{tabular}	
 		\end{adjustbox}
 	\end{table}
 \item \textit{Operations creations and querying:} this interface exposes methods to manage and retrieve requests and reservations.\\	
-	%TODO forse aggiungere gli user ID nei parametri yes
 	\begin{table}[H]
 		\begin{adjustbox}{width=1.2\textwidth}
 		\begin{tabular}{*{3}{c}}
 			\toprule
 			Method & Parameters required & Notes \\
 			\midrule
-			addRequest & starting location, destination & adds a new ``not accepted'' request to the DB and returns its ID to the caller\\ 
-			deleteRequest & request ID & deletes an existing request from the DB\\ 
-			activateRequest & request ID, taxi ID & changes the state of the request from ``not accepted'' to ``accepted'' and the taxi to unavailable.\\
-			getRequest & request ID & returns the request and all its attributes\\
-			getUserRequests& user ID & returns all the active requests of the specified user \\ %TODO aspetta, uno può fare più chiamate contemporaneamente?
-			addReservation & starting locations, destination, meeting time & adds a new reservation to the DB and return its ID\\
-			deleteReservation & reservation ID & deletes an existing reservation from the DB\\
-			activateReservation & reservation ID, taxi ID & changes the state of the reservation from ``not accepted'' to ``accepted'' and the taxi to unavailable\\
-			getReservation & reservation ID & returns the reservation specified by its ID with all its attributes\\
-			getUserReservations & user ID & returns all the active reservations of the specified user \\ 
+			addRequest & starting location, destination, user ID & adds a new ``not accepted'' request to the DB from the user that requested it and returns its ID to the caller\\ 
+			deleteRequest & request ID & deletes an existing request from the DB and returns true. If the request is marked as not removable it returns false\\ 
+			activateRequest & request ID, taxi ID & changes the state of the request from ``not accepted'' to ``accepted'' and the taxi's state to unavailable. It also marks the request as not removable\\
+			getRequest & request ID & returns the request specified by the ID and all its attributes\\
+			getAllUserCalls& user ID & returns all the active requests and reservations of the specified user \\
+			addReservation & starting locations, destination, meeting time & adds a new reservation to the DB from the specified user and return its ID\\
+			deleteReservation & reservation ID & deletes an existing reservation from the DB and returns true. If the reservation is marked as not removable it returns false\\
+			activateReservation & reservation ID, taxi ID & changes the state of the reservation from ``not accepted'' to ``accepted'' and the taxi to unavailable. It also marks the reservation as not removable\\
+			getReservation & reservation ID & returns the reservation specified by the ID with all its attributes\\
 			\bottomrule
 		\end{tabular}	
 	\end{adjustbox}
 \end{table}
-user ID is always a parameter, but not always specified to keep the table readable\\
-also, the ``activate'' methods mark a row in the DB as not removable by the user
 \end{itemize}
-\paragraph{HTTP/s Request}
-This interface exposes  %TODO finire frase
 
 \paragraph{Response creator}
 This interface exposes all the functionalities end users require to access the services offered by myTaxiService. 
-In the following list the methods are divided by type of end user that needs them.
+In the following list the methods are divided by type of end user that needs them. 
 \begin{itemize}
 	\item \textit{Functionalities exploited by guests:}	\\
 	\begin{table}[H]
@@ -153,68 +148,70 @@ In the following list the methods are divided by type of end user that needs the
 				Method & Parameters required & Notes \\
 				\midrule
 				searchForETA & starting location & returns the ETA\footnotemark\  of the CAT\footnotemark\\ %
+				register & credentials & if the credentials don't refer to an already existing account, a new one is created \\
+				login & credentials & the guest logs into the system \\
 				\bottomrule
 			\end{tabular}
 	\end{adjustbox}
 \end{table}
-\footnotetext{text}%TODO inserire le sezioni del RASD
-\footnotetext{text}
+\footnotetext{See RASD's section 1.5.2}
+\footnotetext{See RASD's section 1.5.2}
 
-	\item \textit{Functionalities exploited by logged in user:} logged in user can access the searchForETA method exposed for guests along the following methods:
+	\item In the following tables, user IDs are always passed as a parameter, as they are needed for the authentication, but they're omitted for readability. \\	
+
+	\item \textit{Functionalities exploited by logged in user:} logged in user can access the searchForETA method exposed for guests along with the following methods: 
 	\begin{table}[H]
 		\begin{adjustbox}{width=1.2\textwidth}
 			\begin{tabular}{*{3}{c}}
 				\toprule
 				Method & Parameters required & Notes \\
 				\midrule
-				requestTaxi &  & \\ %TODO finire
-				cancelRequest & & \\ %TODO finire
-				showRequestDetails & & \\
-				reserveTaxi & &  \\
-				cancelReservation & & \\
-				showReservationDetails & & \\
-				register & & \\
-				login & & \\
-				logout & & \\
+				requestTaxi & starting location, destination & requests a taxi for the specified starting location \\ 
+				cancelRequest & request ID & cancels the request if it's not already been accepted\\ 
+				showRequestDetails & request ID & shows the details of the specified request\\
+				reserveTaxi & starting location, destination, meeting time & reserve a taxi for the specified starting location and meeting time \\
+				cancelReservation & reservation ID & cancels the reservation if it's not already been accepted \\
+				showReservationDetails & reservation ID & shows the details of the specified reservation\\
+				logout &  & the user is logged out of the system \\
 				\bottomrule
 			\end{tabular}
 		\end{adjustbox}
-	\end{table}
-		
-	\item \textit{Driver:}
-		
+	\end{table}	
+	\item \textit{Driver:}		
 	\begin{table}[H]
 		\begin{adjustbox}{width=1.2\textwidth}
 			\begin{tabular}{*{3}{c}}
 				\toprule
 				Method & Parameters required & Notes \\
 				\midrule
-				answerRequest & & \\ %TODO finire
-				answerReservation & & \\ %TODO finire
-				toggleState & & \\
+				acceptRequest & request ID & the request for which the taxi driver has been notified, specified by its ID, is accepted \\ 
+				acceptReservation & reservation ID & the reservation for which the taxi driver has been notified, specified by its ID, is accepted\\ 
+				refuseRequest & request ID & the request for which the taxi driver has been notified, specified by its ID, is refused\\ 
+				refuseReservation & reservation ID & the reservation for which the taxi driver has been notified, specified by its ID, is refused\\
+				toggleState & & the state of the taxi driver is changed from not available to available, or vice versa\\
 				\bottomrule
 			\end{tabular}
 		\end{adjustbox}
-	\end{table}
-		
-%TODO dubbissimo: ma qui le interfacce sono semplicemente i 3 metodi che vengono messi a disposizione dell'admin per fare add update e delete degli account?
-		\begin{comment}
-		
+	\end{table}		
 	\item Admin
+		\begin{adjustbox}{width=1.2\textwidth}	
+			\begin{tabular}{*{3}{c}}
+				\toprule
+				Method & Parameters required & Notes \\
+				\midrule
+				addTaxiDriverAccount & credentials & a new account for a taxi driver is created with the specified credentials\\ 
+				updateTaxiDriverAccount & attributes to update, new values, taxi driver ID & the attributes of the account of the taxi driver specified by its ID are updated to the new values\\ 
+				deleteTaxiDriverAccount & taxi driver ID & the account of the taxi driver specified by its ID is deleted\\
+				\bottomrule
+			\end{tabular}
+		\end{adjustbox}	
 		
-		\begin{tabular}{*{3}{c}}
-			\toprule
-			Method & Parameters required & Notes \\
-			\midrule
-			answerRequest & & \\ %TODO finire
-			answerReservation & & \\ %TODO finire
-			toggleState & & \\
-			\bottomrule
-		\end{tabular}
-		\end{comment}	
+\paragraph{Https %TODO fare}
+This interface exposes the same methods as the previous one as the 
+
 		
-		\paragraph{Notifications}
-		This interface exposes methods to notify end users (except for administrators) of particular events. 
+\paragraph{Notifications}
+This interface exposes methods to notify end users (except for administrators) of particular events. 
 		
 		
 		
@@ -239,7 +236,7 @@ This section has been explored in RASD's section 2.1.1 ``User Interfaces'' so we
 
 Functional requirements:
 \begin{itemize}
-	\item Data accessibility, mutability and creation for the 4 kinds of users\footnotemark\ is granted thanks to the HTTP interface exposed on the Internet.
+	\item Data accessibility, mutability and creation for the end users is granted thanks to the HTTP interface exposed on the Internet.
 	\item Notification delivery is granted through the interface exposed by the mobile applications and web applications.
 \end{itemize}
 Non functional requirements:
@@ -249,7 +246,6 @@ Non functional requirements:
 	\item Stability, scalability and availability of resources will be granted by using a cloud-based system. The deployment will not be made on physical machines but virtual machines rented on reliable providers.
 	%TODO add SSL to acronyms
 \end{itemize}
-\footnotetext{Guest, Administrator, Registered User and Taxi Driver (RASD section 1.6)}
 \section{References}
 \clearpage
 \section{Appendix}

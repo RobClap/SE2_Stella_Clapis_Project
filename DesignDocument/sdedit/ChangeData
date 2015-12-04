@@ -7,7 +7,7 @@ accounts:DBMS
 
 admin:adminPage.ShowTaxis
 adminPage:Page with list of taxies=httpHandler.getTaxiesPage
-httpHandler:TaxisPage=webpageCreator.CreatePage(Data)
+httpHandler:TaxisPage=webpageCreator.getAllTaxies
 webpageCreator:auth valid=dbconnector.getAccount
 dbconnector:admin account=accounts.SELECT... (check auth)
 webpageCreator:Taxis=dbconnector.getAllAccounts(ACCOUNTS.Taxi)

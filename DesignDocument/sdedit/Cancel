@@ -33,7 +33,7 @@ notificationModule:listen_for_answer
 	clientUI:denied=httpHandler.cancel
 	httpHandler:denied=webpageCreator.cancel
 
-	dbconnector:>notificationModule.request_answered_tigger&
+	dbconnector:>notificationModule.request_answered_trigger&
 
 	taxiUI:taxiDriver.drive_page
 	taxiUI:stop
