@@ -204,15 +204,15 @@ In the following list the methods are divided by type of end user that needs the
 	
 \end{itemize}
 \subsection{Selected Architectural Styles and Patterns}
-%client-server
-%3 tier
-%thin client
-%DMZ
+The most important part of the application is based on a classical Client-Server pattern: the service is completely provided by the centralized core, to which the clients connect in order to perform any operation.\\
+More in details the pattern involves a very minimal client with almost no functionalities except for connecting to the server and displaying the information received.\\
+For the Server it was decided to adopt a 3-tier subdivision: the untrusted internet, the DMZ and the internal network.
 \subsection{Other Design Decisions}
-%Phonegap
-%Cloud
-%
-
+In order to provide an easier maintenance and to allow the project to scale easily two main points were stated: 
+\begin{itemize}
+	\item A cross-platform web-based framework should be chosen to develop the mobile version of the application 
+	\item A cloud based approach should be chosen instead of buying the hardware to host the service
+\end{itemize}
 
 \section{User Interface Design}
 This section has been explored in RASD's section 2.1.1 ``User Interfaces'' so we refer to that one.
