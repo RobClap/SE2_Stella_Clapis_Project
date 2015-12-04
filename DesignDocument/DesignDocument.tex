@@ -93,7 +93,7 @@ Some details:
 \end{itemize}
 %TODO sequence diagrams
 \subsection{Component Interfaces}
-\paragraph{DB Interactions}
+\subsubsection{DB Interactions}
 This interface encapsulates and exposes all the operations the Web Server needs to interact with the DB\@. The operations are divided in 2 categories based on the DB's part they manage:
 \begin{itemize}	
 	\item \textit{Accounts managing and access:} this interface exposes methods to manage the stored end users accounts.\\	
@@ -137,7 +137,7 @@ This interface encapsulates and exposes all the operations the Web Server needs 
 \end{table}
 \end{itemize}
 
-\paragraph{Response creator}
+\subsubsection{Response creator}
 This interface exposes all the functionalities end users require to access the services offered by myTaxiService. 
 In the following list the methods are divided by type of end user that needs them. 
 \begin{itemize}
@@ -160,7 +160,7 @@ In the following list the methods are divided by type of end user that needs the
 
 	\item In the following tables, user IDs are always passed as a parameter, as they are needed for the authentication, but they're omitted for readability. \\	
 
-	\item \textit{Functionalities exploited by logged in user:} logged in user can access the searchForETA method exposed for guests along with the following methods: 
+	\item \textit{Functionalities exploited by logged in user:} logged in user can access the searchForETA method exposed for guests along with the following methods: \\
 	\begin{table}[H]
 		\begin{adjustbox}{width=1.2\textwidth}
 			\begin{tabular}{*{3}{c}}
@@ -178,7 +178,7 @@ In the following list the methods are divided by type of end user that needs the
 			\end{tabular}
 		\end{adjustbox}
 	\end{table}	
-	\item \textit{Driver:}		
+	\item \textit{Driver:}\\
 	\begin{table}[H]
 		\begin{adjustbox}{width=1.2\textwidth}
 			\begin{tabular}{*{3}{c}}
@@ -192,7 +192,8 @@ In the following list the methods are divided by type of end user that needs the
 			\end{tabular}
 		\end{adjustbox}
 	\end{table}		
-	\item \textit{Admin:}
+	\item \textit{Admin:} \\
+	\begin{table}[H]
 		\begin{adjustbox}{width=1.2\textwidth}	
 			\begin{tabular}{*{3}{c}}
 				\toprule
@@ -204,12 +205,12 @@ In the following list the methods are divided by type of end user that needs the
 				\bottomrule
 			\end{tabular}
 		\end{adjustbox}	
-		
-\paragraph{Https} %TODO fare}
+	\end{table}	
+\subsubsection{Https} %TODO fare}
 This interface exposes the same methods as the previous one as the 
 %TODO aggiungere interfaccia notification receiver
 		
-\paragraph{Notifications}
+\subsubsection{Notifications}
 This interface exposes methods to notify end users (except for administrators) of particular events. 
 The following list distinguishes notifications sent to taxi drivers from those sent to logged in users
 \begin{itemize}
