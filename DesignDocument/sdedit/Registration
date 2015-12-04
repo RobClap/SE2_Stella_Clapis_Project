@@ -7,7 +7,7 @@ accounts:DBMS
 
 [c:alt Registration successful]
 	guest:clientUI.Register
-	clientUI:successful=httpHandler.Register(credentials)
+	clientUI:successful=httpHandler.register(credentials)
 	httpHandler:confirmed=webpageCreator.register(credentials)
 	webpageCreator:success=dbconnector.addAccount(Data)
 	dbconnector:insert performed=accounts.INSERT INTO ...
@@ -18,7 +18,7 @@ accounts:DBMS
 	clientUI:aborted(Reasons Page)=httpHandler.register(credentials)
 	httpHandler:denied(WebPage with Reasons)=webpageCreator.register(credentials)
 	webpageCreator:denied(Reasons)=dbconnector.addAccount(Data)
-	dbconnector:Replicated OR Invalid data=accounts.INSERT INTO ...
+	dbconnector:Replicated data=accounts.INSERT INTO ...
 	clientUI:guest.RegisterPage(Fields to change)
 	clientUI:stop
 [/c]
