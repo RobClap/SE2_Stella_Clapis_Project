@@ -8,8 +8,8 @@ accounts:DBMS
 guest:unknownApp.get ETA
 unknownApp:ETA=httpHandler.getETA(Zone)
 httpHandler:ETA=APIBackend.getETA(Zone)
-APIBackend:Taxis=dbconnector.getETA(Zone)
-dbconnector:accounts.query active taxis in Zone
+APIBackend:Taxi=dbconnector.getAccount
+dbconnector:accounts.SELECT
 APIBackend:
 APIBackend:compute ETA
 unknownApp:guest.Show ETA

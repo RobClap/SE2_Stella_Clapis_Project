@@ -7,11 +7,11 @@ accounts:DBMS
 
 admin:adminPage.ShowTaxis
 adminPage:Page with list of taxies=httpHandler.getTaxiesPage
-httpHandler:TaxisPage=webpageCreator.CreateTaxisPage
-webpageCreator:auth valid=dbconnector.checkAuth
-dbconnector:admin account=accounts.query accounts
-webpageCreator:Taxis=dbconnector.getTaxis
-dbconnector:Taxis Table=accounts.query taxis
+httpHandler:TaxisPage=webpageCreator.CreatePage(Data)
+webpageCreator:auth valid=dbconnector.getAccount
+dbconnector:admin account=accounts.SELECT... (check auth)
+webpageCreator:Taxis=dbconnector.getAllAccounts(ACCOUNTS.Taxi)
+dbconnector:Taxis Table=accounts.SELECT...
 adminPage:admin.Taxis Page
 adminPage:stop
 admin:
@@ -19,11 +19,12 @@ admin:Select taxi
 admin:
 admin:adminPage.Edit Taxi
 adminPage:Page with taxi detail=httpHandler.getTaxiPage(ID)
-httpHandler:TaxiPage=webpageCreator.CreateTaxiPage(ID)
-webpageCreator:auth valid=dbconnector.checkAuth
-dbconnector:admin account=accounts.query accounts
-webpageCreator:Taxi=dbconnector.getTaxi
-dbconnector:Taxi=accounts.query taxi
+httpHandler:TaxiPage=webpageCreator.CreatePage(Data)
+webpageCreator:auth valid=dbconnector.getAccount
+dbconnector:admin account=accounts.SELECT... (check auth)
+webpageCreator:Taxi=dbconnector.getAccount
+dbconnector:Taxi=accounts.SELECT...
+
 adminPage:admin.Taxi Page
 adminPage:stop
 admin:
@@ -32,10 +33,10 @@ admin:
 admin:adminPage.Save Data(Data)
 adminPage:Confirmed=httpHandler.Save Data(Data)
 httpHandler:Confirmed=webpageCreator.Update Taxi(Data)
-webpageCreator:auth valid=dbconnector.checkAuth
-dbconnector:admin account=accounts.query accounts
-webpageCreator:Updated=dbconnector.updateTaxi(Data)
-dbconnector:success=accounts.update taxi
+webpageCreator:auth valid=dbconnector.getAccount
+dbconnector:admin account=accounts.SELECT... (check auth)
+webpageCreator:ok=dbconnector.updateAccount
+dbconnector:ok=accounts.UPDATE...
 adminPage:admin.Notification of success
 adminPage:admin.TaxisPage
 adminPage:stop

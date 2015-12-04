@@ -104,11 +104,11 @@ This interface encapsulates and exposes all the operations the Web Server needs 
 				Method & Parameters required & Notes \\
 				\midrule
 				addAccount & account type and credentials & adds an account to the DB of the specified type\\
-				modifyAccount & user ID, attribute to modify, and value & updates the attribute specified to the new value\\ 
+				updateAccount & user ID, attribute to modify, and value & updates the attribute specified to the new value\\ 
 				deleteAccount & user ID & deletes the account specified by the ID \\
 				getAccount & user ID & returns the account corresponding to the ID with all its attributes \\
-				getAllAccountsOfOneType & type of account & returns all the accounts of the specified type \\
-
+				getAllAccounts & type of the accounts & returns all the accounts of the specified type \\
+				getFirstInQueue & location & returns the first taxi (by activation time) that is in the given location\\
 				\bottomrule
 			\end{tabular}	
 		\end{adjustbox}
@@ -123,19 +123,20 @@ This interface encapsulates and exposes all the operations the Web Server needs 
 			\midrule
 			addRequest & starting location, destination & adds a new ``not accepted'' request to the DB and returns its ID to the caller\\ 
 			deleteRequest & request ID & deletes an existing request from the DB\\ 
-			toggleStateOfTheRequest & request ID & changes the state of the request from ``not accepted'' to ``accepted''\\
+			activateRequest & request ID, taxi ID & changes the state of the request from ``not accepted'' to ``accepted'' and the taxi to unavailable.\\
 			getRequest & request ID & returns the request and all its attributes\\
 			getUserRequests& user ID & returns all the active requests of the specified user \\ %TODO aspetta, uno può fare più chiamate contemporaneamente?
 			addReservation & starting locations, destination, meeting time & adds a new reservation to the DB and return its ID\\
 			deleteReservation & reservation ID & deletes an existing reservation from the DB\\
-			toggleStateOfTheReservation & reservation ID & changes the state of the reservation from ``not accepted'' to ``accepted''\\
+			activateReservation & reservation ID, taxi ID & changes the state of the reservation from ``not accepted'' to ``accepted'' and the taxi to unavailable\\
 			getReservation & reservation ID & returns the reservation specified by its ID with all its attributes\\
-			getAllTheReservationsOfAnUser & user ID & returns all the active reservations of the specified user \\ 
+			getUserReservations & user ID & returns all the active reservations of the specified user \\ 
 			\bottomrule
 		\end{tabular}	
 	\end{adjustbox}
 \end{table}
-(user ID is always a parameter)
+user ID is always a parameter, but not always specified to keep the table readable\\
+also, the ``activate'' methods mark a row in the DB as not removable by the user
 \end{itemize}
 \paragraph{Http/s Request}
 This interface exposes  %TODO finire frase

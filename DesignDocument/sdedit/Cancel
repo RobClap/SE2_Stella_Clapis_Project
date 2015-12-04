@@ -12,14 +12,14 @@ requestsAndReservations:DBMS
 user:clientUI.request a taxi 
 clientUI:confirmed=httpHandler.request_taxi
 httpHandler:confirmation page=webpageCreator.perform_request
-webpageCreator:request_created=dbconnector.create_request
-dbconnector:auth valid=accounts.check_auth
-dbconnector:placed=requestsAndReservations.create
-webpageCreator:>notificationModule.handle_request
+webpageCreator:request_ID=dbconnector.addRequest
+dbconnector:auth valid=accounts.SELECT ... (check auth)
+dbconnector:placed=requestsAndReservations.INSERT ...
+webpageCreator:>notificationModule.HandleRequest
 clientUI:user.confirmation_page
 
-notificationModule:taxi=dbconnector.get_first_taxi
-dbconnector:active taxi=accounts.get_first_in_queue
+notificationModule:taxi=dbconnector.getFirstInQueue
+dbconnector:active taxi=accounts.SELECT...
 notificationModule:notified=taxiUI.notify_call
 taxiUI:taxiDriver.notify
 notificationModule:listen_for_answer
@@ -27,8 +27,8 @@ notificationModule:listen_for_answer
 	taxiDriver:taxiUI.accept
 	taxiUI:confirmed=httpHandler.accept
 	httpHandler:confirmed=webpageCreator.accept
-	webpageCreator:marked=dbconnector.mark_request_as_active
-	dbconnector:done=requestsAndReservations.update
+	webpageCreator:marked=dbconnector.activateRequest
+	dbconnector:done=requestsAndReservations.UPDATE...
 	user:clientUI.cancel
 	clientUI:denied=httpHandler.cancel
 	httpHandler:denied=webpageCreator.cancel
@@ -37,8 +37,8 @@ notificationModule:listen_for_answer
 
 	taxiUI:taxiDriver.drive_page
 	taxiUI:stop
-	webpageCreator:abortion failed=dbconnector.delete_transaction
-	dbconnector:denied=requestsAndReservations.tryDelete
+	webpageCreator:abortion failed=dbconnector.deleteRequest
+	dbconnector:denied=requestsAndReservations.DELETE...
 	clientUI:user.denied
 	clientUI:stop
 
@@ -50,8 +50,8 @@ notificationModule:listen_for_answer
 	user:clientUI.cancel
 	clientUI:cancelled=httpHandler.cancel
 	httpHandler:cancelled=webpageCreator.cancel
-	webpageCreator:transaction aborted=dbconnector.delete_transaction
-	dbconnector:confirmed=requestsAndReservations.tryDelete
+	webpageCreator:transaction aborted=dbconnector.deleteRequest
+	dbconnector:confirmed=requestsAndReservations.DELETE...
 	dbconnector:>notificationModule.abort&
 	clientUI:user.homepage
 	clientUI:stop
