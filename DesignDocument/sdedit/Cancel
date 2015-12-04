@@ -10,8 +10,8 @@ accounts:DBMS
 requestsAndReservations:DBMS
 
 user:clientUI.request a taxi 
-clientUI:confirmed=httpHandler.request_taxi
-httpHandler:confirmation page=webpageCreator.perform_request
+clientUI:confirmed=httpHandler.requestTaxi
+httpHandler:confirmation page=webpageCreator.requestTaxi
 webpageCreator:request_ID=dbconnector.addRequest
 dbconnector:auth valid=accounts.SELECT ... (check auth)
 dbconnector:placed=requestsAndReservations.INSERT ...
@@ -20,7 +20,7 @@ clientUI:user.confirmation_page
 
 notificationModule:taxi=dbconnector.getFirstInQueue
 dbconnector:active taxi=accounts.SELECT...
-notificationModule:notified=taxiUI.notify_call
+notificationModule:notified=taxiUI.notifyIcomingRequest
 taxiUI:taxiDriver.notify
 notificationModule:listen_for_answer
 [c:alt a taxi accepts in time]
@@ -29,9 +29,9 @@ notificationModule:listen_for_answer
 	httpHandler:confirmed=webpageCreator.accept
 	webpageCreator:marked=dbconnector.activateRequest
 	dbconnector:done=requestsAndReservations.UPDATE...
-	user:clientUI.cancel
-	clientUI:denied=httpHandler.cancel
-	httpHandler:denied=webpageCreator.cancel
+	user:clientUI.cancelRequest
+	clientUI:denied=httpHandler.cancelRequest
+	httpHandler:denied=webpageCreator.cancelRequest
 
 	dbconnector:>notificationModule.request_answered_trigger&
 
@@ -47,9 +47,9 @@ notificationModule:listen_for_answer
 	clientUI:stop
 
 	--[no taxi accepts in time]
-	user:clientUI.cancel
-	clientUI:cancelled=httpHandler.cancel
-	httpHandler:cancelled=webpageCreator.cancel
+	user:clientUI.cancelRequest
+	clientUI:cancelled=httpHandler.cancelRequest
+	httpHandler:cancelled=webpageCreator.cancelRequest
 	webpageCreator:transaction aborted=dbconnector.deleteRequest
 	dbconnector:confirmed=requestsAndReservations.DELETE...
 	dbconnector:>notificationModule.abort&

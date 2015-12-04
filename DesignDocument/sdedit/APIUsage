@@ -1,15 +1,15 @@
-guest:Actor
+user:Actor
 unknownApp:App using APIs connection
 httpHandler:Web Server
 APIBackend:Web Server
 dbconnector:Web Server
 accounts:DBMS
 
-guest:unknownApp.get ETA
-unknownApp:ETA=httpHandler.getETA(Zone)
-httpHandler:ETA=APIBackend.getETA(Zone)
+user:unknownApp.searchForETA
+unknownApp:ETA=httpHandler.searchForETA
+httpHandler:ETA=APIBackend.searchForETA
 APIBackend:Taxi=dbconnector.getAccount
 dbconnector:accounts.SELECT
 APIBackend:
 APIBackend:compute ETA
-unknownApp:guest.Show ETA
+unknownApp:user.Show ETA
