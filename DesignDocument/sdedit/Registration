@@ -18,7 +18,7 @@ accounts:DBMS
 	clientUI:aborted(Reasons Page)=httpHandler.register(credentials)
 	httpHandler:denied(WebPage with Reasons)=webpageCreator.register(credentials)
 	webpageCreator:denied(Reasons)=dbconnector.addAccount(Data)
-	dbconnector:Replicated OR Invalid data=accounts.INSERT INTO ...
+	dbconnector:Replicated data=accounts.INSERT INTO ...
 	clientUI:guest.RegisterPage(Fields to change)
 	clientUI:stop
 [/c]
