@@ -134,9 +134,9 @@ This interface encapsulates and exposes all the operations the Web Server needs 
 				deleteAccount & user ID & deletes the account specified by the ID \\
 				getAccount & user ID & returns the account corresponding to the ID with all its attributes \\
 				getAllAccounts & type of the accounts & returns all the accounts of the specified type \\
-				getFirstInQueue & location & returns the first taxi (by activation time) that is in the given location\\
+				getFirstInQueue & location & returns the first taxi (by activation time) that is in the given zone.\\
+				%TODO dobbiamo mettere qualche metodo che ritorni il CAT perchè non ne abbiamo e poi metterlo nel sd apiusage...a meno che non gli facciamo tiraer fuori tutti i taxi e gli facciamo computare l'eta passandoli tutti<<-- io voto per questa
 				checkAuthenticity & user ID & returns true if the specified account is in the DB, false otherwise \\
-				getFirstInQueue & starting location's zone & returns the first taxi driver of the queue of the specified zone \\
 				\bottomrule
 			\end{tabular}	
 		\end{adjustbox}
@@ -243,7 +243,8 @@ This interface will expose only one method, that will receive the messages from 
 		\item ClientUI/DriverUI:\@ this will change the Activity shown with a new one (encoded in the message) that will show the text. %TODO troppo specifico per android
 \end{itemize}
 		
-\subsubsection{Notifications}
+\subsubsection{Notifications} %TODO nei sd c'è un metodo che si chiama handlerequest, dove lo mettiamo?
+%TODO c'è da sistemare anche la parte del DBconnector che chiama il notification module
 This interface exposes methods to notify end users (except for administrators) of particular events. 
 A call to this interface will spawn asynchronous workers that will notify the user of the changes of a request/reservation.
 If a worker for that request already exists it will handle the new notification too.
@@ -258,7 +259,7 @@ The following list distinguishes notifications sent to taxi drivers from those s
 				notifyAcceptedRequest & request ID, taxi driver ID, ETA & the user is notified of the taxi driver that has accepted the specified request and how much it will take for the taxi driver to get to the starting location\\ 
 				notifyAcceptedReservation & reservation ID, taxi driver ID & the user is notified of the taxi driver that has accepted the specified reservation \\
 				%TODO aggiungere le cancellazioni, quelle devono annullare la richiesta se ne ha una
-				%TODO devo aggiungere le notifiche di avvenuta cancellazione? c'è da fare un check di coerenza con tutte le notifiche nei sd
+				%TODO devo aggiungere le notifiche di avvenuta cancellazione?
 				\bottomrule
 			\end{tabular}
 		\end{adjustbox}	
@@ -270,7 +271,7 @@ The following list distinguishes notifications sent to taxi drivers from those s
 				\midrule
 				notifyIncomingRequest & starting location, user ID, request ID & the taxi driver is notified of an incoming request from the specified user and starting location\\ 
 				notifyIncomingReservation & starting location, user ID, meeting time, reservation ID & the taxi driver is notified of an incoming reservation for the specified meeting time and from the specified user and starting location \\
-				notifyDeletedRequest %TODO ma se facessimo solo sparire il messaggio della richiesta quando viene cancellata prima che faccia in tempo ad accettarla?
+				notifyDeletedRequest %TODO ma se facessimo solo sparire il messaggio della richiesta quando viene cancellata prima che faccia in tempo ad accettarla? nel sd di cancel c'è un coso che mi fa abort ma è bruttino da vedere XD la parola abort non mi piace xD
 				\bottomrule
 			\end{tabular}
 		\end{adjustbox}	

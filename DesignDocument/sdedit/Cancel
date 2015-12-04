@@ -13,7 +13,7 @@ user:clientUI.request a taxi
 clientUI:confirmed=httpHandler.requestTaxi
 httpHandler:confirmation page=webpageCreator.requestTaxi
 webpageCreator:request_ID=dbconnector.addRequest
-dbconnector:auth valid=accounts.SELECT ... (check auth)
+dbconnector:auth valid=accounts.checkAuthenticity
 dbconnector:placed=requestsAndReservations.INSERT ...
 webpageCreator:>notificationModule.HandleRequest
 clientUI:user.confirmation_page
@@ -42,7 +42,7 @@ notificationModule:listen_for_answer
 	clientUI:user.denied
 	clientUI:stop
 
-	notificationModule:>clientUI.taxi_is_coming
+	notificationModule:>clientUI.notifyAcceptedRequest
 	clientUI:user.taxi_is_coming
 	clientUI:stop
 
@@ -55,7 +55,7 @@ notificationModule:listen_for_answer
 	dbconnector:>notificationModule.abort&
 	clientUI:user.homepage
 	clientUI:stop
-	notificationModule:aborted=taxiUI.abort
-	taxiUI:taxiDriver.client aborted
+	notificationModule:aborted=taxiUI.notifyDeletedRequest
+	taxiUI:taxiDriver.user deleted the request
 	taxiUI:stop
 [/c]

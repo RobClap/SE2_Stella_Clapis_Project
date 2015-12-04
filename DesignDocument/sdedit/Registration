@@ -7,7 +7,7 @@ accounts:DBMS
 
 [c:alt Registration successful]
 	guest:clientUI.Register
-	clientUI:successful=httpHandler.Register(credentials)
+	clientUI:successful=httpHandler.register(credentials)
 	httpHandler:confirmed=webpageCreator.register(credentials)
 	webpageCreator:success=dbconnector.addAccount(Data)
 	dbconnector:insert performed=accounts.INSERT INTO ...
