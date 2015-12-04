@@ -13,20 +13,20 @@ user:clientUI.request a taxi
 clientUI:confirmed=httpHandler.requestTaxi
 httpHandler:confirmation page=webpageCreator.requestTaxi
 webpageCreator:request_created=dbconnector.addRequest
-dbconnector:auth valid=accounts.SELECT ... (check auth)
+dbconnector:auth valid=accounts.checkAuthenticity
 dbconnector:placed=requestsAndReservations.INSERT ...
-webpageCreator:>notificationModule.notifyIncomingRequest
+webpageCreator:>notificationModule.handleRequest
 clientUI:user.confirmation_page
 [c:loop until a taxi driver accepts]
 	notificationModule:taxi=dbconnector.getFirstInQueue
 	dbconnector:active taxi=accounts.SELECT ...
-	notificationModule:notified=taxiUI.notifyCall
+	notificationModule:notified=taxiUI.notifyIncomingRequest
 	taxiUI:taxiDriver.notify
 	notificationModule:listenForAnswer
 	[c:alt possible responses]
 		--[refusal]
 		taxiDriver:taxiUI.refuse
-		taxiUI:ok=httpHandler.refused
+		taxiUI:ok=httpHandler.refuse
 		httpHandler:confirm refusal=webpageCreator.refuse
 		webpageCreator:marked=dbconnector.updateAccount(inactive)
 		dbconnector:accounts.UPDATE...
@@ -49,7 +49,7 @@ webpageCreator:marked=dbconnector.activateRequest
 dbconnector:done=requestsAndReservations.UPDATE ...
 dbconnector:done=accounts.UPDATE ...
 dbconnector:>notificationModule.request_answered_trigger&
-notificationModule:notified=clientUI.taxi_is_coming
+notificationModule:notified=clientUI.notifyAcceptedRequest
 clientUI:user.taxi_is_coming
 clientUI:stop
 taxiUI:taxiDriver.drive_page
