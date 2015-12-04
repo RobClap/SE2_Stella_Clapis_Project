@@ -73,9 +73,9 @@ myTaxiService's system is composed by three main components: DBMS, Web Server an
 \begin{figure}[H]
 	  \makebox[\textwidth][c]{\includegraphics[width=1.4\textwidth]{Component}}%
 \end{figure}
-	  Meanwhile the DBMS and the ClientSide application are pretty much self explanatory the WebServer part requires some details:
+	  Meanwhile the DBMS and the Client Side application are pretty much self explanatory the WebServer part requires some details:
 	  \begin{itemize}
-			  \item The Webpage Creator is the responsible for both the Mobile App and Web App responses. The httpHandler will recognise the request by the parameters and ask the Webpage Creator to either create the full Html page (in the case of the Web App) or just send a partially created page that only contains the dynamic data that the Mobile App will then include in its interface.
+			  \item The Webpage Creator is the responsible for both the Mobile App and Web App responses. The httpHandler will recognize the request by the parameters and ask the Webpage Creator to either create the full HTML page (in the case of the Web App) or just send a partially created page that only contains the dynamic data that the Mobile App will then include in its interface.
 			  \item The API Backend will be called by the httpHandler and will respond with Only the data requested in a JSON format
 	  \end{itemize}
 \subsection{Deployment View}
@@ -86,12 +86,12 @@ myTaxiService's system is composed by three main components: DBMS, Web Server an
 \subsection{Runtime View}
 Some details:
 \begin{itemize}
-	\item Https negotiations are omitted in order to preserve readability, but they would all be between the apps (Web or Mobile)  and the httpHandler
+	\item HTTPS negotiations are omitted in order to preserve readability, but they would all be between the apps (Web or Mobile)  and the httpHandler
 	\item Queues are not represented in the database, but they are all re-computed with a query that selects the taxis that are active, are in the desired area and returns them sorted by the time they were marked as active.
 \end{itemize}
 %TODO sequence diagrams
 \subsection{Component Interfaces}
-\paragraph{DBInteractions}
+\paragraph{DB Interactions}
 This interface encapsulates and exposes all the operations the Web Server needs to interact with the DB\@. The operations are divided in 2 categories based on the DB's part they manage:
 \begin{itemize}	
 	\item \textit{Accounts managing and access:} this interface exposes methods to manage the stored end users accounts.\\	
@@ -138,7 +138,7 @@ This interface encapsulates and exposes all the operations the Web Server needs 
 user ID is always a parameter, but not always specified to keep the table readable\\
 also, the ``activate'' methods mark a row in the DB as not removable by the user
 \end{itemize}
-\paragraph{Http/s Request}
+\paragraph{HTTP/s Request}
 This interface exposes  %TODO finire frase
 
 \paragraph{Response creator}
@@ -239,17 +239,17 @@ This section has been explored in RASD's section 2.1.1 ``User Interfaces'' so we
 
 Functional requirements:
 \begin{itemize}
-	\item Data accessibility, modifiability and creation for the 4 kinds of users\footnotemark\ is granted thanks to the http interface exposed on the Internet.
+	\item Data accessibility, mutability and creation for the 4 kinds of users\footnotemark\ is granted thanks to the HTTP interface exposed on the Internet.
 	\item Notification delivery is granted through the interface exposed by the mobile applications and web applications.
 \end{itemize}
 Non functional requirements:
 \begin{itemize}
 	\item Secure channels will be established using SSL 
-	\item Autentication will always be checked before accessing sensible data.
-	\item Stability, scalability and availability of resources will be granted by using a cloud-based system. The deployment will not be made on phisical machines but virtual machines rented on reliable providers.
+	\item Authentication will always be checked before accessing sensible data.
+	\item Stability, scalability and availability of resources will be granted by using a cloud-based system. The deployment will not be made on physical machines but virtual machines rented on reliable providers.
 	%TODO add SSL to acronyms
 \end{itemize}
-\footnotetext{Guest, Administrator, Regeistered User and Taxi Driver (RASD section 1.6)}
+\footnotetext{Guest, Administrator, Registered User and Taxi Driver (RASD section 1.6)}
 \section{References}
 \clearpage
 \section{Appendix}
