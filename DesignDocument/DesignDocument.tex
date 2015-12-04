@@ -28,7 +28,7 @@
 		filecolor=black,        % color of file links
 		urlcolor=purple,        % color of external links
 	}
-	\begin{document}
+\begin{document}
 	\maketitle
 	\begin{center}
 		\includegraphics{polimi-logo}
@@ -261,35 +261,6 @@
 							notifyAcceptedReservation & reservation ID, taxi driver ID & the user is notified of the taxi driver that has accepted the specified reservation \\
 				%TODO aggiungere le cancellazioni, quelle devono annullare la richiesta se ne ha una
 				%TODO devo aggiungere le notifiche di avvenuta cancellazione? | Si
-<<<<<<< HEAD
-							\bottomrule
-						\end{tabular}
-					\end{adjustbox}	
-				\item \textit{Notifications sent to taxi drivers:} \\
-					\begin{adjustbox}{width=1.2\textwidth}	
-						\begin{tabular}{*{3}{c}}
-							\toprule
-							Method & Parameters required & Notes \\
-							\midrule
-							notifyIncomingRequest & starting location, user ID, request ID & the taxi driver is notified of an incoming request from the specified user and starting location\\ 
-							notifyIncomingReservation & starting location, user ID, meeting time, reservation ID & the taxi driver is notified of an incoming reservation for the specified meeting time and from the specified user and starting location \\
-							notifyDeletedRequest %TODO ma se facessimo solo sparire il messaggio della richiesta quando viene cancellata prima che faccia in tempo ad accettarla? nel sd di cancel c'è un coso che mi fa abort ma è bruttino da vedere XD la parola abort non mi piace xD | ok togli tutto
-							\bottomrule
-						\end{tabular}
-					\end{adjustbox}	
-			\end{itemize}		
-	\end{itemize}
-	\subsection{Selected Architectural Styles and Patterns}
-	The most important part of the application is based on a classical Client-Server pattern: the service is completely provided by the centralized core, to which clients connect in order to perform any operation.\\
-	More in details, the pattern involves a very thin client with almost no functionalities except for connecting to the server and displaying the information received.\\
-	For the Web Server it was decided to adopt a 3-tier subdivision: the untrusted internet, the DMZ and the internal network. %TODO qualche dettaglio zuccheroso in più? mi sembra un po poco | non so cosa metterci
-	\subsection{Other Design Decisions}
-	In order to provide an easier maintenance and to allow the project to scale easily, two main points were stated: 
-	\begin{itemize}
-		\item A cross-platform web-based framework should be chosen to develop the mobile version of the application 
-		\item A cloud based approach should be chosen instead of buying the hardware to host the service
-	\end{itemize}
-=======
 				\bottomrule
 			\end{tabular}
 		\end{adjustbox}	
@@ -317,7 +288,6 @@ In order to provide an easier maintenance and to allow the project to scale easi
 	\item A cross-platform web-based framework should be chosen to develop the mobile version of the application 
 	\item A cloud based approach should be chosen instead of buying the hardware to host the service
 \end{itemize}
->>>>>>> dad0e138ccc85cd3d429a261397a64efa47a3e0b
 
 	\section{User Interface Design}
 	This section has been explored in RASD's section 2.1.1 ``User Interfaces'' so we refer to that one.
