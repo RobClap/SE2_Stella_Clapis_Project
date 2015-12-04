@@ -88,13 +88,13 @@ myTaxiService's system is composed by three main components: DBMS, Web Server an
 \subsection{Runtime View}
 This section provides an insight on how the components interact during common use cases of the system.
 \subsubsection{Search for ETA}
-The following Sequence Diagram is shown with a guest but it's equally applicable to a logged in user searching for the ETA \footnotemark 
-\footnote{See RASD's section 1.5.2}
+The following Sequence Diagram is shown with a guest but it's equally applicable to a logged in user searching for the ETA\footnotemark\ 
+\footnotetext{See RASD's section 1.5.2}
 \begin{figure}[H]
 	  \makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth]{sdedit/APIUsage.png}}%
 \end{figure}
 \subsubsection{Cancel a request}
-The following Sequence Diagram shows how the components interact when a user tries to cancel a request. The same Sequence Diagram would still be valid switching "request" with "reservation". 
+The following Sequence Diagram shows how the components interact when a user tries to cancel a request. The same Sequence Diagram would still be valid switching ``request'' with ``reservation''. 
 \begin{figure}[H]
 	  \makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth]{sdedit/Cancel.png}}%
 \end{figure}
@@ -104,7 +104,7 @@ The following Sequence Diagram provides an example of how the administrator can 
 	  \makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth]{sdedit/ChangeData.png}}%
 \end{figure}
 \subsubsection{Registration}
-The following Sequence Diagram shows what happens when a guest tries to register to the system both with valid credentials and with credentials that are already in the DB.
+The following Sequence Diagram shows what happens when a guest tries to register to the system both with valid credentials and with credentials that are already in the DB\@.
 \begin{figure}[H]
 	  \makebox[\textwidth][c]{\includegraphics[width=1.3\textwidth]{sdedit/Registration.png}}%
 \end{figure}
@@ -115,7 +115,7 @@ The following Sequence Diagram demonstrates how a user can request a taxi.
 \end{figure}
 Some details:
 \begin{itemize}
-	\item HTTPS negotiations are omitted in order to preserve readability, but they would all be between the apps (Web or Mobile) and the httpHandler %TODO spiega cosa sono le negotiations
+	\item HTTPS negotiations are omitted in order to preserve readability, but they would all be between the apps (Web or Mobile) and the httpHandler %TODO spiega cosa sono le negotiations | è cultura generale, direi di no, non mi pare di avere spiegato cosa sia una taxi
 	\item Queues are not represented in the database, but they are all re-computed, whenever it is requested, with a query that selects the taxis that are active, are in the desired area and returns them sorted by the time they were marked as active.
 \end{itemize}
 \subsection{Component Interfaces}
@@ -135,7 +135,7 @@ This interface encapsulates and exposes all the operations the Web Server needs 
 				getAccount & user ID & returns the account corresponding to the ID with all its attributes \\
 				getAllAccounts & type of the accounts & returns all the accounts of the specified type \\
 				getFirstInQueue & location & returns the first taxi (by activation time) that is in the given zone.\\
-				%TODO dobbiamo mettere qualche metodo che ritorni il CAT perchè non ne abbiamo e poi metterlo nel sd apiusage...a meno che non gli facciamo tiraer fuori tutti i taxi e gli facciamo computare l'eta passandoli tutti<<-- io voto per questa
+				%TODO dobbiamo mettere qualche metodo che ritorni il CAT perchè non ne abbiamo e poi metterlo nel sd apiusage...a meno che non gli facciamo tiraer fuori tutti i taxi e gli facciamo computare l'eta passandoli tutti<<-- io voto per questa voto anche io
 				checkAuthenticity & user ID & returns true if the specified account is in the DB, false otherwise \\
 				\bottomrule
 			\end{tabular}	
@@ -240,7 +240,7 @@ This interface exposes the standard GET and POST Http methods, that will be hand
 This interface will expose only one method, that will receive the messages from the server and will handle them according to their destination: 
 	\begin{itemize}
 		\item API:\@ this will just be a listener that will put the message in a synchronized queue for the user to pull
-		\item ClientUI/DriverUI:\@ this will change the Activity shown with a new one (encoded in the message) that will show the text. %TODO troppo specifico per android
+		\item ClientUI/DriverUI:\@ this will change the form shown with a new one (encoded in the message) that will show the text. 
 \end{itemize}
 		
 \subsubsection{Notifications} %TODO nei sd c'è un metodo che si chiama handlerequest, dove lo mettiamo?
@@ -259,7 +259,7 @@ The following list distinguishes notifications sent to taxi drivers from those s
 				notifyAcceptedRequest & request ID, taxi driver ID, ETA & the user is notified of the taxi driver that has accepted the specified request and how much it will take for the taxi driver to get to the starting location\\ 
 				notifyAcceptedReservation & reservation ID, taxi driver ID & the user is notified of the taxi driver that has accepted the specified reservation \\
 				%TODO aggiungere le cancellazioni, quelle devono annullare la richiesta se ne ha una
-				%TODO devo aggiungere le notifiche di avvenuta cancellazione?
+				%TODO devo aggiungere le notifiche di avvenuta cancellazione? | Si
 				\bottomrule
 			\end{tabular}
 		\end{adjustbox}	
@@ -271,7 +271,7 @@ The following list distinguishes notifications sent to taxi drivers from those s
 				\midrule
 				notifyIncomingRequest & starting location, user ID, request ID & the taxi driver is notified of an incoming request from the specified user and starting location\\ 
 				notifyIncomingReservation & starting location, user ID, meeting time, reservation ID & the taxi driver is notified of an incoming reservation for the specified meeting time and from the specified user and starting location \\
-				notifyDeletedRequest %TODO ma se facessimo solo sparire il messaggio della richiesta quando viene cancellata prima che faccia in tempo ad accettarla? nel sd di cancel c'è un coso che mi fa abort ma è bruttino da vedere XD la parola abort non mi piace xD
+				notifyDeletedRequest %TODO ma se facessimo solo sparire il messaggio della richiesta quando viene cancellata prima che faccia in tempo ad accettarla? nel sd di cancel c'è un coso che mi fa abort ma è bruttino da vedere XD la parola abort non mi piace xD | ok togli tutto
 				\bottomrule
 			\end{tabular}
 		\end{adjustbox}	
@@ -280,7 +280,7 @@ The following list distinguishes notifications sent to taxi drivers from those s
 \subsection{Selected Architectural Styles and Patterns}
 The most important part of the application is based on a classical Client-Server pattern: the service is completely provided by the centralized core, to which clients connect in order to perform any operation.\\
 More in details, the pattern involves a very thin client with almost no functionalities except for connecting to the server and displaying the information received.\\
-For the Web Server it was decided to adopt a 3-tier subdivision: the untrusted internet, the DMZ and the internal network. %TODO qualche dettaglio zuccheroso in più? mi sembra un po poco
+For the Web Server it was decided to adopt a 3-tier subdivision: the untrusted internet, the DMZ and the internal network. %TODO qualche dettaglio zuccheroso in più? mi sembra un po poco | non so cosa metterci
 \subsection{Other Design Decisions}
 In order to provide an easier maintenance and to allow the project to scale easily, two main points were stated: 
 \begin{itemize}
