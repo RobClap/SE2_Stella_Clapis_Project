@@ -71,7 +71,7 @@ The system to be developed, as mentioned before, will be used to provide an easy
 \subsection{High Level Components and Their Interaction}
 myTaxiService's system is composed by three main components: DBMS, Web Server and client application. The client application provides the UI through which end users can access the application's services. These requests are forwarded to the Web Server which is in charge of providing a response, eventually querying the Database in the DBMS for information. The Web Server is also responsible for answering to the API calls coming from external applications and notifying the end users for particular events, like when a request is accepted by a taxi driver. The DBMS stores all the information of the end users's accounts, the active requests and reservations.
 \subsection{Component View}
-%TODO aggiungere http interfaccia smista
+%TODO aggiungere http interfaccia smista | nonc redo di avere capito
 \begin{figure}[H]
 	  \makebox[\textwidth][c]{\includegraphics[width=1.4\textwidth]{Component}}%
 \end{figure}
@@ -107,7 +107,6 @@ Some details:
 	\item HTTPS negotiations are omitted in order to preserve readability, but they would all be between the apps (Web or Mobile)  and the httpHandler
 	\item Queues are not represented in the database, but they are all re-computed with a query that selects the taxis that are active, are in the desired area and returns them sorted by the time they were marked as active.
 \end{itemize}
-%TODO sequence diagrams
 \subsection{Component Interfaces}
 \subsubsection{DB Interactions}
 This interface encapsulates and exposes all the operations the Web Server needs to interact with the DB\@. The operations are divided in 2 categories based on the DB's part they manage:
@@ -222,12 +221,19 @@ In the following list the methods are divided by type of end user that needs the
 			\end{tabular}
 		\end{adjustbox}	
 	\end{table}	
-\subsubsection{Https} %TODO fare}
-This interface exposes the same methods as the previous one as the 
-%TODO aggiungere interfaccia notification receiver
+\subsubsection{Https} 
+This interface exposes the standard GET and POST Http Methods, that will be handled and forwarded to the Web Page Creator or the API Backend or will be rejected if invalid.
+\subsubsection{Notification Receiver}
+This interface will expose only one method, that will receive the message from the server and will:
+	\begin{itemize}
+		\item API:\@ this will just be a listener that will put the message in a synchronized queue for the utilizer to pull
+		\item ClientUI/DriverUI:\@ this will change the Activity shown with a new one (encoded in the message) that will show the text.
+\end{itemize}
 		
 \subsubsection{Notifications}
 This interface exposes methods to notify end users (except for administrators) of particular events. 
+A call to this interface will spawn asynchronous workers that will try to notify the user of the changes of a request/reservation.
+If a worker for that request already exists it will handle the new notification too.
 The following list distinguishes notifications sent to taxi drivers from those sent to logged in users
 \begin{itemize}
 	\item \textit{Notifications sent to logged in users:} \\
@@ -238,7 +244,7 @@ The following list distinguishes notifications sent to taxi drivers from those s
 				\midrule
 				notifyAcceptedRequest & request ID, taxi driver ID, ETA & the user is notified of the taxi driver that has accepted the specified request and how much it will take for the taxi driver to get to the starting location\\ 
 				notifyAcceptedReservation & reservation ID, taxi driver ID & the user is notified of the taxi driver that has accepted the specified reservation \\
-				%TODO aggiungere altro?
+				%TODO aggiungere le cancellazioni, quelle devono annullare la richiesta se ne ha una
 				\bottomrule
 			\end{tabular}
 		\end{adjustbox}	
@@ -250,7 +256,7 @@ The following list distinguishes notifications sent to taxi drivers from those s
 				\midrule
 				notifyIncomingRequest & starting location, user ID, request ID & the taxi driver is notified of an incoming request from the specified user and starting location\\ 
 				notifyIncomingReservation & starting location, user ID, meeting time, reservation ID & the taxi driver is notified of an incoming reservation for the specified meeting time and from the specified user and starting location \\
-				%TODO aggiungere altro?
+				%TODO aggiungere cancellazioni
 				\bottomrule
 			\end{tabular}
 		\end{adjustbox}	
@@ -259,7 +265,7 @@ The following list distinguishes notifications sent to taxi drivers from those s
 \subsection{Selected Architectural Styles and Patterns}
 The most important part of the application is based on a classical Client-Server pattern: the service is completely provided by the centralized core, to which the clients connect in order to perform any operation.\\
 More in details the pattern involves a very thin client with almost no functionalities except for connecting to the server and displaying the information received.\\
-For the Web Server it was decided to adopt a 3-tier subdivision: the untrusted internet, the DMZ and the internal network. %TODO sistemare questo
+For the Web Server it was decided to adopt a 3-tier subdivision: the untrusted internet, the DMZ and the internal network. %TODO sistemare questo come?
 \subsection{Other Design Decisions}
 In order to provide an easier maintenance and to allow the project to scale easily, two main points were stated: 
 \begin{itemize}
@@ -271,9 +277,6 @@ In order to provide an easier maintenance and to allow the project to scale easi
 This section has been explored in RASD's section 2.1.1 ``User Interfaces'' so we refer to that one.
 
 \section{Requirements Traceability}
-%Explain	 how the requirements you have defined in  the RASD map	 into the design	 elements that you have  defined in this document
-%TODO move both funct and non funct and explain how are they respected
-
 Functional requirements:
 \begin{itemize}
 	\item Data accessibility, mutability and creation for the end users is granted thanks to the HTTP interface exposed on the Internet.
