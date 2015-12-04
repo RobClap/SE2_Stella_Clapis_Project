@@ -52,6 +52,7 @@ This Design Document is intended to explain the design and architecture of myTax
 	\item \textit{UI:} user interface through which the end users can interact with the application.
 	\item \textit{DB:} Database.
 	\item \textit{DBMS:} Database Management System.
+	\item \textit{SSL:} Secure Socket Layer, a protocol that ensures a safe end-to-end transmission.
 \end{itemize}
 \subsection{Reference Documents}
 \begin{itemize}
@@ -102,14 +103,14 @@ This interface encapsulates and exposes all the operations the Web Server needs 
 				\toprule
 				Method & Parameters required & Notes \\
 				\midrule
-				addAccount & account type and credentials & adds an account to the DB of the specified type\\
+				addAccount & account type and credentials & adds an account to the DB of the specified type if there's not another one with the same ID\\
 				updateAccount & user ID, attribute to modify, and value & updates the attribute specified to the new value\\ 
 				deleteAccount & user ID & deletes the account specified by the ID \\
 				getAccount & user ID & returns the account corresponding to the ID with all its attributes \\
 				getAllAccounts & type of the accounts & returns all the accounts of the specified type \\
 				getFirstInQueue & location & returns the first taxi (by activation time) that is in the given location\\
 				checkAuthenticity & user ID & returns true if the specified account is in the DB, false otherwise \\
-				%TODO mi sa che devo aggiungere getfirstinqueue
+				getFirstInQueue & starting location's zone & returns the first taxi driver of the queue of the specified zone \\
 				\bottomrule
 			\end{tabular}	
 		\end{adjustbox}
@@ -184,16 +185,14 @@ In the following list the methods are divided by type of end user that needs the
 				\toprule
 				Method & Parameters required & Notes \\
 				\midrule
-				acceptRequest & request ID & the request for which the taxi driver has been notified, specified by its ID, is accepted \\ 
-				acceptReservation & reservation ID & the reservation for which the taxi driver has been notified, specified by its ID, is accepted\\ 
-				refuseRequest & request ID & the request for which the taxi driver has been notified, specified by its ID, is refused\\ 
-				refuseReservation & reservation ID & the reservation for which the taxi driver has been notified, specified by its ID, is refused\\
+				accept & request or reservation ID & the request or reservation for which the taxi driver has been notified, specified by its ID, is accepted \\ 
+				refuse & request or reservation ID & the request or reservation for which the taxi driver has been notified, specified by its ID, is refused\\ 
 				toggleState & & the state of the taxi driver is changed from not available to available, or vice versa\\
 				\bottomrule
 			\end{tabular}
 		\end{adjustbox}
 	\end{table}		
-	\item Admin
+	\item \textit{Admin:}
 		\begin{adjustbox}{width=1.2\textwidth}	
 			\begin{tabular}{*{3}{c}}
 				\toprule
@@ -208,32 +207,44 @@ In the following list the methods are divided by type of end user that needs the
 		
 \paragraph{Https %TODO fare}
 This interface exposes the same methods as the previous one as the 
-
+%TODO aggiungere interfaccia notification receiver
 		
 \paragraph{Notifications}
 This interface exposes methods to notify end users (except for administrators) of particular events. 
 The following list distinguishes notifications sent to taxi drivers from those sent to logged in users
 \begin{itemize}
-	\item \textit{Notifications sent to logged in users:}
+	\item \textit{Notifications sent to logged in users:} \\
 		\begin{adjustbox}{width=1.2\textwidth}	
 			\begin{tabular}{*{3}{c}}
 				\toprule
 				Method & Parameters required & Notes \\
 				\midrule
-				notifyAcceptedRequest & request ID, taxi driver ID & the user is notified that request specified by the ID %TODO finire\\ 
+				notifyAcceptedRequest & request ID, taxi driver ID, ETA & the user is notified of the taxi driver that has accepted the specified request and how much it will take for the taxi driver to get to the starting location\\ 
+				notifyAcceptedReservation & reservation ID, taxi driver ID & the user is notified of the taxi driver that has accepted the specified reservation \\
+				%TODO aggiungere altro?
+				\bottomrule
+			\end{tabular}
+		\end{adjustbox}	
+	\item \textit{Notifications sent to taxi drivers:} \\
+		\begin{adjustbox}{width=1.2\textwidth}	
+			\begin{tabular}{*{3}{c}}
+				\toprule
+				Method & Parameters required & Notes \\
+				\midrule
+				notifyIncomingRequest & starting location, user ID, request ID & the taxi driver is notified of an incoming request from the specified user and starting location\\ 
+				notifyIncomingReservation & starting location, user ID, meeting time, reservation ID & the taxi driver is notified of an incoming reservation for the specified meeting time and from the specified user and starting location \\
+				%TODO aggiungere altro?
 				\bottomrule
 			\end{tabular}
 		\end{adjustbox}	
 \end{itemize}		
-		
-		
 \end{itemize}
 \subsection{Selected Architectural Styles and Patterns}
 The most important part of the application is based on a classical Client-Server pattern: the service is completely provided by the centralized core, to which the clients connect in order to perform any operation.\\
-More in details the pattern involves a very minimal client with almost no functionalities except for connecting to the server and displaying the information received.\\
-For the Server it was decided to adopt a 3-tier subdivision: the untrusted internet, the DMZ and the internal network.
+More in details the pattern involves a very thin client with almost no functionalities except for connecting to the server and displaying the information received.\\
+For the Web Server it was decided to adopt a 3-tier subdivision: the untrusted internet, the DMZ and the internal network. %TODO sistemare questo
 \subsection{Other Design Decisions}
-In order to provide an easier maintenance and to allow the project to scale easily two main points were stated: 
+In order to provide an easier maintenance and to allow the project to scale easily, two main points were stated: 
 \begin{itemize}
 	\item A cross-platform web-based framework should be chosen to develop the mobile version of the application 
 	\item A cloud based approach should be chosen instead of buying the hardware to host the service
@@ -256,7 +267,6 @@ Non functional requirements:
 	\item Secure channels will be established using SSL 
 	\item Authentication will always be checked before accessing sensible data.
 	\item Stability, scalability and availability of resources will be granted by using a cloud-based system. The deployment will not be made on physical machines but virtual machines rented on reliable providers.
-	%TODO add SSL to acronyms
 \end{itemize}
 \section{References}
 \clearpage

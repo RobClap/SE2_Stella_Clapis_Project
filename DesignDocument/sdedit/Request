@@ -11,11 +11,11 @@ requestsAndReservations:DBMS
 
 user:clientUI.request a taxi 
 clientUI:confirmed=httpHandler.requestTaxi
-httpHandler:confirmation page=webpageCreator.performRequest
+httpHandler:confirmation page=webpageCreator.requestTaxi
 webpageCreator:request_created=dbconnector.addRequest
 dbconnector:auth valid=accounts.SELECT ... (check auth)
 dbconnector:placed=requestsAndReservations.INSERT ...
-webpageCreator:>notificationModule.handleRequest
+webpageCreator:>notificationModule.notifyIncomingRequest
 clientUI:user.confirmation_page
 [c:loop until a taxi driver accepts]
 	notificationModule:taxi=dbconnector.getFirstInQueue

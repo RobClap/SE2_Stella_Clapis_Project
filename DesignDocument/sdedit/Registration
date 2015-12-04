@@ -1,4 +1,4 @@
-user:Actor
+guest:Actor
 clientUI:Mobile App OR Webpage
 httpHandler:Web Server
 webpageCreator:Web Server
@@ -6,19 +6,19 @@ dbconnector:Web Server
 accounts:DBMS
 
 [c:alt Registration successful]
-	user:clientUI.Register
-	clientUI:successful=httpHandler.Register(Data)
-	httpHandler:confirmed=webpageCreator.request(Data)
+	guest:clientUI.Register
+	clientUI:successful=httpHandler.Register(credentials)
+	httpHandler:confirmed=webpageCreator.register(credentials)
 	webpageCreator:success=dbconnector.addAccount(Data)
 	dbconnector:insert performed=accounts.INSERT INTO ...
-	clientUI:user.Home Page
+	clientUI:guest.Home Page
 	clientUI:stop
 	--[Registration unsuccessful]
-	user:clientUI.Register
-	clientUI:aborted(Reasons Page)=httpHandler.Register(Data)
-	httpHandler:denied(WebPage with Reasons)=webpageCreator.request(Data)
+	guest:clientUI.Register
+	clientUI:aborted(Reasons Page)=httpHandler.register(credentials)
+	httpHandler:denied(WebPage with Reasons)=webpageCreator.register(credentials)
 	webpageCreator:denied(Reasons)=dbconnector.addAccount(Data)
 	dbconnector:Replicated OR Invalid data=accounts.INSERT INTO ...
-	clientUI:user.RegisterPage(Fields to change)
+	clientUI:guest.RegisterPage(Fields to change)
 	clientUI:stop
 [/c]
