@@ -1,0 +1,41 @@
+ * https://glassfish.dev.java.net/public/CDDL+GPL_1_1.html
+public class ConnectorDeployer extends JavaEEDeployer<ConnectorContainer, ConnectorApplication>
+    public ConnectorDeployer() {
+    public MetaData getMetaData() {
+    public <T> T loadMetaData(Class<T> type, DeploymentContext context) {
+    public ConnectorApplication load(ConnectorContainer container, DeploymentContext context) {
+    public void unload(ConnectorApplication appContainer, DeploymentContext context) {
+    public void clean(DeploymentContext dc) {
+                    public Object run(Resources param) throws PropertyVetoException, TransactionFailure {
+                    public Object run(Resources param) throws PropertyVetoException,
+                    public Object run(Resources param) throws PropertyVetoException, TransactionFailure {
+                    public Object run(Resources param) throws PropertyVetoException, TransactionFailure {
+                    public Object run(Resources param) throws PropertyVetoException, TransactionFailure {
+    public void postConstruct() {
+    public void logFine(String message) {
+    public void event(Event event) {
+    public void preDestroy() {
+    private ConnectorRuntime runtime;
+    private ClassLoaderHierarchy clh;
+    private org.glassfish.resourcebase.resources.listener.ResourceManager resourceManager;
+    private ApplicationScopedResourcesManager asrManager;
+    private Domain domain;
+    private ServerEnvironment env;
+    private Resources resources;
+    private Events events;
+    private ConfigBeansUtilities configBeansUtilities;
+    private static Logger _logger = LogDomains.getLogger(ConnectorDeployer.class, LogDomains.RSR_LOGGER);
+    private static StringManager localStrings = StringManager.getManager(ConnectorRuntime.class);
+    private static final String DOMAIN = "domain";
+    private static final String EAR = "ear";
+    private void deleteAllResources(String moduleName, String targetServer) {
+    private void deleteRAConfig(final ResourceAdapterConfig rac) {
+    private void deleteWorkSecurityMaps(final Collection<WorkSecurityMap> workSecurityMaps, String raName) {
+    private void deleteAdminObjectResources(final Collection<AdminObjectResource> adminObjectResources,
+    private void deleteConnectorResources(final Collection<Resource> connectorResources, final String target,
+    private void deleteResourceRef(String jndiName, String target) throws TransactionFailure {
+    private void deleteConnectionPools(final Collection<ConnectorConnectionPool> conPools, String raName) {
+    private void registerBeanValidator(String rarName, ReadableArchive archive, ClassLoader classLoader) {
+    private List<String> getValidationMappingDescriptors(ReadableArchive archive) {
+    private void unregisterBeanValidator(String rarName){
+    private void setFailureStatus(DeploymentContext dc, String moduleName) {
