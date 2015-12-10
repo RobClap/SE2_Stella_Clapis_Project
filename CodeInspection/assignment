@@ -1,0 +1,9 @@
+Professor: Mirandola
+Students: Roberto Clapis, Erica Stella
+Methods:
+Name:registerBeanValidator( String rarName , ReadableArchive archive , ClassLoader classLoader )
+Location:appserver/connectors/connectors-runtime/src/main/java/com/sun/enterprise/connectors/module/ConnectorDeployer.java
+Name:getValidationMappingDescriptors( ReadableArchive archive )
+Location:appserver/connectors/connectors-runtime/src/main/java/com/sun/enterprise/connectors/module/ConnectorDeployer.java
+Name:event( Event event )
+Location:appserver/connectors/connectors-runtime/src/main/java/com/sun/enterprise/connectors/module/ConnectorDeployer.java

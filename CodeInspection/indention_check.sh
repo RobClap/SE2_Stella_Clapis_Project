@@ -1,5 +1,5 @@
 cat ConnectorDeployer.java |
-egrep -v '^[ ]{4}+' | #output lines that do not start with "    "+ (4 or multiple of 4 spaces)
+ egrep -v '^[ ]{4}+' | #output lines that do not start with "    "+ (4 or multiple of 4 spaces)
  egrep -v "^[a-zA-Z]" | #filter out lines that are not indented at all
  egrep -v "^[ ]*$" | #remove blank lines
  egrep -v "^ \*" | #remove comments section
@@ -10,3 +10,7 @@ egrep -v '^[ ]{4}+' | #output lines that do not start with "    "+ (4 or multipl
 # output: [1 line]
 #							//ignore ?
 #line 518 in registerBeanValidator()
+
+cat ConnectorDeployer.java | grep "	" #Check for the "tab" character
+
+#output: [the same line of the other command]
