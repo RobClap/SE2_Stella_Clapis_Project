@@ -8,6 +8,28 @@
 \usepackage{color}
 \usepackage{verbatim}
 \usepackage{listings}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+	language=Java,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=none,
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=3
+}
+
 \usepackage{underscore}
 \setcounter{secnumdepth}{5}
 \usepackage[bookmarks=true]{hyperref}
@@ -55,72 +77,85 @@
 %Explain which point is not fulfilled
 %and why
 
+\subsection{Naming Conventions}
+\subsection{Indention}
+\subsection{Braces}
+\subsection{File Organization}
+\subsection{Wrapping Lines}
+\subsection{Comments}
+\subsection{Java Source Files}
+%20 a posto
+%21 a posto
+\subsection{Package and Import Statements}
+%24 a posto se il package statement è questo --> package com.sun.enterprise.connectors.module;
+\subsection{Class and Interface Declarations}
+\subsection{Initialization and Declarations}
+\subsection{Method Calls}
+\subsection{Arrays}
+\subsection{Object Comparison}
+\subsection{Output Format}
+\subsection{Computation, Comparisons and Assignments}
+\subsection{Exceptions}
+\subsection{Flow of Control}
+\subsection{Files}
+
+\begin{comment}
+parte delle braces fatta su registerBean
 \subsection{registerBeanValidator}
-
-\subsubsection{Naming Conventions}
-\subsubsection{Indention}
 \subsubsection{Braces}
-\subsubsection{File Organization}
-\subsubsection{Wrapping Lines}
-\subsubsection{Comments}
-\subsubsection{Java Source Files}
-\subsubsection{Package and Import Statements}
-\subsubsection{Class and Interface Declarations}
-\subsubsection{Initialization and Declarations}
-\subsubsection{Method Calls}
-\subsubsection{Arrays}
-\subsubsection{Object Comparison}
-\subsubsection{Output Format}
-\subsubsection{Computation, Comparisons and Assignments}
-\subsubsection{Exceptions}
-\subsubsection{Flow of Control}
-\subsubsection{Files}
+\paragraph{10}
+All braces in this method follow the Kernighan and Ritchie style
+so no issues were found.
+\paragraph{11}
+%11 a posto
+\end{comment}
 
-\subsection{getValidationMappingDescriptors}
-
-\subsubsection{Naming Conventions}
-\subsubsection{Indention}
-\subsubsection{Braces}
-\subsubsection{File Organization}
-\subsubsection{Wrapping Lines}
-\subsubsection{Comments}
-\subsubsection{Java Source Files}
-\subsubsection{Package and Import Statements}
-\subsubsection{Class and Interface Declarations}
-\subsubsection{Initialization and Declarations}
-\subsubsection{Method Calls}
-\subsubsection{Arrays}
-\subsubsection{Object Comparison}
-\subsubsection{Output Format}
-\subsubsection{Computation, Comparisons and Assignments}
-\subsubsection{Exceptions}
-\subsubsection{Flow of Control}
-\subsubsection{Files}
-
-\subsection{event}
-
-\subsubsection{Naming Conventions}
-\subsubsection{Indention}
-\subsubsection{Braces}
-\subsubsection{File Organization}
-\subsubsection{Wrapping Lines}
-\subsubsection{Comments}
-\subsubsection{Java Source Files}
-\subsubsection{Package and Import Statements}
-\subsubsection{Class and Interface Declarations}
-\subsubsection{Initialization and Declarations}
-\subsubsection{Method Calls}
-\subsubsection{Arrays}
-\subsubsection{Object Comparison}
-\subsubsection{Output Format}
-\subsubsection{Computation, Comparisons and Assignments}
-\subsubsection{Exceptions}
-\subsubsection{Flow of Control}
-\subsubsection{Files}
 
 \section{Other Highlighted Problems}
 %List here all the parts of code that
 %you think create or may create a bug
 %and explain why
-	
+
+\section{Appendix}
+Appendix for Roberto Clapis\\
+Work hours: 20
+\begin{center}
+	Software Used:\\
+	\-\\
+	\begin{tabular}{*{2}{c}}
+		\toprule
+		Task & Software \\
+		\midrule
+		Edit \LaTeX\ Source & Vim\\
+		Edit Graphs Sources & Vim\\
+		Edit sources for Sequence Diagrams & Vim\\
+		Convert Sequence Diagrams to images & Quick Sequence Diagram Editor\\
+		Generate and Raster directed graphs& Dot\\
+		Generate and Raster undirected graphs& Fdp\\
+		General images mangling and cropping & ImageMagick \& Shotwell\\
+		Convert \LaTeX\ source to PDF & \LaTeX\-MK\\
+		Spell Check & Aspell \\
+		\LaTeX\ Check & LaCheck\\
+		\bottomrule
+	\end{tabular}
+\end{center}
+\-\\
+\-\\
+Appendix for Erica Stella\\
+Work hours: 20
+\begin{center}
+	Software Used:\\
+	\-\\
+	\begin{tabular}{*{2}{c}}
+		\toprule
+		Task & Software \\
+		\midrule
+		Edit \LaTeX\ Source & TexStudio\\
+		Convert \LaTeX\ source to PDF & \LaTeX\-MK\\
+		Edit sources for Sequence Diagrams & Quick Sequence Diagram Editor\\
+		Convert Sequence Diagrams to images & Quick Sequence Diagram Editor\\
+		\bottomrule
+	\end{tabular}
+\end{center}
+
 \end{document}
