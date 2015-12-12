@@ -7,10 +7,14 @@ cat ConnectorDeployer.java |
  egrep -v "^@" | #remove @
  egrep -v "^}" #remove end of the file
 
-# output: [1 line]
-#							//ignore ?
-#line 518 in registerBeanValidator()
+<<output
+[1 line]
+							//ignore ?
+line 518 in registerBeanValidator()
+output
 
 cat ConnectorDeployer.java | grep "	" #Check for the "tab" character
 
-#output: [the same line of the other command]
+<<output
+[the same line yelded by the other command]
+output

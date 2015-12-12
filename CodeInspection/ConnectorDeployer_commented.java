@@ -85,7 +85,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-	//MARKER TODO
 /**
  * Deployer for a resource-adapter.
  *
@@ -588,6 +587,7 @@ public class ConnectorDeployer extends JavaEEDeployer<ConnectorContainer, Connec
         registry.removeBeanValidator(rarName);
     }
 
+	//MARKER TODO
     public void event(Event event) {
 
         // added this pre-check so as to validate whether connector-resources referring
