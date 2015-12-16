@@ -103,7 +103,7 @@ either with an enhanced for or in a while loop with an iterator that starts from
 \subsubsection{38}
 As explained in the previous point, no issues were found.
 \subsubsection{39}
-%TODO domanda
+%TODO domanda: in caso di array o liste ritornate da metodi?
 \subsection{Object Comparison}
 \subsubsection{40}
 %TODO tutti gli oggetti che vengono confrontati con null usano !=, secondo te devo segnalarlo o non li conto? io credo di no
@@ -114,25 +114,60 @@ The only outputs of the methods that were assigned to us are the
  entries logged in the logger and they're all free of spelling
  and grammatical errors.
 \subsubsection{42}
-%TODO domanda
+%TODO domanda: nei nostri messaggi di errore dei logger non mi sembra ci siano grandi informazioni su come correggere l'errore a parte lo stacktrace dell'eccezione e poche altre parole, tu che dici?
 \subsubsection{43}
-%TODO domanda
+%TODO domanda: questa proprio boh....
 \subsection{Computation, Comparisons and Assignments}
+\subsubsection{44}
+No examples of brutish programming have been found.
+\subsubsection{45}
+%TODO order of computation/evaluation?
+\subsubsection{46}
+%TODO intende che le espressioni devono essere ben parentesizzate tipo se devo fare un + prima di un *?
+\subsubsection{47}
+\subsubsection{48}
+\subsubsection{49}
+%TODO corretti in che senso? O.O
+\subsubsection{50}
+%TODO uhm boh...
+\subsubsection{51}
+%TODO maledetta lei e la sua cazzo di documentazione
 \subsection{Exceptions}
+\subsubsection{52}
+%TODO non trovo le classi nella documentazione per controllare che eccezioni lanciano....
+%TODO Erica nel metodo registerBeanValidator il primo try non ha un catch block
+\subsubsection{53}
+%TODO se quando catcho un'eccezione la loggo e basta è da ritenere un'azione appropriata?
+Two issues have been found regarding appropriate actions 
+taken in catch blocks because, in the following extracts
+from two of the methods assigned to us, no proper actions 
+are taken:
+\begin{itemize}
+	\item registerBeanValidator: \\
+	\begin{lstlisting}
+		try {
+	        if (inputStream != null) {
+		        inputStream.close();
+	        }
+        } catch (Exception e) {
+	        // ignore ?
+        }
+	\end{lstlisting}
+	\item getValidationMappingDescriptors: \\
+	\begin{lstlisting}
+		try {
+		    reader.close();
+	    } catch (Exception e) {
+		    //ignore ?
+	    }
+	\end{lstlisting}
+\end{itemize}
 \subsection{Flow of Control}
-\subsection{Files}
-
-\begin{comment}
-parte delle braces fatta su registerBean
-\subsection{registerBeanValidator}
-\subsubsection{Braces}
-\paragraph{10}
-All braces in this method follow the Kernighan and Ritchie style
-so no issues were found.
-\paragraph{11}
-%11 a posto
-\end{comment}
-
+\subsection{Files} %TODO questo è un boh generale T.T scusami T.T
+\subsubsection{57}
+\subsubsection{58}
+\subsubsection{59}
+\subsubsection{60}
 
 \section{Other Highlighted Problems}
 %List here all the parts of code that
