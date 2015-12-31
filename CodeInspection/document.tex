@@ -75,14 +75,18 @@
 %do not fulfill some points in the checklist.
 %Explain which point is not fulfilled
 %and why
-
+%BEGINROBSECTION
 \subsection{Naming Conventions}
 \subsubsection{1}
 Class name is meaningful;\\
 No interfaces are in the file;\\
-Method names are meaningful, even if it is suggested to change "deleteRAConfig" in "deleteResourceAdapterConfig";\\
+Method names are meaningful, but 2 problems emerged:
+\begin{itemize}
+\item it is suggested to change "deleteRAConfig" in "deleteResourceAdapterConfig";
+\item it is suggested to change the ``event'' method name in something more clear, or at least document it.
+\end{itemize}
 Class variables are meaningful.\\
-Method variables \\%TODO\\
+Method variables are meaningful even if the use of names longer than 2 characters is suggested.\\
 Constants names are meaningful but the "EAR" constant may be renamed in "ENTERPRISE_ARCHIVE" to improve readability;\\ 
 
 \subsubsection{2}
@@ -100,33 +104,115 @@ The convenction is respected, but the variable "clh" has a meaningless name, bec
 The constants respect the naming convenction.
 \subsection{Indention}
 \subsubsection{8}
-Indention is coherent, 4 or multiples of 4 spaces are used consinstently, with only line 518 as an exception.
+Indention is coherent, 4 or multiples of 4 spaces are used consinstently.
 \subsubsection{9}
 line 518 uses tabs to indent.\\
 \begin{lstlisting}
-``							//ignore ?''
+513	                        try {
+514	                            if (inputStream != null) {
+515	                                inputStream.close();
+516	                            }
+517	                        } catch (Exception e) {
+518	                            // ignore ?
+519	                        }
 \end{lstlisting}
+It is proposed to remove the line or mark it as a ``TODO: check if it is adeguate to ignore this''
 \subsection{Braces}
+%TODO with sonarqube
 \subsection{File Organization}
+\subsubsection{12}
+A blank line is suggested before line 55 to divide imports of different domains.
+Remove the two blank lines 216 217 in order to have coherence in spacing.
+Remove line 299, it is not good to end a method with a blank line.
+Remove line 342 and 373
+\subsubsection{13}
+There are 74 lines longer than 80 chars. Most of them make sense as they are since splitting the line would just reduce readability. Some lines in the file are already splitted when it was practical to do so.
+
+\subsubsection{14}
+Only one line exceedes 120 chars and it is 121 chars long.
+It is line 278 and since it is a comment and exceedes by only one character two solutions are proposed:\\
+\begin{itemize}
+	\item Leave the line as it is, since splitting it would be a low-level break in the middle of a parenthesis
+	\item split it before the opened parentheses
+\end{itemize}
+
 \subsection{Wrapping Lines}
+\subsubsection{15}
+Line wrappings occour only after the following characters: 
+\begin{verbatim}
+>,=.+
+\end{verbatim}
+In lines 640 and 649 lines are broken before a parentheses in order to have a higher-level break so the convenction is respected.
+\subsubsection{16}
+Higher level breaks are used.
+\subsubsection{17}
+Allignment of new statements are correct.
 \subsection{Comments}
+\subsubsection{18}
+The assigned class lacks of documentation. Most of the methods are not documented, and even if some comments to explain what code does are present, they are very few and not present in a constant way but only in some parts of the code.
+It is suggested to at least provide a line of comment or doc for each method.
+\subsubsection{19}
+Line 594 is the only one that has commented-out code and it has a justification to have the code, but not why it is commented out.
 \subsection{Java Source Files}
 \subsubsection{20}
 The file ConnectorDeployer.java contains only the ConnectorDeployer public class.
 \subsubsection{21}
 The ConnectorDeployer public class is the first and only class in the file.
+\subsubsection{22}
+Since the following methods have no documentation this check is not doable.
+\begin{itemize}
+	\item event (due to implementation of EventListener)
+	\item preDestroy (due to impelementation of PreDestroy)
+	\item logFine
+\end{itemize}
+The other methods are coherent with documentation.
+\subsubsection{23}
+As stated in the point above three public methods are not documented, and even if 2 are due to interface implementation at least a line of documentation to explain what the particular method does should be added.
+Also most of the private methods have no documentation, and it should be provided.
 \subsection{Package and Import Statements}
 \subsubsection{24}
 The package statement package com.sun.enterprise.connectors.module; is
 the first non-comment statement and is followed by the import statements.
 \subsection{Class and Interface Declarations}
+\subsubsection{25}
+\paragraph{A}
+The class has a documentation comment
+\paragraph{B}
+The class statement follows his doc
+\paragraph{C}
+There is no implementation comment
+\paragraph{D}
+Static variables are after the instance variables, so the convenction is not respected.
+\paragraph{E}
+There are only private variables
+\paragraph{F}
+There is the empty constructor
+\paragraph{G}
+The methods follow the constructor
+\subsubsection{26}
+Methods are grouped by functionality.
+\subsubsection{27}
+%TODO 
 \subsection{Initialization and Declarations}
+\subsubsection{28}
+Variables and class members are of the correct type and they have the right visibility.
+\subsubsection{29}
+%TODO with SonarQube
+\subsubsection{30}
+%TODO with SonarQube
+\subsubsection{31}
+%TODO with SonarQube
+\subsubsection{32}
+%TODO with SonarQube
+\subsubsection{33}
+%TODO with SonarQube
+%ENDROBSECTION (this is used to automatic todo checks
 \subsection{Method Calls}
 \subsection{Arrays}
 \subsubsection{37}
 No issues were found regarding array indexing. All arrays and lists are accessed 
 either with an enhanced for or in a while loop with an iterator that starts from the
- first element and scans all the other elements until there are no more.
+first element and scans all the other elements until there are no more.
 \subsubsection{38}
 As explained in the previous point, no issues were found.
 \subsubsection{39}
@@ -140,8 +226,8 @@ No issues were found regarding object comparisons as '==' is never used.
 \subsection{Output Format}
 \subsubsection{41}
 The only outputs of the methods that were assigned to us are the
- entries logged in the logger and they're all free of spelling
- and grammatical errors.
+entries logged in the logger and they're all free of spelling
+and grammatical errors.
 \subsubsection{42}
 %TODO domanda: nei nostri messaggi di errore dei logger non mi sembra ci siano grandi informazioni su come correggere l'errore a parte lo stacktrace dell'eccezione e poche altre parole, tu che dici?
 %hai ragione, ma è molto comune, che facciamo? vuoi mettere di essere più esplicativi o linkare a una pagina risolutiva?
@@ -182,23 +268,23 @@ from two of the methods assigned to us, no actions at all
 are taken:
 \begin{itemize}
 	\item registerBeanValidator: \\
-	\begin{lstlisting}
+		\begin{lstlisting}
 		try {
-	        if (inputStream != null) {
-		        inputStream.close();
-	        }
-        } catch (Exception e) {
-	        // ignore ?
-        }
-	\end{lstlisting}
+			if (inputStream != null) {
+				inputStream.close();
+			}
+		} catch (Exception e) {
+			// ignore ?
+		}
+		\end{lstlisting}
 	\item getValidationMappingDescriptors: \\
-	\begin{lstlisting}
+		\begin{lstlisting}
 		try {
-		    reader.close();
-	    } catch (Exception e) {
-		    //ignore ?
-	    }
-	\end{lstlisting}
+			reader.close();
+		} catch (Exception e) {
+			//ignore ?
+		}
+		\end{lstlisting}
 \end{itemize}
 \subsection{Flow of Control}
 \subsubsection{54 and 55}
@@ -206,10 +292,13 @@ There are no switch statements in the methods that were assigned to us.
 \subsection{Files} %TODO questo Ã¨ un boh generale T.T scusami T.T
 %Vuoi che la guardi io? Dovrei avere capito cosa sia XD
 \subsubsection{57}
+All files are declared and opened properly.
 \subsubsection{58}
+All opened files are closed in a ``finally'' block. %TODO riga 515 davvero chiude tutto o solo l'ultimo?
 \subsubsection{59}
+Since files are read line by line with a buffered reader the condition is correctly checked with a null-check for the read line.
 \subsubsection{60}
-
+Exceptions are just caught and logged. If an exception is thrown while manipulating the file it is correctly closed.
 \section{Other Highlighted Problems}
 %List here all the parts of code that
 %you think create or may create a bug
@@ -217,7 +306,7 @@ There are no switch statements in the methods that were assigned to us.
 
 \section{Appendix}
 Appendix for Roberto Clapis\\
-Work hours: 20
+Work hours: 10
 \begin{center}
 	Software Used:\\
 	\-\\
@@ -226,15 +315,11 @@ Work hours: 20
 		Task & Software \\
 		\midrule
 		Edit \LaTeX\ Source & Vim\\
-		Edit Graphs Sources & Vim\\
-		Edit sources for Sequence Diagrams & Vim\\
-		Convert Sequence Diagrams to images & Quick SequenceÂ DiagramÂ Editor\\
-		Generate and Raster directed graphs& Dot\\
-		Generate and Raster undirected graphs& Fdp\\
-		General images mangling and cropping & ImageMagick \& Shotwell\\
 		Convert \LaTeX\ source to PDF & \LaTeX\-MK\\
 		Spell Check & Aspell \\
 		\LaTeX\ Check & LaCheck\\
+		Analyze brackets convenction & SonarQube\\
+		Analyze naming convenctions & sed, grep, cat, tr\\
 		\bottomrule
 	\end{tabular}
 \end{center}
