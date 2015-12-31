@@ -192,20 +192,21 @@ The methods follow the constructor
 \subsubsection{26}
 Methods are grouped by functionality.
 \subsubsection{27}
-%TODO 
+%TODO with SonarQube
 \subsection{Initialization and Declarations}
 \subsubsection{28}
 Variables and class members are of the correct type and they have the right visibility.
 \subsubsection{29}
-%TODO with SonarQube
+Variables are declared in the proper scope.
 \subsubsection{30}
-%TODO with SonarQube
+Constructors are almost always called unless it is intentional to assign ``null'' to the variable.
 \subsubsection{31}
-%TODO with SonarQube
+classLoader in the ``load'' method is probably intentionally left null, depending on the computation that follows its declaration. (line 176)
+All the other variables are initialized before use.
 \subsubsection{32}
-%TODO with SonarQube
+Every variable is initialized where it is declared, and if it requires futher computation to be assigned with a value it is explicitly initialized with null, which sometimes is a valid value (see 31), and later computed and assigned.
 \subsubsection{33}
-%TODO with SonarQube
+Declarations appear at the beginning of blocks except fpr the ``event'' method, in which they are declared based on context in which they are used. Adding subscopes is suggested.
 %ENDROBSECTION (this is used to automatic todo checks
 \subsection{Method Calls}
 \subsection{Arrays}
@@ -303,6 +304,7 @@ Exceptions are just caught and logged. If an exception is thrown while manipulat
 %List here all the parts of code that
 %you think create or may create a bug
 %and explain why
+%TODO registerBeanValidator does not close all streams but only the last one, which is bad practice in general
 
 \section{Appendix}
 Appendix for Roberto Clapis\\
