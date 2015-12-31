@@ -1,0 +1,74 @@
+    93	public class ConnectorDeployer extends JavaEEDeployer<ConnectorContainer, ConnectorApplication>
+   103	    private org.glassfish.resourcebase.resources.listener.ResourceManager resourceManager;
+   122	    private static Logger _logger = LogDomains.getLogger(ConnectorDeployer.class, LogDomains.RSR_LOGGER);
+   123	    private static StringManager localStrings = StringManager.getManager(ConnectorRuntime.class);
+   157	     * @return an ApplicationContainer instance identifying the running application
+   160	    public ConnectorApplication load(ConnectorContainer container, DeploymentContext context) {
+   177	        //this check is not needed as system-rars are never deployed, just to be safe.
+   180	                //for a connector deployer, classloader will always be ConnectorClassFinder
+   185	                            ConnectorsUtil.getApplicationName(context), moduleName);
+   195	                registerBeanValidator(moduleName, context.getSource(), classLoader);
+   197	                runtime.createActiveResourceAdapter(connDesc, moduleName, sourcePath, classLoader);
+   203	                //since resource-adapter creation has failed, remove the class-loader for the RAR
+   207	                //since resource-adapter creation has failed, unregister bean validator of the RAR
+   212	        return new ConnectorApplication(moduleName, ConnectorsUtil.getApplicationName(context), resourceManager,
+   220	     * ContractProvider instance. The container will be stop upon return from this
+   226	    public void unload(ConnectorApplication appContainer, DeploymentContext context) {
+   239	                //remove the class-finder (class-loader) from connector-class-loader chain
+   263	        UndeployCommandParameters dcp = dc.getCommandParameters(UndeployCommandParameters.class);
+   269	                    String applicationName = ConnectorsUtil.getApplicationName(dc);
+   270	                    moduleName = ConnectorsUtil.getEmbeddedRarModuleName(applicationName, moduleName);
+   278	     * deletes all resources (pool, resource, admin-object-resource, ra-config, work-security-map) of a resource-adapter)
+   285	        Collection<ConnectorConnectionPool> conPools = ConnectorsUtil.getAllPoolsOfModule(moduleName, resources);
+   287	        Collection<Resource> connectorResources = ConnectorsUtil.getAllResources(poolNames, resources);
+   288	        Collection<AdminObjectResource> adminObjectResources = ResourcesUtil.createInstance().
+   290	        Collection<WorkSecurityMap> securityMaps = ConnectorsUtil.getAllWorkSecurityMaps(resources, moduleName);
+   291	        ResourceAdapterConfig rac = ConnectorsUtil.getRAConfig(moduleName, resources);
+   296	        deleteAdminObjectResources(adminObjectResources, targetServer, moduleName);
+   307	                    public Object run(Resources param) throws PropertyVetoException, TransactionFailure {
+   311	                    _logger.log(Level.WARNING, "unable.to.delete.rac", rac.getResourceAdapterName());
+   315	                Object params[] = new Object[]{rac.getResourceAdapterName(), tfe};
+   316	                _logger.log(Level.WARNING, "unable.to.delete.rac.exception", params);
+   321	    private void deleteWorkSecurityMaps(final Collection<WorkSecurityMap> workSecurityMaps, String raName) {
+   327	                    public Object run(Resources param) throws PropertyVetoException,
+   335	                    _logger.log(Level.WARNING, "unable.to.delete.work.security.map", raName);
+   340	                _logger.log(Level.WARNING, "unable.to.delete.work.security.map.exception", params);
+   346	    private void deleteAdminObjectResources(final Collection<AdminObjectResource> adminObjectResources,
+   347	                                            final String target, String raName) {
+   359	                    public Object run(Resources param) throws PropertyVetoException, TransactionFailure {
+   360	                        for (AdminObjectResource resource : adminObjectResources) {
+   367	                    _logger.log(Level.WARNING, "unable.to.delete.admin.object", raName);
+   371	                _logger.log(Level.WARNING, "unable.to.delete.admin.object.exception", params);
+   377	    private void deleteConnectorResources(final Collection<Resource> connectorResources, final String target,
+   384	                    String jndiName = ((ConnectorResource) resource).getJndiName();
+   390	                    public Object run(Resources param) throws PropertyVetoException, TransactionFailure {
+   398	                    _logger.log(Level.WARNING, "unable.to.delete.connector.resource", raName);
+   402	                _logger.log(Level.WARNING, "unable.to.delete.connector.resource.exception", params);
+   407	    private void deleteResourceRef(String jndiName, String target) throws TransactionFailure {
+   443	    private void deleteConnectionPools(final Collection<ConnectorConnectionPool> conPools, String raName) {
+   448	                    public Object run(Resources param) throws PropertyVetoException, TransactionFailure {
+   456	                    _logger.log(Level.WARNING, "unable.to.delete.connector.connection.pool", raName);
+   460	                _logger.log(Level.WARNING, "unable.to.delete.connector.connection.pool.exception", params);
+   481	    private void registerBeanValidator(String rarName, ReadableArchive archive, ClassLoader classLoader) {
+   491	                List<String> mappingsList = getValidationMappingDescriptors(archive);
+   504	                        ValidatorContext validatorContext = validatorFactory.usingContext();
+   509	                            _logger.log(Level.FINE, "Exception while processing xml files for detecting " +
+   525	                _logger.log(Level.WARNING, "error.processing.xml.for.bean.validation.mapping", params);
+   528	                validatorFactory = Validation.byDefaultProvider().configure().buildValidatorFactory();
+   539	    private List<String> getValidationMappingDescriptors(ReadableArchive archive) {
+   540	        String validationMappingNSName = "jboss.org/xml/ns/javax/validation/mapping";
+   564	                        _logger.log(Level.FINE, "Exception while processing xml file [ " + fileName + " ] " +
+   588	        // added this pre-check so as to validate whether connector-resources referring
+   590	        // Though similar validation is done in 'ConnectorApplication', this is to
+   591	        // handle the case where the application is not enabled in DAS (no ConnectorApplication)
+   594	        if (/*env.isDas() && */ Deployment.UNDEPLOYMENT_VALIDATION.equals(event.type())) {
+   597	            UndeployCommandParameters dcp = dc.getCommandParameters(UndeployCommandParameters.class);
+   608	            com.sun.enterprise.config.serverbeans.Application app = domain.getApplications().getApplication(appName);
+   611	                isRAR = app.containsSnifferType(ConnectorConstants.CONNECTOR_MODULE);
+   619	            Server server = domain.getServers().getServer(env.getInstanceName());
+   635	                    if (module.getEngine(ConnectorConstants.CONNECTOR_MODULE) != null) {
+   636	                        moduleName = appName + ConnectorConstants.EMBEDDEDRAR_NAME_DELIMITER + moduleName;
+   637	                        if (moduleName.toLowerCase(Locale.getDefault()).endsWith(".rar")) {
+   641	                                    (resourceManager.getAllResources(), moduleName, true).size() > 0) {
+   650	                        (resourceManager.getAllResources(), moduleName, true).size() > 0) {
+   658	        String message = localStrings.getString("con.deployer.resources.exist", moduleName);
