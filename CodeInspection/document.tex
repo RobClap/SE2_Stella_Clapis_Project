@@ -39,8 +39,7 @@
 	\\A.A. 2015\@-\@2016
 	\\Software Engineering 2: ``myTaxiService''
 	\\\textbf{C}ode \textbf{I}nspection}
-\hypersetup{
-	pdftitle={Code Inspection},    % title
+\hypersetup{pdftitle={Code Inspection},    % title
 	pdfauthor={Roberto Clapis, Erica Stella},                     % author
 	pdfsubject={Code Inspection},                        % subject of the document
 	pdfkeywords={TeX, LaTeX, taxi, Inspection, SoftwareEngineering2}, % list of keywords
@@ -78,7 +77,35 @@
 %and why
 
 \subsection{Naming Conventions}
+\subsubsection{1}
+Class name is meaningful;\\
+No interfaces are in the file;\\
+Method names are meaningful, even if it is suggested to change "deleteRAConfig" in "deleteResourceAdapterConfig";\\
+Class variables are meaningful.\\
+Method variables \\%TODO\\
+Constants names are meaningful but the "EAR" constant may be renamed in "ENTERPRISE_ARCHIVE" to improve readability;\\ 
+
+\subsubsection{2}
+Some one-character variables were found, but they were all "e" for exceptions.
+We cosidered acceptable to have exceptions in catch blocks named "e" since they are throwaway variables and they have a very limited scope length.
+\subsubsection{3}
+The file only contains one class and it respects the naming convenction.
+\subsubsection{4}
+No interface is declared in the assigned file.
+\subsubsection{5}
+All the methods respect the naming convenction.
+\subsubsection{6}
+The convenction is respected, but the variable "clh" has a meaningless name, because an acronym is used, but as a 3 letter lowercase word, which can be confusing. It is suggested to rename the variable clHierarchy or classLoaderHierarchy to improve readability.
+\subsubsection{7}
+The constants respect the naming convenction.
 \subsection{Indention}
+\subsubsection{8}
+Indention is coherent, 4 or multiples of 4 spaces are used consinstently, with only line 518 as an exception.
+\subsubsection{9}
+line 518 uses tabs to indent.\\
+\begin{lstlisting}
+``							//ignore ?''
+\end{lstlisting}
 \subsection{Braces}
 \subsection{File Organization}
 \subsection{Wrapping Lines}
@@ -104,9 +131,11 @@ either with an enhanced for or in a while loop with an iterator that starts from
 As explained in the previous point, no issues were found.
 \subsubsection{39}
 %TODO domanda: in caso di array o liste ritornate da metodi?
+%Mah, credo in generale, se viene creato un nuovo elemento di un array non viene solo dimensionato l'array ma anche creato un ``new'' element.
 \subsection{Object Comparison}
 \subsubsection{40}
 %TODO tutti gli oggetti che vengono confrontati con null usano !=, secondo te devo segnalarlo o non li conto? io credo di no
+%null non si può confrontare con ``equals''
 No issues were found regarding object comparisons as '==' is never used.
 \subsection{Output Format}
 \subsubsection{41}
@@ -115,8 +144,10 @@ The only outputs of the methods that were assigned to us are the
  and grammatical errors.
 \subsubsection{42}
 %TODO domanda: nei nostri messaggi di errore dei logger non mi sembra ci siano grandi informazioni su come correggere l'errore a parte lo stacktrace dell'eccezione e poche altre parole, tu che dici?
+%hai ragione, ma è molto comune, che facciamo? vuoi mettere di essere più esplicativi o linkare a una pagina risolutiva?
 \subsubsection{43}
 %TODO domanda: questa proprio boh....
+%Eh, semplicemente controlla che il logging non sia fatto con tabulazioni a random o colori strani.
 \subsection{Computation, Comparisons and Assignments}
 \subsubsection{44}
 No examples of brutish programming have been found.
@@ -124,20 +155,27 @@ No examples of brutish programming have been found.
 %TODO order of computation/evaluation?
 \subsubsection{46}
 %TODO intende che le espressioni devono essere ben parentesizzate tipo se devo fare un + prima di un *?
+%Si, e che non siano invece usate laddove sono inutili
 \subsubsection{47}
 \subsubsection{48}
 \subsubsection{49}
 %TODO corretti in che senso? O.O
+%credo nel senso che non siano sbagliati, ovvero che siano le condizioni giuste
 \subsubsection{50}
 %TODO uhm boh...
+%Che non siano catchate eccezioni che non possono essere sollevate, o di non avere una eccezione più generica catchata prima di una più dettagliata (nel qual caso hai del codice non raggiungibile)
 \subsubsection{51}
 %TODO maledetta lei e la sua cazzo di documentazione
+%Implicit type conversion è una rogna da checkare, mi sa che ci converrà caricare il progetto in eclipse e farlo fare a lui, se vuoi ne parliamo
 \subsection{Exceptions}
 \subsubsection{52}
 %TODO non trovo le classi nella documentazione per controllare che eccezioni lanciano....
+%dopo le cerco
 %TODO Erica nel metodo registerBeanValidator il primo try non ha un catch block
+%si che ce l'ha
 \subsubsection{53}
 %TODO se quando catcho un'eccezione la loggo e basta Ã¨ da ritenere un'azione appropriata?
+%eh, se l'eccezione è del tipo ``connection reset'' o ``invalid file'' direi di si'
 Two issues have been found regarding appropriate actions 
 taken in catch blocks because, in the following extracts
 from two of the methods assigned to us, no actions at all
@@ -166,6 +204,7 @@ are taken:
 \subsubsection{54 and 55}
 There are no switch statements in the methods that were assigned to us.
 \subsection{Files} %TODO questo Ã¨ un boh generale T.T scusami T.T
+%Vuoi che la guardi io? Dovrei avere capito cosa sia XD
 \subsubsection{57}
 \subsubsection{58}
 \subsubsection{59}
