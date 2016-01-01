@@ -107,7 +107,7 @@ The constants respect the naming convention.
 \subsubsection{8}
 Indention is coherent, 4 or multiples of 4 spaces are used consistently.
 \subsubsection{9}
-line 518 uses tabs to indent.\\ %TODO non c'è lo stesso ignore sia in validationmapping che in registerbean? %ma è stato indentato con gli spazi
+line 518 uses tabs to indent.\\ 
 \begin{lstlisting}
 513	                        try {
 514	                            if (inputStream != null) {
@@ -202,8 +202,7 @@ Variables and class members are of the correct type and they have the right visi
 \subsubsection{29}
 Variables are declared in the proper scope.
 \subsubsection{30}
-Constructors are always called unless it is intentional to assign ``null'' to the variable. %TODO ma tipo quando mi ritorna un oggetto da un metodo di un altro oggetto è da considerare come una chiamata al costruttore? 
-%affermativo
+Constructors are always called unless it is intentional to assign ``null'' to the variable.
 \subsubsection{31}
 classLoader in the ``load'' method is probably intentionally left null, depending on the computation that follows its declaration. (line 176)
 All the other variables are initialized before use.
@@ -245,18 +244,19 @@ and grammatical errors.
 %TODO domanda: nei nostri messaggi di errore dei logger non mi sembra ci siano grandi informazioni su come correggere l'errore a parte lo stacktrace dell'eccezione e poche altre parole, tu che dici?
 %hai ragione, ma è molto comune, che facciamo? vuoi mettere di essere più esplicativi o linkare a una pagina risolutiva?
 \subsubsection{43}
-%TODO domanda: questa proprio boh....
-%Eh, semplicemente controlla che il logging non sia fatto con tabulazioni a random o colori strani.
+All the logger's entries are formatted correctly.
 \subsection{Computation, Comparisons and Assignments}
 \subsubsection{44}
 No examples of brutish programming have been found.
 \subsubsection{45}
 %TODO order of computation/evaluation?
 \subsubsection{46}
-%TODO intende che le espressioni devono essere ben parentesizzate tipo se devo fare un + prima di un *?
-%Si, e che non siano invece usate laddove sono inutili
+There are no expressions in which there could be operator
+precedence problems.
 \subsubsection{47}
+%TODO
 \subsubsection{48}
+%TODO
 \subsubsection{49}
 %TODO corretti in che senso? O.O
 %credo nel senso che non siano sbagliati, ovvero che siano le condizioni giuste
@@ -273,8 +273,6 @@ No examples of brutish programming have been found.
 %TODO Erica nel metodo registerBeanValidator il primo try non ha un catch block
 %si che ce l'ha
 \subsubsection{53}
-%TODO se quando catcho un'eccezione la loggo e basta Ã¨ da ritenere un'azione appropriata?
-%eh, se l'eccezione è del tipo ``connection reset'' o ``invalid file'' direi di si'
 Two issues have been found regarding appropriate actions 
 taken in catch blocks because, in the following extracts
 from two of the methods assigned to us, no actions at all
@@ -316,7 +314,7 @@ Exceptions are just caught and logged. If an exception is thrown while manipulat
 %List here all the parts of code that
 %you think create or may create a bug
 %and explain why
-%TODO registerBeanValidator does not close all streams but only the last one, which is bad practice in general
+registerBeanValidator does not close all streams but only the last one.
 
 \section{Appendix}
 Appendix for Roberto Clapis\\
@@ -340,7 +338,7 @@ Work hours: 10
 \-\\
 \-\\
 Appendix for Erica Stella\\
-Work hours: 6 @ 14:00 16/12
+Work hours: 6+2 @ 20:00 1/1
 \begin{center}
 	Software Used:\\
 	\-\\
