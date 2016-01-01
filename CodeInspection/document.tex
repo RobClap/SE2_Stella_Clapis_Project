@@ -61,7 +61,7 @@
 \section{Assigned Class}
 %state theÂ namespace patternÂ and name of the classes	
 %that were assigned	to you	
- Â 	
+  	
 \section{Functional Role of Class ConnectorDeployer}
 %elaborate on the functional role you have
 %identified for the class cluster that was
@@ -80,33 +80,34 @@
 \subsubsection{1}
 Class name is meaningful;\\
 No interfaces are in the file;\\
-Method names are meaningful, but 2 problems emerged:
+Method names are meaningful, but 2 problems emerged: %TODO segnala solo i problemi -  vedi nota dopo
 \begin{itemize}
 \item it is suggested to change "deleteRAConfig" in "deleteResourceAdapterConfig";
 \item it is suggested to change the ``event'' method name in something more clear, or at least document it.
 \end{itemize}
 Class variables are meaningful.\\
-Method variables are meaningful even if the use of names longer than 2 characters is suggested.\\
+Method variables are meaningful even if the use of names longer than 2 characters is suggested.\\ %TODO i suggerimenti sono da togliere, non bisogna cercare di fixare i problemi, sono segnalarli
+%TODO se ci sono variabili con nomi da due lettere e non sono meaningful sono da segnalare - stesso per le costanti
 Constants names are meaningful but the "EAR" constant may be renamed in "ENTERPRISE_ARCHIVE" to improve readability;\\ 
 
 \subsubsection{2}
 Some one-character variables were found, but they were all "e" for exceptions.
-We cosidered acceptable to have exceptions in catch blocks named "e" since they are throwaway variables and they have a very limited scope length.
+We considered acceptable to have exceptions in catch blocks named "e" since they are throwaway variables and they have a very limited scope length.
 \subsubsection{3}
-The file only contains one class and it respects the naming convenction.
+The file only contains one class and it respects the naming convention.
 \subsubsection{4}
 No interface is declared in the assigned file.
 \subsubsection{5}
-All the methods respect the naming convenction.
+All the methods respect the naming convention.
 \subsubsection{6}
-The convenction is respected, but the variable "clh" has a meaningless name, because an acronym is used, but as a 3 letter lowercase word, which can be confusing. It is suggested to rename the variable clHierarchy or classLoaderHierarchy to improve readability.
+The convection is respected, but the variable "clh" has a meaningless name, because an acronym is used, but as a 3 letter lowercase word, which can be confusing. It is suggested to rename the variable clHierarchy or classLoaderHierarchy to improve readability. %TODO ma allora questo non è da mettere prima nel punto 1?
 \subsubsection{7}
-The constants respect the naming convenction.
+The constants respect the naming convention.
 \subsection{Indention}
 \subsubsection{8}
-Indention is coherent, 4 or multiples of 4 spaces are used consinstently.
+Indention is coherent, 4 or multiples of 4 spaces are used consistently.
 \subsubsection{9}
-line 518 uses tabs to indent.\\
+line 518 uses tabs to indent.\\ %TODO non c'è lo stesso ignore sia in validationmapping che in registerbean?
 \begin{lstlisting}
 513	                        try {
 514	                            if (inputStream != null) {
@@ -116,21 +117,23 @@ line 518 uses tabs to indent.\\
 518	                            // ignore ?
 519	                        }
 \end{lstlisting}
-It is proposed to remove the line or mark it as a ``TODO: check if it is adeguate to ignore this''
+%TODO questa parte è da togliere, bisogna solo segnalare i problemi e non cercare di rimuoverli -- It is proposed to remove the line or mark it as a ``TODO: check if it is adeguate to ignore this''
 \subsection{Braces}
 %TODO with sonarqube
+%TODO queste le avevo già controllate io a mano per i nostri metodi e non ci sono problemi
 \subsection{File Organization}
 \subsubsection{12}
+%TODO togliere i suggerimenti e segnalare solo il problema
 A blank line is suggested before line 55 to divide imports of different domains.
 Remove the two blank lines 216 217 in order to have coherence in spacing.
 Remove line 299, it is not good to end a method with a blank line.
 Remove line 342 and 373
 \subsubsection{13}
+%TODO e non ce n'è nessuna da segnalare che avrebbe senso splittata?
 There are 74 lines longer than 80 chars. Most of them make sense as they are since splitting the line would just reduce readability. Some lines in the file are already splitted when it was practical to do so.
-
 \subsubsection{14}
-Only one line exceedes 120 chars and it is 121 chars long.
-It is line 278 and since it is a comment and exceedes by only one character two solutions are proposed:\\
+Only one line exceeds 120 chars and it is 121 chars long.
+It is line 278 and since it is a comment and exceeds by only one character two solutions are proposed:\\ %TODO non sono da proporre soluzioni
 \begin{itemize}
 	\item Leave the line as it is, since splitting it would be a low-level break in the middle of a parenthesis
 	\item split it before the opened parentheses
@@ -138,20 +141,23 @@ It is line 278 and since it is a comment and exceedes by only one character two 
 
 \subsection{Wrapping Lines}
 \subsubsection{15}
-Line wrappings occour only after the following characters: 
+Line wrappings occur only after the following characters: 
 \begin{verbatim}
 >,=.+
 \end{verbatim}
-In lines 640 and 649 lines are broken before a parentheses in order to have a higher-level break so the convenction is respected.
+%TODO non è il caso di fare vedere quali linee sono?
+In lines 640 and 649 lines are broken before a parentheses in order to have a higher-level break so the convention is respected.
 \subsubsection{16}
 Higher level breaks are used.
 \subsubsection{17}
-Allignment of new statements are correct.
+Alignment of new statements is correct.
 \subsection{Comments}
 \subsubsection{18}
 The assigned class lacks of documentation. Most of the methods are not documented, and even if some comments to explain what code does are present, they are very few and not present in a constant way but only in some parts of the code.
+%TODO togliere il suggerimento
 It is suggested to at least provide a line of comment or doc for each method.
 \subsubsection{19}
+%TODO da aggiungere la linea di codice e dire che mancano data e motivi per essere commentata
 Line 594 is the only one that has commented-out code and it has a justification to have the code, but not why it is commented out.
 \subsection{Java Source Files}
 \subsubsection{20}
@@ -162,12 +168,12 @@ The ConnectorDeployer public class is the first and only class in the file.
 Since the following methods have no documentation this check is not doable.
 \begin{itemize}
 	\item event (due to implementation of EventListener)
-	\item preDestroy (due to impelementation of PreDestroy)
-	\item logFine
+	\item preDestroy (due to implementation of PreDestroy)
+	\item logFine %TODO questo è il Logger di java normale, la doc c'è
 \end{itemize}
 The other methods are coherent with documentation.
-\subsubsection{23}
-As stated in the point above three public methods are not documented, and even if 2 are due to interface implementation at least a line of documentation to explain what the particular method does should be added.
+\subsubsection{23} %TODO togliere i suggerimenti
+As stated in the point above, three public methods are not documented, and even if 2 are due to interface implementation at least a line of documentation to explain what the particular method does should be added.
 Also most of the private methods have no documentation, and it should be provided.
 \subsection{Package and Import Statements}
 \subsubsection{24}
@@ -182,7 +188,7 @@ The class statement follows his doc
 \paragraph{C}
 There is no implementation comment
 \paragraph{D}
-Static variables are after the instance variables, so the convenction is not respected.
+Static variables are after the instance variables, so the convention is not respected.
 \paragraph{E}
 There are only private variables
 \paragraph{F}
@@ -198,17 +204,23 @@ Methods are grouped by functionality.
 Variables and class members are of the correct type and they have the right visibility.
 \subsubsection{29}
 Variables are declared in the proper scope.
-\subsubsection{30}
-Constructors are almost always called unless it is intentional to assign ``null'' to the variable.
+\subsubsection{30}%TODO almost?
+Constructors are almost always called unless it is intentional to assign ``null'' to the variable. %TODO ma tipo quando mi ritorna un oggetto da un metodo di un altro oggetto è da considerare come una chiamata al costruttore?
 \subsubsection{31}
 classLoader in the ``load'' method is probably intentionally left null, depending on the computation that follows its declaration. (line 176)
 All the other variables are initialized before use.
 \subsubsection{32}
-Every variable is initialized where it is declared, and if it requires futher computation to be assigned with a value it is explicitly initialized with null, which sometimes is a valid value (see 31), and later computed and assigned.
+Every variable is initialized where it is declared, and if it requires further computation to be assigned with a value it is explicitly initialized with null, which sometimes is a valid value (see 31), and later computed and assigned.
 \subsubsection{33}
-Declarations appear at the beginning of blocks except fpr the ``event'' method, in which they are declared based on context in which they are used. Adding subscopes is suggested.
+Declarations appear at the beginning of blocks except for the ``event'' method, in which they are declared based on context in which they are used. Adding subscopes is suggested. %TODO togliere suggerimento
 %ENDROBSECTION (this is used to automatic todo checks
 \subsection{Method Calls}
+\subsubsection{34}
+%TODO qui manca la documentazione di un sacco di metodi, le scrivo che non si trova e che quindi non posso controllare? devo anche specificare di quali metodi manca la documentazione?
+\subsubsection{35}
+%TODO macosacazzovuoldire?
+\subsubsection{36}
+%TODO per properly intende che vengono usate per qualcosa e non rimangono inutilizzate?
 \subsection{Arrays}
 \subsubsection{37}
 No issues were found regarding array indexing. All arrays and lists are accessed 
