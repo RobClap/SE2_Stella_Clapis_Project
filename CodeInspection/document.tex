@@ -229,13 +229,14 @@ first element and scans all the other elements until there are no more.
 \subsubsection{38}
 As explained in the previous point, no issues were found.
 \subsubsection{39}
-%TODO domanda: in caso di array o liste ritornate da metodi?
-%Mah, credo in generale, se viene creato un nuovo elemento di un array non viene solo dimensionato l'array ma anche creato un ``new'' element.
+Only one array is newly created in our methods in registerBeanValidator \\
+\begin{lstlisting}
+Object params[] = new Object[]{rarName, e};
+\end{lstlisting}
+and the constructor is used to create it.
 \subsection{Object Comparison}
 \subsubsection{40}
-%TODO tutti gli oggetti che vengono confrontati con null usano !=, secondo te devo segnalarlo o non li conto? io credo di no
-%null non si può confrontare con ``equals''
-No issues were found regarding object comparisons as '==' is never used.
+No issues were found regarding object comparisons as '==' is never used instead of equals.
 \subsection{Output Format}
 \subsubsection{41}
 The only outputs of the methods that were assigned to us are the
