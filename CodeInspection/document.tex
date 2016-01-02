@@ -76,12 +76,13 @@
 %Explain which point is not fulfilled
 %and why
 %BEGINROBSECTION
+%TODO segnalare variabili di due lettere
 \subsection{Naming Conventions}
 \subsubsection{1}
 Class name is meaningful;\\
 No interfaces are in the file;\\
 Method names are meaningful.
-Class variables are meaningful. It is suggested to rename the ``env'' variable because it masks the field ``env'' of JavaEEDeployer\\
+Class variables are meaningful but the ``env'' masks the field ``env'' of JavaEEDeployer and the ``clh'' variable has a meaningless name.\\
 Method variables are meaningful even if the use of names longer than 2 characters is suggested.\\
 Constants names are meaningful but the "EAR" constant may be renamed in "ENTERPRISE_ARCHIVE" to improve readability;\\ 
 
@@ -95,7 +96,7 @@ No interface is declared in the assigned file.
 \subsubsection{5}
 All the methods respect the naming convention.
 \subsubsection{6}
-The convection is respected, but the variable "clh" has a meaningless name, because an acronym is used, but as a 3 letter lowercase word, which can be confusing. It is suggested to rename the variable clHierarchy or classLoaderHierarchy to improve readability. %TODO ma allora questo non è da mettere prima nel punto 1? 
+The convenction is respected, but the variable "clh" has a meaningless name, because an acronym is used, but as a 3 letter lowercase word, which can be confusing. It is suggested to rename the variable clHierarchy or classLoaderHierarchy to improve readability. %TODO ma allora questo non è da mettere prima nel punto 1? 
 %Se non ti piace qua spostalo pure
 \subsubsection{7}
 The constants respect the naming convention.
@@ -126,7 +127,7 @@ Blank lines 299, 342, 373 are meaningless.
 \subsubsection{13}
 %TODO e non ce n'è nessuna da segnalare che avrebbe senso splittata? Onestamente non ne ho trovate, secondo me l'hanno fatto fare a del codice
 %Se vuoi guardare sono in sh/longerthan80 però ci ho già dato un'occhiata io e non mi pare.
-There are 74 lines longer than 80 chars. Most of them make sense as they are since splitting the line would just reduce readability. Some lines in the file are already splitted when it was practical to do so.
+There are 74 lines longer than 80 chars but splitting the line would just reduce readability.
 \subsubsection{14}
 Only one line(278) exceeds 120 chars and it is 121 chars long.
 \subsection{Wrapping Lines}
@@ -310,8 +311,10 @@ Exceptions are just caught and logged. If an exception is thrown while manipulat
 %List here all the parts of code that
 %you think create or may create a bug
 %and explain why
-%TODO registerBeanValidator does not close all streams but only the last one, which is bad practice in general
-%TODO the ``event'' method is too complex, it should be split in simpler and smaller methods
+\begin{itemize}
+	\item The registerBeanValidator method does not close all streams but only the last one it tried to open and which threw an exception.
+	\item The ``event'' method is too complex, it should be split in simpler and smaller methods.
+\end{itemize}
 
 \section{Appendix}
 Appendix for Roberto Clapis\\
