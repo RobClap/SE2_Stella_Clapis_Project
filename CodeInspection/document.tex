@@ -105,8 +105,7 @@ No interface is declared in the assigned file.
 \subsubsection{5}
 All the methods respect the naming convention.
 \subsubsection{6}
-The convenction is respected, but the variable "clh" has a meaningless name, because an acronym is used, but as a 3 letter lowercase word, which can be confusing. It is suggested to rename the variable clHierarchy or classLoaderHierarchy to improve readability. %TODO ma allora questo non è da mettere prima nel punto 1? 
-%Se non ti piace qua spostalo pure
+The convenction is respected, but not for the variable "clh" which is a 3 letter lowercase word used as an acronym.
 \subsubsection{7}
 The constants respect the naming convention.
 \subsection{Indention}
@@ -134,8 +133,6 @@ A blank line is missing before line 55 to divide imports of different domains.
 There are 2 meaingless blank lines (216 217) that break coherence in spacing.
 Blank lines 299, 342, 373 are meaningless.
 \subsubsection{13}
-%TODO e non ce n'è nessuna da segnalare che avrebbe senso splittata? Onestamente non ne ho trovate, secondo me l'hanno fatto fare a del codice
-%Se vuoi guardare sono in sh/longerthan80 però ci ho già dato un'occhiata io e non mi pare.
 There are 74 lines longer than 80 chars but splitting the line would just reduce readability.
 \subsubsection{14}
 Only one line(278) exceeds 120 chars and it is 121 chars long.
@@ -202,7 +199,7 @@ The methods follow the constructor
 Methods are grouped by functionality.
 \subsubsection{27}
 Code is free of duplicates longer than one line.
-%TODO ROB forse il fatto che event sia troppo lungo è da mettere qui e non in fondo tra i problemi
+There is a very long method that should be split in smaller, simpler methods which is the ``event'' method.
 \subsection{Initialization and Declarations}
 \subsubsection{28}
 Variables and class members are of the correct type and they have the right visibility.
@@ -311,7 +308,6 @@ found: \\
 \subsubsection{54 and 55}
 There are no switch statements in the methods that were assigned to us.
 \subsection{Files}
-%Vuoi che la guardi io? Dovrei avere capito cosa sia XD
 \subsubsection{57}
 All files are declared and opened properly.
 \subsubsection{58}
@@ -327,9 +323,9 @@ Exceptions are just caught and logged. If an exception is thrown while manipulat
 %and explain why
 \begin{itemize}
 	\item The registerBeanValidator method does not close all streams but only the last one it tried to open and which threw an exception.
-	\item The ``event'' method is too complex, it should be split in simpler and smaller methods.
+	\item 
 \end{itemize}
-%TODO anche in validationmappintdescriptors chiude solo l'ultimo reader e non chiude gli inputstream
+%TODO erica: anche in validationmappintdescriptors chiude solo l'ultimo reader e non chiude gli inputstream % aggiungilo agli items sopra
 
 \section{Appendix}
 Appendix for Roberto Clapis\\
@@ -345,8 +341,6 @@ Work hours: 10
 		Convert \LaTeX\ source to PDF & \LaTeX\-MK\\
 		Spell Check & Aspell \\
 		\LaTeX\ Check & LaCheck\\
-		Analyze brackets convention & SonarQube\\
-		Analyze naming conventions & sed, grep, cat, tr\\ %TODO sai che non credo dovremmo scriverli questi?
 		\bottomrule
 	\end{tabular}
 \end{center}
