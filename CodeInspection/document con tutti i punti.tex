@@ -1,0 +1,370 @@
+\documentclass{article}
+\usepackage{adjustbox}
+\usepackage{float}
+\usepackage{textcomp}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{booktabs}
+\usepackage{color}
+\usepackage{verbatim}
+\usepackage{listings}
+
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\lstset{frame=tb,
+	language=Java,
+	aboveskip=3mm,
+	belowskip=3mm,
+	showstringspaces=false,
+	columns=flexible,
+	basicstyle={\small\ttfamily},
+	numbers=none,
+	numberstyle=\tiny\color{gray},
+	keywordstyle=\color{blue},
+	commentstyle=\color{dkgreen},
+	stringstyle=\color{mauve},
+	breaklines=true,
+	breakatwhitespace=true,
+	tabsize=3
+}
+
+\usepackage{underscore}
+\setcounter{secnumdepth}{5}
+\usepackage[bookmarks=true]{hyperref}
+\author{Roberto Clapis (841859), Erica Stella (854443)} 
+\date{\today}
+\title{Politecnico di Milano
+	\\A.A. 2015\@-\@2016
+	\\Software Engineering 2: ``myTaxiService''
+	\\\textbf{C}ode \textbf{I}nspection}
+\hypersetup{pdftitle={Code Inspection},    % title
+	pdfauthor={Roberto Clapis, Erica Stella},                     % author
+	pdfsubject={Code Inspection},                        % subject of the document
+	pdfkeywords={TeX, LaTeX, taxi, Inspection, SoftwareEngineering2}, % list of keywords
+	colorlinks=true,       % false: boxed links; true: colored links
+	linkcolor=black,       % color of internal links
+	citecolor=blue,       % color of links to bibliography
+	filecolor=black,        % color of file links
+	urlcolor=purple,        % color of external links
+}
+\begin{document}
+	\maketitle
+	\begin{center}
+		\includegraphics{polimi-logo}
+	\end{center}
+	\clearpage
+	\tableofcontents
+	\clearpage
+	
+\section{Assigned Class}
+%state theÂ namespace patternÂ and name of the classes	
+%that were assigned	to you
+We were assigned the three methods registerBeanValidator, 
+getValidationMappingDescriptors and event from class
+ConnectorDeployer in package
+com.sun.enterprise.connectors.module.
+  	
+\section{Functional Role of Class ConnectorDeployer}
+%elaborate on the functional role you have
+%identified for the class cluster that was
+%assigned to you, also, elaborate on how
+%you managed to understand this role and
+%provide necessary evidence, e.g., 
+%javadoc, diagrams, etc.
+As far as the documentation is provided, the class
+methods are concerned with the deployment of previously created
+applications in their execution environment (a container), which is
+uniquely identified in order to communicate with the
+application, and the management of the application's life cycle.
+
+\section{Found Issues}
+%report the classes/code fragments that 
+%do not fulfill some points in the checklist.
+%Explain which point is not fulfilled
+%and why
+%BEGINROBSECTION
+%TODO segnalare variabili di due lettere
+\subsection{Naming Conventions}
+\subsubsection{1}
+Class name is meaningful;\\
+No interfaces are in the file;\\
+Method names are meaningful.
+Class variables are meaningful but the ``env'' masks the field ``env'' of JavaEEDeployer and the ``clh'' variable has a meaningless name.\\
+Method variables are meaningful even if the use of names longer than 2 characters is suggested.\\
+Constants names are meaningful but the "EAR" constant may be renamed in "ENTERPRISE_ARCHIVE" to improve readability;\\ 
+
+\subsubsection{2}
+Some one-character variables were found, but they were all "e" for exceptions.
+We considered acceptable to have exceptions in catch blocks named "e" since they are throwaway variables and they have a very limited scope length.
+\subsubsection{3}
+The file only contains one class and it respects the naming convention.
+\subsubsection{4}
+No interface is declared in the assigned file.
+\subsubsection{5}
+All the methods respect the naming convention.
+\subsubsection{6}
+The convenction is respected, but the variable "clh" has a meaningless name, because an acronym is used, but as a 3 letter lowercase word, which can be confusing. It is suggested to rename the variable clHierarchy or classLoaderHierarchy to improve readability. %TODO ma allora questo non è da mettere prima nel punto 1? 
+%Se non ti piace qua spostalo pure
+\subsubsection{7}
+The constants respect the naming convention.
+\subsection{Indention}
+\subsubsection{8}
+Indention is coherent, 4 or multiples of 4 spaces are used consistently.
+\subsubsection{9}
+line 518 uses tabs to indent.\\ 
+\begin{lstlisting}
+513	                        try {
+514	                            if (inputStream != null) {
+515	                                inputStream.close();
+516	                            }
+517	                        } catch (Exception e) {
+518	                            // ignore ?
+519	                        }
+\end{lstlisting}
+\subsection{Braces}
+\subsubsection{10}
+Consistent bracing style is used.
+\subsubsection{11}
+Curly braces are always used for conditional statements.
+\subsection{File Organization}
+\subsubsection{12}
+A blank line is missing before line 55 to divide imports of different domains.
+There are 2 meaingless blank lines (216 217) that break coherence in spacing.
+Blank lines 299, 342, 373 are meaningless.
+\subsubsection{13}
+%TODO e non ce n'è nessuna da segnalare che avrebbe senso splittata? Onestamente non ne ho trovate, secondo me l'hanno fatto fare a del codice
+%Se vuoi guardare sono in sh/longerthan80 però ci ho già dato un'occhiata io e non mi pare.
+There are 74 lines longer than 80 chars but splitting the line would just reduce readability.
+\subsubsection{14}
+Only one line(278) exceeds 120 chars and it is 121 chars long.
+\subsection{Wrapping Lines}
+\subsubsection{15}
+Line wrappings occur only after the following characters: 
+\begin{verbatim}
+>,=.+
+\end{verbatim}
+In lines 640 and 649 lines are broken before a parentheses in order to have a higher-level break so the convention is respected.
+\begin{lstlisting}
+                            if (resourcesUtil.filterConnectorResources
+                                    (resourceManager.getAllResources(), moduleName, true).size() > 0) {
+\end{lstlisting}
+\subsubsection{16}
+Higher level breaks are used.
+\subsubsection{17}
+Alignment of new statements is correct.
+\subsection{Comments}
+\subsubsection{18}
+The assigned class lacks of documentation. Most of the methods are not documented, and even if some comments to explain what code does are present, they are very few and not present in a constant way but only in some parts of the code.
+\subsubsection{19}
+Line 594 is the only one that has commented-out code and it has a justification to have the code, but not why it is commented out and when it should be put back in the code or removed.
+
+\begin{lstlisting}
+        if (/*env.isDas() && */ Deployment.UNDEPLOYMENT_VALIDATION.equals(event.type())) {
+\end{lstlisting}
+\subsection{Java Source Files}
+\subsubsection{20}
+The file ConnectorDeployer.java contains only the ConnectorDeployer public class.
+\subsubsection{21}
+The ConnectorDeployer public class is the first and only class in the file.
+\subsubsection{22}
+Since the following methods have no documentation this check is not doable.
+\begin{itemize}
+	\item event (due to implementation of EventListener)
+	\item preDestroy (due to implementation of PreDestroy)
+\end{itemize}
+The other methods are coherent with documentation.
+\subsubsection{23} 
+As stated in the point above, two public methods are not documented.
+Also most of the private methods have no documentation, and it should be provided.
+\subsection{Package and Import Statements}
+\subsubsection{24}
+The package statement package com.sun.enterprise.connectors.module; is
+the first non-comment statement and is followed by the import statements.
+\subsection{Class and Interface Declarations}
+\subsubsection{25}
+\paragraph{A}
+The class has a documentation comment
+\paragraph{B}
+The class statement follows his doc
+\paragraph{C}
+There is no implementation comment
+\paragraph{D}
+Static variables are after the instance variables, so the convention is not respected.
+\paragraph{E}
+There are only private variables
+\paragraph{F}
+There is the empty constructor
+\paragraph{G}
+The methods follow the constructor
+\subsubsection{26}
+Methods are grouped by functionality.
+\subsubsection{27}
+Code is free of duplicates longer than one line.
+%TODO ROB forse il fatto che event sia troppo lungo è da mettere qui e non in fondo tra i problemi
+\subsection{Initialization and Declarations}
+\subsubsection{28}
+Variables and class members are of the correct type and they have the right visibility.
+\subsubsection{29}
+Variables are declared in the proper scope.
+\subsubsection{30}
+Constructors are always called unless it is intentional to assign ``null'' to the variable.
+\subsubsection{31}
+classLoader in the ``load'' method is probably intentionally left null, depending on the computation that follows its declaration. (line 176)
+All the other variables are initialized before use.
+\subsubsection{32}
+Every variable is initialized where it is declared, and if it requires further computation to be assigned with a value it is explicitly initialized with null, which sometimes is a valid value (see 31), and later computed and assigned.
+\subsubsection{33}
+Declarations appear at the beginning of blocks except for the ``event'' method, in which they are declared based on context in which they are used. 
+%ENDROBSECTION (this is used to automatic todo checks
+\subsection{Method Calls}
+\subsubsection{34}
+All the parameters are presented in the correct order.
+\subsubsection{35}
+No issues were found regarding this point.
+\subsubsection{36}
+All method returned variables are used properly.
+\subsection{Arrays}
+\subsubsection{37}
+No issues were found regarding array indexing. All arrays and lists are accessed 
+either with an enhanced for or in a while loop with an iterator that starts from the
+first element and scans all the other elements until there are no more.
+\subsubsection{38}
+As explained in the previous point, no issues were found.
+\subsubsection{39}
+Only one array is newly created in our methods in registerBeanValidator \\
+\begin{lstlisting}
+Object params[] = new Object[]{rarName, e};
+\end{lstlisting}
+and the constructor is used to create it.
+\subsection{Object Comparison}
+\subsubsection{40}
+No issues were found regarding object comparisons as '==' is never used instead of equals.
+\subsection{Output Format}
+\subsubsection{41}
+The only outputs of the methods we were assigned are the
+entries logged in the logger and they're all free of spelling
+and grammatical errors.
+\subsubsection{42}
+All the error messages logged in case of exceptions state which
+operation caused the arousal of the exception (except for the ones 
+pointed out at 53) and eventually provide a stack trace, but no
+message provides guidance as to how to correct the problem.
+\subsubsection{43}
+All the logger's entries are formatted correctly.
+\subsection{Computation, Comparisons and Assignments}
+\subsubsection{44}
+No examples of brutish programming have been found.
+\subsubsection{45}
+The order of computation and evaluation is correct.
+\subsubsection{46}
+There are no expressions in which there could be operator
+precedence problems.
+\subsubsection{47}
+There are no divisions in the methods we were assigned.
+\subsubsection{48}
+There is no integer arithmetic in the methods we were assigned.
+\subsubsection{49}
+All comparisons and boolean operators are correct.
+\subsubsection{50}
+%TODO sono in dubbio sul secondo try di registerbeanvalidator..catcha Exception e mette dentro il rarName che viene usato solo in quel punto del metodo...
+%Che non siano catchate eccezioni che non possono essere sollevate, o di non avere una eccezione più generica catchata prima di una più dettagliata (nel qual caso hai del codice non raggiungibile)
+No exceptions are explicitly thrown.
+\subsubsection{51}
+There are no implicit type conversions.
+\subsection{Exceptions}
+\subsubsection{52}
+All relevant exceptions are caught.
+\subsubsection{53}
+The issues found are presented in the following
+lists divided by the method in which they were
+found: \\
+\begin{itemize}
+	\item registerBeanValidator: \\
+	\begin{itemize}
+		\item No actions taken at all: \\
+			\begin{lstlisting}
+				try {
+					if (inputStream != null) {
+						inputStream.close();
+					}
+				} catch (Exception e) {
+					// ignore ?
+				}
+			\end{lstlisting}
+		\item The outer try block has no corresponding catch block.
+	\end{itemize}
+	\item getValidationMappingDescriptors: \\
+	\begin{itemize}
+		\item No actions taken at all: \\
+				\begin{lstlisting}
+					try {
+						reader.close();
+					} catch (Exception e) {
+						//ignore ?
+					}
+				\end{lstlisting}
+	\end{itemize}
+\end{itemize}
+\subsection{Flow of Control}
+\subsubsection{54 and 55}
+There are no switch statements in the methods that were assigned to us.
+\subsection{Files}
+%Vuoi che la guardi io? Dovrei avere capito cosa sia XD
+\subsubsection{57}
+All files are declared and opened properly.
+\subsubsection{58}
+All opened files are closed in a ``finally'' block.
+\subsubsection{59}
+Since files are read line by line with a buffered reader the condition is correctly checked with a null-check for the read line.
+\subsubsection{60}
+Exceptions are just caught and logged. If an exception is thrown while manipulating the file it is correctly closed.
+
+\section{Other Highlighted Problems}
+%List here all the parts of code that
+%you think create or may create a bug
+%and explain why
+\begin{itemize}
+	\item The registerBeanValidator method does not close all streams but only the last one it tried to open and which threw an exception.
+	\item The ``event'' method is too complex, it should be split in simpler and smaller methods.
+\end{itemize}
+%TODO anche in validationmappintdescriptors chiude solo l'ultimo reader e non chiude gli inputstream
+
+\section{Appendix}
+Appendix for Roberto Clapis\\
+Work hours: 10
+\begin{center}
+	Software Used:\\
+	\-\\
+	\begin{tabular}{*{2}{c}}
+		\toprule
+		Task & Software \\
+		\midrule
+		Edit \LaTeX\ Source & Vim\\
+		Convert \LaTeX\ source to PDF & \LaTeX\-MK\\
+		Spell Check & Aspell \\
+		\LaTeX\ Check & LaCheck\\
+		Analyze brackets convention & SonarQube\\
+		Analyze naming conventions & sed, grep, cat, tr\\ %TODO sai che non credo dovremmo scriverli questi?
+		\bottomrule
+	\end{tabular}
+\end{center}
+\-\\
+\-\\
+Appendix for Erica Stella\\
+Work hours: 10
+\begin{center}
+	Software Used:\\
+	\-\\
+	\begin{tabular}{*{2}{c}}
+		\toprule
+		Task & Software \\
+		\midrule
+		Edit \LaTeX\ Source & TexStudio\\
+		Convert \LaTeX\ source to PDF & \LaTeX\-MK\\
+		\bottomrule
+	\end{tabular}
+\end{center}
+
+\end{document}
