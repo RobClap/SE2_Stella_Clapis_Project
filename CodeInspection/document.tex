@@ -37,7 +37,7 @@
 \date{\today}
 \title{Politecnico di Milano
 	\\A.A. 2015\@-\@2016
-	\\Software Engineering 2: ``myTaxiService''
+	\\Software Engineering 2
 	\\\textbf{C}ode \textbf{I}nspection}
 \hypersetup{pdftitle={Code Inspection},    % title
 	pdfauthor={Roberto Clapis, Erica Stella},                     % author
@@ -61,9 +61,13 @@
 \section{Assigned Class}
 %state the namespace pattern and name of the classes	
 %that were assigned	to you
-We were assigned the three methods registerBeanValidator, 
-getValidationMappingDescriptors and event from class
-ConnectorDeployer in package
+We were assigned the three methods 
+\begin{itemize}
+	\item private void registerBeanValidator(String rarName, ReadableArchive archive, ClassLoader classLoader)
+	\item private List %TODO triangole intorno a String --> String getValidationMappingDescriptors(ReadableArchive archive)
+	\item public void event(Event event)
+\end{itemize}
+from class ConnectorDeployer in package \\
 com.sun.enterprise.connectors.module.
  �	
 \section{Functional Role of Class ConnectorDeployer}
@@ -88,24 +92,23 @@ application, and the management of the application's life cycle.
 %TODO segnalare variabili di due lettere
 \subsection{Naming Conventions}
 \subsubsection{1}
-Class name is meaningful;\\
-No interfaces are in the file;\\
+Class name is meaningful.\\
+No interfaces are in the file.\\
 Method names are meaningful.\\
-Class variables are meaningful but the ``env'' masks the field ``env'' of JavaEEDeployer and the ``clh'' variable has a meaningless name.\\
-Method variables are meaningful, two or three letters names are often used but they are acronyms of what they do and in a ristrected scope they are not considered an issue.\\
-Constants names are meaningful but the "EAR" constant may be renamed in "ENTERPRISE_ARCHIVE" to improve readability;\\ 
-
+All class variables are meaningful except for the ``env'' that masks the field ``env'' of JavaEEDeployer and the ``clh'' variable that has a meaningless name.\\
+Method variables are meaningful, two or three letters names are often used but they are acronyms of what they do and in a restricted scope they are not considered an issue.\\
+Constants names are meaningful but the "EAR" constant may be renamed in "ENTERPRISE_ARCHIVE" to improve readability.\\ 
 \subsubsection{2}
 Some one-character variables were found, but they were all "e" for exceptions.
 We considered acceptable to have exceptions in catch blocks named "e" since they are throwaway variables and they have a very limited scope length.
 \subsubsection{3}
-The file only contains one class and it respects the naming convention.
+The file only contains class ConnectorDeployer and it respects the naming convention.
 \subsubsection{4}
 No interface is declared in the assigned file.
 \subsubsection{5}
 All the methods respect the naming convention.
 \subsubsection{6}
-The convenction is respected, but not for the variable "clh" which is a 3 letter lowercase word used as an acronym.
+The convention is respected, but not for the variable "clh" which is a 3 letter lowercase word used as an acronym.
 \subsubsection{7}
 The constants respect the naming convention.
 \subsection{Indention}
@@ -130,25 +133,25 @@ Curly braces are always used for conditional statements.
 \subsection{File Organization}
 \subsubsection{12}
 A blank line is missing before line 55 to divide imports of different domains.
-There are 2 meaingless blank lines (216 217) that break coherence in spacing.
+There are 2 meaningless blank lines (216 217) that break coherence in spacing.
 Blank lines 299, 342, 373 are meaningless.
 \subsubsection{13}
-There are 74 lines longer than 80 chars but splitting the line would just reduce readability.
+There are 74 lines longer than 80 chars but splitting them would just reduce readability.
 \subsubsection{14}
-Only one line(278) exceeds 120 chars and it is 121 chars long.
+Only one line (278) exceeds 120 chars and it is 121 chars long.
 \subsection{Wrapping Lines}
 \subsubsection{15}
 Line wrappings occur only after the following characters: 
 \begin{verbatim}
 >,=.+
 \end{verbatim}
+so the convention is respected.
+\subsubsection{16}
 In lines 640 and 649 lines are broken before a parentheses in order to have a higher-level break so the convention is respected.
 \begin{lstlisting}
-                            if (resourcesUtil.filterConnectorResources
-                                    (resourceManager.getAllResources(), moduleName, true).size() > 0) {
+if (resourcesUtil.filterConnectorResources
+(resourceManager.getAllResources(), moduleName, true).size() > 0) {
 \end{lstlisting}
-\subsubsection{16}
-Higher level breaks are used.
 \subsubsection{17}
 Alignment of new statements is correct.
 \subsection{Comments}
@@ -156,7 +159,6 @@ Alignment of new statements is correct.
 The assigned class lacks of documentation. Most of the methods are not documented, and even if some comments to explain what code does are present, they are very few and not present in a constant way but only in some parts of the code.
 \subsubsection{19}
 Line 594 is the only one that has commented-out code and it has a justification to have the code, but not why it is commented out and when it should be put back in the code or removed.
-
 \begin{lstlisting}
         if (/*env.isDas() && */ Deployment.UNDEPLOYMENT_VALIDATION.equals(event.type())) {
 \end{lstlisting}
@@ -174,7 +176,7 @@ Since the following methods have no documentation this check is not doable.
 The other methods are coherent with documentation.
 \subsubsection{23} 
 As stated in the point above, two public methods are not documented.
-Also most of the private methods have no documentation, and it should be provided.
+Also most of the private methods have no documentation.
 \subsection{Package and Import Statements}
 \subsubsection{24}
 The package statement package com.sun.enterprise.connectors.module; is
@@ -184,7 +186,7 @@ the first non-comment statement and is followed by the import statements.
 \paragraph{A}
 The class has a documentation comment
 \paragraph{B}
-The class statement follows his doc
+The class statement follows his documentation
 \paragraph{C}
 There is no implementation comment
 \paragraph{D}
@@ -333,7 +335,6 @@ Exceptions are just caught and logged. If an exception is thrown while manipulat
 %and explain why
 \begin{itemize}
 	\item The registerBeanValidator method does not close all streams but only the last one it tried to open and which threw an exception.
-	\item 
 \end{itemize}
 
 \section{Appendix}
