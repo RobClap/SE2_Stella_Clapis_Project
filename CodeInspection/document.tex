@@ -230,11 +230,12 @@ first element and scans all the other elements until there are no more.
 \subsubsection{38}
 As explained in the previous point, no issues were found.
 \subsubsection{39}
-Only one array is newly created in our methods in registerBeanValidator \\
+Only one array is newly created in our method registerBeanValidator \\
 \begin{lstlisting}
 Object params[] = new Object[]{rarName, e};
 \end{lstlisting}
-and the constructor is used to create it.
+and the constructor is used to create it, so no
+issues were found.
 \subsection{Object Comparison}
 \subsubsection{40}
 No issues were found regarding object comparisons as '==' is never used instead of equals.
@@ -245,8 +246,8 @@ entries logged in the logger and they're all free of spelling
 and grammatical errors.
 \subsubsection{42}
 All the error messages logged in case of exceptions state which
-operation caused the arousal of the exception (except for the ones 
-pointed out at 53) and eventually provide a stack trace, but no
+operation caused the arousal of the exception 
+and eventually provide a stack trace, but no
 message provides guidance as to how to correct the problem.
 \subsubsection{43}
 All the logger's entries are formatted correctly.
@@ -266,7 +267,7 @@ There is no integer arithmetic in the methods we were assigned.
 All comparisons and boolean operators are correct.
 \subsubsection{50}
 %TODO sono in dubbio sul secondo try di registerbeanvalidator..catcha Exception e mette dentro il rarName che viene usato solo in quel punto del metodo...
-%Che non siano catchate eccezioni che non possono essere sollevate, o di non avere una eccezione più generica catchata prima di una più dettagliata (nel qual caso hai del codice non raggiungibile)
+%TODO l'ho messo come issue al punto 53
 No exceptions are explicitly thrown.
 \subsubsection{51}
 There are no implicit type conversions.
@@ -282,31 +283,40 @@ found: \\
 	\begin{itemize}
 		\item No actions taken at all: \\
 			\begin{lstlisting}
-				try {
-					if (inputStream != null) {
-						inputStream.close();
-					}
-				} catch (Exception e) {
-					// ignore ?
-				}
+513				try {
+514					if (inputStream != null) {
+515						inputStream.close();
+516					}
+517				} catch (Exception e) {
+518					// ignore ?
+519				}
 			\end{lstlisting}
 		\item The outer try block has no corresponding catch block.
+			\begin{lstlisting}
+484				try {
+					...
+534				} finally {
+					...
+536				}
+			\end{lstlisting}
 	\end{itemize}
 	\item getValidationMappingDescriptors: \\
 	\begin{itemize}
 		\item No actions taken at all: \\
 				\begin{lstlisting}
-					try {
-						reader.close();
-					} catch (Exception e) {
-						//ignore ?
-					}
+569					try {
+570						reader.close();
+571					} catch (Exception e) {
+572						//ignore ?
+573					}
 				\end{lstlisting}
 	\end{itemize}
 \end{itemize}
 \subsection{Flow of Control}
 \subsubsection{54 and 55}
-There are no switch statements in the methods that were assigned to us.
+There are no switch statements in the methods we were assigned.
+\subsubsection{56}
+All loops are correctly formed.
 \subsection{Files}
 \subsubsection{57}
 All files are declared and opened properly.
@@ -325,7 +335,6 @@ Exceptions are just caught and logged. If an exception is thrown while manipulat
 	\item The registerBeanValidator method does not close all streams but only the last one it tried to open and which threw an exception.
 	\item 
 \end{itemize}
-%TODO erica: anche in validationmappintdescriptors chiude solo l'ultimo reader e non chiude gli inputstream % aggiungilo agli items sopra
 
 \section{Appendix}
 Appendix for Roberto Clapis\\
