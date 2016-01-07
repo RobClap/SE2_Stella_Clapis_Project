@@ -1,0 +1,60 @@
+\documentclass{article}
+\usepackage{adjustbox}
+\usepackage{float}
+\usepackage{textcomp}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage{booktabs}
+\usepackage{color}
+\usepackage{verbatim}
+\usepackage{listings}
+\usepackage{underscore}
+\setcounter{secnumdepth}{5}
+\usepackage[bookmarks=true]{hyperref}
+\author{Roberto Clapis (841859), Erica Stella (854443)} 
+\date{\today}
+\title{Politecnico di Milano
+	\\A.A. 2015\@-\@2016
+	\\Software Engineering 2: ``myTaxiService''
+	\\\textbf{I}ntegration textbf{T}est textbf{P}lan \textbf{D}ocument}
+\hypersetup{
+	pdftitle={Integration Test Plan Document},    % title
+	pdfauthor={Roberto Clapis, Erica Stella},                     % author
+	pdfsubject={Integration Test Plan Document},                        % subject of the document
+	pdfkeywords={TeX, LaTeX, taxi, ITPD, SoftwareEngineering2}, % list of keywords
+	colorlinks=true,       % false: boxed links; true: colored links
+	linkcolor=black,       % color of internal links
+	citecolor=blue,       % color of links to bibliography
+	filecolor=black,        % color of file links
+	urlcolor=purple,        % color of external links
+}
+\begin{document}
+\maketitle
+\begin{center}
+	\includegraphics{polimi-logo}
+\end{center}
+\clearpage
+\tableofcontents
+\clearpage
+\section{Introduction}
+\subsection{Revision History}
+%Record all revisions to the document
+\subsection{Purpose and Scope}
+%State the purpose and scope of the document
+\subsection{List of Definitions and Abbreviations}
+\subsection{List of Reference Documents}
+%List all reference documents, for instance: the project description, the RASD, the Design document, the documentation of any tool you plan to use for testing
+\section{Integration Strategy}
+\subsection{Entry Criteria}
+%Specify the criteria that must be met before integration testing of specific elements may begin (e.g., functions must have been unit tested).
+\subsection{Elements to be Integrated}
+%Identify the components to be integrated, refer to your design document to identify such components in a way that is consistent with your design 
+\subsection{Integration Testing Strategy}
+Describe the integration testing approach (top-down, bottom-up, functional groupings, etc.) and the rationale for the choosing that approach
+\subsection{Sequence of Component/Function Integration}
+%NOTE: the structure of this section may vary depending on the integration strategy you select in Section 2.3. Use the structure proposed below as a non mandatory guide
+\subsubsection{Software Integration Sequence}
+%For each subsystem: identify the sequence in which the software components will be integrated within the subsystem. Relate this sequence to any product features/functions that are being built up
+\subsubsection{Subsystem Integration Sequence}
+
+\end{document}
