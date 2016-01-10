@@ -16,7 +16,7 @@
 \title{Politecnico di Milano
 	\\A.A. 2015\@-\@2016
 	\\Software Engineering 2: ``myTaxiService''
-	\\\textbf{I}ntegration textbf{T}est textbf{P}lan \textbf{D}ocument}
+	\\\textbf{I}ntegration \textbf{T}est \textbf{P}lan \textbf{D}ocument}
 \hypersetup{
 	pdftitle={Integration Test Plan Document},    % title
 	pdfauthor={Roberto Clapis, Erica Stella},                     % author
@@ -41,16 +41,37 @@
 %Record all revisions to the document
 \subsection{Purpose and Scope}
 %State the purpose and scope of the document
+This document describes the Integration Test Plan for the myTaxiService application. It provides a plan referring to how the various components of the software architecture described in the Design Document will be integrated for testing. 
 \subsection{List of Definitions and Abbreviations}
 \subsection{List of Reference Documents}
 %List all reference documents, for instance: the project description, the RASD, the Design document, the documentation of any tool you plan to use for testing
+\begin{itemize}
+	\item The document with myTaxiService's description
+	\item myTaxiService's RASD
+	\item myTaxiService's Design Document
+\end{itemize}
 \section{Integration Strategy}
 \subsection{Entry Criteria}
 %Specify the criteria that must be met before integration testing of specific elements may begin (e.g., functions must have been unit tested).
+Before the integration testing, each single module must have been tested to verify its correct functioning according to its specifications.
 \subsection{Elements to be Integrated}
 %Identify the components to be integrated, refer to your design document to identify such components in a way that is consistent with your design 
+According to the Design Document, the components to be integrated are:
+\begin{itemize}
+	\item Accounts
+	\item Active Reservations and Requests
+	\item DBConnector
+	\item APIBackend
+	\item WebpageCreator
+	\item NotificationModule
+	\item HttpHandler
+	\item ClientUI
+	\item DriverUI
+	\item AdminUI
+\end{itemize}
 \subsection{Integration Testing Strategy}
-Describe the integration testing approach (top-down, bottom-up, functional groupings, etc.) and the rationale for the choosing that approach
+%Describe the integration testing approach (top-down, bottom-up, functional groupings, etc.) and the rationale for the choosing that approach
+The decided testing approach is bottom-up. %TODO inserire motivazione del perchè
 \subsection{Sequence of Component/Function Integration}
 %NOTE: the structure of this section may vary depending on the integration strategy you select in Section 2.3. Use the structure proposed below as a non mandatory guide
 \subsubsection{Software Integration Sequence}
