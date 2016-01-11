@@ -17,8 +17,7 @@
 	\\A.A. 2015\@-\@2016
 	\\Software Engineering 2: ``myTaxiService''
 	\\\textbf{I}ntegration \textbf{T}est \textbf{P}lan \textbf{D}ocument}
-\hypersetup{
-	pdftitle={Integration Test Plan Document},    % title
+\hypersetup{pdftitle={Integration Test Plan Document},    % title
 	pdfauthor={Roberto Clapis, Erica Stella},                     % author
 	pdfsubject={Integration Test Plan Document},                        % subject of the document
 	pdfkeywords={TeX, LaTeX, taxi, ITPD, SoftwareEngineering2}, % list of keywords
@@ -80,8 +79,112 @@ The decided testing approach is bottom-up. %TODO inserire motivazione del perch�
 %Identify the order in which subsystems will be integrated. If you have a single subsystem, 2.4.1 and 2.4.2 are to be merged in a single section. You can refer to Section 2.2 of the test plan example [1] as an example of what we expect
 \section{Individual Steps and Test Description}
 %For each step of the integration process identified above, describe the type of tests that will be used to verify that the elements integrated in this step perform as expected. Describe in general the expected results of the test set. You may refer to Chapter 3 and Chapter 4 of the test plan example [1] as an example of what we expect. (NOTE: this is not a detailed description of test protocols. Think of this as the test design phase. Specific protocols will be written to fulfill the goals of the tests identified in this section.)
-\section{Tools and Test Equipment Required}
-%Identify all tools and test equipment needed to accomplish the integration. Refer to the tools presented during the lectures. Explain why and how you're going to use them. Note that you may also use manual testing for some part. Consider manual testing as one of the possible tools you have available.
-\section{Program Stubs and Test Data Required}
-%Based on the testing strategy and test design, identify any program stubs or special test data required for each integration step.
-\end{document}
+\subsection{Test case specifications}
+	WebServer \rightarrow DBMS
+	\begin{tabular}{*{2}{c}}
+		\toprule
+		Test Case identifier & I1T1 \rightarrow I1TN\\
+		Test Items & DBConnector \rightarrow Accounts \\
+		Input Specification & Queries to manipulate (creation modification and deletion) of accounts\\
+		Output Specification & The actual modifications intended\\
+		Environmental Needs & DBMS Driver\\
+		\bottomrule
+	\end{tabular}
+	\begin{tabular}{*{2}{c}}
+		\toprule
+		Test Case identifier & I2T1\\
+		Test Items & DBConnector \rightarrow Active Reservations and Requests \\
+		Input Specification & Queries to place/accept/delete reservations and requests, in every possible order of execution\\
+		Output Specification & The actual modifications intended and the rejection of the invalid requests\\
+		Environmental Needs & DBMS Driver\\
+		\bottomrule
+	\end{tabular}
+
+	WebServer 
+	\begin{tabular}{*{2}{c}}
+		\toprule
+		Test Case identifier & IT1\\
+		Test Items & DBConnector \rightarrow Accounts \\
+		Input Specification & Queries to manipulate (creation modification and deletion) of accounts\\
+		Output Specification & The actual modifications intended\\
+		Environmental Needs & DBMS Driver\\
+		\bottomrule
+	\end{tabular}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	\subsection{Test procedures}
+	\section{Tools and Test Equipment Required}
+	\begin{tabular}{*{2}{c}}
+		\toprule
+		Test Case identifier & I1T1\\
+		Test Items & \rightarrow\\
+		Input Specification & \\
+		Output Specification & \\
+		Environmental Needs & \\
+		\bottomrule
+	\end{tabular}
+	\begin{tabular}{*{2}{c}}
+		\toprule
+		Test Case identifier & \\
+		Test Items & \\
+		Input Specification & \\
+		Output Specification & \\
+		Environmental Needs & \\
+		\bottomrule
+	\end{tabular}
+	%Identify all tools and test equipment needed to accomplish the integration. Refer to the tools presented during the lectures. Explain why and how you're going to use them. Note that you may also use manual testing for some part. Consider manual testing as one of the possible tools you have available.
+	\section{Program Stubs and Test Data Required}
+	%Based on the testing strategy and test design, identify any program stubs or special test data required for each integration step.
+	\section{Appendix}
+	Appendix for Roberto Clapis\\
+	Work hours: 20
+	\begin{center}
+		Software Used:\\
+		\-\\
+		\begin{tabular}{*{2}{c}}
+			\toprule
+			Task & Software \\
+			\midrule
+			Edit \LaTeX\ Source & Vim\\
+			Edit Graphs Sources & Vim\\
+			Edit sources for Sequence Diagrams & Vim\\
+			Convert Sequence Diagrams to images & Quick Sequence Diagram Editor\\
+			Generate and Raster directed graphs& Dot\\
+			Generate and Raster undirected graphs& Fdp\\
+			General images mangling and cropping & ImageMagick \& Shotwell\\
+			Convert \LaTeX\ source to PDF & \LaTeX\-MK\\
+			Spell Check & Aspell \\
+			\LaTeX\ Check & LaCheck\\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+	\-\\
+	\-\\
+	Appendix for Erica Stella\\
+	Work hours: 20
+	\begin{center}
+		Software Used:\\
+		\-\\
+		\begin{tabular}{*{2}{c}}
+			\toprule
+			Task & Software \\
+			\midrule
+			Edit \LaTeX\ Source & TexStudio\\
+			Convert \LaTeX\ source to PDF & \LaTeX\-MK\\
+			Edit sources for Sequence Diagrams & Quick Sequence Diagram Editor\\
+			Convert Sequence Diagrams to images & Quick Sequence Diagram Editor\\
+			\bottomrule
+		\end{tabular}
+	\end{center}
+
+	\end{document}
+
