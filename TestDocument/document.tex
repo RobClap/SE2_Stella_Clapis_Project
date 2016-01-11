@@ -8,7 +8,6 @@
 \usepackage{color}
 \usepackage{verbatim}
 \usepackage{listings}
-\usepackage{mathtools}
 \usepackage{underscore}
 \setcounter{secnumdepth}{5}
 \usepackage[bookmarks=true]{hyperref}
@@ -116,7 +115,6 @@ the various UIs, will be integrated.
 \subsection{T7}
 \begin{adjustbox}{width=1.2\textwidth}	
 	\begin{tabular}{*{2}{c}}
-		\toprule
 		\midrule
 		\textbf{Test Case Identifier} & T7\\
 		\textbf{Test Items} & Accounts $\rightarrow$ WebServer\\
@@ -130,7 +128,6 @@ the various UIs, will be integrated.
 \subsection{T8}
 \begin{adjustbox}{width=1.2\textwidth}	
 	\begin{tabular}{*{2}{c}}
-		\toprule
 		\midrule
 		\textbf{Test Case Identifier} & T8\\
 		\textbf{Test Items} & Active Reservations and Requests $\rightarrow$ Web Server\\
@@ -144,7 +141,6 @@ the various UIs, will be integrated.
 \subsection{T9}
 \begin{adjustbox}{width=1.2\textwidth}	
 	\begin{tabular}{*{2}{c}}
-		\toprule
 		\midrule
 		\textbf{Test Case Identifier} & T9\\
 		\textbf{Test Items} & Web Server $\rightarrow$ ClientUI\\
@@ -158,11 +154,10 @@ the various UIs, will be integrated.
 \subsection{T10}
 \begin{adjustbox}{width=1.2\textwidth}	
 	\begin{tabular}{*{2}{c}}
-		\toprule
 		\midrule
 		\textbf{Test Case Identifier} & T10\\
 		\textbf{Test Items} & Web Server $\rightarrow$ DriverUI\\
-		\textbf{Input Specification} & \\
+		\textbf{Input Specification} & Typical DriverUI input\\
 		\textbf{Output Specification} & \\ %TODO
 		\textbf{Environmental Needs} & T7 and T8 succeeded\\
 		%TODO driver?
@@ -172,18 +167,20 @@ the various UIs, will be integrated.
 \subsection{T11}
 \begin{adjustbox}{width=1.2\textwidth}	
 	\begin{tabular}{*{2}{c}}
-		\toprule
 		\midrule
 		\textbf{Test Case Identifier} & T11\\
 		\textbf{Test Items} & Web Server $\rightarrow$ AdminUI\\
-		\textbf{Input Specification} & \\
-		\textbf{Output Specification} & \\
-		\textbf{Environmental Needs} & \\
+		\textbf{Input Specification} & Typical AdminUI input\\
+		\textbf{Output Specification} & \\ %TODO
+		\textbf{Environmental Needs} & T7 and T8 succeeded\\
+		%TODO driver?
 		\bottomrule
 	\end{tabular}
 \end{adjustbox}
 \section{Tools and Test Equipment Required}
 %Identify all tools and test equipment needed to accomplish the integration. Refer to the tools presented during the lectures. Explain why and how you're going to use them. Note that you may also use manual testing for some part. Consider manual testing as one of the possible tools you have available.
+%TODO Arquillian?
 \section{Program Stubs and Test Data Required}
 %Based on the testing strategy and test design, identify any program stubs or special test data required for each integration step.
+%TODO cosa intende per special data?
 \end{document}
