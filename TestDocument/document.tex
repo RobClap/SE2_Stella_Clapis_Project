@@ -112,13 +112,13 @@ the various UIs, will be integrated.
 %TODO domanda sui driver
 %For each step of the integration process identified above, describe the type of tests that will be used to verify that the elements integrated in this step perform as expected. Describe in general the expected results of the test set. You may refer to Chapter 3 and Chapter 4 of the test plan example [1] as an example of what we expect. (NOTE: this is not a detailed description of test protocols. Think of this as the test design phase. Specific protocols will be written to fulfill the goals of the tests identified in this section.)
 \subsection{Test case specifications}
-WebServer \rightarrow DBMS
+WebServer $\rightarrow$ DBMS
 \subsubsection{T1}
 \begin{adjustbox}{width=1.2\textwidth}	
 	\begin{tabular}{*{2}{c}}
 		\toprule
 		\textbf{Test Case identifier} & I1T1\\
-		\textbf{Test Items} & DBConnector \rightarrow Accounts \\
+		\textbf{Test Items} & DBConnector $\rightarrow$ Accounts \\
 		\textbf{Input Specification} & Queries to manipulate (creation modification and deletion) of accounts\\
 		\textbf{Output Specification} & The actual modifications intended\\
 		\textbf{Environmental Needs} & DBMS Driver\\
@@ -130,7 +130,7 @@ WebServer \rightarrow DBMS
 	\begin{tabular}{*{2}{c}}
 		\toprule
 		\textbf{Test Case identifier} & I2T1\\
-		\textbf{Test Items} & DBConnector \rightarrow Active Reservations and Requests \\
+		\textbf{Test Items} & DBConnector $\rightarrow$ Active Reservations and Requests \\
 		\textbf{Input Specification} & Queries to place/accept/delete reservations and requests, in every possible order of execution\\
 		\textbf{Output Specification} & The actual modifications intended and the rejection of the invalid requests\\
 		\textbf{Environmental Needs} & DBMS Driver\\
@@ -144,7 +144,7 @@ WebServer
 	\begin{tabular}{*{2}{c}}
 		\toprule
 		\textbf{Test Case identifier} & I3T1\\
-		\textbf{Test Items} & ApiBackend \rightarrow DBConnector\\
+		\textbf{Test Items} & ApiBackend $\rightarrow$ DBConnector\\
 		\textbf{Input Specification} & Perform valid and invalid Requests on the Backend\\
 		\textbf{Output Specification} & All and only the queries that should be allowed are executed\\
 		\textbf{Environmental Needs} & I1,I2 successful\\
@@ -156,62 +156,73 @@ WebServer
 	\begin{tabular}{*{2}{c}}
 		\toprule
 		\textbf{Test Case identifier} & I4T1\\
-		\textbf{Test Items} & ApiBackend \rightarrow DBConnector\\
-		\textbf{Input Specification} & Perform valid and invalid Requests on the Backend\\
+		\textbf{Test Items} & Webpage Creator $\rightarrow$ DBConnector\\
+		\textbf{Input Specification} & Perform valid and invalid Requests on the WebPage Cretor\\
 		\textbf{Output Specification} & All and only the queries that should be allowed are executed\\
 		\textbf{Environmental Needs} & I1,I2 successful\\
 		\bottomrule
 	\end{tabular}
 \end{adjustbox}
+\subsubsection{T5}
+\begin{adjustbox}{width=1.2\textwidth}	
+	\begin{tabular}{*{2}{c}}
+		\toprule
+		\textbf{Test Case identifier} & I5T1\\
+		\textbf{Test Items} & HTTP Handler $\rightarrow$ Webpage Creator\\
+		\textbf{Input Specification} & Crete a request for esch possible page\\
+		\textbf{Output Specification} & The HTML of the expected pages\\
+		\textbf{Environmental Needs} & All previous tests successful\\
+		\bottomrule
+	\end{tabular}
+\end{adjustbox}
+\subsubsection{T6}
+\begin{adjustbox}{width=1.2\textwidth}	
+	\begin{tabular}{*{2}{c}}
+		\toprule
+		\textbf{Test Case identifier} & I6T1\\
+		\textbf{Test Items} & HTTP Handler $\rightarrow$ API Backend \\
+		\textbf{Input Specification} & Pass various requests to the Backend\\
+		\textbf{Output Specification} & The data requested in JSON format\\
+		\textbf{Environmental Needs} & I1 $\rightarrow$ I4 successful\\
+		\bottomrule
+	\end{tabular}
+\end{adjustbox}
 
+Client Side Application
 \subsubsection{T7}
 \begin{adjustbox}{width=1.2\textwidth}	
 	\begin{tabular}{*{2}{c}}
 		\midrule
-		\textbf{Test Case Identifier} & T7\\
-		\textbf{Test Items} & Accounts $\rightarrow$ WebServer\\
-		\textbf{Input Specification} & \\ %TODO
-		\textbf{Output Specification} & Check if the correct Accounts' methods are called\\
-		\textbf{Environmental Needs} & T1 to T6 succeeded\\
-		%TODO ha bisogno del driver?
+		\textbf{Test Case Identifier} & I7T1\\
+		\textbf{Test Items} & Client UI $\rightarrow$ HTTP Handler\\
+		\textbf{Input Specification} & Typical ClientUI input in the web form\\
+		\textbf{Output Specification} & The full content of the page\\ 
+		\textbf{Environmental Needs} & All previous tests\\
 		\bottomrule
 	\end{tabular}
 \end{adjustbox}
+\begin{adjustbox}{width=1.2\textwidth}	
+	\begin{tabular}{*{2}{c}}
+		\midrule
+		\textbf{Test Case Identifier} & I7T2\\
+		\textbf{Test Items} & Client UI $\rightarrow$ HTTP Handler\\
+		\textbf{Input Specification} & Typical ClientUI input in the mobile form\\
+		\textbf{Output Specification} & The dynamic content of the page\\ 
+		\textbf{Environmental Needs} & All previous tests\\
+		\bottomrule
+	\end{tabular}
+\end{adjustbox}
+
+
 \subsubsection{T8}
 \begin{adjustbox}{width=1.2\textwidth}	
 	\begin{tabular}{*{2}{c}}
 		\midrule
-		\textbf{Test Case Identifier} & T8\\
-		\textbf{Test Items} & Active Reservations and Requests $\rightarrow$ Web Server\\
-		\textbf{Input Specification} & \\ %TODO
-		\textbf{Output Specification} & Check if the correct Active Reservations and Requests' methods are called\\
-		\textbf{Environmental Needs} & T1 to T6 succeeded\\
-		%TODO ha bisogno del driver?
-		\bottomrule
-	\end{tabular}
-\end{adjustbox}
-\subsubsection{T9}
-\begin{adjustbox}{width=1.2\textwidth}	
-	\begin{tabular}{*{2}{c}}
-		\midrule
-		\textbf{Test Case Identifier} & T9\\
-		\textbf{Test Items} & Web Server $\rightarrow$ ClientUI\\
-		\textbf{Input Specification} & Typical ClientUI input\\
-		\textbf{Output Specification} & \\ %TODO cosa devo controllare?
-		\textbf{Environmental Needs} & T7 and T8 succeeded\\
-		%TODO driver?
-		\bottomrule
-	\end{tabular}
-\end{adjustbox}
-\subsubsection{T10}
-\begin{adjustbox}{width=1.2\textwidth}	
-	\begin{tabular}{*{2}{c}}
-		\midrule
-		\textbf{Test Case Identifier} & T10\\
-		\textbf{Test Items} & Web Server $\rightarrow$ DriverUI\\
+		\textbf{Test Case Identifier} & I8T1\\
+		\textbf{Test Items} & Driver UI $\rightarrow$ WebServer\\
 		\textbf{Input Specification} & Typical DriverUI input\\
-		\textbf{Output Specification} & \\ %TODO
-		\textbf{Environmental Needs} & T7 and T8 succeeded\\
+		\textbf{Output Specification} & The content of the dynamic parts of the application\\
+		\textbf{Environmental Needs} & I1 $\rightarrow$ I6\\
 		%TODO driver?
 		\bottomrule
 	\end{tabular}
