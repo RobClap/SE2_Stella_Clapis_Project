@@ -82,12 +82,14 @@ According to the Design Document, the components to be integrated are:
 \end{itemize}
 \subsection{Integration Testing Strategy}
 %Describe the integration testing approach (top-down, bottom-up, functional groupings, etc.) and the rationale for the choosing that approach
-The decided testing approach is bottom-up. %TODO inserire motivazione del perchè
+The decided testing approach is bottom-up in order to ensure that the parts being tested can relay on an already considered stable underlying infrastructure.
 \subsection{Sequence of Component/Function Integration}
 %NOTE: the structure of this section may vary depending on the integration strategy you select in Section 2.3. Use the structure proposed below as a non mandatory guide
 \subsubsection{Software Integration Sequence}
 %For each subsystem: identify the sequence in which the software components will be integrated within the subsystem. Relate this sequence to any product features/functions that are being built up
-%TODO che vuol dire relate to any product features/functions that are being built up?
+%TODO che vuol dire relate to any product features/functions that are being built up? %Non lo so
+%TODO i test delle tue immagini hanno una numerazione con la quale non sono d'accordo, e dovrebbero chiamarsi ``I'' non ``T'' e le frecce non sono al contrario? 
+%TODO dato che mi sto lamentando cosi' tanto dei grafici, vuoi che li rifaccia io in latex?
 \paragraph{Web Server}
 The following images describe how the Web Server's 
 components will be integrated for testing.
@@ -112,7 +114,6 @@ the various UIs, will be integrated.
 %TODO domanda sui driver
 %For each step of the integration process identified above, describe the type of tests that will be used to verify that the elements integrated in this step perform as expected. Describe in general the expected results of the test set. You may refer to Chapter 3 and Chapter 4 of the test plan example [1] as an example of what we expect. (NOTE: this is not a detailed description of test protocols. Think of this as the test design phase. Specific protocols will be written to fulfill the goals of the tests identified in this section.)
 \subsection{Test case specifications}
-WebServer $\rightarrow$ DBMS
 \subsubsection{I1}
 \begin{adjustbox}{width=1.2\textwidth}	
 	\begin{tabular}{*{2}{c}}
@@ -137,8 +138,6 @@ WebServer $\rightarrow$ DBMS
 		\bottomrule
 	\end{tabular}
 \end{adjustbox}
-
-WebServer 
 \subsubsection{I3}
 \begin{adjustbox}{width=1.2\textwidth}	
 	\begin{tabular}{*{2}{c}}
@@ -187,8 +186,6 @@ WebServer
 		\bottomrule
 	\end{tabular}
 \end{adjustbox}
-
-Client Side Application
 \subsubsection{I7}
 \begin{adjustbox}{width=1.2\textwidth}	
 	\begin{tabular}{*{2}{c}}
@@ -212,38 +209,37 @@ Client Side Application
 		\bottomrule
 	\end{tabular}
 \end{adjustbox}
-
-
 \subsubsection{I8}
 \begin{adjustbox}{width=1.2\textwidth}	
 	\begin{tabular}{*{2}{c}}
 		\midrule
 		\textbf{Test Case Identifier} & I8T1\\
-		\textbf{Test Items} & Driver UI $\rightarrow$ WebServer\\
+		\textbf{Test Items} & Driver UI $\rightarrow$ HTTP Handler\\
 		\textbf{Input Specification} & Typical DriverUI input\\
 		\textbf{Output Specification} & The content of the dynamic parts of the application\\
 		\textbf{Environmental Needs} & I1 $\rightarrow$ I6\\
-		%TODO driver?
 		\bottomrule
 	\end{tabular}
 \end{adjustbox}
-\subsubsection{T11}
+\subsubsection{I91}
 \begin{adjustbox}{width=1.2\textwidth}	
 	\begin{tabular}{*{2}{c}}
 		\midrule
-		\textbf{Test Case Identifier} & T11\\
-		\textbf{Test Items} & Web Server $\rightarrow$ AdminUI\\
+		\textbf{Test Case Identifier} & I9T1\\
+		\textbf{Test Items} & Admin UI input $\rightarrow$ HTTP Handler\\
 		\textbf{Input Specification} & Typical AdminUI input\\
-		\textbf{Output Specification} & \\ %TODO
-		\textbf{Environmental Needs} & T7 and T8 succeeded\\
-		%TODO driver?
+		\textbf{Output Specification} & The pages expected to be rendered\\
+		\textbf{Environmental Needs} & I1 $\rightarrow$ I6\\
 		\bottomrule
 	\end{tabular}
 \end{adjustbox}
+\subsection{Integration Test Procedures}
+%TODO qua manca una intera sezione con le procedure di test? Va fatta?
 \section{Tools and Test Equipment Required}
 %Identify all tools and test equipment needed to accomplish the integration. Refer to the tools presented during the lectures. Explain why and how you're going to use them. Note that you may also use manual testing for some part. Consider manual testing as one of the possible tools you have available.
 %TODO Arquillian?
 \section{Program Stubs and Test Data Required}
 %Based on the testing strategy and test design, identify any program stubs or special test data required for each integration step.
 %TODO cosa intende per special data?
+%Credo che intenda i casi test, con particolare attenzione su quelli dei casi limite
 \end{document}
