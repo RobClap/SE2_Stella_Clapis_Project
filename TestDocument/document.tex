@@ -181,8 +181,8 @@ the UIs, will be integrated.
 		\toprule
 		\textbf{Test Case identifier} & I4T1\\
 		\textbf{Test Items} & NotificationModule $\rightarrow$ WebpageCreator\\
-		\textbf{Input Specification} & \\ %TODO
-		\textbf{Output Specification} & \\%TODO
+		\textbf{Input Specification} & All the possible types of input that require sending notifications to a client \\ 
+		\textbf{Output Specification} & Check if the correct methods of the NotificationModule have been called\\
 		\textbf{Environmental Needs} & UIs' stub, WebpageCreator driver\\
 		\bottomrule
 	\end{tabular}
@@ -193,8 +193,8 @@ the UIs, will be integrated.
 		\toprule
 		\textbf{Test Case identifier} & I5T1\\
 		\textbf{Test Items} & NotificationModule $\rightarrow$ APIBackend\\
-		\textbf{Input Specification} & \\ %TODO
-		\textbf{Output Specification} & \\%TODO
+		\textbf{Input Specification} & All the possible types of input that require sending notifications to a client \\ 
+		\textbf{Output Specification} & Check if the correct methods of the NotificationModule have been called\\
 		\textbf{Environmental Needs} & UIs' stub, APIBackend driver\\
 		\bottomrule
 	\end{tabular}
@@ -265,7 +265,7 @@ the UIs, will be integrated.
 	\begin{tabular}{*{2}{c}}
 		\midrule
 		\textbf{Test Procedure Identifier} & TP1\\
-		\textbf{Purpose} & This test procedure verifies whether the WebServer\\ %TODO 
+		\textbf{Purpose} & This test procedure verifies whether the WebServer's components work properly together with all kinds of inputs\\ 
 		\textbf{Procedure Steps} & Execute I1-I5\\
 		\bottomrule
 	\end{tabular}
@@ -302,4 +302,12 @@ has been used to create all the stubs and the drivers
 named in Section 3.1.
 \section{Program Stubs and Test Data Required}
 %Based on the testing strategy and test design, identify any program stubs or special test data required for each integration step.
+\subsection{Stubs}
+The required stubs are:
+\begin{itemize}
+	\item Active Requests and Reservations' stub
+	\item Accounts' stub
+	\item ClientUI's stub
+	\item DriverUI's stub
+\end{itemize}
 \end{document}
