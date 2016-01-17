@@ -40,10 +40,14 @@
 %Record all revisions to the document
 \subsection{Purpose and Scope}
 %State the purpose and scope of the document
-This document describes the Integration Test Plan for the myTaxiService application. It provides a plan referring to how the various components of the software architecture described in the Design Document will be integrated for testing. 
+This document describes the Integration Test Plan for the myTaxiService application. It provides a plan referring to how the various components 
+described in the Design Document will be integrated for testing. 
 \subsection{List of Definitions and Abbreviations}
 \begin{itemize}
-	\item \textit{UI:} User Interface. 
+	\item \textit{UI:} User Interface.
+	\item \textit{Database's stubs:} Active Requests and Reservations' stub 
+	and Accounts' stub.
+	\item \textit{UIs' stubs:} ClientUI's stub and DriverUI's stub.
 \end{itemize}
 \subsection{List of Reference Documents}
 %List all reference documents, for instance: the project description, the RASD, the Design document, the documentation of any tool you plan to use for testing
@@ -55,7 +59,7 @@ This document describes the Integration Test Plan for the myTaxiService applicat
 \section{Integration Strategy}
 \subsection{Entry Criteria}
 %Specify the criteria that must be met before integration testing of specific elements may begin (e.g., functions must have been unit tested).
-Before the integration testing, each single module must have been tested to verify its correct functioning according to its specifications.
+Before the integration testing, each single module must have been tested to verify the correct functioning of its methods according to its specifications.
 \subsection{Elements to be Integrated}
 %Identify the components to be integrated, refer to your design document to identify such components in a way that is consistent with your design 
 According to the Design Document, the components to be integrated are:
@@ -82,36 +86,44 @@ According to the Design Document, the components to be integrated are:
 \end{itemize}
 \subsection{Integration Testing Strategy}
 %Describe the integration testing approach (top-down, bottom-up, functional groupings, etc.) and the rationale for the choosing that approach
-The decided testing approach is bottom-up in order to ensure that the parts being tested can relay on an already considered stable underlying infrastructure.
+The decided testing approach is sandwich. This has been chosen in order to 
+integrate first the components of the WebServer, and then integrate the WebServer with the Database and the UI. %TODO finire di aggiungere la motivazione
 \subsection{Sequence of Component/Function Integration}
 %NOTE: the structure of this section may vary depending on the integration strategy you select in Section 2.3. Use the structure proposed below as a non mandatory guide
 \subsubsection{Software Integration Sequence}
 %For each subsystem: identify the sequence in which the software components will be integrated within the subsystem. Relate this sequence to any product features/functions that are being built up
-%TODO che vuol dire relate to any product features/functions that are being built up? %Non lo so
-%TODO i test delle tue immagini hanno una numerazione con la quale non sono d'accordo, e dovrebbero chiamarsi ``I'' non ``T'' e le frecce non sono al contrario? 
-%TODO dato che mi sto lamentando cosi' tanto dei grafici, vuoi che li rifaccia io in dot? Ci metto due secondi e se vogliamo modificarli si fa velocemente
+In the following graphs the arrows go 
+from the callee module to the caller module
+and are marked with identifiers that define
+the order of integration.
 \paragraph{Web Server}
 The following images describe how the Web Server's 
 components will be integrated for testing.
-The arrows represent the order of integration.
-\begin{center}
-	\includegraphics{WebServer1}
-	\includegraphics{WebServer2}
-\end{center}
+\begin{figure}[H]
+		\makebox[\textwidth][c]{\includegraphics[width=1.0\textwidth]{WebServer1}}%
+\end{figure}
+\begin{figure}[H]
+	\makebox[\textwidth][c]{\includegraphics[width=0.7\textwidth]{WebServer2}}%
+\end{figure}
 \subsubsection{Subsystem Integration Sequence}
 %Identify the order in which subsystems will be integrated. If you have a single subsystem, 2.4.1 and 2.4.2 are to be merged in a single section. You can refer to Section 2.2 of the test plan example [1] as an example of what we expect
 The following graphs describe how the three 
-components of myTaxiService application, 
-which are the database, the Web Server and 
-the various UIs, will be integrated.
-\begin{center}
-	\includegraphics{DBWS}
-	\includegraphics{WSUI1}
-	\includegraphics{WSUI2}
-	\includegraphics{WSUI3}
-\end{center}
+main components of myTaxiService application, 
+the Database, the Web Server and 
+the UIs, will be integrated.
+\begin{figure}[H]
+	\makebox[\textwidth][c]{\includegraphics[width=0.7\textwidth]{DBWS}}%
+\end{figure}
+\begin{figure}[H]
+	\makebox[\textwidth][c]{\includegraphics[width=0.65\textwidth]{WSUI3}}%
+\end{figure}
+\begin{figure}[H]
+	\makebox[\textwidth][c]{\includegraphics[width=0.65\textwidth]{WSUI1}}%
+\end{figure}
+\begin{figure}[H]
+	\makebox[\textwidth][c]{\includegraphics[width=0.65\textwidth]{WSUI2}}%
+\end{figure}
 \section{Individual Steps and Test Description}
-%TODO domanda sui driver
 %For each step of the integration process identified above, describe the type of tests that will be used to verify that the elements integrated in this step perform as expected. Describe in general the expected results of the test set. You may refer to Chapter 3 and Chapter 4 of the test plan example [1] as an example of what we expect. (NOTE: this is not a detailed description of test protocols. Think of this as the test design phase. Specific protocols will be written to fulfill the goals of the tests identified in this section.)
 \subsection{Test case specifications}
 \subsubsection{I1}
@@ -119,10 +131,10 @@ the various UIs, will be integrated.
 	\begin{tabular}{*{2}{c}}
 		\toprule
 		\textbf{Test Case identifier} & I1T1\\
-		\textbf{Test Items} & DBConnector $\rightarrow$ Accounts \\
-		\textbf{Input Specification} & Queries to manipulate (creation modification and deletion) of accounts\\
-		\textbf{Output Specification} & The actual modifications intended\\
-		\textbf{Environmental Needs} & DBMS Driver\\
+		\textbf{Test Items} & DBConnector $\rightarrow$ WebpageCreator\\
+		\textbf{Input Specification} & Perform valid and invalid requests on the WebPage Creator\\
+		\textbf{Output Specification} & All and only the queries that should be allowed are executed and the correct DBConnector's methods are called\\
+		\textbf{Environmental Needs} & Database's stub, WebpageCreator driver\\
 		\bottomrule
 	\end{tabular}
 \end{adjustbox}
@@ -131,10 +143,10 @@ the various UIs, will be integrated.
 	\begin{tabular}{*{2}{c}}
 		\toprule
 		\textbf{Test Case identifier} & I2T1\\
-		\textbf{Test Items} & DBConnector $\rightarrow$ Active Reservations and Requests \\
-		\textbf{Input Specification} & Queries to place/accept/delete reservations and requests, in every possible order of execution\\
-		\textbf{Output Specification} & The actual modifications intended and the rejection of the invalid requests\\
-		\textbf{Environmental Needs} & DBMS Driver\\
+		\textbf{Test Items} & DBConnector $\rightarrow$ APIBackend\\
+		\textbf{Input Specification} & Perform valid and invalid requests on the APIBackend\\
+		\textbf{Output Specification} & All and only the queries that should be allowed are executed and the correct DBConnector's methods are called\\
+		\textbf{Environmental Needs} & Database's stub, APIBackend driver\\
 		\bottomrule
 	\end{tabular}
 \end{adjustbox}
@@ -143,10 +155,23 @@ the various UIs, will be integrated.
 	\begin{tabular}{*{2}{c}}
 		\toprule
 		\textbf{Test Case identifier} & I3T1\\
-		\textbf{Test Items} & ApiBackend $\rightarrow$ DBConnector\\
-		\textbf{Input Specification} & Perform valid and invalid Requests on the Backend\\
-		\textbf{Output Specification} & All and only the queries that should be allowed are executed\\
-		\textbf{Environmental Needs} & I1,I2 successful\\
+		\textbf{Test Items} & WebpageCreator $\rightarrow$ HttpHandler\\
+		\textbf{Input Specification} & Perform valid and invalid requests on the HttpHandler\\
+		\textbf{Output Specification} & Verify if only the requests intended for
+		the WebpageCreator are forwarded to it and the correct WebpageCreator methods are called\\
+		\textbf{Environmental Needs} & Database's stub, HttpHandler driver, I1,I2 successful\\
+		\bottomrule
+	\end{tabular}
+\end{adjustbox}
+\begin{adjustbox}{width=1.2\textwidth}	
+	\begin{tabular}{*{2}{c}}
+		\toprule
+		\textbf{Test Case identifier} & I3T2\\
+		\textbf{Test Items} & APIBackend $\rightarrow$ HttpHandler\\
+		\textbf{Input Specification} & Perform valid and invalid requests on the HttpHandler\\
+		\textbf{Output Specification} & Verify if only the requests intended for
+		the APIBackend are forwarded to it and the correct APIBacken methods are called\\
+		\textbf{Environmental Needs} & Active Requests and Reservations' stub, Accounts' stub, HttpHandler driver, I1,I2 successful\\
 		\bottomrule
 	\end{tabular}
 \end{adjustbox}
@@ -155,10 +180,10 @@ the various UIs, will be integrated.
 	\begin{tabular}{*{2}{c}}
 		\toprule
 		\textbf{Test Case identifier} & I4T1\\
-		\textbf{Test Items} & Webpage Creator $\rightarrow$ DBConnector\\
-		\textbf{Input Specification} & Perform valid and invalid Requests on the WebPage Cretor\\
-		\textbf{Output Specification} & All and only the queries that should be allowed are executed\\
-		\textbf{Environmental Needs} & I1,I2 successful\\
+		\textbf{Test Items} & NotificationModule $\rightarrow$ WebpageCreator\\
+		\textbf{Input Specification} & \\ %TODO
+		\textbf{Output Specification} & \\%TODO
+		\textbf{Environmental Needs} & UIs' stub, WebpageCreator driver\\
 		\bottomrule
 	\end{tabular}
 \end{adjustbox}
@@ -167,10 +192,10 @@ the various UIs, will be integrated.
 	\begin{tabular}{*{2}{c}}
 		\toprule
 		\textbf{Test Case identifier} & I5T1\\
-		\textbf{Test Items} & HTTP Handler $\rightarrow$ Webpage Creator\\
-		\textbf{Input Specification} & Crete a request for esch possible page\\
-		\textbf{Output Specification} & The HTML of the expected pages\\
-		\textbf{Environmental Needs} & All previous tests successful\\
+		\textbf{Test Items} & NotificationModule $\rightarrow$ APIBackend\\
+		\textbf{Input Specification} & \\ %TODO
+		\textbf{Output Specification} & \\%TODO
+		\textbf{Environmental Needs} & UIs' stub, APIBackend driver\\
 		\bottomrule
 	\end{tabular}
 \end{adjustbox}
@@ -179,67 +204,102 @@ the various UIs, will be integrated.
 	\begin{tabular}{*{2}{c}}
 		\toprule
 		\textbf{Test Case identifier} & I6T1\\
-		\textbf{Test Items} & HTTP Handler $\rightarrow$ API Backend \\
-		\textbf{Input Specification} & Pass various requests to the Backend\\
-		\textbf{Output Specification} & The data requested in JSON format\\
-		\textbf{Environmental Needs} & I1 $\rightarrow$ I4 successful\\
+		\textbf{Test Items} & Accounts $\rightarrow$ WebServer\\
+		\textbf{Input Specification} & Queries to manipulate (creation modification and deletion) of accounts\\
+		\textbf{Output Specification} & The correct Accounts' method have been called\\
+		\textbf{Environmental Needs} & WebServer driver, Active Reservations and Requests' stub, I1-15 successful\\
 		\bottomrule
 	\end{tabular}
 \end{adjustbox}
 \subsubsection{I7}
 \begin{adjustbox}{width=1.2\textwidth}	
 	\begin{tabular}{*{2}{c}}
-		\midrule
-		\textbf{Test Case Identifier} & I7T1\\
-		\textbf{Test Items} & Client UI $\rightarrow$ HTTP Handler\\
-		\textbf{Input Specification} & Typical ClientUI input in the web form\\
-		\textbf{Output Specification} & The full content of the page\\ 
-		\textbf{Environmental Needs} & All previous tests\\
-		\bottomrule
-	\end{tabular}
-\end{adjustbox}
-\begin{adjustbox}{width=1.2\textwidth}	
-	\begin{tabular}{*{2}{c}}
-		\midrule
-		\textbf{Test Case Identifier} & I7T2\\
-		\textbf{Test Items} & Client UI $\rightarrow$ HTTP Handler\\
-		\textbf{Input Specification} & Typical ClientUI input in the mobile form\\
-		\textbf{Output Specification} & The dynamic content of the page\\ 
-		\textbf{Environmental Needs} & All previous tests\\
+		\toprule
+		\textbf{Test Case identifier} & I7T1\\
+		\textbf{Test Items} & Active Reservations and Requests $\rightarrow$ WebServer\\
+		\textbf{Input Specification} & Queries to place/accept/delete reservations and requests, in every possible order of execution\\ 
+		\textbf{Output Specification} & The correct Active Reservations and Requests' methods have been called\\
+		\textbf{Environmental Needs} & WebServer driver, I1-I6 successful\\
 		\bottomrule
 	\end{tabular}
 \end{adjustbox}
 \subsubsection{I8}
 \begin{adjustbox}{width=1.2\textwidth}	
 	\begin{tabular}{*{2}{c}}
-		\midrule
-		\textbf{Test Case Identifier} & I8T1\\
-		\textbf{Test Items} & Driver UI $\rightarrow$ HTTP Handler\\
-		\textbf{Input Specification} & Typical DriverUI input\\
-		\textbf{Output Specification} & The content of the dynamic parts of the application\\
-		\textbf{Environmental Needs} & I1 $\rightarrow$ I6\\
+		\toprule
+		\textbf{Test Case identifier} & I8T1\\
+		\textbf{Test Items} & WebServer $\rightarrow$ AdminUI\\
+		\textbf{Input Specification} & Every possible input from the UI\\ 
+		\textbf{Output Specification} & The correct WebServer's methods have been called\\
+		\textbf{Environmental Needs} & I1-I7 successful\\
 		\bottomrule
 	\end{tabular}
 \end{adjustbox}
-\subsubsection{I91}
+\subsubsection{I9}
 \begin{adjustbox}{width=1.2\textwidth}	
 	\begin{tabular}{*{2}{c}}
-		\midrule
-		\textbf{Test Case Identifier} & I9T1\\
-		\textbf{Test Items} & Admin UI input $\rightarrow$ HTTP Handler\\
-		\textbf{Input Specification} & Typical AdminUI input\\
-		\textbf{Output Specification} & The pages expected to be rendered\\
-		\textbf{Environmental Needs} & I1 $\rightarrow$ I6\\
+		\toprule
+		\textbf{Test Case identifier} & I9T1\\
+		\textbf{Test Items} & WebServer $\rightarrow$ ClientUI\\
+		\textbf{Input Specification} & Every possible input from the UI\\ 
+		\textbf{Output Specification} & The correct WebServer's methods have been called\\
+		\textbf{Environmental Needs} & I1-I7 successful\\
+		\bottomrule
+	\end{tabular}
+\end{adjustbox}
+\subsubsection{I10}
+\begin{adjustbox}{width=1.2\textwidth}	
+	\begin{tabular}{*{2}{c}}
+		\toprule
+		\textbf{Test Case identifier} & I10T1\\
+		\textbf{Test Items} & WebServer $\rightarrow$ AdminUI\\
+		\textbf{Input Specification} & Every possible input from the UI\\ 
+		\textbf{Output Specification} & The correct WebServer's methods have been called\\
+		\textbf{Environmental Needs} & I1-I7 successful\\
 		\bottomrule
 	\end{tabular}
 \end{adjustbox}
 \subsection{Integration Test Procedures}
-%TODO qua manca una intera sezione con le procedure di test? Va fatta?
+\subsubsection{TP1}
+\begin{adjustbox}{width=1.2\textwidth}	
+	\begin{tabular}{*{2}{c}}
+		\midrule
+		\textbf{Test Procedure Identifier} & TP1\\
+		\textbf{Purpose} & This test procedure verifies whether the WebServer\\ %TODO 
+		\textbf{Procedure Steps} & Execute I1-I5\\
+		\bottomrule
+	\end{tabular}
+\end{adjustbox}
+\subsubsection{TP2}
+\begin{adjustbox}{width=1.2\textwidth}	
+	\begin{tabular}{*{2}{c}}
+		\midrule
+		\textbf{Test Procedure Identifier} & TP2\\
+		\textbf{Purpose} & This test procedure verifies whether the Database can handle all types of inputs and modifications requested by the WebServer\\ 
+		\textbf{Procedure Steps} & Execute I6-I7\\
+		\bottomrule
+	\end{tabular}
+\end{adjustbox}
+\subsubsection{TP3}
+\begin{adjustbox}{width=1.2\textwidth}	
+	\begin{tabular}{*{2}{c}}
+		\midrule
+		\textbf{Test Procedure Identifier} & TP3\\
+		\textbf{Purpose} & This test procedure verifies whether the WebServer can handle all the inputs from the UIs and outputs the requested information\\ 
+		\textbf{Procedure Steps} & Execute I8-I10\\
+		\bottomrule
+	\end{tabular}
+\end{adjustbox}
 \section{Tools and Test Equipment Required}
 %Identify all tools and test equipment needed to accomplish the integration. Refer to the tools presented during the lectures. Explain why and how you're going to use them. Note that you may also use manual testing for some part. Consider manual testing as one of the possible tools you have available.
-%TODO Arquillian?
+We base our tools' choice on the assumption that
+the implementation of the myTaxiService application
+has been made using Java as the programming language.
+As one of the used and reliable testing framework
+currently available, we decided to exploit the
+functionalities of Mockito. In particular, it
+has been used to create all the stubs and the drivers
+named in Section 3.1.
 \section{Program Stubs and Test Data Required}
 %Based on the testing strategy and test design, identify any program stubs or special test data required for each integration step.
-%TODO cosa intende per special data?
-%Credo che intenda i casi test, con particolare attenzione su quelli dei casi limite
 \end{document}
