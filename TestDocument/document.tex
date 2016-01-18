@@ -130,7 +130,7 @@ the UIs, will be integrated.
 \subsection{Test case specifications}
 \subsubsection{I1}
 \begin{adjustbox}{width=1.2\textwidth}	
-	\begin{tabular}{*{2}{c}}
+	\begin{tabular}{*{2}{p{0.6\textwidth}}}
 		\toprule
 		\textbf{Test Case identifier} & I1T1\\
 		\textbf{Test Items} & DBConnector $\rightarrow$ WebpageCreator\\
@@ -142,7 +142,7 @@ the UIs, will be integrated.
 \end{adjustbox}
 \subsubsection{I2}
 \begin{adjustbox}{width=1.2\textwidth}	
-	\begin{tabular}{*{2}{c}}
+	\begin{tabular}{*{2}{p{0.6\textwidth}}}
 		\toprule
 		\textbf{Test Case identifier} & I2T1\\
 		\textbf{Test Items} & DBConnector $\rightarrow$ APIBackend\\
@@ -154,19 +154,19 @@ the UIs, will be integrated.
 \end{adjustbox}
 \subsubsection{I3}
 \begin{adjustbox}{width=1.2\textwidth}	
-	\begin{tabular}{*{2}{c}}
+	\begin{tabular}{*{2}{p{0.6\textwidth}}}
 		\toprule
 		\textbf{Test Case identifier} & I3T1\\
 		\textbf{Test Items} & WebpageCreator $\rightarrow$ HttpHandler\\
 		\textbf{Input Specification} & Perform valid and invalid requests on the HttpHandler\\
-		\textbf{Output Specification} & Verify if only the requests intended for \newline
+		\textbf{Output Specification} & Verify if only the requests intended for 
 		the WebpageCreator are forwarded to it and the correct WebpageCreator methods are called\\
 		\textbf{Environmental Needs} & Database's stub, HttpHandler driver, I1,I2 successful\\
 		\bottomrule
 	\end{tabular}
 \end{adjustbox}
 \begin{adjustbox}{width=1.2\textwidth}	
-	\begin{tabular}{*{2}{c}}
+	\begin{tabular}{*{2}{p{0.6\textwidth}}}
 		\toprule
 		\textbf{Test Case identifier} & I3T2\\
 		\textbf{Test Items} & APIBackend $\rightarrow$ HttpHandler\\
@@ -179,7 +179,7 @@ the UIs, will be integrated.
 \end{adjustbox}
 \subsubsection{I4}
 \begin{adjustbox}{width=1.2\textwidth}	
-	\begin{tabular}{*{2}{c}}
+	\begin{tabular}{*{2}{p{0.6\textwidth}}}
 		\toprule
 		\textbf{Test Case identifier} & I4T1\\
 		\textbf{Test Items} & NotificationModule $\rightarrow$ WebpageCreator\\
@@ -191,7 +191,7 @@ the UIs, will be integrated.
 \end{adjustbox}
 \subsubsection{I5}
 \begin{adjustbox}{width=1.2\textwidth}	
-	\begin{tabular}{*{2}{c}}
+	\begin{tabular}{*{2}{p{0.6\textwidth}}}
 		\toprule
 		\textbf{Test Case identifier} & I5T1\\
 		\textbf{Test Items} & NotificationModule $\rightarrow$ APIBackend\\
@@ -203,7 +203,7 @@ the UIs, will be integrated.
 \end{adjustbox}
 \subsubsection{I6}
 \begin{adjustbox}{width=1.2\textwidth}	
-	\begin{tabular}{*{2}{c}}
+	\begin{tabular}{*{2}{p{0.6\textwidth}}}
 		\toprule
 		\textbf{Test Case identifier} & I6T1\\
 		\textbf{Test Items} & Accounts $\rightarrow$ WebServer\\
@@ -215,7 +215,7 @@ the UIs, will be integrated.
 \end{adjustbox}
 \subsubsection{I7}
 \begin{adjustbox}{width=1.2\textwidth}	
-	\begin{tabular}{*{2}{c}}
+	\begin{tabular}{*{2}{p{0.6\textwidth}}}
 		\toprule
 		\textbf{Test Case identifier} & I7T1\\
 		\textbf{Test Items} & Active Reservations and Requests $\rightarrow$ WebServer\\
@@ -227,7 +227,7 @@ the UIs, will be integrated.
 \end{adjustbox}
 \subsubsection{I8}
 \begin{adjustbox}{width=1.2\textwidth}	
-	\begin{tabular}{*{2}{c}}
+	\begin{tabular}{*{2}{p{0.6\textwidth}}}
 		\toprule
 		\textbf{Test Case identifier} & I8T1\\
 		\textbf{Test Items} & WebServer $\rightarrow$ AdminUI\\
@@ -239,7 +239,7 @@ the UIs, will be integrated.
 \end{adjustbox}
 \subsubsection{I9}
 \begin{adjustbox}{width=1.2\textwidth}	
-	\begin{tabular}{*{2}{c}}
+	\begin{tabular}{*{2}{p{0.6\textwidth}}}
 		\toprule
 		\textbf{Test Case identifier} & I9T1\\
 		\textbf{Test Items} & WebServer $\rightarrow$ ClientUI\\
@@ -251,7 +251,7 @@ the UIs, will be integrated.
 \end{adjustbox}
 \subsubsection{I10}
 \begin{adjustbox}{width=1.2\textwidth}	
-	\begin{tabular}{*{2}{c}}
+	\begin{tabular}{*{2}{p{0.6\textwidth}}}
 		\toprule
 		\textbf{Test Case identifier} & I10T1\\
 		\textbf{Test Items} & WebServer $\rightarrow$ AdminUI\\
@@ -264,7 +264,7 @@ the UIs, will be integrated.
 \subsection{Integration Test Procedures}
 \subsubsection{TP1}
 \begin{adjustbox}{width=1.2\textwidth}	
-	\begin{tabular}{*{2}{c}}
+	\begin{tabular}{*{2}{p{0.6\textwidth}}}
 		\midrule
 		\textbf{Test Procedure Identifier} & TP1\\
 		\textbf{Purpose} & This test procedure verifies whether the WebServer's components work properly together with all kinds of inputs\\ 
@@ -274,7 +274,7 @@ the UIs, will be integrated.
 \end{adjustbox}
 \subsubsection{TP2}
 \begin{adjustbox}{width=1.2\textwidth}	
-	\begin{tabular}{*{2}{c}}
+	\begin{tabular}{*{2}{p{0.6\textwidth}}}
 		\midrule
 		\textbf{Test Procedure Identifier} & TP2\\
 		\textbf{Purpose} & This test procedure verifies whether the Database can handle all types of inputs and modifications requested by the WebServer\\ 
@@ -284,7 +284,7 @@ the UIs, will be integrated.
 \end{adjustbox}
 \subsubsection{TP3}
 \begin{adjustbox}{width=1.2\textwidth}	
-	\begin{tabular}{*{2}{c}}
+	\begin{tabular}{*{2}{p{0.6\textwidth}}}
 		\midrule
 		\textbf{Test Procedure Identifier} & TP3\\
 		\textbf{Purpose} & This test procedure verifies whether the WebServer can handle all the inputs from the UIs and outputs the requested information\\ 
