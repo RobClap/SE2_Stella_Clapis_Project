@@ -294,8 +294,8 @@ the UIs, will be integrated.
 %Identify all tools and test equipment needed to accomplish the integration. Refer to the tools presented during the lectures. Explain why and how you're going to use them. Note that you may also use manual testing for some part. Consider manual testing as one of the possible tools you have available.
 We base our tools' choice on the assumption that
 the implementation of the myTaxiService application
-has been made using Java as the programming language.
-As one of the used and reliable testing framework
+has been made using Java as programming language.
+As one of the most used and reliable testing frameworks
 currently available, we decided to exploit the
 functionalities of Mockito. In particular, it
 has been used to create all the stubs and the drivers
@@ -313,14 +313,16 @@ The required stubs are:
 For the complete set of methods exposed by the 
 interfaces of the modules listed above refer
 to the Design Document's section 2.6.
-\subsubsection{Active Requests and Reservations' stub}
-This stub should provide all the possible combinations
-of responses when called. It should simulate all the
-conditions a real database could be in, also including an
-empty database.
-\subsubsection{Accounts' stub}
-
-\subsubsection{ClientUI's stub}
-
-\subsubsection{DriverUI's stub}
+\subsubsection{Database' stub}
+This stubs should simulate a real database. They 
+should provide responses for all the possible contents 
+a database could have.
+\subsubsection{UIs's stub}
+These stubs are used only in the NotificationModule's test.
+They have to mock the reception of messages from the WebServer.
+\subsection{Drivers}
+As stated in Section 3.1, all tests except for I8-I10 need 
+a driver. They are used to provide the inputs that should cover
+all the possible inputs the module could receive, where possible, 
+and check the output for correctness.
 \end{document}
