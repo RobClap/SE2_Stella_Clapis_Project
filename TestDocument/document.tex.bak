@@ -88,14 +88,12 @@ According to the Design Document, the components to be integrated are:
 %Describe the integration testing approach (top-down, bottom-up, functional groupings, etc.) and the rationale for the choosing that approach
 The decided testing approach is sandwich. This has been chosen in order to 
 integrate first the components of the WebServer, and then integrate the WebServer with the Database and the UI. %TODO finire di aggiungere la motivazione
-%TODO Aspetta, a sandwich non è l'esatto opposto?
-
 \subsection{Sequence of Component/Function Integration}
 %NOTE: the structure of this section may vary depending on the integration strategy you select in Section 2.3. Use the structure proposed below as a non mandatory guide
 \subsubsection{Software Integration Sequence}
 %For each subsystem: identify the sequence in which the software components will be integrated within the subsystem. Relate this sequence to any product features/functions that are being built up
 In the following graphs the arrows go 
-from the called module to the caller module
+from the callee module to the caller module
 and are marked with identifiers that define
 the order of integration.
 \paragraph{Web Server}
@@ -159,7 +157,7 @@ the UIs, will be integrated.
 		\textbf{Test Case identifier} & I3T1\\
 		\textbf{Test Items} & WebpageCreator $\rightarrow$ HttpHandler\\
 		\textbf{Input Specification} & Perform valid and invalid requests on the HttpHandler\\
-		\textbf{Output Specification} & Verify if only the requests intended for \newline
+		\textbf{Output Specification} & Verify if only the requests intended for
 		the WebpageCreator are forwarded to it and the correct WebpageCreator methods are called\\
 		\textbf{Environmental Needs} & Database's stub, HttpHandler driver, I1,I2 successful\\
 		\bottomrule
