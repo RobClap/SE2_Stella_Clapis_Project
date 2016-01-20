@@ -36,18 +36,23 @@
 \tableofcontents
 \clearpage
 \section{Introduction}
-\subsection{Revision History}
+%\subsection{Revision History}
 %Record all revisions to the document
 \subsection{Purpose and Scope}
 %State the purpose and scope of the document
-This document describes the Integration Test Plan for the myTaxiService application. It provides a plan referring to how the various components 
-described in the Design Document will be integrated for testing. 
+This document describes the Integration Test Plan for the myTaxiService application. Its purpose is to provide a plan for how the application's components, listed in the Design Document, will be integrated for testing. It also provides a description of the necessary tools, stubs and drivers. 
 \subsection{List of Definitions and Abbreviations}
 \begin{itemize}
-	\item \textit{UI:} User Interface.
-	\item \textit{Database's stubs:} Active Requests and Reservations' stub 
-	and Accounts' stub.
-	\item \textit{UIs' stubs:} ClientUI's stub and DriverUI's stub.
+	\item Abbreviations:
+	\begin{itemize}
+		\item \textit{UI:} User Interface.
+	\end{itemize}
+	\item Definitions:
+	\begin{itemize}
+		\item \textit{Database's stubs:} Active Requests and Reservations' stub 
+		and Accounts' stub.
+		\item \textit{UIs' stubs:} ClientUI's stub and DriverUI's stub.
+	\end{itemize}
 \end{itemize}
 \subsection{List of Reference Documents}
 %List all reference documents, for instance: the project description, the RASD, the Design document, the documentation of any tool you plan to use for testing
@@ -59,7 +64,7 @@ described in the Design Document will be integrated for testing.
 \section{Integration Strategy}
 \subsection{Entry Criteria}
 %Specify the criteria that must be met before integration testing of specific elements may begin (e.g., functions must have been unit tested).
-Before the integration testing, each single module must have been tested to verify the correct functioning of its methods according to its specifications.
+Before the integration testing, each single module must have been tested to verify the correct functioning of its methods according to their specifications.
 \subsection{Elements to be Integrated}
 %Identify the components to be integrated, refer to your design document to identify such components in a way that is consistent with your design 
 According to the Design Document, the components to be integrated are:
@@ -86,9 +91,13 @@ According to the Design Document, the components to be integrated are:
 \end{itemize}
 \subsection{Integration Testing Strategy}
 %Describe the integration testing approach (top-down, bottom-up, functional groupings, etc.) and the rationale for the choosing that approach
-The decided testing approach is sandwich. This has been chosen in order to 
-integrate first the components of the WebServer, and then integrate the WebServer with the Database and the UI. %TODO finire di aggiungere la motivazione
-%TODO Aspetta, a sandwich non è l'esatto opposto?
+The decided testing approach is sandwich. It has been chosen in order to 
+integrate first the modules of the WebServer, and then integrate it
+ with the Database and the UI. This is because the WebServer
+is the only application part made by connected subcomponents, and
+is also its core. Adopting this approach made possible to 
+test thoroughly the correct functioning of the WebServer with controlled input and
+ without interferences from other parts of the application.
 
 \subsection{Sequence of Component/Function Integration}
 %NOTE: the structure of this section may vary depending on the integration strategy you select in Section 2.3. Use the structure proposed below as a non mandatory guide
@@ -134,9 +143,9 @@ the UIs, will be integrated.
 		\toprule
 		\textbf{Test Case identifier} & I1T1\\
 		\textbf{Test Items} & DBConnector $\rightarrow$ WebpageCreator\\
-		\textbf{Input Specification} & Perform valid and invalid requests on the WebPage Creator\\
+		\textbf{Input Specification} & Perform valid and invalid requests on the WebpageCreator\\
 		\textbf{Output Specification} & All and only the queries that should be allowed are executed and the correct DBConnector's methods are called\\
-		\textbf{Environmental Needs} & Database's stub, WebpageCreator driver\\
+		\textbf{Environmental Needs} & Database's stubs, WebpageCreator driver\\
 		\bottomrule
 	\end{tabular}
 \end{adjustbox}
@@ -148,7 +157,7 @@ the UIs, will be integrated.
 		\textbf{Test Items} & DBConnector $\rightarrow$ APIBackend\\
 		\textbf{Input Specification} & Perform valid and invalid requests on the APIBackend\\
 		\textbf{Output Specification} & All and only the queries that should be allowed are executed and the correct DBConnector's methods are called\\
-		\textbf{Environmental Needs} & Database's stub, APIBackend driver\\
+		\textbf{Environmental Needs} & Database's stubs, APIBackend driver\\
 		\bottomrule
 	\end{tabular}
 \end{adjustbox}
@@ -161,7 +170,7 @@ the UIs, will be integrated.
 		\textbf{Input Specification} & Perform valid and invalid requests on the HttpHandler\\
 		\textbf{Output Specification} & Verify if only the requests intended for 
 		the WebpageCreator are forwarded to it and the correct WebpageCreator methods are called\\
-		\textbf{Environmental Needs} & Database's stub, HttpHandler driver, I1,I2 successful\\
+		\textbf{Environmental Needs} & Database's stubs, HttpHandler driver, I1,I2 successful\\
 		\bottomrule
 	\end{tabular}
 \end{adjustbox}
@@ -172,8 +181,8 @@ the UIs, will be integrated.
 		\textbf{Test Items} & APIBackend $\rightarrow$ HttpHandler\\
 		\textbf{Input Specification} & Perform valid and invalid requests on the HttpHandler\\
 		\textbf{Output Specification} & Verify if only the requests intended for
-		the APIBackend are forwarded to it and the correct APIBacken methods are called\\
-		\textbf{Environmental Needs} & Active Requests and Reservations' stub, Accounts' stub, HttpHandler driver, I1,I2 successful\\
+		the APIBackend are forwarded to it and the correct APIBackend methods are called\\
+		\textbf{Environmental Needs} & Database's stubs, HttpHandler driver, I1,I2 successful\\
 		\bottomrule
 	\end{tabular}
 \end{adjustbox}
@@ -207,7 +216,7 @@ the UIs, will be integrated.
 		\toprule
 		\textbf{Test Case identifier} & I6T1\\
 		\textbf{Test Items} & Accounts $\rightarrow$ WebServer\\
-		\textbf{Input Specification} & Queries to manipulate (creation modification and deletion) of accounts\\
+		\textbf{Input Specification} & Queries to manipulate (creation, modification and deletion) of accounts\\
 		\textbf{Output Specification} & The correct Accounts' method have been called\\
 		\textbf{Environmental Needs} & WebServer driver, Active Reservations and Requests' stub, I1-15 successful\\
 		\bottomrule
@@ -219,7 +228,7 @@ the UIs, will be integrated.
 		\toprule
 		\textbf{Test Case identifier} & I7T1\\
 		\textbf{Test Items} & Active Reservations and Requests $\rightarrow$ WebServer\\
-		\textbf{Input Specification} & Queries to place/accept/delete reservations and requests, in every possible order of execution\\ 
+		\textbf{Input Specification} & Queries to place/delete reservations and requests, in every possible order of execution\\ 
 		\textbf{Output Specification} & The correct Active Reservations and Requests' methods have been called\\
 		\textbf{Environmental Needs} & WebServer driver, I1-I6 successful\\
 		\bottomrule
@@ -267,7 +276,7 @@ the UIs, will be integrated.
 	\begin{tabular}{*{2}{p{0.6\textwidth}}}
 		\midrule
 		\textbf{Test Procedure Identifier} & TP1\\
-		\textbf{Purpose} & This test procedure verifies whether the WebServer's components work properly together with all kinds of inputs\\ 
+		\textbf{Purpose} & This test procedure verifies whether the WebServer's components work properly together with provided input and aside from the database\\ 
 		\textbf{Procedure Steps} & Execute I1-I5\\
 		\bottomrule
 	\end{tabular}
@@ -313,7 +322,7 @@ The required stubs are:
 	\item DriverUI's stub
 \end{itemize}
 For the complete set of methods exposed by the 
-interfaces of the modules listed above refer
+interfaces of the modules listed above, refer
 to the Design Document's section 2.6.
 \subsubsection{Database' stub}
 This stubs should simulate a real database. They 
@@ -325,6 +334,6 @@ They have to mock the reception of messages from the WebServer.
 \subsection{Drivers}
 As stated in Section 3.1, all tests except for I8-I10 need 
 a driver. They are used to provide the inputs that should cover
-all the possible inputs the module could receive, where possible, 
+all the possible inputs, where possible, the module could receive
 and check the output for correctness.
 \end{document}
