@@ -43,18 +43,50 @@ Points and COCOMO. Then it presents the available resources and how
 they will be allocated to the project tasks and, in the end, it
 discusses the possible risks this project might encounter and the
 associated recovery actions.
-%TODO finire
 \section{Size and Effort Estimation}
 \subsection{Size Estimation - Function Points}
+Following Albrecht's method, our application's function points
+will be divided in 5 types:
+\begin{itemize}
+	\item Internal Logical File (ILF): homogeneous set of data used
+	and managed by the application.
+	\item External Interface File (EIF): homogeneous set of data 
+	used by the application but generated and maintained by other.
+	\item External Input: elementary operation to elaborate data
+	coming from the external environment.
+	\item External Output: elementary operation that generates data
+	for the external environment.
+	\item External Inquiry: elementary operation that involves
+	input and output.
+\end{itemize}
+The function points' types stated above will be weighted as 
+specified in the following table.
 \begin{center}
 	\includegraphics[width = 0.8\textwidth]{FP}
 \end{center}
+\subsubsection{Internal Logical File}
+%TODO
+\subsubsection{External Interface File}
+%TODO
+\subsubsection{External Input}
+%TODO
+\subsubsection{External Output}
+%TODO
+\subsubsection{External Inquiry}
+%TODO
 \subsection{Effort Estimation - COCOMO}
+%TODO
 \section{Resource Allocation}
+%TODO descrizione
 \subsection{Tasks}
 RASD:
 \begin{itemize}
-	\item
+	\item Domain assumptions
+	\item Functional requirements
+	\item Non functional requirements
+	\item Use cases and scenarios
+	\item User interface
+	\item Alloy
 \end{itemize}
 Design Document:
 \begin{itemize}
