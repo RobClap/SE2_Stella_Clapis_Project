@@ -66,10 +66,19 @@ specified in the following table.
 \end{center}
 \subsubsection{Internal Logical File}
 %TODO
-user-username password hash email
-taxi driver - taxi code username password hash email zona corrente - ora di attivazione
-admin username password hash email
-city zones with nearest zones
+The application stores information about: 
+\begin{itemize}
+	\item Admins (username, password hash, email)
+	\item Users (username, password hash, email)
+	\item City zones (nearest zones)
+	\item Taxi drivers (taxi code, username, password hash, current zone, availability time)
+\end{itemize}
+The first three entities have a simple structure as they are composed 
+of a small number of fields, while the taxi drivers have a more complex
+structure that also needs to be updated frequently. Thus we decide to 
+adopt the simple weight for the first three entities and the medium weight
+for the last one.
+3\texttimes7+1\texttimes10 = 31 FPs concerning ILFs.
 \subsubsection{External Interface File}
 There are no such things in our project.
 \subsubsection{External Input}
