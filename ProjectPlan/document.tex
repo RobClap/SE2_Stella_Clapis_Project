@@ -82,20 +82,30 @@ for the last one.
 \subsubsection{External Interface File}
 There are no such things in our project.
 \subsubsection{External Input}
+\begin{table}[H]
+\begin{adjustbox}{width=1.2\textwidth}
+\begin{tabular}{*{4}{c}}
+\toprule
+Function & Complexity & FP computation & FP \\
+\midrule
 %TODO
-registrazione
-login
-logout
-request a taxi
-reserve a taxi
-modify personal data
-switch taxi driver state
-accept/refuse req and res
-location of the taxi driver based on the gps
-add a new taxi driver into the system
-remove a taxi driver from the system
-modify taxi drivers' credentials data
-cancel req/res
+registrazione & Medium & 4 & 4\\
+login & Easy & 3 & 3\\
+logout & Easy & 3 & 3\\
+request a taxi & Medium & 4 & 4\\
+reserve a taxi & Medium & 4 & 4\\
+modify personal data & Medium & 4 & 4\\
+toggle taxi driver state & Medium & 4 & 4\\
+accept/refuse req and res & Medium x 4 & 4 x 4 &  16\\
+location of the taxi driver based on the gps & Medium & 4 & 4\\
+add a new taxi driver into the system & Easy & 3 & \\
+remove a taxi driver from the system & Easy & 3 & 3 \\
+modify taxi drivers' credentials data & Easy & 3 & 3 \\
+cancel req/res & Medium x 2 & 4 x 2 & 8 \\
+\midrule
+&&&\colsum{}\\
+\bottomrule
+\end{table}
 \subsubsection{External Output}
 %TODO
 suggestion di completamento vie
@@ -110,6 +120,7 @@ select a currently active req or res
 select a taxi driver for the admin
 show the list of taxi drivers for the admin
 show all active req and res of a user
+list all users of a type
 \subsection{Effort Estimation - COCOMO}
 %TODO
 \section{Resource Allocation}
@@ -117,24 +128,24 @@ show all active req and res of a user
 \subsection{Tasks}
 RASD:
 \begin{itemize}
-	\item Domain assumptions
-	\item Functional requirements
-	\item Non functional requirements
-	\item Use cases and scenarios
-	\item User interface
-	\item Alloy
+\item Domain assumptions
+\item Functional requirements
+\item Non functional requirements
+\item Use cases and scenarios
+\item User interface
+\item Alloy
 \end{itemize}
 Design Document:
 \begin{itemize}
-	\item
+\item
 \end{itemize}
 Code Inspection:
 \begin{itemize}
-	\item
+\item
 \end{itemize}
 Integration Test Plan Document:
 \begin{itemize}
-	\item 
+\item 
 \end{itemize}
 \section{Risks}
 \end{document}
