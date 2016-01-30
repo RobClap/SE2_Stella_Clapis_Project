@@ -39,12 +39,12 @@
 This document describes the project plan for myTaxiService application.
 It presents an analysis of the expected size and effort required 
 for the implementation phase calculated respectively with the Function
-Points and COCOMO. Then it presents the available resources and how 
+Points and COCOMO\@. Then it presents the available resources and how 
 they will be allocated to the project tasks and, in the end, it
 discusses the possible risks this project might encounter and the
 associated recovery actions.
 \section{Size and Effort Estimation}
-\subsection{Size Estimation - Function Points}
+\subsection{Size Estimation -- Function Points}
 Following Albrecht's method, our application's function points
 will be divided in 5 types:
 \begin{itemize}
@@ -96,31 +96,58 @@ request a taxi & Medium & 4 & 4\\
 reserve a taxi & Medium & 4 & 4\\
 modify personal data & Medium & 4 & 4\\
 toggle taxi driver state & Medium & 4 & 4\\
-accept/refuse req and res & Medium x 4 & 4 x 4 &  16\\
+accept/refuse req and res & Medium \texttimes 4 & 4 \texttimes 4 &  16\\
 location of the taxi driver based on the gps & Medium & 4 & 4\\
-add a new taxi driver into the system & Easy & 3 & \\
+add a new taxi driver into the system & Easy & 3 & 3 \\
 remove a taxi driver from the system & Easy & 3 & 3 \\
 modify taxi drivers' credentials data & Easy & 3 & 3 \\
-cancel req/res & Medium x 2 & 4 x 2 & 8 \\
+cancel req/res & Medium \texttimes 2 & 4 \texttimes 2 & 8 \\
 \midrule
-&&&\colsum{}\\
+Total & & & 63\\
 \bottomrule
+\end{tabular}
+\end{adjustbox}
 \end{table}
 \subsubsection{External Output}
 %TODO
-suggestion di completamento vie
-notifica taxi code del taxi che sta arrivando
-notify a request to the taxi driver
-notify a reservation
-
-calculate and show ETA - involves calculate the queues and eventually calculate the CAT
+\begin{table}[H]
+\begin{adjustbox}{width=1.2\textwidth}
+\begin{tabular}{*{3}{c}}
+\toprule
+Function & Complexity & FP \\
+\midrule
+	autocompletion of streets name & Medium &5\\ 
+	notification with the code of the incoming taxi& Medium&5\\ 
+	notify a request to the taxi driver&Easy&4\\ 
+	notify a reservation&Easy&4\\ 
+	calculate the queues &Hard&6\\ 
+	calculate the CAT&Hard&6\\ 
+	calculate and show ETA&Hard&6\\ 
+\midrule
+Total & & 36\\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table}
 \subsubsection{External Inquiry}
 %TODO
-select a currently active req or res
-select a taxi driver for the admin
-show the list of taxi drivers for the admin
-show all active req and res of a user
-list all users of a type
+\begin{table}[H]
+\begin{adjustbox}{width=1.2\textwidth}
+\begin{tabular}{*{3}{c}}
+\toprule
+Function & Complexity & FP \\
+\midrule
+select a currently active request or reservation&Easy&3\\
+select a taxi driver for the admin&Easy&3\\
+show the list of taxi drivers for the admin&Easy&3\\
+show all active requests and reservations of a user&Easy&3\\
+list all users of a type&Easy&3\\
+\midrule
+Total & & 15\\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\end{table}
 \subsection{Effort Estimation - COCOMO}
 %TODO
 To convert the function points in SLOC we use a 
@@ -128,37 +155,39 @@ conversion factor of 46, as specified here
 http://www.qsm.com/resources/function-point-languages-table
 for J2EE.
 \begin{center}
-	SLOC = FP \texttimes 46 = \texttimes 46 = %TODO
+	SLOC = FP \texttimes 46 = 145 \texttimes 46 = 6670
 \end{center}
 We consider our project with all nominal Cost Drivers and
 Scale Drivers so we have an EAF of 1.00 and an
 exponent E of 1.0997.
 \begin{center}
-	€ffort = 2.94 \texttimes EAF \texttimes (KSLOC)
+	Effort = 2.94 \texttimes EAF \texttimes 6.670 KSLOC = 19.6098
 \end{center}
 \section{Resource Allocation}
 %TODO descrizione
+%TODO ma secondo te dobbiamo farlo cosi'? non dovremmo farlo per il progetto coeme dovessimo fare il codice?
+%perchè secondo me non vogliono la distribuzione delle risorse per fare la docuentazione ma epr fare il codice
 \subsection{Tasks}
 RASD:
 \begin{itemize}
-\item Domain assumptions
-\item Functional requirements
-\item Non functional requirements
-\item Use cases and scenarios
-\item User interface
-\item Alloy
+	\item Domain assumptions
+	\item Functional requirements
+	\item Non functional requirements
+	\item Use cases and scenarios
+	\item User interface
+	\item Alloy
 \end{itemize}
 Design Document:
 \begin{itemize}
-\item
+	\item
 \end{itemize}
 Code Inspection:
 \begin{itemize}
-\item
+	\item
 \end{itemize}
 Integration Test Plan Document:
 \begin{itemize}
-\item 
+	\item 
 \end{itemize}
 \section{Risks}
 \end{document}
