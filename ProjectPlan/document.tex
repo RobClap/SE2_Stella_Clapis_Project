@@ -1,6 +1,8 @@
 \documentclass{article}
 \usepackage{adjustbox}
 \usepackage{float}
+\usepackage{marvosym}
+\usepackage{amsmath}
 \usepackage{textcomp}
 \usepackage{graphicx}
 \graphicspath{{images/}}
@@ -131,14 +133,30 @@ conversion factor of 46, as specified here
 http://www.qsm.com/resources/function-point-languages-table
 for J2EE.
 \begin{center}
-	SLOC = FP \texttimes 46 = 145 \texttimes 46 = 6670
+	SLOC = FP \texttimes 46 = 152 \texttimes 46 = 6992
 \end{center}
 We consider our project with all nominal Cost Drivers and
 Scale Drivers so we have an EAF of 1.00 and an
 exponent E of 1.0997.
 \begin{center}
-	Effort = 2.94 \texttimes EAF \texttimes 6.670 KSLOC = 19.6098
+	\EUR ffort = 2.94\texttimes EAF\texttimes $(KSLOC)^{E}$ = 2.94\texttimes$(6.992)^{1.0997}$ = 24.95 Person-Month
 \end{center}
+The duration of the project could therefore be calculated with the following equation
+\begin{center}
+	Duration = 3.67\texttimes(\EUR ffort)$^{SE}$ = 3.67\texttimes$24.95^{0.3179}$ = 10.2 months
+\end{center}
+where SE = 0.3179 as derived from nominal Scale Drivers.
+Thus, the estimate of people needed to complete the project is
+\begin{center}
+	N$_{people}$ = $\frac{Effort}{Duration}$ = 2.45 people $\rightarrow$ 3 people
+\end{center}
+
+
+
+
+
+
+
 \section{Resource Allocation}
 %TODO descrizione
 %TODO ma secondo te dobbiamo farlo cosi'? non dovremmo farlo per il progetto coeme dovessimo fare il codice?
