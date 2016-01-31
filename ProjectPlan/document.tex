@@ -65,89 +65,65 @@ specified in the following table.
 	\includegraphics[width = 0.8\textwidth]{FP}
 \end{center}
 \subsubsection{Internal Logical File}
-%TODO
 The application stores information about: 
 \begin{itemize}
-	\item Admins (username, password hash, email)
-	\item Users (username, password hash, email)
+	\item Admins (user name, password hash, email)
+	\item Users (user name, password hash, email)
 	\item City zones (nearest zones)
-	\item Taxi drivers (taxi code, username, password hash, current zone, availability time)
+	\item Requests (starting zone, destination zone, taxi code)
+	\item Reservations (starting zone, destination zone, taxi code, meeting time)
+	\item Taxi drivers (taxi code, user name, password hash, current zone, availability time)
 \end{itemize}
-The first three entities have a simple structure as they are composed 
+The first five entities have a simple structure as they are composed 
 of a small number of fields, while the taxi drivers have a more complex
 structure that also needs to be updated frequently. Thus we decide to 
-adopt the simple weight for the first three entities and the medium weight
+adopt the simple weight for the first five and the medium weight
 for the last one.
-3\texttimes7+1\texttimes10 = 31 FPs concerning ILFs.
+5\texttimes7+1\texttimes10 = 45 FPs concerning ILFs.
 \subsubsection{External Interface File}
 There are no such things in our project.
 \subsubsection{External Input}
-\begin{table}[H]
-\begin{adjustbox}{width=1.2\textwidth}
-\begin{tabular}{*{4}{c}}
-\toprule
-Function & Complexity & FP computation & FP \\
-\midrule
-%TODO
-registrazione & Medium & 4 & 4\\
-login & Easy & 3 & 3\\
-logout & Easy & 3 & 3\\
-request a taxi & Medium & 4 & 4\\
-reserve a taxi & Medium & 4 & 4\\
-modify personal data & Medium & 4 & 4\\
-toggle taxi driver state & Medium & 4 & 4\\
-accept/refuse req and res & Medium \texttimes 4 & 4 \texttimes 4 &  16\\
-location of the taxi driver based on the gps & Medium & 4 & 4\\
-add a new taxi driver into the system & Easy & 3 & 3 \\
-remove a taxi driver from the system & Easy & 3 & 3 \\
-modify taxi drivers' credentials data & Easy & 3 & 3 \\
-cancel req/res & Medium \texttimes 2 & 4 \texttimes 2 & 8 \\
-\midrule
-Total & & & 63\\
-\bottomrule
-\end{tabular}
-\end{adjustbox}
-\end{table}
+myTaxiService application interacts with users
+as follows: 
+\begin{itemize}
+	\item login/logout: as they're simple operations the simple weight can be adopted. 2\texttimes3 = 6 FPs.
+	\item registration: this is considered of medium complexity as it requires a careful update of the ILFs. 1\texttimes4 = 4 FPs
+	\item request/reserve a taxi: these operations are considered complex as they also involve the calculation of the queues and the CAT. 2\texttimes6 = 12 FPs
+	\item cancel a request/reservation: these operation are complex as they involve two entities, users and taxi drivers, and a careful concurrency handling. 2\texttimes6 = 12 FPs
+	\item modify personal data: this can be considered of medium complexity as it requires the handling of important information. 4 FPs
+	\item toggle taxi driver state: this is considered an easy operation as it concerns only one entity. 3 FPs
+	\item accept/refuse requests/reservations: these are considered operations of medium complexity as they require of two important entities. 4\texttimes4 = 16
+	\item receiving gps information on the taxi driver's location: this is considered a medium complexity operation. 4 FPs
+\end{itemize}
+It also interacts with admins as follows:
+\begin{itemize}
+	\item insert/modify/remove a taxi driver from the database: these can be considered easy operations. 3\texttimes3 = 9 FPs
+\end{itemize}
+Thus, 70 FPs concerning External Inputs.
+
 \subsubsection{External Output}
-%TODO
-\begin{table}[H]
-\begin{adjustbox}{width=1.2\textwidth}
-\begin{tabular}{*{3}{c}}
-\toprule
-Function & Complexity & FP \\
-\midrule
-	autocompletion of streets name & Medium &5\\ 
-	notification with the code of the incoming taxi& Medium&5\\ 
-	notify a request to the taxi driver&Easy&4\\ 
-	notify a reservation&Easy&4\\ 
-	calculate the queues &Hard&6\\ 
-	calculate the CAT&Hard&6\\ 
-	calculate and show ETA&Hard&6\\ 
-\midrule
-Total & & 36\\
-\bottomrule
-\end{tabular}
-\end{adjustbox}
-\end{table}
+The application allows the creation of:
+\begin{itemize}
+	\item notifications about the taxi code to send to users: we can adopt the simple weight for this operation. 4 FPs
+	\item notifications of requests/reservations to send to taxi drivers: we can adopt the simple weight for these operations too. 2\texttimes4 = 8 FPs
+	\item notifications of the ETA: this is a complex operation as it involves the calculation of the queues and of the CAT. 7 FPs
+\end{itemize}
+19 FPs concerning External Outputs.
+
 \subsubsection{External Inquiry}
-%TODO
-\begin{table}[H]
-\begin{adjustbox}{width=1.2\textwidth}
-\begin{tabular}{*{3}{c}}
-\toprule
-Function & Complexity & FP \\
-\midrule
-select a currently active request or reservation&Easy&3\\
-select a taxi driver for the admin&Easy&3\\
-show the list of taxi drivers for the admin&Easy&3\\
-show all active requests and reservations of a user&Easy&3\\
-list all users of a type&Easy&3\\
-\midrule
-Total & & 15\\
-\bottomrule
-\end{tabular}
-\end{adjustbox}
-\end{table}
+The application allows users to:
+\begin{itemize}
+	\item show all his/her active requests and reservations
+	\item select a currently active request/reservation
+	\item select the street between the available ones
+\end{itemize}
+and it allows admins to:
+\begin{itemize}
+	\item show the list of all taxi drivers
+	\item select a taxi driver
+\end{itemize}
+These 6 operations can all be considered easy, so we can adopt the simple weight for all of them. 6\texttimes3 = 18 FPs concerning External Inquiries.
+
 \subsection{Effort Estimation - COCOMO}
 %TODO
 To convert the function points in SLOC we use a 
