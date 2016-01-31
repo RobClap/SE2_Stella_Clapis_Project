@@ -151,37 +151,70 @@ Thus, the estimate of people needed to complete the project is
 	N$_{people}$ = $\frac{Effort}{Duration}$ = 2.45 people $\rightarrow$ 3 people
 \end{center}
 
-
-
-
-
-
-
 \section{Resource Allocation}
-%TODO descrizione
-%TODO ma secondo te dobbiamo farlo cosi'? non dovremmo farlo per il progetto coeme dovessimo fare il codice?
-%perchè secondo me non vogliono la distribuzione delle risorse per fare la docuentazione ma epr fare il codice
 \subsection{Tasks}
+We're going to refer to the tasks with a [Tx] notation, where x stands for a number used to uniquely identify the task.
 RASD:
 \begin{itemize}
-	\item Domain assumptions
-	\item Functional requirements
-	\item Non functional requirements
-	\item Use cases and scenarios
-	\item User interface
-	\item Alloy
+	\item [T1] Domain assumptions
+	\item [T2] Functional requirements
+	\item [T3] Non functional requirements
+	\item [T4] Use cases and scenarios
+	\item [T5] Models (the world and the machine, class diagram, sequence diagrams)
+	\item [T6] User interface
+	\item [T7] Alloy
 \end{itemize}
 Design Document:
 \begin{itemize}
-	\item
+	\item [T8] Component view
+	\item [T9] Deployment view
+	\item [T10] Runtime view
+	\item [T11] Component interfaces
 \end{itemize}
 Code Inspection:
 \begin{itemize}
-	\item
+	\item [T12] Checklist points 1-30
+	\item [T13] Checklist points 31-60
 \end{itemize}
 Integration Test Plan Document:
 \begin{itemize}
-	\item 
+	\item [T14] Integration sequence
+	\item [T15] Test case specifications
+	\item [T16] Test procedures
+	\item [T17] Tools, drivers and stubs
 \end{itemize}
+\begin{table}[H]
+\begin{adjustbox}{width = 1.2\textwidth}
+\begin{tabular}{*{2}{c}}
+	\toprule
+	Tasks & Dependencies \\
+	\midrule
+	[T1] & None\\
+	[T2] & T1\\
+	[T3] & T1\\
+	[T4] & \\
+	[T5] & \\
+	[T6] & \\
+	[T7] & T2, T3\\
+	[T8] & \\
+	[T9] & \\
+	[T10] & \\
+	[T11] & \\
+	[T12] & \\
+	[T13] & \\
+	[T14] & \\
+	[T15] & \\
+	[T16] & \\
+	[T17] & \\
+\end{tabular}
+\end{adjustbox}
+\end{table}
+
+
+
+
+
+
+
 \section{Risks}
 \end{document}
