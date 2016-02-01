@@ -127,7 +127,6 @@ and it allows admins to:
 These 6 operations can all be considered easy, so we can adopt the simple weight for all of them. 6\texttimes3 = 18 FPs concerning External Inquiries.
 
 \subsection{Effort Estimation - COCOMO}
-%TODO
 To convert the function points in SLOC we use a 
 conversion factor of 46, as specified here 
 http://www.qsm.com/resources/function-point-languages-table
@@ -153,68 +152,65 @@ Thus, the estimate of people needed to complete the project is
 
 \section{Resource Allocation}
 \subsection{Tasks}
-We're going to refer to the tasks with a [Tx] notation, where x stands for a number used to uniquely identify the task.
-RASD:
+We're going to refer to the tasks with a [Tx] notation, where x stands for a number used to uniquely identify the task. \\
+RASD (15.10.2015-6.11.2015):
 \begin{itemize}
-	\item [T1] Domain assumptions
-	\item [T2] Functional requirements
-	\item [T3] Non functional requirements
-	\item [T4] Use cases and scenarios
-	\item [T5] Models (the world and the machine, class diagram, sequence diagrams)
-	\item [T6] User interface
-	\item [T7] Alloy
+	\item T1 - Domain assumptions
+	\item T2 -  Functional requirements
+	\item T3 -  Non functional requirements
+	\item T4 - Use cases and scenarios
+	\item T5 - Models (the world and the machine, class diagram, sequence diagrams)
+	\item T6 - User interface
+	\item T7 - Alloy
 \end{itemize}
-Design Document:
+Design Document (12.11.2015-4.12.2015):
 \begin{itemize}
-	\item [T8] Component view
-	\item [T9] Deployment view
-	\item [T10] Runtime view
-	\item [T11] Component interfaces
+	\item T8 - Component view
+	\item T9 - Deployment view
+	\item T10 - Runtime view
+	\item T11 - Component interfaces
 \end{itemize}
-Code Inspection:
+Code Inspection (9.12.2015-5.1.2016):
 \begin{itemize}
-	\item [T12] Checklist points 1-30
-	\item [T13] Checklist points 31-60
+	\item T12 - Checklist points 1-30
+	\item T13 - Checklist points 31-60
 \end{itemize}
-Integration Test Plan Document:
+Integration Test Plan Document (7.1.2016-21.1.2016):
 \begin{itemize}
-	\item [T14] Integration sequence
-	\item [T15] Test case specifications
-	\item [T16] Test procedures
-	\item [T17] Tools, drivers and stubs
+	\item T14 - Integration sequence
+	\item T15 - Test case specifications
+	\item T16 - Test procedures
+	\item T17 - Tools, drivers and stubs
 \end{itemize}
 \begin{table}[H]
-\begin{adjustbox}{width = 1.2\textwidth}
-\begin{tabular}{*{2}{c}}
-	\toprule
-	Tasks & Dependencies \\
-	\midrule
-	[T1] & None\\
-	[T2] & T1\\
-	[T3] & T1\\
-	[T4] & \\
-	[T5] & \\
-	[T6] & \\
-	[T7] & T2, T3\\
-	[T8] & \\
-	[T9] & \\
-	[T10] & \\
-	[T11] & \\
-	[T12] & \\
-	[T13] & \\
-	[T14] & \\
-	[T15] & \\
-	[T16] & \\
-	[T17] & \\
-\end{tabular}
-\end{adjustbox}
+	\begin{tabular}{c c | c c | c c}
+		\toprule
+		Tasks & Dependencies &  Tasks & Dependencies & Tasks & Dependencies\\
+		\midrule
+		T1 & None&T7 & T2, T3&T13 & None\\
+		T2 & T1&T8 & None&T14 & None\\
+		T3 & T1&T9 & T8&T15 & T14\\
+		T4 & T2, T3&T10 & T8&T16 & T15\\
+		T5 & T4&T11 & T8&T17 & T15\\
+		T6 & T4&T12 & None& & \\
+		\bottomrule
+	\end{tabular}
 \end{table}
-
-
-
-
-
-
-
+The following Gantt's graph describes by who the tasks stated above have been completed and when.\\
+\includegraphics[height = 1.0\textheight]{PROJECTPLAN}
 \section{Risks}
+\begin{table}[H]
+	\begin{adjustbox}{width = 1.2\textwidth}
+	\begin{tabular}{*{4}{p{0.6\textwidth}}}
+		\toprule
+		Risk & Probability & Effects & Strategy\\
+		\midrule
+		Personnel shortfall due to any cause (e.g. illness) & Moderate & Serious & allocate at least 2 people to each task so that if one goes missing the other one can carry on the job\\
+		Capacity shortfalls of the entire system & High & Catastrophic & Use a real-time scalable cloud-based infrastructure  \\
+		Problems with the mobile application development framework & Low & Serious & investigate several frameworks to better choose of the one to use\\
+		Taxi drivers don't cooperate in the use of the application & Low & Catastrophic & Propose discounts and other advantages to those adhering to the application\\		
+		\bottomrule
+	\end{tabular}
+	\end{adjustbox}
+\end{table}
 \end{document}
