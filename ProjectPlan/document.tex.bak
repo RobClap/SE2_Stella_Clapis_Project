@@ -64,34 +64,7 @@ will be divided in 5 types:
 The function points' types stated above will be weighted as 
 specified in the following table.
 \begin{center}
-\begin{table}[H]
-\begin{tabular}{|*4{c|}}
-\hline
-Function Type&\multicolumn{3}{c|}{Complexity}\\
-\cline{2-4}
-&Simple&Medium&Complex\\
-\hline
-\hline
-Internal Logic File & 7 & 10 & 15 \\
-\hline
-External Interface File & 5 & 7 & 10 \\
-\hline
-External Input & 3 & 4 & 6 \\
-\hline
-External Output & 4 & 5 & 7 \\
-\hline
-External Inquiry & 3 & 4 & 6 \\
-\hline
-\end{tabular}
-%	\begin{tabular}{*{4}c}
-%		\toprule
-%		Function Type & \multicolumn{3}{|c|}{Complexity}\\
-%		\midrule
-%		Internal Logic File & 7 & 10 & 15 \\
-%		\bottomrule
-%	\end{tabular}
-\end{table}
-%	\includegraphics[width = 0.8\textwidth]{FP}
+	\includegraphics[width = 0.8\textwidth]{FP}
 \end{center}
 \subsubsection{Internal Logical File}
 The application stores information about: 
@@ -122,7 +95,7 @@ as follows:
 	\item modify personal data: this can be considered of medium complexity as it requires the handling of important information. 4 FPs
 	\item toggle taxi driver state: this is considered an easy operation as it concerns only one entity. 3 FPs
 	\item accept/refuse requests/reservations: these are considered operations of medium complexity as they require of two important entities. 4\texttimes4 = 16
-	\item receiving GPS information on the taxi driver's location: this is considered a medium complexity operation. 4 FPs
+	\item receiving gps information on the taxi driver's location: this is considered a medium complexity operation. 4 FPs
 \end{itemize}
 It also interacts with admins as follows:
 \begin{itemize}
