@@ -1,21 +1,29 @@
-\documentclass{beamer}
-%\documentclass[xetex,mathserif,serif]{beamer}
-\title[Crisis] % (optional, only for long titles)
-{The Economics of Financial Crisis}
-\subtitle{Evidence from India}
-\author[Author, Anders] % (optional, for multiple authors)
-{F.~Author\inst{1} \and S.~Anders\inst{2}}
-\institute[Universities Here and There]{\inst{1}%
-	Institute of Computer Science\\
-	University Here
-	\and
-	\inst{2}%
-	Institute of Theoretical Philosophy\\
-	University There
-}
-\date[KPT 2004] % (optional)
-{Conference on Presentation Techniques, 2004}
-\subject{Computer Science}
+%Font più tondeggiante 
+%century gothic
+%Colori in scala di azzurro
+%#00c0ff
+%#4d4dff
+%#ffc34d  per contrasto
+\documentclass[10pt,xcolor={usenames,dvipsnames}]{beamer}
+%\usepackage[dvipsnames]{xcolor}
+\fontfamily{pnc}
+\usepackage{verbatim}
+
+\title{Final Presentation}
+\subtitle{MyTaxiService}
+\author{Roberto Clapis, Erica Stella}
+\institute{Politecnico di Milano}
+\date{12/02/2016}
+\subject{Software Engineering 2}
+
+\usepackage{graphicx}
+\usebackgroundtemplate{\includegraphics[width=\paperwidth,height=\paperheight]{background2.jpg}}
+
+\setbeamercolor{frametitle}{fg=CornflowerBlue}
+\setbeamercolor{title}{fg=CornflowerBlue}
+\setbeamercolor{framesubtitle}{fg=RoyalBlue}
+
+\addtobeamertemplate{frametitle}{\vskip+3ex}{}
 
 \begin{document}
 \frame{\titlepage}
@@ -23,15 +31,18 @@
 	\frametitle{Table of Contents}
 	\tableofcontents[currentsection]
 \end{frame}
-\section[Section]{My section}
+
+
+\section[Section]{RASD}
 \begin{frame}
 	\frametitle{This is the first slide}
-	%Content goes here
+	Content
 \end{frame}
+
 \begin{frame}
 	\frametitle{This is the second slide}
 	\framesubtitle{A bit more information about this}
-	%More content goes here
+	More content
 \end{frame}
-% etc
+
 \end{document}
