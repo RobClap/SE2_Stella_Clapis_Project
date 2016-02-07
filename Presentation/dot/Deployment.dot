@@ -1,0 +1,15 @@
+//TODO add horiz lines
+digraph Deploy{
+	rankdir=LR
+	concentrate=true	
+	node[shape=square]
+	edge[arrowhead="none"]
+	internet[shape=egg]
+	InternalFirewall[shape=box]
+	ExternalFirewall[shape=box]
+	Database -> InternalFirewall
+	InternalFirewall -> WebServer
+	WebServer->ExternalFirewall
+	ExternalFirewall->internet
+	internet->Client
+}
