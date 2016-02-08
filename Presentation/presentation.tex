@@ -30,9 +30,9 @@
 \section[Section]{RASD}
 
 \begin{frame}
-\begin{center}
-	RASD	
-\end{center}
+	\begin{center}
+		RASD	
+	\end{center}
 \end{frame}
 \begin{frame}
 	\frametitle{The RASD Document}
@@ -44,7 +44,6 @@
 		\item We tried to keep as little as possible the user inputs and let the application do the work
 	\end{itemize}
 \end{frame}
-
 \begin{frame}
 	\frametitle{Two simple interfaces}
 	\framesubtitle{Adaptive web-based UI to ensure maintainability}
@@ -79,6 +78,7 @@
 		\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{reserved-and-refused}
 	\end{center}
 \end{frame}
+
 \section[Section]{Design Document}
 \begin{frame}
 	\begin{center}
@@ -86,8 +86,12 @@
 	\end{center}
 \end{frame}
 \begin{frame}
-	\frametitle{}
-	\framesubtitle{}
+	\frametitle{The Design}
+	The architecture of the application is pretty standard
+	\begin{itemize}
+		\item Classical DMZ structure for the Network 
+		\item Database + Web server for the components
+	\end{itemize}
 \end{frame}
 \begin{frame}
 	\frametitle{The Deployment}
@@ -97,18 +101,69 @@
 	\end{center}
 \end{frame}
 \begin{frame}
-	\frametitle{The Component}
+	\frametitle{The Component View}
 	\begin{center}
 		\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{dot/component}
 	\end{center}
 \end{frame}
+\begin{frame}
+	\frametitle{More on the Components}
+	\framesubtitle{Extensibility and maintainability as targets}
+	\begin{itemize}
+		\item Both mobile and web version are based on web technologies.
+		\item The queues, reservations and requests are computed by the DBMS.
+		\item The web server ignores the fact that the client is using a mobile app or a browser.
+		\item The APIs query the DBMS in the exact same way the Web Server does.
+	\end{itemize}
+\end{frame}
+
 \section[Section]{Test Document}
+\begin{frame}
+	\begin{center}
+		Test Document	
+	\end{center}
+\end{frame}
+\begin{frame}
+	\frametitle{The sandwich approach}
+	\framesubtitle{}
+	The sandwich approach allows to first test the %TODO coherence check
+\end{frame}
+
 \section[Section]{Project Plan}
+\begin{frame}
+	\begin{center}
+		Project Plan
+	\end{center}
+\end{frame}
+\begin{frame}
+	\frametitle{Function Points}
+	152 FP in Total:
+	\begin{itemize}
+		\item Internal Logical File 45 FP
+		\item External Input 70 FP
+		\item External Output 19 FP
+		\item External Inquiry 18 FP
+	\end{itemize}
+\end{frame}
+\begin{frame}
+	\frametitle{COCOMO}
+	\framesubtitle{}
+	\begin{itemize}
+		\item \textasciitilde7000 estimated thousands of \textbf{S}ource \textbf{L}ines \textbf{O}f \textbf{C}ode
+		\item \textasciitilde25 Person-Month
+		\item 3 People for a total of 10 Months
+	\end{itemize}
+\end{frame}
+
 \section[Section]{Code Inspection}
+\begin{frame}
+	\begin{center}
+		Code Inspection
+	\end{center}
+\end{frame}
 \end{document}
 
 \begin{frame}
 	\frametitle{}
 	\framesubtitle{}
 \end{frame}
-% vim: spell spelllang=en_gb
