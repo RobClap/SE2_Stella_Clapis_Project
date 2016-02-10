@@ -126,7 +126,11 @@
 \begin{frame}
 	\frametitle{The sandwich approach}
 	\framesubtitle{}
-	The sandwich approach allows to first test the outer parts of the applications
+	The sandwich approach allows to first test the outer parts of the applications, which are easier to test with mock data and mock requests.\\
+	\-\\
+	We chose to first test the UIs and the DBMS tables, in order to have a reliable surrounding when testing the WebServer part, which is the core of the application.\\
+	\-\\
+	Once reached the Integration of the WebServer we decided to keep the same approach even for the internal components.
 \end{frame}
 
 \section[Section]{Project Plan}
@@ -161,9 +165,55 @@
 		Code Inspection
 	\end{center}
 \end{frame}
-\end{document}
-
+\begin{frame}
+	\frametitle{The Checklist}
+	\framesubtitle{The Style is ok}
+	\begin{itemize}
+		\item Naming conventions were mainly respected
+		\item Braces and indention respected the standard except for a couple of lines
+		\item File organization and white spaces were correctly used. With the exception of a comment line that was too long and a couple of white lines to be removed.
+		\item High level breaks were used in code lines
+	\end{itemize}
+\end{frame}
+\begin{frame}
+	\frametitle{The Checklist}
+	\framesubtitle{But the style is not everything}
+	Documentation is mostly absent or incomplete\\
+	\-\\
+	There is a condition of an if that was commented out with no reasons to explain why\\
+	\-\\
+	One of the functions was definitely too complex, it represented the logical function of three different methods, one after the other, separated by a comment.\\
+	An other couple should have been splitted in at least two simpler ones.
+\end{frame}
+\begin{frame}
+	\frametitle{The Checklist}
+	\framesubtitle{A couple of exceptions}
+	A couple of exceptions were caught but not handled, and both of them have a comment stating\\
+	\-\\
+	{
+		\begin{center}
+			\color{Green}
+			\texttt{// ignore ?}
+		\end{center}
+	}
+\end{frame}
+\begin{frame}
+	\frametitle{To close up}
+	\framesubtitle{Closing is important}
+	There is a method that opens a list of inputstreams from an archive file and if an exception is thrown the handler \underline{just closes the last inputstream} opened.\\
+	\-\\
+	According to the Java Documentation closing \underline{every} inputstream that refers to a file closes the file itself.\\
+	\-\\
+	Even if a failure in that point of the application probably implies a failure of the whole process, that will soon close and free the file descriptors, this is a terrible practice and it should be avoided.
+\end{frame}
 \begin{frame}
 	\frametitle{}
 	\framesubtitle{}
+	{
+		\Huge
+		\begin{center}
+			That's all!
+		\end{center}
+	}
 \end{frame}
+\end{document}
