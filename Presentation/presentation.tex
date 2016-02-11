@@ -2,6 +2,7 @@
 \graphicspath{{pics/}}
 \fontfamily{pnc}
 \usepackage{verbatim}
+\usepackage{listings}
 
 \title{Final Presentation}
 \subtitle{MyTaxiService}
@@ -18,7 +19,7 @@
 \setbeamercolor{title}{fg=CornflowerBlue}
 \setbeamercolor{framesubtitle}{fg=RoyalBlue}
 
-\addtobeamertemplate{frametitle}{\vskip+3ex}{} %chktex 20
+\addtobeamertemplate{frametitle}{\vskip+3ex}{} 
 
 \begin{document}
 \frame{\titlepage}
@@ -45,9 +46,24 @@
 		\item We tried to keep as little as possible the user inputs and let the application do the work
 	\end{itemize}
 \end{frame}
+%TODO questi sono davvero troppi, non ha senso è un muro di testo
+%\begin{frame}
+%	\frametitle{Requirements}
+%	\framesubtitle{Non functional requirements}
+%	%TODO
+%\end{frame}
+%\begin{frame}
+%	\frametitle{Requirements}
+%	\framesubtitle{Functional requirements}
+%	%TODO
+%\end{frame}
+%\begin{frame}
+%	\frametitle{Domain Assumptions}
+%	%TODO 
+%\end{frame}
 \begin{frame}
 	\frametitle{Two simple interfaces}
-	\framesubtitle{Adaptive web-based UI to ensure maintainability}
+	\framesubtitle{Adaptive web-based UI to ensure maintainability for both the web UI and mobile UI}
 	\begin{center}
 		\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{GuestInterface}
 	\end{center}
@@ -117,6 +133,14 @@
 		\item The APIs query the DBMS in the exact same way the Web Server does.
 	\end{itemize}
 \end{frame}
+\begin{frame}
+	\frametitle{More on the Components}
+	\framesubtitle{Focus on the WebServer}
+	\begin{center}
+		\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{dot/Webserver}
+	\end{center}
+
+\end{frame}
 
 \section[Section]{Test Document}
 \begin{frame}
@@ -133,6 +157,12 @@
 	\-\\
 	Once reached the Integration of the WebServer we decided to keep the same approach even for the internal components.
 \end{frame}
+
+%\begin{frame}
+%	\frametitle{The Integration Sequence}
+%	\framesubtitle{}
+%	%TODO erica non ho capito cosa devo fare: ``ah poi nel testing io direi di far vedere l'ordine di integrazione''
+%\end{frame}
 
 \section[Section]{Project Plan}
 \begin{frame}
@@ -159,6 +189,17 @@
 		\item 3 People for a total of 10 Months
 	\end{itemize}
 \end{frame}
+\begin{frame}
+	\frametitle{Risks}
+	\framesubtitle{}
+	\begin{itemize}
+		\item	Personnel shortfall due to any cause (e.g. illness)
+		\item	Capacity shortfalls of the entire system
+		\item	Problems with the mobile application development framework
+		\item	Taxi drivers don't cooperate in the use of the application
+		\item	The application is not well-accepted by the public
+	\end{itemize}
+\end{frame}
 
 \section[Section]{Code Inspection}
 \begin{frame}
@@ -182,6 +223,7 @@
 	Documentation is mostly absent or incomplete\\
 	\-\\
 	There is a condition of an if that was commented out with no reasons to explain why\\
+	%TODO  gli esempi del codice commentato via non riesco a metterlo
 	\-\\
 	One of the functions was definitely too complex, it represented the logical function of three different methods, one after the other, separated by a comment.\\
 	An other couple should have been splitted in at least two simpler ones.
@@ -191,12 +233,9 @@
 	\framesubtitle{A couple of exceptions}
 	A couple of exceptions were caught but not handled, and both of them have a comment stating\\
 	\-\\
-	{\begin{center}
-			\color{Green}
-			\texttt{// ignore?}
-		\end{center}
-	}
+	\texttt{{\color{Blue}try }\{\\\-	reader.close();\\\} {\color{Blue}catch} (Exception e) \{\\{\color{Green}\-	//ignore?}\\\}}
 \end{frame}
+
 \begin{frame}
 	\frametitle{To close up}
 	\framesubtitle{Closing is important}
@@ -216,3 +255,4 @@
 	}
 \end{frame}
 \end{document}
+
