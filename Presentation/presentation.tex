@@ -36,31 +36,66 @@
 		RASD	
 	\end{center}
 \end{frame}
+%\begin{frame}
+%	\frametitle{The RASD Document}
+%	\framesubtitle{The approach}
+%	We tried to solve all the easy problems with a simple approach, in order to focus on the actual difficulties. \\
+%	\begin{itemize}
+%		\item Login, logout, registration were kept as standard as possible
+%		\item Usability was kept in mind, customizability was not considered as a feature
+%		\item We tried to keep as little as possible the user inputs and let the application do the work
+%	\end{itemize}
+%\end{frame}
 \begin{frame}
 	\frametitle{The RASD Document}
-	\framesubtitle{The approach}
-	We tried to solve all the easy problems with a KISS approach, in order to focus on the actual difficulties. \\
+	\framesubtitle{The goals}
 	\begin{itemize}
-		\item Login, logout, registration were kept as standard as possible
-		\item Usability was kept in mind, customizability was not considered as a feature
-		\item We tried to keep as little as possible the user inputs and let the application do the work
+		\item Provide an easy way to request a taxi.
+		\item Provide an easy way to reserve a taxi.
+		\item Guarantee a fair management of the taxi queues.
+		\item Create an extensible system that allows expansion and interactions with other services.
 	\end{itemize}
 \end{frame}
-%TODO questi sono davvero troppi, non ha senso è un muro di testo
-%\begin{frame}
-%	\frametitle{Requirements}
-%	\framesubtitle{Non functional requirements}
-%	%TODO
-%\end{frame}
-%\begin{frame}
-%	\frametitle{Requirements}
-%	\framesubtitle{Functional requirements}
-%	%TODO
-%\end{frame}
-%\begin{frame}
-%	\frametitle{Domain Assumptions}
-%	%TODO 
-%\end{frame}
+ \begin{frame}
+	\frametitle{Domain Assumptions}
+	\framesubtitle{The main assumptions}
+	\begin{itemize}
+		\item All taxi drivers will have a phone with active GPS functionality 
+		\item The GPS information about the position of the available taxi drivers sent to the system will always be accurate
+		\item Taxi drivers' phones will always have an internet connection while myTaxiService is running
+		\item Users will enter a valid email address during registration 
+		\item Users who have requested or reserved a taxi will always be present when the taxi arrives.
+	\end{itemize}
+\end{frame}
+\begin{frame}
+	\frametitle{Requirements}
+	\framesubtitle{The main functional requirements}
+	For both the API and UI interfaces:
+	\begin{itemize}
+			\item The system will be able to calculate and show the ETA\@ 
+			\item The system will provide a functionality to request a taxi at the given starting location 
+			\item The system will provide a functionality to reserve a taxi at the given starting location and meeting time
+			\item The system will provide a functionality to see currently active reservations and requests
+			\item The system will provide a functionality to notify users of the code of the incoming taxi
+	\end{itemize}
+\end{frame}
+\begin{frame}
+	\frametitle{Requirements}
+	\framesubtitle{Non functional requirements}
+	\begin{itemize}
+	\item \textit{Availability}
+		\begin{itemize}
+			\item The server of the application must always be available
+			\item The app must never freeze 
+			\item The system must store all of its data in an always-reachable database
+			\item Regular backups will be made in order to reduce or prevent data loss
+		\end{itemize}
+	\item \textit{Security}
+		\begin{itemize}
+			\item In no situation sensible data will pass through an insecure channel
+		\end{itemize}
+\end{itemize}
+\end{frame}
 \begin{frame}
 	\frametitle{Two simple interfaces}
 	\framesubtitle{Adaptive web-based UI to ensure maintainability for both the web UI and mobile UI}
@@ -149,13 +184,30 @@
 	\end{center}
 \end{frame}
 \begin{frame}
-	\frametitle{The sandwich approach}
+	\frametitle{WebServer}
 	\framesubtitle{}
-	The sandwich approach allows to first test the outer parts of the applications, which are easier to test with mock data and mock requests.\\
-	\-\\
-	We chose to first test the UIs and the DBMS tables, in order to have a reliable surrounding when testing the WebServer part, which is the core of the application.\\
-	\-\\
-	Once reached the Integration of the WebServer we decided to keep the same approach even for the internal components.
+		\includegraphics[width=\textwidth,height=\textheight,keepaspectratio]{WebServer1}\\
+\end{frame}
+ \begin{frame}
+	\frametitle{WebServer}
+	\framesubtitle{}
+	\begin{center}
+		\includegraphics[width=0.8\textwidth,height=0.8\textheight,keepaspectratio]{WebServer2}
+	\end{center}
+\end{frame}
+\begin{frame}
+	\frametitle{Webserver $\rightarrow$ UI}
+	\framesubtitle{}
+	\begin{center}
+		\includegraphics[width=0.8\textwidth,height=0.8\textheight,keepaspectratio]{WSUI3}\\\-\\
+		\includegraphics[width=0.8\textwidth,height=0.8\textheight,keepaspectratio]{WSUI1}\\\-\\
+		\includegraphics[width=0.8\textwidth,height=0.8\textheight,keepaspectratio]{WSUI2}\\\-\\
+	\end{center}
+\end{frame}
+\begin{frame}
+	\frametitle{DBMS $\rightarrow$ Webserver}
+	\framesubtitle{}
+		\includegraphics[width=0.8\textwidth,height=0.8\textheight,keepaspectratio]{DBWS}
 \end{frame}
 
 %\begin{frame}
@@ -184,8 +236,8 @@
 	\frametitle{COCOMO}
 	\framesubtitle{}
 	\begin{itemize}
-		\item \textasciitilde7000 estimated thousands of \textbf{S}ource \textbf{L}ines \textbf{O}f \textbf{C}ode
-		\item \textasciitilde25 Person-Month
+		\item $152*46 \cong 7000$ estimated \textbf{S}ource \textbf{L}ines \textbf{O}f \textbf{C}ode
+		\item $\sim 25$ Person-Month
 		\item 3 People for a total of 10 Months
 	\end{itemize}
 \end{frame}
@@ -208,6 +260,18 @@
 	\end{center}
 \end{frame}
 \begin{frame}
+	\frametitle{The Class}
+	\framesubtitle{}
+	The class was \texttt{ConnectorDeployer} from the package \texttt{com.sun.enterprise.connectors.module}
+	The methods were
+	\texttt{\begin{itemize}
+		\item private void registerBeanValidator(String rarName, ReadableArchive archive, ClassLoader classLoader)
+		\item private List \textless String\textgreater getValidationMappingDescriptors(ReadableArchive archive)
+		\item public void event(Event event)
+	\end{itemize}
+	}
+\end{frame}
+\begin{frame}
 	\frametitle{The Checklist}
 	\framesubtitle{The Style is ok}
 	\begin{itemize}
@@ -220,13 +284,13 @@
 \begin{frame}
 	\frametitle{The Checklist}
 	\framesubtitle{But the style is not everything}
-	Documentation is mostly absent or incomplete\\
-	\-\\
-	There is a condition of an if that was commented out with no reasons to explain why\\
-	%TODO  gli esempi del codice commentato via non riesco a metterlo
-	\-\\
-	One of the functions was definitely too complex, it represented the logical function of three different methods, one after the other, separated by a comment.\\
-	An other couple should have been splitted in at least two simpler ones.
+	\begin{itemize}
+		\item	Documentation is mostly absent or incomplete\\
+		\item  There is a condition of an if that was commented out with no reasons to explain why\\
+		\includegraphics[width=0.8\textwidth,height=0.8\textheight,keepaspectratio]{commento}
+		\item  One of the functions was definitely too complex, it represented the logical function of three different methods, one after the other, separated by a comment.\\
+		%\item  An other couple should have been splitted in at least two simpler ones.
+	\end{itemize}
 \end{frame}
 \begin{frame}
 	\frametitle{The Checklist}
@@ -242,8 +306,7 @@
 	There is a method that opens a list of inputstreams from an archive file and if an exception is thrown the handler \underline{just closes the last inputstream} opened.\\
 	\-\\
 	According to the Java Documentation closing \underline{every} inputstream that refers to a file closes the file itself.\\
-	\-\\
-	Even if a failure in that point of the application probably implies a failure of the whole process, that will soon close and free the file descriptors, this is a terrible practice and it should be avoided.
+	%Even if a failure in that point of the application probably implies a failure of the whole process, that will soon close and free the file descriptors, this is a terrible practice and it should be avoided.
 \end{frame}
 \begin{frame}
 	\frametitle{}
